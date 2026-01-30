@@ -66,12 +66,11 @@ async function loadInvite() {
 
     try {
         const { data: invite, error: inviteError } = await supabaseClient
-            .from('user_invites')
-            .select('email, organization_id')
-            console.log("Token being sent to DB:", inviteToken);
-            .eq('invite_token', inviteToken)
-            .eq('status', 'pending')
-            .maybeSingle();
+    .from('user_invites')
+    .select('email, organization_id')
+    .eq('invite_token', inviteToken)
+    .eq('status', 'pending')
+    .maybeSingle();
 
         if (inviteError || !invite) {
             loader.innerHTML = "❌ This invite is invalid or has expired.";
