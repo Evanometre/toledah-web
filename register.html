@@ -130,12 +130,9 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
         if (authData?.user) {
             console.log("Auth success, linking organization...");
             
-            // STEP 2: Call the RPC to link org, roles, and profile
-            // Use the "accept_invite" function we updated in the SQL editor earlier
-            const { data: rpcData, error: rpcError } = await supabaseClient.rpc('accept_invite', {
-                p_token: inviteToken, // Fixed variable name
-                p_user_id: authData.user.id 
-            });
+            const { data: rpcData, error: rpcError } = await supabaseClient.rpc('accept_user_invite_by_token', {
+    p_invite_token: inviteToken
+});
 
             if (rpcError) {
                 console.error("RPC Error:", rpcError);
