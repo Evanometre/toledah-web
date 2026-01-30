@@ -59,28 +59,51 @@
 
     // 3. Fetch Invite Details on Load
     async function loadInvite() {
-        if (!inviteToken) {
-            loader.innerHTML = "❌ No invite token found.";
+    if (!inviteToken) {
+        loader.innerHTML = "❌ No invite token found.";
+        return;
+    }
+
+    try {
+        // STEP 1: Just get the invite first (No fancy joins)
+        const { data: invite, error: inviteError } = await supabaseClient
+            .from('user_invites')
+            .select('email, organization_id') // Simple select
+            .eq('invite_token', inviteToken)
+            .eq('status', 'pending')
+            .maybeSingle(); // maybeSingle is safer than .single()
+
+        if (inviteError) {
+            console.error("Invite Fetch Error:", inviteError);
+            loader.innerHTML = "❌ Database error. Check console.";
             return;
         }
 
-        const { data, error } = await supabaseClient
-            .from('user_invites')
-            .select(`email, organizations(name)`)
-            .eq('invite_token', inviteToken)
-            .eq('status', 'pending')
-            .single();
-
-        if (error || !data) {
+        if (!invite) {
             loader.innerHTML = "❌ This invite is invalid or has expired.";
-        } else {
-            loader.classList.add('hidden');
-            formContainer.classList.remove('hidden');
-            document.getElementById('org-name').innerText = data.organizations.name;
-            document.getElementById('email').value = data.email;
+            return;
         }
-    }
 
+        // STEP 2: Now get the Org name using the ID we just found
+        const { data: org, error: orgError } = await supabaseClient
+            .from('organizations')
+            .select('name')
+            .eq('id', invite.organization_id)
+            .maybeSingle();
+
+        // STEP 3: Show the data
+        loader.classList.add('hidden');
+        formContainer.classList.remove('hidden');
+        
+        // If org exists, show name, otherwise show a default
+        document.getElementById('org-name').innerText = org ? org.name : "Your Team";
+        document.getElementById('email').value = invite.email;
+
+    } catch (err) {
+        console.error("Unexpected Script Error:", err);
+        loader.innerHTML = "❌ An unexpected error occurred.";
+    }
+}
     // 4. Handle Registration
     document.getElementById('submit-btn').addEventListener('click', async () => {
         const fullName = document.getElementById('full-name').value;
