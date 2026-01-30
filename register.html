@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Organization | NOVA</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 40px; background: #f5f5f5; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { color: #333; margin-top: 0; }
+        .info-box { background: #e85a2a10; padding: 15px; border-radius: 8px; border-left: 4px solid #e85a2a; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #e85a2a; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        button:disabled { background: #ccc; }
+        .error { color: red; font-size: 14px; margin-bottom: 10px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div id="loader">Loading invitation details...</div>
+    
+    <div id="form-container" class="hidden">
+        <h2 id="title">Accept Invitation</h2>
+        <div class="info-box">
+            You've been invited to join <strong id="org-name">...</strong>
+        </div>
+
+        <div id="error-msg" class="error"></div>
+
+        <input type="text" id="full-name" placeholder="Full Name">
+        <input type="email" id="email" disabled> <input type="password" id="password" placeholder="Create Password (min 6 chars)">
+        <input type="password" id="confirm-password" placeholder="Confirm Password">
+        
+        <button id="submit-btn">Complete Registration</button>
+    </div>
+
+    <div id="success-container" class="hidden">
+        <h2>🎉 Success!</h2>
+        <p>Your account has been created and linked to your organization.</p>
+        <p>You can now open the <strong>NOVA App</strong> on your phone and sign in.</p>
+    </div>
+</div>
+
+<script>
+    // 1. Setup Supabase (REPLACE THESE WITH YOUR ACTUAL KEYS)
+    const SUPABASE_URL = 'https://xgjeyphgmekakpvttjhr.supabase.co';
+    const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnamV5cGhnbWVrYWtwdnR0amhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4MTU2MjgsImV4cCI6MjA4MTM5MTYyOH0.45mb9tVTAhI7r2SFLYZcg8QvZWqLWecbDxshVFOO8rw';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // 2. Get the token from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const inviteToken = urlParams.get('token');
+
+    const formContainer = document.getElementById('form-container');
+    const loader = document.getElementById('loader');
+
+    // 3. Fetch Invite Details on Load
+    async function loadInvite() {
+        if (!inviteToken) {
+            loader.innerHTML = "❌ No invite token found.";
+            return;
+        }
+
+        const { data, error } = await supabase
+            .from('user_invites')
+            .select(`email, organizations(name)`)
+            .eq('invite_token', inviteToken)
+            .eq('status', 'pending')
+            .single();
+
+        if (error || !data) {
+            loader.innerHTML = "❌ This invite is invalid or has expired.";
+        } else {
+            loader.classList.add('hidden');
+            formContainer.classList.remove('hidden');
+            document.getElementById('org-name').innerText = data.organizations.name;
+            document.getElementById('email').value = data.email;
+        }
+    }
+
+    // 4. Handle Registration
+    document.getElementById('submit-btn').addEventListener('click', async () => {
+        const fullName = document.getElementById('full-name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirm = document.getElementById('confirm-password').value;
+        const btn = document.getElementById('submit-btn');
+        const errorMsg = document.getElementById('error-msg');
+
+        if (!fullName || password.length < 6) {
+            errorMsg.innerText = "Please fill all fields. Password must be 6+ chars.";
+            return;
+        }
+        if (password !== confirm) {
+            errorMsg.innerText = "Passwords do not match.";
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerText = "Processing...";
+
+        // Step A: Sign up the user in Supabase Auth
+        const { data: authData, error: authError } = await supabase.auth.signUp({
+            email,
+            password
+        });
+
+        if (authError) {
+            errorMsg.innerText = authError.message;
+            btn.disabled = false;
+            return;
+        }
+
+        // Step B: Link the profile using the SQL function we created earlier
+        const { data: rpcData, error: rpcError } = await supabase.rpc('accept_invite_and_create_profile', {
+            p_invite_token: inviteToken,
+            p_full_name: fullName,
+            p_user_id: authData.user.id
+        });
+
+        if (rpcError || (rpcData && !rpcData.success)) {
+            errorMsg.innerText = rpcError?.message || rpcData?.error;
+            btn.disabled = false;
+        } else {
+            formContainer.classList.add('hidden');
+            document.getElementById('success-container').classList.remove('hidden');
+        }
+    });
+
+    loadInvite();
+</script>
+
+</body>
+</html>
