@@ -131,12 +131,15 @@
             password
         });
 
-        if (authError) {
-            errorMsg.innerText = authError.message;
-            btn.disabled = false;
-            return;
-        }
-
+       if (authData?.user && !authError) {
+  // THIS IS THE MISSING LINK
+  const { data, error: inviteError } = await supabase.rpc('accept_invite', {
+    p_token: tokenFromUrl, // The hex token
+    p_user_id: authData.user.id // The new user's ID
+  });
+  
+  if (inviteError) console.error("Role assignment failed:", inviteError);
+}
         // Step B: Link the profile using the SQL function we created earlier
         const { data: rpcData, error: rpcError } = await supabaseClient.rpc('accept_invite_and_create_profile', {
             p_invite_token: inviteToken,
