@@ -68,7 +68,6 @@ async function loadInvite() {
         const { data: invite, error: inviteError } = await supabaseClient
             .from('user_invites')
             .select('email, organization_id')
-            console.log("Token being sent to DB:", inviteToken);
             .eq('invite_token', inviteToken)
             .eq('status', 'pending')
             .maybeSingle();
