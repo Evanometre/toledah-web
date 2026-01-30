@@ -48,90 +48,58 @@
     // 1. Setup Supabase (REPLACE THESE WITH YOUR ACTUAL KEYS)
     const SUPABASE_URL = 'https://xgjeyphgmekakpvttjhr.supabase.co';
     const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnamV5cGhnbWVrYWtwdnR0amhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4MTU2MjgsImV4cCI6MjA4MTM5MTYyOH0.45mb9tVTAhI7r2SFLYZcg8QvZWqLWecbDxshVFOO8rw';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // Check if the library loaded correctly
+    if (typeof supabase === 'undefined') {
+        document.getElementById('loader').innerHTML = "❌ Supabase library failed to load.";
+    }
 
-    // 2. Get the token from the URL
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // 2. Get the token
     const urlParams = new URLSearchParams(window.location.search);
     const inviteToken = urlParams.get('token');
+    
+    console.log("URL Token found:", inviteToken);
 
-    const formContainer = document.getElementById('form-container');
-    const loader = document.getElementById('loader');
-
-    // 3. Fetch Invite Details on Load
     async function loadInvite() {
-        if (!inviteToken) {
-            loader.innerHTML = "❌ No invite token found.";
+        if (!inviteToken || inviteToken === "undefined") {
+            document.getElementById('loader').innerHTML = "❌ No valid invite token found in the link.";
             return;
         }
 
-        const { data, error } = await supabase
-            .from('user_invites')
-            .select(`email, organizations(name)`)
-            .eq('invite_token', inviteToken)
-            .eq('status', 'pending')
-            .single();
+        try {
+            // Fetch invite
+            const result = await supabaseClient
+                .from('user_invites')
+                .select('email, organization_id, organizations(name)')
+                .eq('invite_token', inviteToken)
+                .eq('status', 'pending')
+                .single();
 
-        if (error || !data) {
-            loader.innerHTML = "❌ This invite is invalid or has expired.";
-        } else {
-            loader.classList.add('hidden');
-            formContainer.classList.remove('hidden');
-            document.getElementById('org-name').innerText = data.organizations.name;
-            document.getElementById('email').value = data.email;
+            if (result.error) {
+                console.error("Database Error:", result.error);
+                document.getElementById('loader').innerHTML = "❌ Invite not found or expired.";
+                return;
+            }
+
+            const inviteData = result.data;
+            
+            // Fill the page
+            document.getElementById('loader').classList.add('hidden');
+            document.getElementById('form-container').classList.remove('hidden');
+            document.getElementById('org-name').innerText = inviteData.organizations.name;
+            document.getElementById('email').value = inviteData.email;
+
+        } catch (err) {
+            console.error("Script Error:", err);
+            document.getElementById('loader').innerHTML = "❌ A script error occurred.";
         }
     }
 
-    // 4. Handle Registration
-    document.getElementById('submit-btn').addEventListener('click', async () => {
-        const fullName = document.getElementById('full-name').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirm = document.getElementById('confirm-password').value;
-        const btn = document.getElementById('submit-btn');
-        const errorMsg = document.getElementById('error-msg');
-
-        if (!fullName || password.length < 6) {
-            errorMsg.innerText = "Please fill all fields. Password must be 6+ chars.";
-            return;
-        }
-        if (password !== confirm) {
-            errorMsg.innerText = "Passwords do not match.";
-            return;
-        }
-
-        btn.disabled = true;
-        btn.innerText = "Processing...";
-
-        // Step A: Sign up the user in Supabase Auth
-        const { data: authData, error: authError } = await supabase.auth.signUp({
-            email,
-            password
-        });
-
-        if (authError) {
-            errorMsg.innerText = authError.message;
-            btn.disabled = false;
-            return;
-        }
-
-        // Step B: Link the profile using the SQL function we created earlier
-        const { data: rpcData, error: rpcError } = await supabase.rpc('accept_invite_and_create_profile', {
-            p_invite_token: inviteToken,
-            p_full_name: fullName,
-            p_user_id: authData.user.id
-        });
-
-        if (rpcError || (rpcData && !rpcData.success)) {
-            errorMsg.innerText = rpcError?.message || rpcData?.error;
-            btn.disabled = false;
-        } else {
-            formContainer.classList.add('hidden');
-            document.getElementById('success-container').classList.remove('hidden');
-        }
-    });
-
+    // Call the function
     loadInvite();
 </script>
+
 
 </body>
 </html>
