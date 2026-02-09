@@ -26,12 +26,21 @@
   </div>
 
   <script>
+    // Extract orgId from path (supports /verified/<orgId>)
+    function getOrgId() {
+      const pathParts = window.location.pathname.split('/');
+      if(pathParts.length >= 3 && pathParts[1] === 'verified') {
+        return pathParts[2];
+      }
+      return null;
+    }
+
     async function loadProfile(orgId) {
       try {
-        const res = await fetch(`https://YOUR_SUPABASE_URL/rest/v1/public_trust_profiles?organization_id=eq.${orgId}`, {
+        const res = await fetch(`https://xgjeyphgmekakpvttjhr.supabase.co/rest/v1/public_trust_profiles?organization_id=eq.${orgId}`, {
           headers: {
-            'apikey': 'YOUR_SUPABASE_ANON_KEY',
-            'Authorization': 'Bearer YOUR_SUPABASE_ANON_KEY'
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnamV5cGhnbWVrYWtwdnR0amhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4MTU2MjgsImV4cCI6MjA4MTM5MTYyOH0.45mb9tVTAhI7r2SFLYZcg8QvZWqLWecbDxshVFOO8rw',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnamV5cGhnbWVrYWtwdnR0amhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4MTU2MjgsImV4cCI6MjA4MTM5MTYyOH0.45mb9tVTAhI7r2SFLYZcg8QvZWqLWecbDxshVFOO8rw'
           }
         });
         const data = await res.json();
@@ -51,19 +60,6 @@
         document.getElementById('verifiedAt').textContent = "";
         document.getElementById('daysActive').textContent = "";
       }
-    }
-
-    function getOrgId() {
-      // Option 1: Query string ?orgId=<id>
-      const params = new URLSearchParams(window.location.search);
-      if(params.get('orgId')) return params.get('orgId');
-
-      // Option 2: Path /verified/<id>
-      const pathParts = window.location.pathname.split('/');
-      if(pathParts.length >= 3 && pathParts[1] === 'verified') {
-        return pathParts[2];
-      }
-      return null;
     }
 
     const orgId = getOrgId();
