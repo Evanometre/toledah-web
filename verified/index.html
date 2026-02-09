@@ -5,48 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nova Trust Profile</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-    .profile { border: 1px solid #ccc; padding: 20px; border-radius: 10px; display: inline-block; }
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
+    .profile { background: #fff; border-radius: 12px; padding: 20px; max-width: 600px; margin: 50px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .header { text-align: center; margin-bottom: 24px; }
+    h1 { font-size: 28px; color: #1f2937; }
+    h2 { font-size: 22px; margin-bottom: 8px; }
+    p { font-size: 16px; margin: 4px 0; }
   </style>
 </head>
 <body>
-  <h1>Nova Trust Profile</h1>
   <div class="profile">
+    <div class="header">
+      <h1>Nova Trust Profile</h1>
+    </div>
     <h2 id="orgName">Loading...</h2>
     <p id="tier">Tier: -</p>
     <p id="score">Trust Score: -</p>
+    <p id="verifiedAt">Verified Since: -</p>
+    <p id="daysActive">Active Days: -</p>
   </div>
 
   <script>
-    // --- Step 2a: Get orgId from URL ---
+    async function loadProfile(orgId) {
+      try {
+        const res = await fetch(`https://YOUR_SUPABASE_URL/rest/v1/public_trust_profiles?organization_id=eq.${orgId}`, {
+          headers: {
+            'apikey': 'YOUR_SUPABASE_ANON_KEY',
+            'Authorization': 'Bearer YOUR_SUPABASE_ANON_KEY'
+          }
+        });
+        const data = await res.json();
+        if (!data || data.length === 0) throw new Error("Profile not found");
+
+        const profile = data[0];
+        document.getElementById('orgName').textContent = profile.organization_name;
+        document.getElementById('tier').textContent = `Tier: ${profile.verification_tier}`;
+        document.getElementById('score').textContent = `Trust Score: ${Math.round(profile.overall_score)}/100`;
+        document.getElementById('verifiedAt').textContent = `Verified Since: ${profile.verified_at ? new Date(profile.verified_at).toLocaleDateString() : "Recently"}`;
+        document.getElementById('daysActive').textContent = `Active Days: ${profile.days_active}`;
+      } catch (err) {
+        console.error(err);
+        document.getElementById('orgName').textContent = "Profile Not Found";
+        document.getElementById('tier').textContent = "";
+        document.getElementById('score').textContent = "";
+        document.getElementById('verifiedAt').textContent = "";
+        document.getElementById('daysActive').textContent = "";
+      }
+    }
+
     function getOrgId() {
-      // Option 1: URL path e.g., /verified/<orgId>
+      // Option 1: Query string ?orgId=<id>
+      const params = new URLSearchParams(window.location.search);
+      if(params.get('orgId')) return params.get('orgId');
+
+      // Option 2: Path /verified/<id>
       const pathParts = window.location.pathname.split('/');
       if(pathParts.length >= 3 && pathParts[1] === 'verified') {
         return pathParts[2];
       }
-      // Option 2: query string e.g., ?orgId=<orgId>
-      const params = new URLSearchParams(window.location.search);
-      return params.get('orgId');
+      return null;
     }
 
     const orgId = getOrgId();
-    if(!orgId) {
-      document.getElementById('orgName').textContent = "Org ID not found!";
+    if(orgId) {
+      loadProfile(orgId);
     } else {
-      // --- Step 2b: Fetch org data dynamically ---
-      // Replace this URL with your API endpoint
-      fetch(`https://yourapi.com/org/${orgId}`)
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById('orgName').textContent = data.organization_name || 'Unknown Organization';
-          document.getElementById('tier').textContent = `Tier: ${data.verification_tier || '-'}`;
-          document.getElementById('score').textContent = `Trust Score: ${Math.round(data.overall_score || 0)}/100`;
-        })
-        .catch(err => {
-          console.error(err);
-          document.getElementById('orgName').textContent = "Failed to load organization";
-        });
+      document.getElementById('orgName').textContent = "Org ID not provided";
     }
   </script>
 </body>
