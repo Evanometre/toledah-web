@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Trust Profile</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+    .profile { border: 1px solid #ccc; padding: 20px; border-radius: 10px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <h1>Nova Trust Profile</h1>
+  <div class="profile">
+    <h2 id="orgName">Loading...</h2>
+    <p id="tier">Tier: -</p>
+    <p id="score">Trust Score: -</p>
+  </div>
+
+  <script>
+    // --- Step 2a: Get orgId from URL ---
+    function getOrgId() {
+      // Option 1: URL path e.g., /verified/<orgId>
+      const pathParts = window.location.pathname.split('/');
+      if(pathParts.length >= 3 && pathParts[1] === 'verified') {
+        return pathParts[2];
+      }
+      // Option 2: query string e.g., ?orgId=<orgId>
+      const params = new URLSearchParams(window.location.search);
+      return params.get('orgId');
+    }
+
+    const orgId = getOrgId();
+    if(!orgId) {
+      document.getElementById('orgName').textContent = "Org ID not found!";
+    } else {
+      // --- Step 2b: Fetch org data dynamically ---
+      // Replace this URL with your API endpoint
+      fetch(`https://yourapi.com/org/${orgId}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('orgName').textContent = data.organization_name || 'Unknown Organization';
+          document.getElementById('tier').textContent = `Tier: ${data.verification_tier || '-'}`;
+          document.getElementById('score').textContent = `Trust Score: ${Math.round(data.overall_score || 0)}/100`;
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('orgName').textContent = "Failed to load organization";
+        });
+    }
+  </script>
+</body>
+</html>
