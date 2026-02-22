@@ -7,321 +7,805 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e1e1e;
-            --background: #f5f5f5;
-            --border: #cfcfcf;
-            --secondary: #3a3a3a;
-            --accent: #e85a2a;
+            --primary: #1a1a1a;
+            --background: #f4f4f2;
+            --border: #d8d8d4;
+            --secondary: #6b6b65;
+            --accent: #e8552a;
+            --accent-soft: rgba(232, 85, 42, 0.08);
+            --white: #ffffff;
         }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'DM Sans', -apple-system, sans-serif;
             background-color: var(--background);
             color: var(--primary);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Apple-style Glassmorphism */
+        h1, h2, h3, h4, .display {
+            font-family: 'Sora', sans-serif;
+        }
+
+        /* ─── NAV ─── */
         .glass-nav {
-            background: rgba(245, 245, 245, 0.8);
-            backdrop-filter: saturate(180%) blur(20px);
+            background: rgba(244, 244, 242, 0.82);
+            backdrop-filter: saturate(180%) blur(24px);
+            -webkit-backdrop-filter: saturate(180%) blur(24px);
             border-bottom: 1px solid var(--border);
         }
 
-        .hero-text {
-            letter-spacing: -0.05em;
-            line-height: 1.1;
+        /* ─── HERO ─── */
+        .nova-hero {
+            background: #0f0f0f;
+            position: relative;
+            overflow: hidden;
         }
 
+        .nova-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(ellipse, rgba(232, 85, 42, 0.12) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .nova-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(232,85,42,0.4), transparent);
+        }
+
+        .nova-eyebrow {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .nova-title {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(3.2rem, 9vw, 7.5rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.0;
+            color: #ffffff;
+        }
+
+        .nova-title span {
+            color: var(--accent);
+        }
+
+        .nova-sub {
+            color: rgba(255,255,255,0.5);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 520px;
+        }
+
+        /* ─── PHONE MOCKUP ─── */
+        .phone-wrap {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .phone-glow {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: 120px;
+            background: radial-gradient(ellipse, rgba(232,85,42,0.35) 0%, transparent 70%);
+            filter: blur(20px);
+            pointer-events: none;
+        }
+
+        .phone-frame {
+            width: 220px;
+            background: #1c1c1e;
+            border-radius: 40px;
+            border: 1.5px solid rgba(255,255,255,0.12);
+            box-shadow:
+                0 0 0 1px rgba(0,0,0,0.5),
+                0 60px 120px rgba(0,0,0,0.7),
+                inset 0 1px 0 rgba(255,255,255,0.08);
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .phone-notch {
+            width: 80px;
+            height: 24px;
+            background: #0f0f0f;
+            border-radius: 0 0 18px 18px;
+            margin: 0 auto;
+        }
+
+        .phone-screen {
+            padding: 12px;
+            min-height: 400px;
+            background: #111;
+        }
+
+        .screen-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .screen-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 0.05em;
+        }
+
+        .screen-badge {
+            font-size: 0.5rem;
+            background: var(--accent);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 10px 8px;
+        }
+
+        .stat-label {
+            font-size: 0.42rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-value.accent { color: var(--accent); }
+        .stat-value.green { color: #4ade80; }
+
+        .chart-bar-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 40px;
+            margin: 10px 0 6px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: rgba(232,85,42,0.2);
+            border-radius: 3px 3px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-bar::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: var(--accent);
+            border-radius: 3px 3px 0 0;
+            animation: barGrow 1.5s ease forwards;
+        }
+
+        .b1::after { height: 45%; animation-delay: 0.1s; }
+        .b2::after { height: 60%; animation-delay: 0.2s; }
+        .b3::after { height: 35%; animation-delay: 0.3s; }
+        .b4::after { height: 80%; animation-delay: 0.4s; }
+        .b5::after { height: 55%; animation-delay: 0.5s; }
+        .b6::after { height: 70%; animation-delay: 0.6s; }
+        .b7::after { height: 90%; animation-delay: 0.7s; background: rgba(232,85,42,0.9); }
+
+        @keyframes barGrow {
+            from { height: 0; }
+        }
+
+        .sale-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .sale-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+
+        .sale-name {
+            font-size: 0.5rem;
+            color: rgba(255,255,255,0.7);
+            flex: 1;
+        }
+
+        .sale-amount {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: #4ade80;
+        }
+
+        /* ─── FEATURE PILLS ─── */
+        .feature-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.7);
+            white-space: nowrap;
+        }
+
+        .feature-pill .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* ─── CTA BUTTONS ─── */
+        .btn-primary {
+            background: #fff;
+            color: #0f0f0f;
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 14px 32px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
+        }
+
+        .btn-ghost {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            padding: 14px 24px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(255,255,255,0.25);
+            color: #fff;
+        }
+
+        /* ─── TOLEDAH STRIP ─── */
+        .toledah-strip {
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* ─── ECOSYSTEM ─── */
         .bento-card {
             background: white;
             border: 1px solid var(--border);
-            border-radius: 24px;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
         }
 
         .bento-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.07);
         }
 
-        .pill-button {
-            border-radius: 999px;
-            padding: 10px 24px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .pill-button-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .pill-button-primary:hover {
-            background-color: #000;
-        }
-
-        /* Specific styles for the logo icon SVG */
-        .logo-tri {
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-        }
-
-        .coming-soon-badge {
-            font-size: 0.7rem;
+        .coming-badge {
+            font-family: 'Sora', sans-serif;
+            font-size: 0.6rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 4px 10px;
+            letter-spacing: 0.12em;
+            padding: 3px 10px;
             border: 1px solid var(--border);
             border-radius: 999px;
             color: var(--secondary);
+        }
+
+        /* ─── VISION ─── */
+        .vision-quote {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: -0.02em;
+            color: var(--primary);
+        }
+
+        /* ─── SCROLL REVEAL ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── TICKER ─── */
+        .ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-inner {
+            display: inline-flex;
+            gap: 48px;
+            animation: ticker 22s linear infinite;
+        }
+
+        .ticker-inner:hover { animation-play-state: paused; }
+
+        @keyframes ticker {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.78rem;
+            color: var(--secondary);
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .ticker-sep {
+            color: var(--border);
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- ═══ NAVIGATION ═══ -->
     <nav class="glass-nav fixed top-0 w-full z-50">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <!-- Logo mimicking the triangle in your image -->
-  <!-- Logo as SVG file -->
-            <img src="images/logo.svg" alt="Toledah Logo" class="icon text-primary" />
-                <span class="font-semibold text-lg tracking-tight uppercase">Toledah</span>
-            </div>
-            
-            <div class="hidden md:flex space-x-8 text-sm font-medium text-secondary">
-                <a href="#nova" class="hover:text-primary transition-colors">Nova Business Manager</a>
-                <a href="#ecosystem" class="hover:text-primary transition-colors">Ecosystem</a>
-                <a href="#about" class="hover:text-primary transition-colors">Vision</a>
+            <div class="flex items-center space-x-2.5">
+                <img src="images/logo.svg" alt="Toledah" style="width:22px;height:22px;" />
+                <span style="font-family:'Sora',sans-serif;font-weight:600;font-size:1rem;letter-spacing:0.06em;text-transform:uppercase;">Toledah</span>
             </div>
 
-            <div>
-                <a href="#nova" class="pill-button pill-button-primary text-sm">
-                    Get Started
-                </a>
+            <div class="hidden md:flex space-x-8 text-sm" style="color:var(--secondary);">
+                <a href="#nova" class="hover:text-primary transition-colors" style="font-weight:400;">Nova</a>
+                <a href="#ecosystem" class="hover:text-primary transition-colors" style="font-weight:400;">Ecosystem</a>
+                <a href="/vision" class="hover:text-primary transition-colors" style="font-weight:400;">Vision</a>
             </div>
+
+            <a href="#nova" style="background:var(--primary);color:#fff;font-family:'Sora',sans-serif;font-weight:500;font-size:0.82rem;padding:9px 22px;border-radius:999px;text-decoration:none;transition:background 0.2s;">
+                Request Access
+            </a>
         </div>
     </nav>
-    
-    <style>
-.icon {
-    width: 24px;   /* controls displayed size */
-    height: 24px;
-}
-</style>
 
-    <!-- Hero Section -->
-    <section class="pt-40 pb-20 px-6 text-center">
-        <div class="max-w-4xl mx-auto">
-            <p class="text-accent font-semibold tracking-widest uppercase text-xs mb-4">Establishing Foundation</p>
-            <h1 class="hero-text text-6xl md:text-8xl font-semibold mb-8">
-                The Infrastructure <br/>of Growth.
-            </h1>
-            <p class="text-xl md:text-2xl text-secondary max-w-2xl mx-auto mb-12 font-light">
-                Toledah creates interconnected systems that help businesses, individuals, and institutions thrive.
-            </p>
-            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="#nova" class="pill-button pill-button-primary px-8 py-4 text-lg">Deploy Nova</a>
-                <a href="#ecosystem" class="text-primary font-medium flex items-center group">
-                    View the Roadmap
-                    <svg class="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </a>
+
+    <!-- ═══ NOVA HERO — THE WHOLE STAGE ═══ -->
+    <section class="nova-hero min-h-screen flex flex-col justify-center pt-16">
+        <div class="max-w-7xl mx-auto px-6 py-24 w-full">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+
+                <!-- Left: Copy -->
+                <div>
+                    <p class="nova-eyebrow mb-6">Introducing Nova — Early Access</p>
+
+                    <h1 class="nova-title mb-8">
+                        Run your<br/>
+                        entire business<br/>
+                        from your<span style="color:var(--accent);">.</span><br/>
+                        <span style="color:rgba(255,255,255,0.25);font-weight:300;">phone.</span>
+                    </h1>
+
+                    <p class="nova-sub mb-10">
+                        Nova is a smart business manager built for real-world operators.
+                        Sales, inventory, staff control, profit separation, and tax records —
+                        even when the network isn't perfect.
+                    </p>
+
+                    <!-- Feature pills -->
+                    <div class="flex flex-wrap gap-3 mb-12">
+                        <span class="feature-pill"><span class="dot"></span>Works offline</span>
+                        <span class="feature-pill"><span class="dot"></span>PIT & VAT ready</span>
+                        <span class="feature-pill"><span class="dot"></span>WhatsApp receipts</span>
+                        <span class="feature-pill"><span class="dot"></span>Staff permissions</span>
+                    </div>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <a href="#" class="btn-primary">Request Early Access</a>
+                        <a href="#nova-features" class="btn-ghost">
+                            See what it does
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Phone Mockup -->
+                <div class="phone-wrap py-8">
+                    <div class="phone-glow"></div>
+                    <div class="phone-frame">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="screen-header">
+                                <span class="screen-title">Nova · Dashboard</span>
+                                <span class="screen-badge">LIVE</span>
+                            </div>
+
+                            <div class="stat-row">
+                                <div class="stat-card">
+                                    <div class="stat-label">Today's Sales</div>
+                                    <div class="stat-value accent">₦84,500</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">Net Profit</div>
+                                    <div class="stat-value green">₦31,200</div>
+                                </div>
+                            </div>
+
+                            <div class="stat-row">
+                                <div class="stat-card">
+                                    <div class="stat-label">Items Sold</div>
+                                    <div class="stat-value" style="font-size:0.9rem;">142</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">Low Stock</div>
+                                    <div class="stat-value" style="color:#fbbf24;font-size:0.9rem;">3 items</div>
+                                </div>
+                            </div>
+
+                            <div style="font-size:0.42rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.1em;margin-top:10px;margin-bottom:2px;">Weekly Revenue</div>
+                            <div class="chart-bar-row">
+                                <div class="chart-bar b1"></div>
+                                <div class="chart-bar b2"></div>
+                                <div class="chart-bar b3"></div>
+                                <div class="chart-bar b4"></div>
+                                <div class="chart-bar b5"></div>
+                                <div class="chart-bar b6"></div>
+                                <div class="chart-bar b7"></div>
+                            </div>
+
+                            <div style="font-size:0.42rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.1em;margin-top:10px;margin-bottom:6px;">Recent Sales</div>
+
+                            <div class="sale-item">
+                                <div class="sale-dot"></div>
+                                <span class="sale-name">Engine Oil 5L × 4</span>
+                                <span class="sale-amount">+₦12,000</span>
+                            </div>
+                            <div class="sale-item">
+                                <div class="sale-dot"></div>
+                                <span class="sale-name">Brake Pads × 2</span>
+                                <span class="sale-amount">+₦8,400</span>
+                            </div>
+                            <div class="sale-item">
+                                <div class="sale-dot"></div>
+                                <span class="sale-name">Filter Kit × 1</span>
+                                <span class="sale-amount">+₦3,200</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom fade -->
+        <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);"></div>
+    </section>
+
+
+    <!-- ═══ FEATURE TICKER ═══ -->
+    <div class="toledah-strip py-4 ticker-wrap">
+        <div class="ticker-inner">
+            <!-- duplicated for seamless loop -->
+            <span class="ticker-item"><span style="color:var(--accent);">✦</span> Fast sales engine</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Offline-first architecture</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Nigerian PIT & VAT compliance</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">WhatsApp receipt delivery</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Role-based staff permissions</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Profit separation engine</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Audit trail & trust score</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Manufacturing module</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item"><span style="color:var(--accent);">✦</span> Fast sales engine</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Offline-first architecture</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Nigerian PIT & VAT compliance</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">WhatsApp receipt delivery</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Role-based staff permissions</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Profit separation engine</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Audit trail & trust score</span>
+            <span class="ticker-sep">·</span>
+            <span class="ticker-item">Manufacturing module</span>
+        </div>
+    </div>
+
+
+    <!-- ═══ NOVA FEATURES ═══ -->
+    <section id="nova-features" class="py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+
+            <div class="max-w-xl mb-20 reveal">
+                <p class="nova-eyebrow" style="color:var(--accent);margin-bottom:12px;">Why Nova</p>
+                <h2 style="font-family:'Sora',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:600;letter-spacing:-0.03em;line-height:1.15;color:var(--primary);">
+                    Full Power.<br/>Zero Laptop.
+                </h2>
+                <p style="color:var(--secondary);font-size:1.05rem;font-weight:300;line-height:1.7;margin-top:16px;">
+                    Built for the market, the depot, and the workshop floor — not the corner office.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bento-card p-8 reveal">
+                    <div style="width:44px;height:44px;background:var(--accent-soft);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                        <svg width="20" height="20" fill="none" stroke="var(--accent)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:10px;">Tap. Tap. Done.</h3>
+                    <p style="color:var(--secondary);font-size:0.9rem;line-height:1.7;font-weight:300;">Complete a sale in seconds. No dropdowns, no multi-step wizards. The fastest POS you've used on a phone.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bento-card p-8 reveal" style="transition-delay:0.1s;">
+                    <div style="width:44px;height:44px;background:#f0fdf4;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                        <svg width="20" height="20" fill="none" stroke="#16a34a" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:10px;">Separate your chop-money.</h3>
+                    <p style="color:var(--secondary);font-size:0.9rem;line-height:1.7;font-weight:300;">The profit allocation engine automatically separates personal funds from business revenue. Know exactly what is yours to spend.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bento-card p-8 reveal" style="transition-delay:0.2s;">
+                    <div style="width:44px;height:44px;background:#fef3f2;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                        <svg width="20" height="20" fill="none" stroke="#dc2626" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+                    </div>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:10px;">Monitor your staff from anywhere.</h3>
+                    <p style="color:var(--secondary);font-size:0.9rem;line-height:1.7;font-weight:300;">Role-based access control gives each staff member exactly the permissions they need — and nothing more. Peace of mind, always.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bento-card p-8 reveal" style="transition-delay:0.0s;">
+                    <div style="width:44px;height:44px;background:#fffbeb;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                        <svg width="20" height="20" fill="none" stroke="#d97706" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                    </div>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:10px;">Tax-man proof your business.</h3>
+                    <p style="color:var(--secondary);font-size:0.9rem;line-height:1.7;font-weight:300;">PIT and VAT calculated natively on every transaction. Your records are always audit-ready without any extra work.</p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bento-card p-8 reveal" style="transition-delay:0.1s;">
+                    <div style="width:44px;height:44px;background:#f5f3ff;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                        <svg width="20" height="20" fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                    </div>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:10px;">Receipts straight to WhatsApp.</h3>
+                    <p style="color:var(--secondary);font-size:0.9rem;line-height:1.7;font-weight:300;">Send professional branded invoices directly to your customer's WhatsApp. One tap from the sales summary screen.</p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bento-card p-8 reveal" style="transition-delay:0.2s;">
+                    <div style="width:44px;height:44px;background:#f0f9ff;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
+                        <svg width="20" height="20" fill="none" stroke="#0284c7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                    </div>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:10px;">Works when MTN doesn't.</h3>
+                    <p style="color:var(--secondary);font-size:0.9rem;line-height:1.7;font-weight:300;">Offline-first architecture keeps your business running during network failures. Data syncs silently when you're back online.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Nova Spotlight (Dark Section) -->
-<section id="nova" class="bg-[#1e1e1e] text-white py-32 px-6 overflow-hidden">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        <div>
-            <span class="inline-block px-3 py-1 border border-white/20 rounded-full text-[10px] tracking-widest uppercase mb-6 opacity-60">
-                Release 1.0 — Early Access
-            </span>
 
-            <h2 class="text-5xl font-semibold mb-6 tracking-tight">
-                The Engine of Scale.
-            </h2>
-
-            <p class="text-lg text-gray-400 mb-8 leading-relaxed">
-                Nova is a smart business manager built for real-world operators.
-                Manage sales, control staff, separate personal money from business money,
-                and stay tax-ready, all from your phone, even when the network isn’t perfect.
-            </p>
-
-            <ul class="space-y-4 mb-10">
-                <li class="flex items-start text-gray-300">
-                    <div class="w-1.5 h-1.5 rounded-full bg-accent mt-2 mr-3"></div>
-                    Full business control on mobile, no laptop required
-                </li>
-                <li class="flex items-start text-gray-300">
-                    <div class="w-1.5 h-1.5 rounded-full bg-accent mt-2 mr-3"></div>
-                    Built-in profit separation, staff permissions, and audit trails
-                </li>
-                <li class="flex items-start text-gray-300">
-                    <div class="w-1.5 h-1.5 rounded-full bg-accent mt-2 mr-3"></div>
-                    Tax-ready records for PIT & VAT, backed by real transactions
-                </li>
-            </ul>
-
-    <button class="bg-white text-gray-800 rounded-full px-8 py-3 font-semibold hover:bg-gray-200">
-    Request Early Access
-</button>
-        </div>
-
-        <div class="relative">
-            <!-- Mockup Representation -->
-            <div class="bg-gray-800 rounded-2xl border border-white/10 aspect-video shadow-2xl p-4 overflow-hidden">
-                <div class="flex items-center space-x-2 mb-4">
-                    <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
-                    <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
-                    <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
-                </div>
-                <div class="space-y-3">
-                    <div class="h-4 w-1/3 bg-white/10 rounded"></div>
-                    <div class="grid grid-cols-3 gap-3">
-                        <div class="h-20 bg-white/5 rounded-lg border border-white/5"></div>
-                        <div class="h-20 bg-white/5 rounded-lg border border-white/5"></div>
-                        <div class="h-20 bg-accent/20 rounded-lg border border-accent/30"></div>
-                    </div>
-                    <div class="h-32 bg-white/5 rounded-lg border border-white/5"></div>
-                </div>
+    <!-- ═══ TOLEDAH IDENTITY STRIP ═══ -->
+    <section class="py-20 px-6" style="background:var(--background);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="reveal">
+                <p style="font-size:0.72rem;font-family:'Sora',sans-serif;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--secondary);margin-bottom:8px;">Nova is a Toledah product</p>
+                <h3 style="font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:600;letter-spacing:-0.02em;">The Infrastructure of Growth.</h3>
             </div>
+            <p style="color:var(--secondary);font-size:0.95rem;font-weight:300;line-height:1.7;max-width:420px;" class="reveal">
+                Toledah builds interconnected systems for businesses, individuals, and institutions. Nova is the first layer. More is coming.
+            </p>
+            <a href="/vision" style="font-family:'Sora',sans-serif;font-size:0.85rem;font-weight:500;color:var(--primary);border:1px solid var(--border);padding:10px 22px;border-radius:999px;text-decoration:none;white-space:nowrap;transition:border-color 0.2s;" class="reveal">
+                Read the Vision →
+            </a>
         </div>
-    </div>
-</section>
+    </section>
 
-    <!-- Ecosystem (Bento Grid) -->
+
+    <!-- ═══ ECOSYSTEM (CONDENSED) ═══ -->
     <section id="ecosystem" class="py-32 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
-            <div class="mb-16">
-                <h2 class="text-4xl font-semibold tracking-tight mb-4">The Toledah Ecosystem</h2>
-                <p class="text-secondary text-xl font-light">An interconnected suite of infrastructure solutions.</p>
+            <div class="mb-16 reveal">
+                <p class="nova-eyebrow" style="color:var(--secondary);margin-bottom:12px;">What's being built</p>
+                <h2 style="font-family:'Sora',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:600;letter-spacing:-0.03em;">The Toledah Ecosystem</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6">
-                <!-- Tole Pay -->
-                <div class="bento-card p-8 md:col-span-2">
-                    <div class="flex justify-between items-start mb-12">
-                        <div class="p-3 bg-background rounded-xl">
-                            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+
+                <div class="bento-card p-7 md:col-span-2 reveal">
+                    <div class="flex justify-between items-start mb-10">
+                        <div style="padding:10px;background:#f5f5f3;border-radius:12px;">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
                         </div>
-                        <span class="coming-soon-badge">Alpha</span>
+                        <span class="coming-badge">Alpha</span>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-2">Tole Pay</h3>
-                    <p class="text-secondary font-light">Institutional-grade payment gateway and fintech rail for emerging markets.</p>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:600;margin-bottom:8px;">Tole Pay</h3>
+                    <p style="color:var(--secondary);font-size:0.88rem;font-weight:300;line-height:1.6;">Institutional-grade payment infrastructure and fintech rail for emerging markets.</p>
                 </div>
 
-                <!-- Yoseph AI -->
-                <div class="bento-card p-8 md:col-span-2 bg-[#f9f9f9]">
-                    <div class="flex justify-between items-start mb-12">
-                        <div class="p-3 bg-primary rounded-xl text-white">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <div class="bento-card p-7 md:col-span-2 reveal" style="transition-delay:0.1s;">
+                    <div class="flex justify-between items-start mb-10">
+                        <div style="padding:10px;background:#1a1a1a;border-radius:12px;">
+                            <svg width="18" height="18" fill="none" stroke="white" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                         </div>
-                        <span class="coming-soon-badge">R&D Phase</span>
+                        <span class="coming-badge">R&D</span>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-2">Yoseph</h3>
-                    <p class="text-secondary font-light">The AI intent layer designed to bridge human decision making and automated execution.</p>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:600;margin-bottom:8px;">Yoseph</h3>
+                    <p style="color:var(--secondary);font-size:0.88rem;font-weight:300;line-height:1.6;">The AI intent layer bridging human decision-making and automated execution.</p>
                 </div>
 
-                <!-- Nova Covenant -->
-                <div class="bento-card p-8">
-                    <div class="flex justify-between items-start mb-12">
-                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
-                        <span class="coming-soon-badge text-[8px]">Proprietary</span>
+                <div class="bento-card p-7 reveal" style="transition-delay:0s;">
+                    <div class="flex justify-between items-start mb-10">
+                        <svg width="18" height="18" fill="none" stroke="var(--accent)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                        <span class="coming-badge" style="font-size:0.55rem;">Proprietary</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Nova Covenant</h3>
-                    <p class="text-sm text-secondary">Specialized silicon designed for decentralized orchestration.</p>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:6px;">Nova Covenant</h3>
+                    <p style="color:var(--secondary);font-size:0.82rem;font-weight:300;line-height:1.6;">Specialised silicon for decentralised orchestration.</p>
                 </div>
 
-                <!-- Nova Agro -->
-                <div class="bento-card p-8">
-                    <div class="flex justify-between items-start mb-12">
-                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-                        <span class="coming-soon-badge text-[8px]">Planning</span>
+                <div class="bento-card p-7 reveal" style="transition-delay:0.1s;">
+                    <div class="flex justify-between items-start mb-10">
+                        <svg width="18" height="18" fill="none" stroke="#16a34a" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                        <span class="coming-badge" style="font-size:0.55rem;">Planning</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Nova Agro</h3>
-                    <p class="text-sm text-secondary">Securing the supply chain from seed to market with IoT and ERP integration.</p>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:6px;">Nova Agro</h3>
+                    <p style="color:var(--secondary);font-size:0.82rem;font-weight:300;line-height:1.6;">Securing the supply chain from seed to market.</p>
                 </div>
-                
-               <!-- Toledah Witness -->
-<div class="bento-card p-8">
-    <div class="flex justify-between items-start mb-12">
-        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" />
-        </svg>
-        <span class="coming-soon-badge text-[8px]">Private Research</span>
-    </div>
-    <h3 class="text-xl font-semibold mb-2">Toledah Witness</h3>
-    <p class="text-sm text-secondary">
-        Live-captured media sealed at the moment of creation.
-        Designed to preserve truth as verifiable record.
-    </p>
-</div> 
 
-                <!-- Marketplace -->
-                <div class="bento-card p-8 md:col-span-2">
-                    <div class="flex justify-between items-start mb-12">
-                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                        <span class="coming-soon-badge text-[8px]">Future</span>
+                <div class="bento-card p-7 reveal" style="transition-delay:0.2s;">
+                    <div class="flex justify-between items-start mb-10">
+                        <svg width="18" height="18" fill="none" stroke="#7c3aed" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"/></svg>
+                        <span class="coming-badge" style="font-size:0.55rem;">Research</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Nova Marketplace</h3>
-                    <p class="text-sm text-secondary">The centralized exchange for B2B procurement and global commodities within the Nova ecosystem.</p>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:6px;">Toledah Witness</h3>
+                    <p style="color:var(--secondary);font-size:0.82rem;font-weight:300;line-height:1.6;">Live-captured media sealed at the moment of creation.</p>
                 </div>
+
+                <div class="bento-card p-7 reveal" style="transition-delay:0.3s;">
+                    <div class="flex justify-between items-start mb-10">
+                        <svg width="18" height="18" fill="none" stroke="#0284c7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                        <span class="coming-badge" style="font-size:0.55rem;">Future</span>
+                    </div>
+                    <h3 style="font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:6px;">Nova Marketplace</h3>
+                    <p style="color:var(--secondary);font-size:0.82rem;font-weight:300;line-height:1.6;">B2B procurement and global commodities exchange.</p>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Vision Statement -->
-    <section id="about" class="py-32 px-6 border-t border-border">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl font-semibold mb-8">One Platform. Absolute Control.</h2>
-            <p class="text-xl text-secondary leading-relaxed font-light">
-                Toledah is built on the principle of integrated sovereignty. By owning the hardware (Covenant), the logic (Yoseph), the records (Witness), and the proof and the operations (Nova), we provide enterprises with a level of vertical integration previously reserved for the world's largest nations.
-            </p>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-[#1e1e1e] text-white pt-20 pb-10 px-6">
-        <div class="max-w-7xl mx-auto border-b border-white/10 pb-16 grid grid-cols-2 md:grid-cols-4 gap-12">
-            <div class="col-span-2">
-                 <div class="flex items-center space-x-2 mb-6">
-                     <img src="images/logo white.png" alt="Toledah Logo" class="icon text-primary" />
-                     
-                    <span class="font-semibold text-lg tracking-tight uppercase">Toledah</span>
+    <!-- ═══ FOOTER ═══ -->
+    <footer style="background:#0f0f0f;color:white;padding:80px 24px 40px;">
+        <div class="max-w-7xl mx-auto">
+            <div style="border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:60px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;" class="grid">
+                <div>
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+                        <img src="images/logo white.png" alt="Toledah" style="width:20px;height:20px;" />
+                        <span style="font-family:'Sora',sans-serif;font-weight:600;font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;">Toledah</span>
+                    </div>
+                    <p style="color:rgba(255,255,255,0.35);font-size:0.88rem;font-weight:300;max-width:280px;line-height:1.7;">The infrastructure for a growing global economy.</p>
                 </div>
-                <p class="text-gray-400 max-w-sm">The infrastructure for Global Economy.</p>
+                <div>
+                    <h4 style="font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:20px;">Products</h4>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+                        <li><a href="#" style="color:rgba(255,255,255,0.55);font-size:0.88rem;text-decoration:none;font-weight:300;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Nova Business Manager</a></li>
+                        <li><a href="#" style="color:rgba(255,255,255,0.55);font-size:0.88rem;text-decoration:none;font-weight:300;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Tole Pay</a></li>
+                        <li><a href="#" style="color:rgba(255,255,255,0.55);font-size:0.88rem;text-decoration:none;font-weight:300;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Yoseph AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-family:'Sora',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:20px;">Legal</h4>
+                    <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;">
+                        <li><a href="#" style="color:rgba(255,255,255,0.55);font-size:0.88rem;text-decoration:none;font-weight:300;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Privacy</a></li>
+                        <li><a href="#" style="color:rgba(255,255,255,0.55);font-size:0.88rem;text-decoration:none;font-weight:300;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Terms</a></li>
+                        <li><a href="#" style="color:rgba(255,255,255,0.55);font-size:0.88rem;text-decoration:none;font-weight:300;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">Global Compliance</a></li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <h4 class="font-semibold mb-6">Solutions</h4>
-                <ul class="space-y-4 text-gray-400 text-sm">
-                    <li><a href="#" class="hover:text-white transition-colors">Nova Business Manager</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Tole Pay</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Yoseph AI</a></li>
-                </ul>
+            <div style="padding-top:28px;display:flex;justify-content:space-between;align-items:center;">
+                <p style="color:rgba(255,255,255,0.2);font-size:0.75rem;">© 2026 Toledah Technologies Inc. All rights reserved.</p>
+                <p style="color:rgba(255,255,255,0.2);font-size:0.75rem;">Designed for Scale.</p>
             </div>
-            <div>
-                <h4 class="font-semibold mb-6">Legal</h4>
-                <ul class="space-y-4 text-gray-400 text-sm">
-                    <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors">Global Compliance</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto pt-8 text-gray-500 text-xs flex justify-between">
-            <p>© 2026 Toledah Technologies Inc. All rights reserved.</p>
-            <p>Designed for Scale.</p>
         </div>
     </footer>
 
+
+    <!-- ═══ SCROLL REVEAL SCRIPT ═══ -->
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+
 </body>
 </html>
-
-
