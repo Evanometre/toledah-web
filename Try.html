@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toledah | The Infrastructure of Growth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --obsidian: #050505;
+            --card-bg: #111111;
+            --gold: #D4AF37;
+            --gold-muted: rgba(212, 175, 55, 0.15);
+            --text-main: #F5F5F7;
+            --text-mute: #86868B;
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: var(--obsidian);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.01em;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .display { font-family: 'Sora', sans-serif; }
+
+        /* ─── PREMIUM GRADIENTS ─── */
+        .hero-glow {
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── NAVIGATION ─── */
+        .nav-blur {
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 0.5px solid var(--glass-border);
+        }
+
+        /* ─── TYPOGRAPHY ─── */
+        .eyebrow {
+            font-family: 'Sora';
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            font-size: 0.65rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+            font-weight: 700;
+        }
+
+        /* ─── THE PHONE (SPECULAR HIGHLIGHTS) ─── */
+        .phone-container {
+            position: relative;
+            padding: 10px;
+            background: linear-gradient(145deg, #2c2c2e, #050505);
+            border-radius: 54px;
+            box-shadow: 
+                0 0 0 1px rgba(255,255,255,0.1), /* The "Silver Edge" */
+                0 50px 100px -20px rgba(0,0,0,1);
+        }
+
+        .phone-screen {
+            background: #000;
+            border-radius: 44px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* ─── BENTO BOXES (SPATIAL) ─── */
+        .bento-grid-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.2, 1, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-grid-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* ─── BUTTONS ─── */
+        .btn-gold {
+            background: var(--gold);
+            color: #000;
+            padding: 14px 32px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .btn-gold:hover { transform: scale(1.03); }
+
+        .btn-outline {
+            border: 1px solid var(--glass-border);
+            padding: 14px 32px;
+            border-radius: 999px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .btn-outline:hover { background: rgba(255,255,255,0.05); }
+
+        /* ─── STAT CARDS (INTERNAL UI) ─── */
+        .inner-stat {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-glow"></div>
+
+    <nav class="nav-blur fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gradient-to-tr from-[#D4AF37] to-[#F9E498] rounded-lg"></div>
+                <span class="font-bold tracking-widest text-sm">TOLEDAH</span>
+            </div>
+            <div class="hidden md:flex gap-10 text-[0.8rem] font-medium tracking-wide text-[#86868B]">
+                <a href="#" class="hover:text-white transition-colors">NOVA</a>
+                <a href="#" class="hover:text-white transition-colors">ECOSYSTEM</a>
+                <a href="#" class="hover:text-white transition-colors">VISION</a>
+            </div>
+            <button class="btn-gold text-[0.75rem] py-2 px-6">REQUEST ACCESS</button>
+        </div>
+    </nav>
+
+    <section class="relative pt-40 pb-20 px-8">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+            
+            <div class="z-10">
+                <p class="eyebrow mb-8">Early Access Available</p>
+                <h1 class="hero-title mb-8">
+                    Infrastructure<br/>
+                    of <span class="text-white">Growth.</span>
+                </h1>
+                <p class="text-lg text-[#86868B] max-w-lg mb-12 font-light leading-relaxed">
+                    Nova is a precision tool for real-world operators. 
+                    Manage complex inventory, institutional tax compliance, and multi-staff operations from a single piece of glass.
+                </p>
+                
+                <div class="flex flex-wrap gap-5">
+                    <button class="btn-gold">Request Early Access</button>
+                    <button class="btn-outline flex items-center gap-2">
+                        Watch the Film
+                        <div class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
+                            <div class="w-0 h-0 border-t-[4px] border-t-transparent border-l-[7px] border-l-white border-b-[4px] border-b-transparent ml-1"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-center lg:justify-end">
+                <div class="phone-container w-[320px]">
+                    <div class="phone-screen aspect-[9/19.5] p-6 flex flex-col">
+                        <div class="flex justify-between items-center mb-10">
+                            <span class="text-[0.6rem] font-bold tracking-tighter text-white/40">NOVA OS v1.0</span>
+                            <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"></div>
+                        </div>
+
+                        <div class="inner-stat mb-4">
+                            <p class="text-[0.5rem] uppercase tracking-widest text-white/30 mb-1">Gross Revenue</p>
+                            <p class="text-2xl font-bold text-[#D4AF37]">₦142.8M</p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 mb-8">
+                            <div class="inner-stat">
+                                <p class="text-[0.5rem] text-white/30 uppercase">Efficiency</p>
+                                <p class="text-lg font-bold">94%</p>
+                            </div>
+                            <div class="inner-stat">
+                                <p class="text-[0.5rem] text-white/30 uppercase">Staff Active</p>
+                                <p class="text-lg font-bold">12</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-auto">
+                            <div class="flex items-end gap-1 h-24 mb-4">
+                                <div class="flex-1 bg-white/5 rounded-t-sm h-[40%]"></div>
+                                <div class="flex-1 bg-white/5 rounded-t-sm h-[60%]"></div>
+                                <div class="flex-1 bg-white/10 rounded-t-sm h-[35%]"></div>
+                                <div class="flex-1 bg-[#D4AF37] rounded-t-sm h-[90%] shadow-[0_0_20px_rgba(212,175,55,0.3)]"></div>
+                                <div class="flex-1 bg-white/5 rounded-t-sm h-[55%]"></div>
+                            </div>
+                            <p class="text-[0.6rem] text-center text-white/20 font-medium">REAL-TIME DATA STREAM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 px-8 bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-20">
+                <p class="eyebrow mb-4">Core Modules</p>
+                <h2 class="text-5xl font-bold tracking-tight">Built for Sovereignty.</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bento-grid-card p-10 md:col-span-2">
+                    <div class="h-full flex flex-col">
+                        <div class="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-8 text-[#D4AF37]">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white">The Profit Separation Engine</h3>
+                        <p class="text-[#86868B] max-w-md font-light">Automatically route your personal income away from business capital. Built-in logic to ensure your company stays liquid while you stay paid.</p>
+                    </div>
+                </div>
+
+                <div class="bento-grid-card p-10">
+                    <div class="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-8 text-[#D4AF37]">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-1.14-10.428a2.99 2.99 0 000 5.714M12 11c0-3.517 1.009-6.799 2.753-9.571m1.14 10.428a2.99 2.99 0 010 5.714M12 11c2.333 0 4.667 1.333 4.667 4M12 11c-2.333 0-4.667 1.333-4.667 4m9.334 0a12.01 12.01 0 01-14 0"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Trust Scores</h3>
+                    <p class="text-[#86868B] text-sm font-light">Every staff interaction is logged with biometric-grade audit trails. Build a business that runs itself.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 px-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="flex items-center gap-3 opacity-50">
+                <div class="w-6 h-6 bg-white rounded-md"></div>
+                <span class="font-bold tracking-widest text-xs">TOLEDAH</span>
+            </div>
+            <p class="text-[#86868B] text-[0.7rem] tracking-widest uppercase">© 2026 Toledah Technologies Inc. Designed for Scale.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
