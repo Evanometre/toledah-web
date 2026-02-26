@@ -165,37 +165,47 @@
     </div>
 
     <script>
-      // Get URL parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      const accessToken = urlParams.get("access_token");
-      const refreshToken = urlParams.get("refresh_token");
-      const type = urlParams.get("type");
+      // Supabase delivers tokens in two ways depending on the flow:
+      //
+      // 1. Implicit flow — tokens in the HASH fragment:
+      //    /auth/callback#access_token=...&refresh_token=...&type=signup
+      //
+      // 2. PKCE flow — one-time code in the QUERY string:
+      //    /auth/callback?code=...
+      //
+      // The original version only checked window.location.search,
+      // so it always missed the hash tokens. Fixed below.
 
-      // Deep link to your app
+      const hashParams  = new URLSearchParams(window.location.hash.substring(1));
+      const queryParams = new URLSearchParams(window.location.search);
+
+      const accessToken  = hashParams.get("access_token");
+      const refreshToken = hashParams.get("refresh_token");
+      const type         = hashParams.get("type") || queryParams.get("type");
+      const code         = queryParams.get("code"); // PKCE flow
+
       const appScheme = "novapos://";
-      let deepLink = appScheme;
+      let deepLink = appScheme + "auth/callback";
 
-      // Add tokens if available (for web app to pick up)
       if (accessToken) {
-        deepLink += `auth/callback?access_token=${accessToken}`;
-        if (refreshToken) {
-          deepLink += `&refresh_token=${refreshToken}`;
-        }
-        if (type) {
-          deepLink += `&type=${type}`;
-        }
+        // Implicit flow — forward tokens directly to the app
+        deepLink += `?access_token=${encodeURIComponent(accessToken)}`;
+        if (refreshToken) deepLink += `&refresh_token=${encodeURIComponent(refreshToken)}`;
+        if (type)         deepLink += `&type=${encodeURIComponent(type)}`;
+      } else if (code) {
+        // PKCE flow — forward the code; Supabase client in the app exchanges it
+        deepLink += `?code=${encodeURIComponent(code)}`;
+        if (type) deepLink += `&type=${encodeURIComponent(type)}`;
       }
+      // If neither, open the app anyway — it will check its own session state
 
-      // Try to open the app automatically
       function openApp() {
         window.location.href = deepLink;
       }
 
-      // Attempt automatic redirect after 1.5 seconds
       setTimeout(() => {
         openApp();
 
-        // After 3 seconds, show manual button if still on page
         setTimeout(() => {
           document.getElementById("spinner").style.display = "none";
           document.getElementById("loadingText").style.display = "none";
@@ -206,7 +216,6 @@
         }, 3000);
       }, 1500);
 
-      // Manual button click handler
       document.getElementById("openAppBtn").addEventListener("click", openApp);
     </script>
   </body>
