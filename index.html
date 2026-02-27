@@ -46,6 +46,8 @@
         background: var(--graphite-900);
         color: var(--air);
         overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
       }
 
       .label {
@@ -84,6 +86,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .nav-logo {
@@ -447,6 +451,8 @@
         align-items: center;
         position: relative;
         z-index: 2;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       @media (max-width: 900px) {
@@ -587,6 +593,7 @@
         padding-top: 24px;
         border-top: 1px solid var(--border-dark);
         flex-wrap: wrap;
+        row-gap: 12px;
       }
 
       .trust-item {
@@ -616,6 +623,10 @@
         }
         .trust-row {
           gap: 16px 24px;
+        }
+        .trust-item {
+          flex: 1 1 calc(50% - 8px);
+          min-width: 80px;
         }
       }
 
@@ -950,6 +961,8 @@
           transparent
         );
         border-radius: 2px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .statement-text {
@@ -978,6 +991,8 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 80px 20px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .section-header {
@@ -1090,6 +1105,8 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 80px 20px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .audience-grid {
@@ -1192,6 +1209,8 @@
         align-items: center;
         gap: 28px;
         flex-wrap: wrap;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .toledah-strip-inner h3 {
@@ -1237,6 +1256,8 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 80px 20px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .ecosystem-grid {
@@ -1330,6 +1351,8 @@
         padding: 100px 20px;
         text-align: center;
         position: relative;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .footer-cta::before {
@@ -1387,6 +1410,8 @@
       .footer-inner {
         max-width: 1200px;
         margin: 0 auto;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .footer-top {
