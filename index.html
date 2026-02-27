@@ -430,7 +430,7 @@
       .hero-platinum-light {
         position: absolute;
         top: -80px;
-        right: -80px;
+        right: 0; /* change from -80px to 0 */
         width: 400px;
         height: 400px;
         background: radial-gradient(
@@ -439,6 +439,7 @@
           transparent 65%
         );
         pointer-events: none;
+        max-width: 50vw; /* ADD — prevents it bleeding right on narrow screens */
       }
 
       .hero-inner {
