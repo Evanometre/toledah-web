@@ -1,946 +1,2252 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Toledah | The Infrastructure of Growth</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --graphite-900: #0f0f0f;
-            --graphite-800: #1a1a1a;
-            --graphite-700: #242424;
-            --graphite-600: #2e2e2e;
-            --graphite-400: #6b6b6b;
-            --graphite-200: #b8b8b8;
-            --teal-deep:    #0E2931;
-            --teal-mid:     #12484C;
-            --teal-bright:  #2B7574;
-            --teal-glow:    rgba(43,117,116,0.15);
-            --platinum:     #C8C8C6;
-            --platinum-dim: rgba(200,200,198,0.4);
-            --platinum-ghost: rgba(200,200,198,0.1);
-            --air:          #EEEEED;
-            --border-dark:  rgba(200,200,198,0.08);
-            --border-teal:  rgba(43,117,116,0.2);
+      :root {
+        --graphite-900: #0f0f0f;
+        --graphite-800: #1a1a1a;
+        --graphite-700: #242424;
+        --graphite-600: #2e2e2e;
+        --graphite-400: #6b6b6b;
+        --graphite-200: #b8b8b8;
+        --teal-deep: #0e2931;
+        --teal-mid: #12484c;
+        --teal-bright: #2b7574;
+        --teal-glow: rgba(43, 117, 116, 0.15);
+        --platinum: #c8c8c6;
+        --platinum-dim: rgba(200, 200, 198, 0.4);
+        --platinum-ghost: rgba(200, 200, 198, 0.1);
+        --air: #eeeeed;
+        --border-dark: rgba(200, 200, 198, 0.08);
+        --border-teal: rgba(43, 117, 116, 0.2);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--graphite-900);
+        color: var(--air);
+        overflow-x: hidden;
+      }
+
+      .label {
+        font-family: "Sora", sans-serif;
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .teal-rule {
+        width: 36px;
+        height: 2px;
+        background: var(--teal-bright);
+        border-radius: 1px;
+        margin-bottom: 16px;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 200;
+        background: rgba(15, 15, 15, 0.9);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-bottom: 1px solid var(--border-dark);
+      }
+
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+
+      .logo-mark {
+        width: 28px;
+        height: 28px;
+        background: var(--teal-deep);
+        border: 1px solid var(--border-teal);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-name {
+        font-family: "Sora", sans-serif;
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--air);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 24px;
+      }
+      .nav-links a {
+        font-size: 0.82rem;
+        color: var(--graphite-200);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--air);
+      }
+
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-nav {
+        font-family: "Sora", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 7px 16px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+
+      .btn-nav.ghost {
+        background: transparent;
+        color: var(--graphite-200);
+        border: 1px solid var(--border-dark);
+      }
+      .btn-nav.ghost:hover {
+        color: var(--air);
+        border-color: var(--platinum-dim);
+      }
+      .btn-nav.primary {
+        background: var(--teal-bright);
+        color: white;
+      }
+      .btn-nav.primary:hover {
+        background: var(--teal-mid);
+      }
+
+      /* ── HAMBURGER ── */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 36px;
+        height: 36px;
+        background: transparent;
+        border: 1px solid var(--border-dark);
+        border-radius: 7px;
+        cursor: pointer;
+        gap: 5px;
+        transition: border-color 0.2s;
+        flex-shrink: 0;
+      }
+      .hamburger:hover {
+        border-color: var(--border-teal);
+      }
+      .hamburger span {
+        display: block;
+        width: 16px;
+        height: 1.5px;
+        background: var(--graphite-200);
+        border-radius: 1px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: center;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(6.5px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-6.5px) rotate(-45deg);
+      }
+
+      /* ── DRAWER OVERLAY ── */
+      .drawer-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 150;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .drawer-overlay.open {
+        opacity: 1;
+      }
+
+      /* ── DRAWER PANEL ── */
+      .drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(320px, 85vw);
+        z-index: 160;
+        background: var(--teal-deep);
+        border-left: 1px solid var(--border-teal);
+        display: flex;
+        flex-direction: column;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .drawer.open {
+        transform: translateX(0);
+      }
+
+      .drawer-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        height: 56px;
+        border-bottom: 1px solid var(--border-teal);
+        flex-shrink: 0;
+      }
+
+      .drawer-brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+
+      .drawer-close {
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+        background: rgba(43, 117, 116, 0.1);
+        border: 1px solid var(--border-teal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--graphite-200);
+        transition: background 0.2s;
+      }
+      .drawer-close:hover {
+        background: rgba(43, 117, 116, 0.2);
+        color: var(--air);
+      }
+
+      .drawer-nav {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        overflow-y: auto;
+      }
+
+      .drawer-section-label {
+        font-family: "Sora", sans-serif;
+        font-size: 0.57rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(43, 117, 116, 0.6);
+        padding: 14px 0 7px;
+      }
+      .drawer-section-label:first-child {
+        padding-top: 4px;
+      }
+
+      .drawer-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: rgba(238, 238, 237, 0.55);
+        font-size: 0.92rem;
+        font-weight: 400;
+        transition: all 0.18s;
+        border: 1px solid transparent;
+      }
+      .drawer-link:hover,
+      .drawer-link.active {
+        background: rgba(43, 117, 116, 0.1);
+        border-color: var(--border-teal);
+        color: var(--air);
+      }
+      .drawer-link svg {
+        width: 16px;
+        height: 16px;
+        opacity: 0.45;
+        flex-shrink: 0;
+      }
+      .drawer-link:hover svg,
+      .drawer-link.active svg {
+        opacity: 0.85;
+      }
+
+      .drawer-footer {
+        padding: 20px;
+        border-top: 1px solid var(--border-teal);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+
+      .drawer-cta-primary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 13px 20px;
+        background: var(--teal-bright);
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-family: "Sora", sans-serif;
+        font-size: 0.82rem;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+      .drawer-cta-primary:hover {
+        background: var(--teal-mid);
+      }
+
+      .drawer-cta-secondary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px;
+        background: transparent;
+        color: rgba(238, 238, 237, 0.4);
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 0.82rem;
+        border: 1px solid var(--border-teal);
+        transition: all 0.2s;
+      }
+      .drawer-cta-secondary:hover {
+        color: var(--air);
+        border-color: rgba(43, 117, 116, 0.5);
+      }
+
+      /* ── MOBILE SWITCH ── */
+      @media (max-width: 767px) {
+        .nav-links {
+          display: none;
         }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--graphite-900);
-            color: var(--air);
-            overflow-x: hidden;
+        .nav-cta {
+          display: none;
         }
-
-        .label {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.65rem; font-weight: 600;
-            letter-spacing: 0.2em; text-transform: uppercase;
+        .hamburger {
+          display: flex;
         }
-
-        .teal-rule {
-            width: 36px; height: 2px;
-            background: var(--teal-bright);
-            border-radius: 1px; margin-bottom: 16px;
+        .drawer-overlay {
+          display: block;
         }
+      }
 
-        /* ── NAV ── */
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 100;
-            background: rgba(15,15,15,0.9);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border-dark);
-        }
+      /* ── HERO ── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 56px;
+        position: relative;
+        overflow: hidden;
+      }
 
-        .nav-inner {
-            max-width: 1200px; margin: 0 auto;
-            padding: 0 20px; height: 56px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(var(--border-dark) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border-dark) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+        opacity: 0.5;
+      }
 
-        .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          ellipse,
+          rgba(14, 41, 49, 0.6) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+      }
 
-        .logo-mark {
-            width: 28px; height: 28px;
-            background: var(--teal-deep);
-            border: 1px solid var(--border-teal);
-            border-radius: 6px;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-        }
+      .hero-platinum-light {
+        position: absolute;
+        top: -80px;
+        right: -80px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          ellipse,
+          rgba(200, 200, 198, 0.04) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+      }
 
-        .logo-name {
-            font-family: 'Sora', sans-serif;
-            font-weight: 600; font-size: 0.9rem;
-            letter-spacing: 0.1em; text-transform: uppercase; color: var(--air);
-        }
+      .hero-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 20px 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
 
-        .nav-links { display: flex; gap: 24px; }
-        .nav-links a {
-            font-size: 0.82rem; color: var(--graphite-200);
-            text-decoration: none; transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--air); }
-
-        .nav-cta { display: flex; align-items: center; gap: 8px; }
-
-        .btn-nav {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.75rem; font-weight: 600;
-            padding: 7px 16px; border-radius: 6px;
-            border: none; cursor: pointer;
-            text-decoration: none; transition: all 0.2s;
-        }
-
-        .btn-nav.ghost {
-            background: transparent; color: var(--graphite-200);
-            border: 1px solid var(--border-dark);
-        }
-        .btn-nav.ghost:hover { color: var(--air); border-color: var(--platinum-dim); }
-
-        .btn-nav.primary { background: var(--teal-bright); color: white; }
-        .btn-nav.primary:hover { background: var(--teal-mid); }
-
-        /* hide nav links + ghost btn on mobile */
-        @media (max-width: 767px) {
-            .nav-links { display: none; }
-            .btn-nav.ghost { display: none; }
-            .nav-inner { padding: 0 16px; }
-        }
-
-        /* ── HERO ── */
-        .hero {
-            min-height: 100vh;
-            display: flex; flex-direction: column; justify-content: center;
-            padding-top: 56px; position: relative; overflow: hidden;
-        }
-
-        .hero::before {
-            content: ''; position: absolute; inset: 0;
-            background-image:
-                linear-gradient(var(--border-dark) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border-dark) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none; opacity: 0.5;
-        }
-
-        .hero::after {
-            content: ''; position: absolute;
-            bottom: -100px; left: -100px;
-            width: 500px; height: 500px;
-            background: radial-gradient(ellipse, rgba(14,41,49,0.6) 0%, transparent 65%);
-            pointer-events: none;
-        }
-
-        .hero-platinum-light {
-            position: absolute; top: -80px; right: -80px;
-            width: 400px; height: 400px;
-            background: radial-gradient(ellipse, rgba(200,200,198,0.04) 0%, transparent 65%);
-            pointer-events: none;
-        }
-
+      @media (max-width: 900px) {
         .hero-inner {
-            max-width: 1200px; margin: 0 auto;
-            padding: 60px 20px 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px; align-items: center;
-            position: relative; z-index: 2;
+          grid-template-columns: 1fr;
+          gap: 48px;
+          padding: 48px 20px 40px;
         }
+      }
 
-        @media (max-width: 900px) {
-            .hero-inner {
-                grid-template-columns: 1fr;
-                gap: 48px;
-                padding: 48px 20px 40px;
-            }
+      .eyebrow-strip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 22px;
+      }
+
+      .eyebrow-line {
+        width: 22px;
+        height: 1px;
+        background: var(--teal-bright);
+      }
+
+      .eyebrow-text {
+        font-family: "Sora", sans-serif;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--teal-bright);
+      }
+
+      .hero-headline {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3.2rem, 8vw, 6rem);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        color: var(--air);
+      }
+
+      .hero-headline .teal {
+        color: var(--teal-bright);
+      }
+      .hero-headline .dim {
+        color: rgba(238, 238, 237, 0.2);
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .hero-sub {
+        font-size: 0.95rem;
+        font-weight: 300;
+        line-height: 1.75;
+        color: var(--graphite-200);
+        margin-top: 18px;
+        margin-bottom: 32px;
+      }
+
+      .download-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+
+      .btn-download {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        padding: 10px 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.22s;
+        border: 1px solid;
+      }
+
+      .btn-download.dark {
+        background: var(--air);
+        color: var(--graphite-900);
+        border-color: var(--air);
+      }
+      .btn-download.dark:hover {
+        background: white;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      }
+
+      .btn-download.outline {
+        background: transparent;
+        color: var(--air);
+        border-color: var(--border-dark);
+      }
+      .btn-download.outline:hover {
+        border-color: var(--platinum-dim);
+        background: var(--platinum-ghost);
+      }
+
+      .btn-download-text-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .btn-download-sub {
+        font-size: 0.58rem;
+        opacity: 0.6;
+        letter-spacing: 0.04em;
+        line-height: 1;
+      }
+      .btn-download-label {
+        font-family: "Sora", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      .web-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.8rem;
+        color: var(--graphite-400);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .web-link:hover {
+        color: var(--graphite-200);
+      }
+      .web-link span {
+        border-bottom: 1px solid currentColor;
+        padding-bottom: 1px;
+      }
+
+      .trust-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-dark);
+        flex-wrap: wrap;
+      }
+
+      .trust-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .trust-value {
+        font-family: "DM Mono", monospace;
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--air);
+      }
+      .trust-label {
+        font-size: 0.68rem;
+        color: var(--graphite-400);
+      }
+      .trust-divider {
+        width: 1px;
+        height: 28px;
+        background: var(--border-dark);
+      }
+
+      @media (max-width: 480px) {
+        .trust-divider {
+          display: none;
         }
-
-        .eyebrow-strip {
-            display: flex; align-items: center; gap: 10px;
-            margin-bottom: 22px;
-        }
-
-        .eyebrow-line { width: 22px; height: 1px; background: var(--teal-bright); }
-
-        .eyebrow-text {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.62rem; font-weight: 600;
-            letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--teal-bright);
-        }
-
-        .hero-headline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3.2rem, 8vw, 6rem);
-            font-weight: 500; letter-spacing: -0.02em;
-            line-height: 1.0; color: var(--air);
-        }
-
-        .hero-headline .teal { color: var(--teal-bright); }
-        .hero-headline .dim { color: rgba(238,238,237,0.2); font-style: italic; font-weight: 400; }
-
-        .hero-sub {
-            font-size: 0.95rem; font-weight: 300;
-            line-height: 1.75; color: var(--graphite-200);
-            margin-top: 18px; margin-bottom: 32px;
-        }
-
-        .download-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
-
-        .btn-download {
-            display: inline-flex; align-items: center; gap: 11px;
-            padding: 10px 18px; border-radius: 10px;
-            text-decoration: none; transition: all 0.22s; border: 1px solid;
-        }
-
-        .btn-download.dark {
-            background: var(--air); color: var(--graphite-900);
-            border-color: var(--air);
-        }
-        .btn-download.dark:hover { background: white; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-
-        .btn-download.outline {
-            background: transparent; color: var(--air);
-            border-color: var(--border-dark);
-        }
-        .btn-download.outline:hover { border-color: var(--platinum-dim); background: var(--platinum-ghost); }
-
-        .btn-download-text-group { display: flex; flex-direction: column; }
-        .btn-download-sub { font-size: 0.58rem; opacity: 0.6; letter-spacing: 0.04em; line-height: 1; }
-        .btn-download-label { font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 600; line-height: 1.3; }
-
-        .web-link {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: 0.8rem; color: var(--graphite-400);
-            text-decoration: none; transition: color 0.2s;
-        }
-        .web-link:hover { color: var(--graphite-200); }
-        .web-link span { border-bottom: 1px solid currentColor; padding-bottom: 1px; }
-
         .trust-row {
-            display: flex; align-items: center;
-            gap: 16px; margin-top: 28px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-dark);
-            flex-wrap: wrap;
+          gap: 16px 24px;
         }
+      }
 
-        .trust-item { display: flex; flex-direction: column; gap: 2px; }
-        .trust-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 500; color: var(--air); }
-        .trust-label { font-size: 0.68rem; color: var(--graphite-400); }
-        .trust-divider { width: 1px; height: 28px; background: var(--border-dark); }
+      /* ── PHONE SCENE ── */
+      .phone-scene {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
 
-        @media (max-width: 480px) {
-            .trust-divider { display: none; }
-            .trust-row { gap: 16px 24px; }
+      .phone-scene::before {
+        content: "";
+        position: absolute;
+        width: 260px;
+        height: 460px;
+        background: radial-gradient(
+          ellipse,
+          rgba(43, 117, 116, 0.2) 0%,
+          transparent 70%
+        );
+        filter: blur(28px);
+        pointer-events: none;
+      }
+
+      .phone-frame {
+        width: 230px;
+        background: #141414;
+        border-radius: 42px;
+        border: 1.5px solid rgba(255, 255, 255, 0.1);
+        box-shadow:
+          0 0 0 1px rgba(0, 0, 0, 0.5),
+          0 40px 100px rgba(0, 0, 0, 0.8),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+        animation: floatPhone 6s ease-in-out infinite;
+      }
+
+      @keyframes floatPhone {
+        0%,
+        100% {
+          transform: translateY(0);
         }
-
-        /* ── PHONE SCENE ── */
-        .phone-scene {
-            display: flex; justify-content: center; align-items: center;
-            position: relative;
+        50% {
+          transform: translateY(-10px);
         }
+      }
 
-        .phone-scene::before {
-            content: ''; position: absolute;
-            width: 260px; height: 460px;
-            background: radial-gradient(ellipse, rgba(43,117,116,0.2) 0%, transparent 70%);
-            filter: blur(28px); pointer-events: none;
-        }
-
+      @media (max-width: 900px) {
         .phone-frame {
-            width: 230px;
-            background: #141414;
-            border-radius: 42px;
-            border: 1.5px solid rgba(255,255,255,0.1);
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.5), 0 40px 100px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06);
-            overflow: hidden; position: relative; z-index: 2;
-            animation: floatPhone 6s ease-in-out infinite;
+          width: 210px;
         }
-
-        @keyframes floatPhone { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-
-        @media (max-width: 900px) {
-            .phone-frame { width: 210px; }
-            .phone-scene::before { display: none; }
+        .phone-scene::before {
+          display: none;
         }
+      }
 
-        .phone-notch { width: 88px; height: 26px; background: #0f0f0f; border-radius: 0 0 20px 20px; margin: 0 auto; }
+      .phone-notch {
+        width: 88px;
+        height: 26px;
+        background: #0f0f0f;
+        border-radius: 0 0 20px 20px;
+        margin: 0 auto;
+      }
 
-        .phone-screen { padding: 14px 12px 20px; background: #111; min-height: 420px; }
+      .phone-screen {
+        padding: 14px 12px 20px;
+        background: #111;
+        min-height: 420px;
+      }
 
-        .ps-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-        .ps-title { font-family: 'Sora', sans-serif; font-size: 0.6rem; font-weight: 600; color: rgba(238,238,237,0.8); letter-spacing: 0.08em; }
-        .ps-live { display: flex; align-items: center; gap: 4px; background: rgba(43,117,116,0.15); border: 1px solid rgba(43,117,116,0.3); border-radius: 20px; padding: 2px 7px; }
-        .ps-live-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--teal-bright); animation: pulse 2s infinite; }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-        .ps-live-text { font-size: 0.4rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-bright); }
-
-        .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
-        .ps-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 10px 9px; }
-        .ps-card-label { font-size: 0.4rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
-        .ps-card-value { font-family: 'DM Mono', monospace; font-size: 0.82rem; font-weight: 500; color: white; line-height: 1; }
-        .ps-card-value.teal { color: var(--teal-bright); }
-        .ps-card-value.platinum { color: var(--platinum); }
-        .ps-card-value.amber { color: #d4a843; }
-        .ps-section-label { font-size: 0.38rem; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.12em; margin: 10px 0 5px; }
-
-        .ps-bars { display: flex; align-items: flex-end; gap: 3px; height: 36px; margin-bottom: 10px; }
-        .ps-bar { flex: 1; background: rgba(43,117,116,0.15); border-radius: 2px 2px 0 0; position: relative; overflow: hidden; }
-        .ps-bar::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; background: var(--teal-bright); border-radius: 2px 2px 0 0; animation: barUp 1.2s ease both; }
-        .ps-bar.active::after { background: var(--platinum); }
-        @keyframes barUp { from { height: 0; } }
-        .pb1::after{height:45%;animation-delay:.1s} .pb2::after{height:62%;animation-delay:.15s} .pb3::after{height:38%;animation-delay:.2s} .pb4::after{height:78%;animation-delay:.25s} .pb5::after{height:55%;animation-delay:.3s} .pb6::after{height:68%;animation-delay:.35s} .pb7::after{height:92%;animation-delay:.4s}
-
-        .ps-sale { display: flex; align-items: center; gap: 7px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .ps-sale:last-child { border-bottom: none; }
-        .ps-sale-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-bright); flex-shrink: 0; }
-        .ps-sale-name { font-size: 0.48rem; color: rgba(255,255,255,0.6); flex: 1; }
-        .ps-sale-amount { font-family: 'DM Mono', monospace; font-size: 0.5rem; font-weight: 500; color: var(--platinum); }
-
-        /* Engine of scale */
-        .engine-statement {
-            text-align: center;
-            padding: 60px 20px 48px;
-            position: relative; z-index: 2;
+      .ps-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .ps-title {
+        font-family: "Sora", sans-serif;
+        font-size: 0.6rem;
+        font-weight: 600;
+        color: rgba(238, 238, 237, 0.8);
+        letter-spacing: 0.08em;
+      }
+      .ps-live {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(43, 117, 116, 0.15);
+        border: 1px solid rgba(43, 117, 116, 0.3);
+        border-radius: 20px;
+        padding: 2px 7px;
+      }
+      .ps-live-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--teal-bright);
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
         }
-
-        .engine-statement h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.6rem, 7vw, 5rem);
-            font-weight: 500; letter-spacing: -0.03em;
-            color: var(--air); line-height: 1;
+        50% {
+          opacity: 0.3;
         }
+      }
+      .ps-live-text {
+        font-size: 0.4rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal-bright);
+      }
 
-        /* ── TICKER ── */
-        .ticker-wrap {
-            overflow: hidden; white-space: nowrap;
-            padding: 14px 0;
-            border-top: 1px solid var(--border-dark);
-            border-bottom: 1px solid var(--border-dark);
-            background: var(--graphite-800);
+      .ps-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+      .ps-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 10px 9px;
+      }
+      .ps-card-label {
+        font-size: 0.4rem;
+        color: rgba(255, 255, 255, 0.35);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 5px;
+      }
+      .ps-card-value {
+        font-family: "DM Mono", monospace;
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: white;
+        line-height: 1;
+      }
+      .ps-card-value.teal {
+        color: var(--teal-bright);
+      }
+      .ps-card-value.platinum {
+        color: var(--platinum);
+      }
+      .ps-card-value.amber {
+        color: #d4a843;
+      }
+      .ps-section-label {
+        font-size: 0.38rem;
+        color: rgba(255, 255, 255, 0.25);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        margin: 10px 0 5px;
+      }
+
+      .ps-bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+        height: 36px;
+        margin-bottom: 10px;
+      }
+      .ps-bar {
+        flex: 1;
+        background: rgba(43, 117, 116, 0.15);
+        border-radius: 2px 2px 0 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .ps-bar::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--teal-bright);
+        border-radius: 2px 2px 0 0;
+        animation: barUp 1.2s ease both;
+      }
+      .ps-bar.active::after {
+        background: var(--platinum);
+      }
+      @keyframes barUp {
+        from {
+          height: 0;
         }
+      }
+      .pb1::after {
+        height: 45%;
+        animation-delay: 0.1s;
+      }
+      .pb2::after {
+        height: 62%;
+        animation-delay: 0.15s;
+      }
+      .pb3::after {
+        height: 38%;
+        animation-delay: 0.2s;
+      }
+      .pb4::after {
+        height: 78%;
+        animation-delay: 0.25s;
+      }
+      .pb5::after {
+        height: 55%;
+        animation-delay: 0.3s;
+      }
+      .pb6::after {
+        height: 68%;
+        animation-delay: 0.35s;
+      }
+      .pb7::after {
+        height: 92%;
+        animation-delay: 0.4s;
+      }
 
-        .ticker-inner {
-            display: inline-flex; gap: 40px;
-            animation: ticker 28s linear infinite;
+      .ps-sale {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      .ps-sale:last-child {
+        border-bottom: none;
+      }
+      .ps-sale-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--teal-bright);
+        flex-shrink: 0;
+      }
+      .ps-sale-name {
+        font-size: 0.48rem;
+        color: rgba(255, 255, 255, 0.6);
+        flex: 1;
+      }
+      .ps-sale-amount {
+        font-family: "DM Mono", monospace;
+        font-size: 0.5rem;
+        font-weight: 500;
+        color: var(--platinum);
+      }
+
+      /* Engine of scale */
+      .engine-statement {
+        text-align: center;
+        padding: 60px 20px 48px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .engine-statement h2 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.6rem, 7vw, 5rem);
+        font-weight: 500;
+        letter-spacing: -0.03em;
+        color: var(--air);
+        line-height: 1;
+      }
+
+      /* ── TICKER ── */
+      .ticker-wrap {
+        overflow: hidden;
+        white-space: nowrap;
+        padding: 14px 0;
+        border-top: 1px solid var(--border-dark);
+        border-bottom: 1px solid var(--border-dark);
+        background: var(--graphite-800);
+      }
+
+      .ticker-inner {
+        display: inline-flex;
+        gap: 40px;
+        animation: ticker 28s linear infinite;
+      }
+      .ticker-inner:hover {
+        animation-play-state: paused;
+      }
+      @keyframes ticker {
+        from {
+          transform: translateX(0);
         }
-        .ticker-inner:hover { animation-play-state: paused; }
-        @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-        .ticker-item { display: inline-flex; align-items: center; gap: 8px; font-size: 0.73rem; color: var(--graphite-400); }
-        .ticker-item .gem { color: var(--teal-bright); font-size: 0.58rem; }
-        .ticker-sep { color: var(--graphite-600); }
-
-        /* ── STATEMENT ── */
-        .statement-section {
-            max-width: 1200px; margin: 0 auto;
-            padding: 80px 20px;
-            position: relative;
+        to {
+          transform: translateX(-50%);
         }
+      }
 
-        .statement-section::before {
-            content: ''; position: absolute;
-            left: 20px; top: 50%; transform: translateY(-50%);
-            width: 3px; height: 60px;
-            background: linear-gradient(to bottom, transparent, var(--teal-bright), transparent);
-            border-radius: 2px;
-        }
+      .ticker-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.73rem;
+        color: var(--graphite-400);
+      }
+      .ticker-item .gem {
+        color: var(--teal-bright);
+        font-size: 0.58rem;
+      }
+      .ticker-sep {
+        color: var(--graphite-600);
+      }
 
-        .statement-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-            font-weight: 400; line-height: 1.45;
-            letter-spacing: -0.01em; color: var(--air);
-            padding-left: 28px;
-        }
+      /* ── STATEMENT ── */
+      .statement-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px;
+        position: relative;
+      }
 
-        .statement-text em { font-style: italic; color: var(--platinum); }
+      .statement-section::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 60px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--teal-bright),
+          transparent
+        );
+        border-radius: 2px;
+      }
 
-        /* ── FEATURES ── */
-        .features-section {
-            background: var(--graphite-800);
-            border-top: 1px solid var(--border-dark);
-            border-bottom: 1px solid var(--border-dark);
-        }
+      .statement-text {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+        font-weight: 400;
+        line-height: 1.45;
+        letter-spacing: -0.01em;
+        color: var(--air);
+        padding-left: 28px;
+      }
 
-        .features-inner {
-            max-width: 1200px; margin: 0 auto;
-            padding: 80px 20px;
-        }
+      .statement-text em {
+        font-style: italic;
+        color: var(--platinum);
+      }
 
+      /* ── FEATURES ── */
+      .features-section {
+        background: var(--graphite-800);
+        border-top: 1px solid var(--border-dark);
+        border-bottom: 1px solid var(--border-dark);
+      }
+
+      .features-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 48px;
+        gap: 24px;
+      }
+
+      @media (max-width: 767px) {
         .section-header {
-            display: flex; justify-content: space-between;
-            align-items: flex-end; margin-bottom: 48px;
-            gap: 24px;
+          flex-direction: column;
+          align-items: flex-start;
         }
-
-        @media (max-width: 767px) {
-            .section-header { flex-direction: column; align-items: flex-start; }
-            .section-sub { text-align: left !important; max-width: 100% !important; }
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 500; letter-spacing: -0.02em;
-            color: var(--air); line-height: 1.1;
-        }
-
         .section-sub {
-            font-size: 0.88rem; color: var(--graphite-400);
-            font-weight: 300; max-width: 280px;
-            line-height: 1.6; text-align: right;
+          text-align: left !important;
+          max-width: 100% !important;
         }
+      }
 
+      .section-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        color: var(--air);
+        line-height: 1.1;
+      }
+
+      .section-sub {
+        font-size: 0.88rem;
+        color: var(--graphite-400);
+        font-weight: 300;
+        max-width: 280px;
+        line-height: 1.6;
+        text-align: right;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border-dark);
+        border: 1px solid var(--border-dark);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      @media (max-width: 900px) {
         .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--border-dark);
-            border: 1px solid var(--border-dark);
-            border-radius: 14px; overflow: hidden;
+          grid-template-columns: repeat(2, 1fr);
         }
+      }
 
-        @media (max-width: 900px) {
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
+      @media (max-width: 560px) {
+        .features-grid {
+          grid-template-columns: 1fr;
         }
+      }
 
-        @media (max-width: 560px) {
-            .features-grid { grid-template-columns: 1fr; }
-        }
+      .feature-cell {
+        background: var(--graphite-800);
+        padding: 28px 24px;
+        transition: background 0.25s;
+        position: relative;
+      }
 
-        .feature-cell {
-            background: var(--graphite-800);
-            padding: 28px 24px;
-            transition: background 0.25s;
-            position: relative;
-        }
+      .feature-cell:hover {
+        background: var(--graphite-700);
+      }
 
-        .feature-cell:hover { background: var(--graphite-700); }
+      .feature-cell::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2px;
+        height: 0;
+        background: var(--teal-bright);
+        transition: height 0.3s ease;
+      }
+      .feature-cell:hover::after {
+        height: 100%;
+      }
 
-        .feature-cell::after {
-            content: ''; position: absolute;
-            top: 0; left: 0; width: 2px; height: 0;
-            background: var(--teal-bright);
-            transition: height 0.3s ease;
-        }
-        .feature-cell:hover::after { height: 100%; }
+      .feature-num {
+        font-family: "DM Mono", monospace;
+        font-size: 0.62rem;
+        color: var(--graphite-600);
+        margin-bottom: 18px;
+      }
+      .feature-title {
+        font-family: "Sora", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--air);
+        margin-bottom: 10px;
+        line-height: 1.3;
+      }
+      .feature-body {
+        font-size: 0.83rem;
+        color: var(--graphite-400);
+        line-height: 1.7;
+        font-weight: 300;
+      }
 
-        .feature-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--graphite-600); margin-bottom: 18px; }
-        .feature-title { font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--air); margin-bottom: 10px; line-height: 1.3; }
-        .feature-body { font-size: 0.83rem; color: var(--graphite-400); line-height: 1.7; font-weight: 300; }
+      /* ── AUDIENCE ── */
+      .audience-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px;
+      }
 
-        /* ── AUDIENCE ── */
-        .audience-section {
-            max-width: 1200px; margin: 0 auto;
-            padding: 80px 20px;
-        }
+      .audience-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+        margin-top: 44px;
+        background: var(--border-dark);
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--border-dark);
+      }
 
+      @media (max-width: 700px) {
         .audience-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px; margin-top: 44px;
-            background: var(--border-dark);
-            border-radius: 14px; overflow: hidden;
-            border: 1px solid var(--border-dark);
+          grid-template-columns: 1fr;
         }
+      }
 
-        @media (max-width: 700px) {
-            .audience-grid { grid-template-columns: 1fr; }
-        }
+      .audience-card {
+        background: var(--graphite-800);
+        padding: 40px 32px;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.25s;
+      }
+      .audience-card:hover {
+        background: var(--graphite-700);
+      }
 
-        .audience-card {
-            background: var(--graphite-800);
-            padding: 40px 32px;
-            position: relative; overflow: hidden; transition: background 0.25s;
-        }
-        .audience-card:hover { background: var(--graphite-700); }
+      .audience-card::before {
+        content: "";
+        position: absolute;
+        bottom: -60px;
+        right: -60px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: var(--teal-glow);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .audience-card:hover::before {
+        opacity: 1;
+      }
 
-        .audience-card::before {
-            content: ''; position: absolute;
-            bottom: -60px; right: -60px;
-            width: 160px; height: 160px; border-radius: 50%;
-            background: var(--teal-glow);
-            pointer-events: none; opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .audience-card:hover::before { opacity: 1; }
+      .audience-eyebrow {
+        font-family: "Sora", sans-serif;
+        font-size: 0.6rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--teal-bright);
+        margin-bottom: 14px;
+      }
+      .audience-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.9rem;
+        font-weight: 500;
+        color: var(--air);
+        line-height: 1.15;
+        margin-bottom: 14px;
+      }
+      .audience-body {
+        font-size: 0.85rem;
+        color: var(--graphite-400);
+        line-height: 1.75;
+        font-weight: 300;
+      }
 
-        .audience-eyebrow { font-family: 'Sora', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 14px; }
-        .audience-title { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 500; color: var(--air); line-height: 1.15; margin-bottom: 14px; }
-        .audience-body { font-size: 0.85rem; color: var(--graphite-400); line-height: 1.75; font-weight: 300; }
+      .audience-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 20px;
+      }
+      .audience-tag {
+        font-size: 0.7rem;
+        color: var(--graphite-200);
+        background: var(--graphite-700);
+        border: 1px solid var(--border-dark);
+        padding: 4px 10px;
+        border-radius: 4px;
+      }
 
-        .audience-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
-        .audience-tag { font-size: 0.7rem; color: var(--graphite-200); background: var(--graphite-700); border: 1px solid var(--border-dark); padding: 4px 10px; border-radius: 4px; }
+      /* ── TOLEDAH STRIP ── */
+      .toledah-strip {
+        background: var(--teal-deep);
+        border-top: 1px solid var(--border-teal);
+        border-bottom: 1px solid var(--border-teal);
+      }
 
-        /* ── TOLEDAH STRIP ── */
-        .toledah-strip {
-            background: var(--teal-deep);
-            border-top: 1px solid var(--border-teal);
-            border-bottom: 1px solid var(--border-teal);
-        }
+      .toledah-strip-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 48px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 28px;
+        flex-wrap: wrap;
+      }
 
-        .toledah-strip-inner {
-            max-width: 1200px; margin: 0 auto;
-            padding: 48px 20px;
-            display: flex; justify-content: space-between;
-            align-items: center; gap: 28px; flex-wrap: wrap;
-        }
+      .toledah-strip-inner h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.7rem;
+        font-weight: 500;
+        color: var(--air);
+        letter-spacing: -0.01em;
+      }
 
-        .toledah-strip-inner h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.7rem; font-weight: 500; color: var(--air); letter-spacing: -0.01em;
-        }
+      .toledah-strip-inner p {
+        font-size: 0.86rem;
+        color: rgba(238, 238, 237, 0.4);
+        font-weight: 300;
+        line-height: 1.75;
+        max-width: 360px;
+      }
 
-        .toledah-strip-inner p {
-            font-size: 0.86rem; color: rgba(238,238,237,0.4);
-            font-weight: 300; line-height: 1.75; max-width: 360px;
-        }
+      .toledah-strip-inner a {
+        font-family: "Sora", sans-serif;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--air);
+        border: 1px solid rgba(43, 117, 116, 0.4);
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: border-color 0.2s;
+        flex-shrink: 0;
+      }
+      .toledah-strip-inner a:hover {
+        border-color: var(--teal-bright);
+      }
 
-        .toledah-strip-inner a {
-            font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 500;
-            color: var(--air); border: 1px solid rgba(43,117,116,0.4);
-            padding: 10px 20px; border-radius: 6px;
-            text-decoration: none; white-space: nowrap; transition: border-color 0.2s;
-            flex-shrink: 0;
-        }
-        .toledah-strip-inner a:hover { border-color: var(--teal-bright); }
+      /* ── ECOSYSTEM ── */
+      .ecosystem-section {
+        background: var(--graphite-800);
+        border-top: 1px solid var(--border-dark);
+      }
 
-        /* ── ECOSYSTEM ── */
-        .ecosystem-section { background: var(--graphite-800); border-top: 1px solid var(--border-dark); }
+      .ecosystem-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 80px 20px;
+      }
 
-        .ecosystem-inner { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+      .ecosystem-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-top: 48px;
+      }
 
+      @media (max-width: 900px) {
         .ecosystem-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px; margin-top: 48px;
+          grid-template-columns: repeat(2, 1fr);
         }
+      }
 
-        @media (max-width: 900px) {
-            .ecosystem-grid { grid-template-columns: repeat(2, 1fr); }
+      @media (max-width: 480px) {
+        .ecosystem-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
         }
+      }
 
-        @media (max-width: 480px) {
-            .ecosystem-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-        }
+      .eco-card {
+        background: var(--graphite-900);
+        border: 1px solid var(--border-dark);
+        border-radius: 12px;
+        padding: 22px 18px;
+        transition:
+          border-color 0.25s,
+          transform 0.25s;
+      }
+      .eco-card:hover {
+        border-color: var(--border-teal);
+        transform: translateY(-2px);
+      }
+      .eco-card.featured {
+        border-color: var(--border-teal);
+        background: var(--teal-deep);
+      }
 
-        .eco-card {
-            background: var(--graphite-900);
-            border: 1px solid var(--border-dark);
-            border-radius: 12px; padding: 22px 18px;
-            transition: border-color 0.25s, transform 0.25s;
-        }
-        .eco-card:hover { border-color: var(--border-teal); transform: translateY(-2px); }
-        .eco-card.featured { border-color: var(--border-teal); background: var(--teal-deep); }
+      .eco-status {
+        font-family: "Sora", sans-serif;
+        font-size: 0.52rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 3px 7px;
+        border-radius: 4px;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+      .eco-status.live {
+        background: rgba(43, 117, 116, 0.2);
+        color: var(--teal-bright);
+        border: 1px solid var(--border-teal);
+      }
+      .eco-status.alpha {
+        background: rgba(200, 200, 198, 0.08);
+        color: var(--platinum);
+        border: 1px solid rgba(200, 200, 198, 0.15);
+      }
+      .eco-status.rd {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--graphite-400);
+        border: 1px solid var(--border-dark);
+      }
+      .eco-status.future {
+        background: transparent;
+        color: var(--graphite-600);
+        border: 1px solid var(--graphite-600);
+      }
 
-        .eco-status {
-            font-family: 'Sora', sans-serif; font-size: 0.52rem; font-weight: 600;
-            letter-spacing: 0.1em; text-transform: uppercase;
-            padding: 3px 7px; border-radius: 4px;
-            display: inline-block; margin-bottom: 20px;
-        }
-        .eco-status.live { background: rgba(43,117,116,0.2); color: var(--teal-bright); border: 1px solid var(--border-teal); }
-        .eco-status.alpha { background: rgba(200,200,198,0.08); color: var(--platinum); border: 1px solid rgba(200,200,198,0.15); }
-        .eco-status.rd { background: rgba(255,255,255,0.04); color: var(--graphite-400); border: 1px solid var(--border-dark); }
-        .eco-status.future { background: transparent; color: var(--graphite-600); border: 1px solid var(--graphite-600); }
+      .eco-name {
+        font-family: "Sora", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--air);
+        margin-bottom: 8px;
+      }
+      .eco-desc {
+        font-size: 0.78rem;
+        color: var(--graphite-400);
+        line-height: 1.6;
+        font-weight: 300;
+      }
 
-        .eco-name { font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--air); margin-bottom: 8px; }
-        .eco-desc { font-size: 0.78rem; color: var(--graphite-400); line-height: 1.6; font-weight: 300; }
+      /* ── FOOTER CTA ── */
+      .footer-cta {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 100px 20px;
+        text-align: center;
+        position: relative;
+      }
 
-        /* ── FOOTER CTA ── */
-        .footer-cta {
-            max-width: 1200px; margin: 0 auto;
-            padding: 100px 20px; text-align: center;
-            position: relative;
-        }
+      .footer-cta::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 260px;
+        background: radial-gradient(
+          ellipse,
+          rgba(14, 41, 49, 0.5) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
 
-        .footer-cta::before {
-            content: ''; position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px; height: 260px;
-            background: radial-gradient(ellipse, rgba(14,41,49,0.5) 0%, transparent 70%);
-            pointer-events: none;
-        }
+      .footer-cta-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.6rem, 6vw, 4.5rem);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        color: var(--air);
+        line-height: 1.05;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 1;
+      }
 
-        .footer-cta-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.6rem, 6vw, 4.5rem);
-            font-weight: 500; letter-spacing: -0.02em;
-            color: var(--air); line-height: 1.05;
-            margin-bottom: 16px; position: relative; z-index: 1;
-        }
+      .footer-cta-sub {
+        font-size: 0.95rem;
+        color: var(--graphite-400);
+        font-weight: 300;
+        margin-bottom: 36px;
+        position: relative;
+        z-index: 1;
+      }
 
-        .footer-cta-sub {
-            font-size: 0.95rem; color: var(--graphite-400);
-            font-weight: 300; margin-bottom: 36px;
-            position: relative; z-index: 1;
-        }
+      .footer-cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
 
-        .footer-cta-buttons {
-            display: flex; justify-content: center;
-            gap: 10px; flex-wrap: wrap;
-            position: relative; z-index: 1;
-        }
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border-dark);
+        padding: 48px 20px 28px;
+      }
 
-        /* ── FOOTER ── */
-        footer {
-            border-top: 1px solid var(--border-dark);
-            padding: 48px 20px 28px;
-        }
+      .footer-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
 
-        .footer-inner { max-width: 1200px; margin: 0 auto; }
+      .footer-top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid var(--border-dark);
+        margin-bottom: 24px;
+      }
 
+      @media (max-width: 700px) {
         .footer-top {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-dark);
-            margin-bottom: 24px;
+          grid-template-columns: 1fr 1fr;
         }
-
-        @media (max-width: 700px) {
-            .footer-top { grid-template-columns: 1fr 1fr; }
-            .footer-top > div:first-child { grid-column: 1 / -1; }
+        .footer-top > div:first-child {
+          grid-column: 1 / -1;
         }
+      }
 
-        @media (max-width: 420px) {
-            .footer-top { grid-template-columns: 1fr; }
+      @media (max-width: 420px) {
+        .footer-top {
+          grid-template-columns: 1fr;
         }
+      }
 
-        .footer-brand-desc { font-size: 0.82rem; color: var(--graphite-400); font-weight: 300; line-height: 1.7; max-width: 240px; margin-top: 12px; }
-        .footer-col-title { font-family: 'Sora', sans-serif; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--graphite-600); margin-bottom: 16px; }
-        .footer-links { display: flex; flex-direction: column; gap: 10px; }
-        .footer-links a { font-size: 0.83rem; color: var(--graphite-400); text-decoration: none; font-weight: 300; transition: color 0.2s; }
-        .footer-links a:hover { color: var(--air); }
+      .footer-brand-desc {
+        font-size: 0.82rem;
+        color: var(--graphite-400);
+        font-weight: 300;
+        line-height: 1.7;
+        max-width: 240px;
+        margin-top: 12px;
+      }
+      .footer-col-title {
+        font-family: "Sora", sans-serif;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--graphite-600);
+        margin-bottom: 16px;
+      }
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .footer-links a {
+        font-size: 0.83rem;
+        color: var(--graphite-400);
+        text-decoration: none;
+        font-weight: 300;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--air);
+      }
 
-        .footer-bottom {
-            display: flex; justify-content: space-between;
-            align-items: center; flex-wrap: wrap; gap: 8px;
-        }
-        .footer-copy { font-size: 0.72rem; color: var(--graphite-600); }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .footer-copy {
+        font-size: 0.72rem;
+        color: var(--graphite-600);
+      }
 
-        /* ── REVEAL ── */
-        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+      /* ── REVEAL ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-    <div class="nav-inner">
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-inner">
         <a href="/" class="nav-logo">
-            <div class="logo-mark">
-<img src="images/logo white.png" 
-     alt="Logo" 
-     style="height: 1.5rem; width: auto; vertical-align: middle;">
-            </div>
-            <span class="logo-name">Toledah</span>
+          <div class="logo-mark">
+            <img
+              src="images/logo white.png"
+              alt="Logo"
+              style="height: 1.2rem; width: auto; vertical-align: middle"
+            />
+          </div>
+          <span class="logo-name">Toledah</span>
         </a>
 
         <div class="nav-links">
-            <a href="#nova">Nova</a>
-            <a href="#ecosystem">Ecosystem</a>
-            <a href="#vision">Vision</a>
+          <a href="#nova">Nova</a>
+          <a href="#ecosystem">Ecosystem</a>
+          <a href="#vision">Vision</a>
         </div>
 
         <div class="nav-cta">
-            <a href="#" class="btn-nav ghost">Web App</a>
-            <a href="#download" class="btn-nav primary">Download Nova</a>
+          <a href="#" class="btn-nav ghost">Web App</a>
+          <a href="#download" class="btn-nav primary">Download Nova</a>
         </div>
+
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+
+    <div class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-header">
+        <div class="drawer-brand">
+          <div class="logo-mark">
+            <img
+              src="images/logo white.png"
+              alt="Logo"
+              style="height: 1rem; width: auto; vertical-align: middle"
+            />
+          </div>
+          <span class="logo-name">Toledah</span>
+        </div>
+        <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M2 2l12 12M14 2L2 14" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <nav class="drawer-nav">
+        <div class="drawer-section-label">Products</div>
+        <a href="#nova" class="drawer-link active" data-close>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <path d="M8 21h8M12 17v4" />
+          </svg>
+          Nova Business OS
+        </a>
+        <a href="#ecosystem" class="drawer-link" data-close>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M16.9 16.9l2.1 2.1M19.1 4.9l-2.1 2.1M7.1 16.9l-2.1 2.1"
+            />
+          </svg>
+          Ecosystem
+        </a>
+        <a href="#vision" class="drawer-link" data-close>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          Vision
+        </a>
+
+        <div class="drawer-section-label">Access</div>
+        <a href="#" class="drawer-link" data-close>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M2 12h20M12 2a15.3 15.3 0 010 20" />
+          </svg>
+          Web Dashboard
+        </a>
+        <a href="#" class="drawer-link" data-close>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <rect x="5" y="2" width="14" height="20" rx="2" />
+            <path d="M12 18h.01" />
+          </svg>
+          App Store
+        </a>
+        <a href="#" class="drawer-link" data-close>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M3 3l8.5 8.5M3 21l8.5-8.5M21 3l-8.5 8.5M21 21l-8.5-8.5" />
+          </svg>
+          Google Play
+        </a>
+      </nav>
+
+      <div class="drawer-footer">
+        <a href="#download" class="drawer-cta-primary" data-close>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <path d="M12 2v14M5 9l7 7 7-7" />
+            <path d="M3 19h18" />
+          </svg>
+          Download Nova
+        </a>
+        <a href="#" class="drawer-cta-secondary" data-close>Open Web App</a>
+      </div>
     </div>
-</nav>
 
-<!-- HERO -->
-<section class="hero" id="nova">
-    <div class="hero-platinum-light"></div>
-    <div class="hero-inner">
-
+    <!-- HERO -->
+    <section class="hero" id="nova">
+      <div class="hero-platinum-light"></div>
+      <div class="hero-inner">
         <div>
-            <div class="eyebrow-strip">
-                <div class="eyebrow-line"></div>
-                <span class="eyebrow-text">Introducing Nova — Now Available</span>
-            </div>
+          <div class="eyebrow-strip">
+            <div class="eyebrow-line"></div>
+            <span class="eyebrow-text">Introducing Nova — Now Available</span>
+          </div>
 
-            <h1 class="hero-headline">
-                Run your<br>
-                entire business<br>
-                from<span class="teal">.</span><br>
-                <span class="dim">anywhere.</span>
-            </h1>
+          <h1 class="hero-headline">
+            Run your<br />
+            entire business<br />
+            from<span class="teal">.</span><br />
+            <span class="dim">anywhere.</span>
+          </h1>
 
-            <p class="hero-sub">Nova is a business operating system built for independent operators and growing companies. Manage sales, inventory, staff, compliance, and profit — from your phone or the web, always in sync.</p>
+          <p class="hero-sub">
+            Nova is a business operating system built for independent operators
+            and growing companies. Manage sales, inventory, staff, compliance,
+            and profit — from your phone or the web, always in sync.
+          </p>
 
-            <div class="download-group" id="download">
-                <a href="#" class="btn-download dark">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                    <div class="btn-download-text-group">
-                        <span class="btn-download-sub">Download on the</span>
-                        <span class="btn-download-label">App Store</span>
-                    </div>
-                </a>
-                <a href="#" class="btn-download outline">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.96.07l.06-.04 11.35-6.55-2.46-2.46-9.91 8.98zm15.49-9.27L16.2 13l-2.47 2.47 2.5 2.5 2.44-1.41c.69-.4.69-1.47 0-1.87zM2.01 1.2C1.7 1.53 1.5 2.02 1.5 2.66v18.69c0 .64.2 1.13.52 1.46l.08.07 10.47-10.48v-.24L2.01 1.2zm13.8 8.57l-2.53-2.53L10.75 9.8l2.46 2.46 2.6-2.49z"/></svg>
-                    <div class="btn-download-text-group">
-                        <span class="btn-download-sub">Get it on</span>
-                        <span class="btn-download-label">Google Play</span>
-                    </div>
-                </a>
-            </div>
-
-            <a href="#" class="web-link">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/></svg>
-                <span>Or use the web dashboard</span>
+          <div class="download-group" id="download">
+            <a href="#" class="btn-download dark">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                />
+              </svg>
+              <div class="btn-download-text-group">
+                <span class="btn-download-sub">Download on the</span>
+                <span class="btn-download-label">App Store</span>
+              </div>
             </a>
+            <a href="#" class="btn-download outline">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M3.18 23.76c.3.17.65.19.96.07l.06-.04 11.35-6.55-2.46-2.46-9.91 8.98zm15.49-9.27L16.2 13l-2.47 2.47 2.5 2.5 2.44-1.41c.69-.4.69-1.47 0-1.87zM2.01 1.2C1.7 1.53 1.5 2.02 1.5 2.66v18.69c0 .64.2 1.13.52 1.46l.08.07 10.47-10.48v-.24L2.01 1.2zm13.8 8.57l-2.53-2.53L10.75 9.8l2.46 2.46 2.6-2.49z"
+                />
+              </svg>
+              <div class="btn-download-text-group">
+                <span class="btn-download-sub">Get it on</span>
+                <span class="btn-download-label">Google Play</span>
+              </div>
+            </a>
+          </div>
 
-            <div class="trust-row">
-                <div class="trust-item"><span class="trust-value">Mobile</span><span class="trust-label">iOS & Android</span></div>
-                <div class="trust-divider"></div>
-                <div class="trust-item"><span class="trust-value">Web</span><span class="trust-label">Full dashboard</span></div>
-                <div class="trust-divider"></div>
-                <div class="trust-item"><span class="trust-value">Offline</span><span class="trust-label">Always working</span></div>
-                <div class="trust-divider"></div>
-                <div class="trust-item"><span class="trust-value">Tax Ready</span><span class="trust-label">PIT · CIT · VAT</span></div>
+          <a href="#" class="web-link">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M2 12h20M12 2a15.3 15.3 0 010 20" />
+            </svg>
+            <span>Or use the web dashboard</span>
+          </a>
+
+          <div class="trust-row">
+            <div class="trust-item">
+              <span class="trust-value">Mobile</span
+              ><span class="trust-label">iOS & Android</span>
             </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <span class="trust-value">Web</span
+              ><span class="trust-label">Full dashboard</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <span class="trust-value">Offline</span
+              ><span class="trust-label">Always working</span>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <span class="trust-value">Tax Ready</span
+              ><span class="trust-label">PIT · CIT · VAT</span>
+            </div>
+          </div>
         </div>
 
         <div class="phone-scene">
-            <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                    <div class="ps-header">
-                        <span class="ps-title">Nova · Dashboard</span>
-                        <div class="ps-live"><div class="ps-live-dot"></div><span class="ps-live-text">Live</span></div>
-                    </div>
-                    <div class="ps-grid">
-                        <div class="ps-card"><div class="ps-card-label">Today's Sales</div><div class="ps-card-value teal">₦84,500</div></div>
-                        <div class="ps-card"><div class="ps-card-label">Net Profit</div><div class="ps-card-value platinum">₦31,200</div></div>
-                    </div>
-                    <div class="ps-grid">
-                        <div class="ps-card"><div class="ps-card-label">Items Sold</div><div class="ps-card-value">142</div></div>
-                        <div class="ps-card"><div class="ps-card-label">Low Stock</div><div class="ps-card-value amber">3 items</div></div>
-                    </div>
-                    <div class="ps-section-label">Weekly Revenue</div>
-                    <div class="ps-bars">
-                        <div class="ps-bar pb1"></div><div class="ps-bar pb2"></div><div class="ps-bar pb3"></div>
-                        <div class="ps-bar pb4"></div><div class="ps-bar pb5"></div><div class="ps-bar pb6"></div>
-                        <div class="ps-bar pb7 active"></div>
-                    </div>
-                    <div class="ps-section-label">Recent Sales</div>
-                    <div class="ps-sale"><div class="ps-sale-dot"></div><span class="ps-sale-name">Engine Oil 5L × 4</span><span class="ps-sale-amount">+₦12,000</span></div>
-                    <div class="ps-sale"><div class="ps-sale-dot"></div><span class="ps-sale-name">Brake Pads × 2</span><span class="ps-sale-amount">+₦8,400</span></div>
-                    <div class="ps-sale"><div class="ps-sale-dot"></div><span class="ps-sale-name">Filter Kit × 1</span><span class="ps-sale-amount">+₦3,200</span></div>
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="ps-header">
+                <span class="ps-title">Nova · Dashboard</span>
+                <div class="ps-live">
+                  <div class="ps-live-dot"></div>
+                  <span class="ps-live-text">Live</span>
                 </div>
+              </div>
+              <div class="ps-grid">
+                <div class="ps-card">
+                  <div class="ps-card-label">Today's Sales</div>
+                  <div class="ps-card-value teal">₦84,500</div>
+                </div>
+                <div class="ps-card">
+                  <div class="ps-card-label">Net Profit</div>
+                  <div class="ps-card-value platinum">₦31,200</div>
+                </div>
+              </div>
+              <div class="ps-grid">
+                <div class="ps-card">
+                  <div class="ps-card-label">Items Sold</div>
+                  <div class="ps-card-value">142</div>
+                </div>
+                <div class="ps-card">
+                  <div class="ps-card-label">Low Stock</div>
+                  <div class="ps-card-value amber">3 items</div>
+                </div>
+              </div>
+              <div class="ps-section-label">Weekly Revenue</div>
+              <div class="ps-bars">
+                <div class="ps-bar pb1"></div>
+                <div class="ps-bar pb2"></div>
+                <div class="ps-bar pb3"></div>
+                <div class="ps-bar pb4"></div>
+                <div class="ps-bar pb5"></div>
+                <div class="ps-bar pb6"></div>
+                <div class="ps-bar pb7 active"></div>
+              </div>
+              <div class="ps-section-label">Recent Sales</div>
+              <div class="ps-sale">
+                <div class="ps-sale-dot"></div>
+                <span class="ps-sale-name">Engine Oil 5L × 4</span
+                ><span class="ps-sale-amount">+₦12,000</span>
+              </div>
+              <div class="ps-sale">
+                <div class="ps-sale-dot"></div>
+                <span class="ps-sale-name">Brake Pads × 2</span
+                ><span class="ps-sale-amount">+₦8,400</span>
+              </div>
+              <div class="ps-sale">
+                <div class="ps-sale-dot"></div>
+                <span class="ps-sale-name">Filter Kit × 1</span
+                ><span class="ps-sale-amount">+₦3,200</span>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div class="engine-statement">
-        <p class="label" style="color:rgba(238,238,237,0.2);margin-bottom:12px;">Nova Business OS</p>
+      <div class="engine-statement">
+        <p
+          class="label"
+          style="color: rgba(238, 238, 237, 0.2); margin-bottom: 12px"
+        >
+          Nova Business OS
+        </p>
         <h2>The Engine of Scale.</h2>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
-    <div class="ticker-inner">
-        <span class="ticker-item"><span class="gem">✦</span> Fast sales engine</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Offline-first architecture</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">CIT, PIT & VAT compliance</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">WhatsApp receipt delivery</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Role-based staff permissions</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Profit separation engine</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Sole proprietor & company modes</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Audit trail & trust score</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Mobile first · Full web dashboard</span><span class="ticker-sep">·</span>
-        <span class="ticker-item"><span class="gem">✦</span> Fast sales engine</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Offline-first architecture</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">CIT, PIT & VAT compliance</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">WhatsApp receipt delivery</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Role-based staff permissions</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Profit separation engine</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Sole proprietor & company modes</span><span class="ticker-sep">·</span>
-        <span class="ticker-item">Audit trail & trust score</span><span class="ticker-sep">·</span>
+    <!-- TICKER -->
+    <div class="ticker-wrap">
+      <div class="ticker-inner">
+        <span class="ticker-item"
+          ><span class="gem">✦</span> Fast sales engine</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Offline-first architecture</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">CIT, PIT & VAT compliance</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">WhatsApp receipt delivery</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Role-based staff permissions</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Profit separation engine</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Sole proprietor & company modes</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Audit trail & trust score</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Mobile first · Full web dashboard</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item"
+          ><span class="gem">✦</span> Fast sales engine</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Offline-first architecture</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">CIT, PIT & VAT compliance</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">WhatsApp receipt delivery</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Role-based staff permissions</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Profit separation engine</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Sole proprietor & company modes</span
+        ><span class="ticker-sep">·</span>
+        <span class="ticker-item">Audit trail & trust score</span
+        ><span class="ticker-sep">·</span>
         <span class="ticker-item">Mobile first · Full web dashboard</span>
+      </div>
     </div>
-</div>
 
-<!-- STATEMENT -->
-<div class="statement-section reveal">
-    <p class="statement-text">Whether you run a sole proprietorship from your phone or manage a registered company across multiple locations — <em>Nova gives you the same institutional infrastructure</em> that used to belong only to large enterprises.</p>
-</div>
+    <!-- STATEMENT -->
+    <div class="statement-section reveal">
+      <p class="statement-text">
+        Whether you run a sole proprietorship from your phone or manage a
+        registered company across multiple locations —
+        <em>Nova gives you the same institutional infrastructure</em> that used
+        to belong only to large enterprises.
+      </p>
+    </div>
 
-<!-- FEATURES -->
-<section class="features-section">
-    <div class="features-inner">
+    <!-- FEATURES -->
+    <section class="features-section">
+      <div class="features-inner">
         <div class="section-header reveal">
-            <div>
-                <div class="teal-rule"></div>
-                <h2 class="section-title">Full Power.<br>Zero Laptop.</h2>
-            </div>
-            <p class="section-sub">Built for the market, the depot, and the workshop floor.</p>
+          <div>
+            <div class="teal-rule"></div>
+            <h2 class="section-title">Full Power.<br />Zero Laptop.</h2>
+          </div>
+          <p class="section-sub">
+            Built for the market, the depot, and the workshop floor.
+          </p>
         </div>
         <div class="features-grid">
-            <div class="feature-cell reveal"><div class="feature-num">01</div><div class="feature-title">Tap. Tap. Done.</div><div class="feature-body">Complete a sale in seconds. No dropdowns, no multi-step wizards. The fastest POS you've used on a phone.</div></div>
-            <div class="feature-cell reveal" style="transition-delay:.07s"><div class="feature-num">02</div><div class="feature-title">Separate your money.</div><div class="feature-body">The profit allocation engine separates personal funds from business revenue. Know exactly what is yours to spend.</div></div>
-            <div class="feature-cell reveal" style="transition-delay:.14s"><div class="feature-num">03</div><div class="feature-title">Monitor staff from anywhere.</div><div class="feature-body">Role-based access gives each staff member exactly the permissions they need — and nothing more.</div></div>
-            <div class="feature-cell reveal"><div class="feature-num">04</div><div class="feature-title">Tax-man proof your business.</div><div class="feature-body">PIT, CIT, and VAT calculated natively on every transaction. Records always audit-ready.</div></div>
-            <div class="feature-cell reveal" style="transition-delay:.07s"><div class="feature-num">05</div><div class="feature-title">Receipts to WhatsApp.</div><div class="feature-body">Send professional branded invoices directly to your customer's WhatsApp. One tap from the sales screen.</div></div>
-            <div class="feature-cell reveal" style="transition-delay:.14s"><div class="feature-num">06</div><div class="feature-title">Works when MTN doesn't.</div><div class="feature-body">Offline-first architecture keeps Nova running during failures. Data syncs silently when you're back online.</div></div>
+          <div class="feature-cell reveal">
+            <div class="feature-num">01</div>
+            <div class="feature-title">Tap. Tap. Done.</div>
+            <div class="feature-body">
+              Complete a sale in seconds. No dropdowns, no multi-step wizards.
+              The fastest POS you've used on a phone.
+            </div>
+          </div>
+          <div class="feature-cell reveal" style="transition-delay: 0.07s">
+            <div class="feature-num">02</div>
+            <div class="feature-title">Separate your money.</div>
+            <div class="feature-body">
+              The profit allocation engine separates personal funds from
+              business revenue. Know exactly what is yours to spend.
+            </div>
+          </div>
+          <div class="feature-cell reveal" style="transition-delay: 0.14s">
+            <div class="feature-num">03</div>
+            <div class="feature-title">Monitor staff from anywhere.</div>
+            <div class="feature-body">
+              Role-based access gives each staff member exactly the permissions
+              they need — and nothing more.
+            </div>
+          </div>
+          <div class="feature-cell reveal">
+            <div class="feature-num">04</div>
+            <div class="feature-title">Tax-man proof your business.</div>
+            <div class="feature-body">
+              PIT, CIT, and VAT calculated natively on every transaction.
+              Records always audit-ready.
+            </div>
+          </div>
+          <div class="feature-cell reveal" style="transition-delay: 0.07s">
+            <div class="feature-num">05</div>
+            <div class="feature-title">Receipts to WhatsApp.</div>
+            <div class="feature-body">
+              Send professional branded invoices directly to your customer's
+              WhatsApp. One tap from the sales screen.
+            </div>
+          </div>
+          <div class="feature-cell reveal" style="transition-delay: 0.14s">
+            <div class="feature-num">06</div>
+            <div class="feature-title">Works when MTN doesn't.</div>
+            <div class="feature-body">
+              Offline-first architecture keeps Nova running during failures.
+              Data syncs silently when you're back online.
+            </div>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- AUDIENCE -->
-<section class="audience-section" id="vision">
-    <div class="reveal">
+    <!-- AUDIENCE -->
+    <section class="audience-section" id="vision">
+      <div class="reveal">
         <div class="teal-rule"></div>
-        <h2 class="section-title" style="color:var(--air);">One system.<br>Every stage.</h2>
-    </div>
-    <div class="audience-grid">
+        <h2 class="section-title" style="color: var(--air)">
+          One system.<br />Every stage.
+        </h2>
+      </div>
+      <div class="audience-grid">
         <div class="audience-card reveal">
-            <div style="width: 100%; height: 220px; overflow: hidden; border-radius: 8px; margin-bottom: 24px; border: 1px solid var(--border-dark);">
-        <img src="images/Market Trader.webp" 
-             alt="Business trader using a POS terminal" 
-             style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8) contrast(1.1);">
-    </div>
-            <div class="audience-eyebrow">Solo Operator · Unregistered SME</div>
-            <div class="audience-title">Start where<br>you are.</div>
-            <div class="audience-body">You run a shop, a depot, a trade. Nova gives you the financial clarity and speed of a system built for serious business — no laptop, no accountant required.</div>
-            <div class="audience-tags">
-                <span class="audience-tag">Fast POS</span>
-                <span class="audience-tag">Personal vs business money</span>
-                <span class="audience-tag">WhatsApp receipts</span>
-                <span class="audience-tag">Offline mode</span>
-            </div>
+          <div
+            style="
+              width: 100%;
+              height: 220px;
+              overflow: hidden;
+              border-radius: 8px;
+              margin-bottom: 24px;
+              border: 1px solid var(--border-dark);
+            "
+          >
+            <img
+              src="images/Market Trader.webp"
+              alt="Business trader using a POS terminal"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                filter: brightness(0.8) contrast(1.1);
+              "
+            />
+          </div>
+          <div class="audience-eyebrow">Solo Operator · Unregistered SME</div>
+          <div class="audience-title">Start where<br />you are.</div>
+          <div class="audience-body">
+            You run a shop, a depot, a trade. Nova gives you the financial
+            clarity and speed of a system built for serious business — no
+            laptop, no accountant required.
+          </div>
+          <div class="audience-tags">
+            <span class="audience-tag">Fast POS</span>
+            <span class="audience-tag">Personal vs business money</span>
+            <span class="audience-tag">WhatsApp receipts</span>
+            <span class="audience-tag">Offline mode</span>
+          </div>
         </div>
-        <div class="audience-card reveal" style="transition-delay:.1s">
-            <div style="width: 100%; height: 200px; overflow: hidden; border-radius: 8px; margin-bottom: 24px;">
-                <img src="images/office.webp" alt="Growing Team" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
-            </div>
-            <div class="audience-eyebrow">Registered Company · Growing Team</div>
-            <div class="audience-title">Scale with<br>structure.</div>
-            <div class="audience-body">You have a CAC number, directors, and staff. Nova's company mode handles CIT, director roles, multi-user access, and audit trails — from phone or full web dashboard.</div>
-            <div class="audience-tags">
-                <span class="audience-tag">Company mode</span>
-                <span class="audience-tag">CIT & VAT compliance</span>
-                <span class="audience-tag">Director roles</span>
-                <span class="audience-tag">Web dashboard</span>
-            </div>
+        <div class="audience-card reveal" style="transition-delay: 0.1s">
+          <div
+            style="
+              width: 100%;
+              height: 200px;
+              overflow: hidden;
+              border-radius: 8px;
+              margin-bottom: 24px;
+            "
+          >
+            <img
+              src="images/office.webp"
+              alt="Growing Team"
+              style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8"
+            />
+          </div>
+          <div class="audience-eyebrow">Registered Company · Growing Team</div>
+          <div class="audience-title">Scale with<br />structure.</div>
+          <div class="audience-body">
+            You have a CAC number, directors, and staff. Nova's company mode
+            handles CIT, director roles, multi-user access, and audit trails —
+            from phone or full web dashboard.
+          </div>
+          <div class="audience-tags">
+            <span class="audience-tag">Company mode</span>
+            <span class="audience-tag">CIT & VAT compliance</span>
+            <span class="audience-tag">Director roles</span>
+            <span class="audience-tag">Web dashboard</span>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- TOLEDAH STRIP -->
-<div class="toledah-strip">
-    <div class="toledah-strip-inner">
+    <!-- TOLEDAH STRIP -->
+    <div class="toledah-strip">
+      <div class="toledah-strip-inner">
         <div class="reveal">
-            <p class="label" style="color:rgba(43,117,116,0.7);margin-bottom:8px;">Nova is a Toledah product</p>
-            <h3>The Infrastructure of Growth.</h3>
+          <p
+            class="label"
+            style="color: rgba(43, 117, 116, 0.7); margin-bottom: 8px"
+          >
+            Nova is a Toledah product
+          </p>
+          <h3>The Infrastructure of Growth.</h3>
         </div>
-        <p class="reveal">Toledah builds interconnected systems for businesses, individuals, and institutions. Nova is the first layer. More is coming.</p>
+        <p class="reveal">
+          Toledah builds interconnected systems for businesses, individuals, and
+          institutions. Nova is the first layer. More is coming.
+        </p>
         <a href="#" class="reveal">Read the Vision →</a>
+      </div>
     </div>
-</div>
 
-<!-- ECOSYSTEM -->
-<section class="ecosystem-section" id="ecosystem">
-    <div class="ecosystem-inner">
+    <!-- ECOSYSTEM -->
+    <section class="ecosystem-section" id="ecosystem">
+      <div class="ecosystem-inner">
         <div class="section-header reveal">
-            <div>
-                <div class="teal-rule"></div>
-                <h2 class="section-title" style="color:var(--air);">The Toledah<br>Ecosystem</h2>
-            </div>
-            <p class="section-sub">Every product is a layer of the same infrastructure — interconnected, not isolated.</p>
+          <div>
+            <div class="teal-rule"></div>
+            <h2 class="section-title" style="color: var(--air)">
+              The Toledah<br />Ecosystem
+            </h2>
+          </div>
+          <p class="section-sub">
+            Every product is a layer of the same infrastructure —
+            interconnected, not isolated.
+          </p>
         </div>
         <div class="ecosystem-grid">
-            <div class="eco-card featured reveal"><span class="eco-status live">Live</span><div class="eco-name">Nova</div><div class="eco-desc">Business operating system for independent operators and growing companies.</div></div>
-            <div class="eco-card reveal" style="transition-delay:.07s"><span class="eco-status alpha">Alpha</span><div class="eco-name">Tole Pay</div><div class="eco-desc">Institutional-grade payment infrastructure and fintech rail for emerging markets.</div></div>
-            <div class="eco-card reveal" style="transition-delay:.14s"><span class="eco-status rd">R&D</span><div class="eco-name">Yoseph</div><div class="eco-desc">The AI intent layer bridging human decision-making and automated execution.</div></div>
-            <div class="eco-card reveal" style="transition-delay:.21s"><span class="eco-status future">Proprietary</span><div class="eco-name">Nova Covenant</div><div class="eco-desc">Specialised silicon for decentralised orchestration.</div></div>
-            <div class="eco-card reveal"><span class="eco-status future">Planning</span><div class="eco-name">Nova Agro</div><div class="eco-desc">Securing the supply chain from seed to market.</div></div>
-            <div class="eco-card reveal" style="transition-delay:.07s"><span class="eco-status future">Research</span><div class="eco-name">Toledah Witness</div><div class="eco-desc">Live-captured media sealed at the moment of creation.</div></div>
-            <div class="eco-card reveal" style="transition-delay:.14s"><span class="eco-status future">Future</span><div class="eco-name">Nova Marketplace</div><div class="eco-desc">B2B procurement and global commodities exchange.</div></div>
-            <div class="eco-card reveal" style="transition-delay:.21s"><span class="eco-status future">Future</span><div class="eco-name">Tolevision</div><div class="eco-desc">Streaming infrastructure built on the Toledah stack.</div></div>
+          <div class="eco-card featured reveal">
+            <span class="eco-status live">Live</span>
+            <div class="eco-name">Nova</div>
+            <div class="eco-desc">
+              Business operating system for independent operators and growing
+              companies.
+            </div>
+          </div>
+          <div class="eco-card reveal" style="transition-delay: 0.07s">
+            <span class="eco-status alpha">Alpha</span>
+            <div class="eco-name">Tole Pay</div>
+            <div class="eco-desc">
+              Institutional-grade payment infrastructure and fintech rail for
+              emerging markets.
+            </div>
+          </div>
+          <div class="eco-card reveal" style="transition-delay: 0.14s">
+            <span class="eco-status rd">R&D</span>
+            <div class="eco-name">Yoseph</div>
+            <div class="eco-desc">
+              The AI intent layer bridging human decision-making and automated
+              execution.
+            </div>
+          </div>
+          <div class="eco-card reveal" style="transition-delay: 0.21s">
+            <span class="eco-status future">Proprietary</span>
+            <div class="eco-name">Nova Covenant</div>
+            <div class="eco-desc">
+              Specialised silicon for decentralised orchestration.
+            </div>
+          </div>
+          <div class="eco-card reveal">
+            <span class="eco-status future">Planning</span>
+            <div class="eco-name">Nova Agro</div>
+            <div class="eco-desc">
+              Securing the supply chain from seed to market.
+            </div>
+          </div>
+          <div class="eco-card reveal" style="transition-delay: 0.07s">
+            <span class="eco-status future">Research</span>
+            <div class="eco-name">Toledah Witness</div>
+            <div class="eco-desc">
+              Live-captured media sealed at the moment of creation.
+            </div>
+          </div>
+          <div class="eco-card reveal" style="transition-delay: 0.14s">
+            <span class="eco-status future">Future</span>
+            <div class="eco-name">Nova Marketplace</div>
+            <div class="eco-desc">
+              B2B procurement and global commodities exchange.
+            </div>
+          </div>
+          <div class="eco-card reveal" style="transition-delay: 0.21s">
+            <span class="eco-status future">Future</span>
+            <div class="eco-name">Tolevision</div>
+            <div class="eco-desc">
+              Streaming infrastructure built on the Toledah stack.
+            </div>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- FOOTER CTA -->
-<div class="footer-cta reveal">
-    <h2 class="footer-cta-title">Your business.<br><em style="font-style:italic;color:var(--platinum);">Fully equipped.</em></h2>
-    <p class="footer-cta-sub">Download Nova and run your entire operation from day one.</p>
-    <div class="footer-cta-buttons">
-        <a href="#" class="btn-download dark" style="border-radius:10px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <div class="btn-download-text-group"><span class="btn-download-sub">Download on the</span><span class="btn-download-label">App Store</span></div>
+    <!-- FOOTER CTA -->
+    <div class="footer-cta reveal">
+      <h2 class="footer-cta-title">
+        Your business.<br /><em
+          style="font-style: italic; color: var(--platinum)"
+          >Fully equipped.</em
+        >
+      </h2>
+      <p class="footer-cta-sub">
+        Download Nova and run your entire operation from day one.
+      </p>
+      <div class="footer-cta-buttons">
+        <a href="#" class="btn-download dark" style="border-radius: 10px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+            />
+          </svg>
+          <div class="btn-download-text-group">
+            <span class="btn-download-sub">Download on the</span
+            ><span class="btn-download-label">App Store</span>
+          </div>
         </a>
-        <a href="#" class="btn-download outline" style="border-radius:10px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.96.07l.06-.04 11.35-6.55-2.46-2.46-9.91 8.98zm15.49-9.27L16.2 13l-2.47 2.47 2.5 2.5 2.44-1.41c.69-.4.69-1.47 0-1.87zM2.01 1.2C1.7 1.53 1.5 2.02 1.5 2.66v18.69c0 .64.2 1.13.52 1.46l.08.07 10.47-10.48v-.24L2.01 1.2zm13.8 8.57l-2.53-2.53L10.75 9.8l2.46 2.46 2.6-2.49z"/></svg>
-            <div class="btn-download-text-group"><span class="btn-download-sub">Get it on</span><span class="btn-download-label">Google Play</span></div>
+        <a href="#" class="btn-download outline" style="border-radius: 10px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M3.18 23.76c.3.17.65.19.96.07l.06-.04 11.35-6.55-2.46-2.46-9.91 8.98zm15.49-9.27L16.2 13l-2.47 2.47 2.5 2.5 2.44-1.41c.69-.4.69-1.47 0-1.87zM2.01 1.2C1.7 1.53 1.5 2.02 1.5 2.66v18.69c0 .64.2 1.13.52 1.46l.08.07 10.47-10.48v-.24L2.01 1.2zm13.8 8.57l-2.53-2.53L10.75 9.8l2.46 2.46 2.6-2.49z"
+            />
+          </svg>
+          <div class="btn-download-text-group">
+            <span class="btn-download-sub">Get it on</span
+            ><span class="btn-download-label">Google Play</span>
+          </div>
         </a>
-        <a href="#" class="btn-download outline" style="border-radius:10px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/></svg>
-            <div class="btn-download-text-group"><span class="btn-download-sub">Access via browser</span><span class="btn-download-label">Web App</span></div>
+        <a href="#" class="btn-download outline" style="border-radius: 10px">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M2 12h20M12 2a15.3 15.3 0 010 20" />
+          </svg>
+          <div class="btn-download-text-group">
+            <span class="btn-download-sub">Access via browser</span
+            ><span class="btn-download-label">Web App</span>
+          </div>
         </a>
+      </div>
     </div>
-</div>
 
-<!-- FOOTER -->
-<footer>
-    <div class="footer-inner">
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
         <div class="footer-top">
-            <div>
-                <div class="nav-logo">
-                    <div class="logo-mark">
-                       <img src="images/logo white.png" 
-     alt="Logo" 
-     style="height: 1.5rem; width: auto; vertical-align: middle;">
-                    </div>
-                    <span class="logo-name">Toledah</span>
-                </div>
-                <p class="footer-brand-desc">The infrastructure for a growing global economy.</p>
+          <div>
+            <div class="nav-logo">
+              <div class="logo-mark">
+                <img
+                  src="images/logo white.png"
+                  alt="Logo"
+                  style="height: 1.5rem; width: auto; vertical-align: middle"
+                />
+              </div>
+              <span class="logo-name">Toledah</span>
             </div>
-            <div>
-                <div class="footer-col-title">Products</div>
-                <div class="footer-links">
-                    <a href="#">Nova Business OS</a>
-                    <a href="#">Tole Pay</a>
-                    <a href="#">Yoseph AI</a>
-                    <a href="#">Nova Marketplace</a>
-                </div>
+            <p class="footer-brand-desc">
+              The infrastructure for a growing global economy.
+            </p>
+          </div>
+          <div>
+            <div class="footer-col-title">Products</div>
+            <div class="footer-links">
+              <a href="#">Nova Business OS</a>
+              <a href="#">Tole Pay</a>
+              <a href="#">Yoseph AI</a>
+              <a href="#">Nova Marketplace</a>
             </div>
-            <div>
-                <div class="footer-col-title">Legal</div>
-                <div class="footer-links">
-                    <a href="#">Privacy</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Global Compliance</a>
-                </div>
+          </div>
+          <div>
+            <div class="footer-col-title">Legal</div>
+            <div class="footer-links">
+              <a href="#">Privacy</a>
+              <a href="#">Terms</a>
+              <a href="#">Global Compliance</a>
             </div>
+          </div>
         </div>
         <div class="footer-bottom">
-            <p class="footer-copy">© 2026 Toledah Technologies Inc. All rights reserved.</p>
-            <p class="footer-copy">Designed for Scale.</p>
+          <p class="footer-copy">
+            © 2026 Toledah Technologies Inc. All rights reserved.
+          </p>
+          <p class="footer-copy">Designed for Scale.</p>
         </div>
-    </div>
-</footer>
+      </div>
+    </footer>
 
-<script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.08 });
-    reveals.forEach(el => observer.observe(el));
-</script>
-</body>
+    <script>
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.08 },
+      );
+      reveals.forEach((el) => observer.observe(el));
+
+      const hamburger = document.getElementById("hamburger");
+      const drawer = document.getElementById("drawer");
+      const overlay = document.getElementById("drawerOverlay");
+      const closeBtn = document.getElementById("drawerClose");
+
+      function openDrawer() {
+        hamburger.classList.add("open");
+        hamburger.setAttribute("aria-expanded", "true");
+        drawer.classList.add("open");
+        drawer.setAttribute("aria-hidden", "false");
+        overlay.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeDrawer() {
+        hamburger.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", "false");
+        drawer.classList.remove("open");
+        drawer.setAttribute("aria-hidden", "true");
+        overlay.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      hamburger.addEventListener("click", () => {
+        const isOpen = drawer.classList.contains("open");
+        isOpen ? closeDrawer() : openDrawer();
+      });
+      closeBtn.addEventListener("click", closeDrawer);
+      overlay.addEventListener("click", closeDrawer);
+      drawer
+        .querySelectorAll("[data-close]")
+        .forEach((el) => el.addEventListener("click", closeDrawer));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeDrawer();
+      });
+    </script>
+  </body>
 </html>
