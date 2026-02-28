@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Evanometre/toledah-web
   branch: main
-  base_url: https://api.decapcms.org
+  base_url: https://toledah-cms-oauth.evansjohn152-1ea.workers.dev
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
