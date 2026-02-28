@@ -2,8 +2,6 @@ backend:
   name: github
   repo: Evanometre/toledah-web
   branch: main
-  auth_type: implicit
-  app_id: Ov23liMGCCQqALxHf5HM
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
