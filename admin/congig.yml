@@ -1,0 +1,70 @@
+backend:
+  name: github
+  repo: Evanometre/toledah-web
+  branch: main
+  base_url: https://api.decapcms.org
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+
+  # ── HOMEPAGE ──
+  - name: "homepage"
+    label: "Homepage"
+    files:
+      - name: "homepage"
+        label: "Homepage"
+        file: "_content/homepage.md"
+        fields:
+          - { label: "Eyebrow Text", name: "eyebrow", widget: "string" }
+          - { label: "Hero Headline Line 1", name: "hero_line1", widget: "string" }
+          - { label: "Hero Headline Line 2", name: "hero_line2", widget: "string" }
+          - { label: "Hero Subtext", name: "hero_sub", widget: "text" }
+          - { label: "Statement Text", name: "statement", widget: "text" }
+          - { label: "Features Section Title", name: "features_title", widget: "string" }
+          - { label: "Features Section Subtitle", name: "features_sub", widget: "string" }
+          - label: "Features"
+            name: "features"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - { label: "Footer CTA Headline", name: "cta_headline", widget: "string" }
+          - { label: "Footer CTA Subtext", name: "cta_sub", widget: "string" }
+
+  # ── PRODUCTS ──
+  - name: "products"
+    label: "Products"
+    files:
+      - name: "zaena"
+        label: "Zaena"
+        file: "_content/products/zaena.md"
+        fields:
+          - { label: "Product Name", name: "title", widget: "string" }
+          - { label: "Eyebrow Text", name: "eyebrow", widget: "string" }
+          - { label: "Hero Headline", name: "hero_headline", widget: "string" }
+          - { label: "Hero Subtext", name: "hero_sub", widget: "text" }
+          - { label: "Statement Text", name: "statement", widget: "text" }
+          - { label: "Features Section Title", name: "features_title", widget: "string" }
+          - { label: "Features Section Subtitle", name: "features_sub", widget: "string" }
+          - label: "Features"
+            name: "features"
+            widget: "list"
+            fields:
+              - { label: "Number", name: "num", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+          - { label: "Trust Section Headline", name: "trust_headline", widget: "string" }
+          - { label: "Trust Section Body", name: "trust_body", widget: "text" }
+          - { label: "Sole Proprietor Mode Title", name: "mode_solo_title", widget: "string" }
+          - { label: "Sole Proprietor Mode Body", name: "mode_solo_body", widget: "text" }
+          - { label: "Company Mode Title", name: "mode_company_title", widget: "string" }
+          - { label: "Company Mode Body", name: "mode_company_body", widget: "text" }
+          - { label: "Compliance Headline", name: "compliance_headline", widget: "string" }
+          - { label: "Compliance Body", name: "compliance_body", widget: "text" }
+          - { label: "Final CTA Headline", name: "cta_headline", widget: "string" }
+          - { label: "Final CTA Subtext", name: "cta_sub", widget: "string" }
+          - { label: "App Store Link", name: "appstore_url", widget: "string", required: false }
+          - { label: "Google Play Link", name: "playstore_url", widget: "string", required: false }
+          - { label: "Web App Link", name: "webapp_url", widget: "string", required: false }
