@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaena Business OS | Toledah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Sora:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal-deep:     #0E2931;
+            --teal-mid:      #12484C;
+            --teal-bright:   #2B7574;
+            --teal-glow:     rgba(43,117,116,0.15);
+            --gold:          #C9922A;
+            --gold-soft:     rgba(201,146,42,0.12);
+            --gold-border:   rgba(201,146,42,0.25);
+            --graphite:      #0f0f0f;
+            --g800:          #1a1a1a;
+            --g700:          #242424;
+            --g400:          #6b6b6b;
+            --g200:          #b8b8b8;
+            --air:           #EEEEED;
+            --surface:       #FFFFFF;
+            --bg:            #F4F4F2;
+            --border-light:  rgba(18,72,76,0.1);
+            --border-mid:    rgba(18,72,76,0.18);
+            --text-primary:  #0E2931;
+            --text-secondary:#3a6267;
+            --text-muted:    #7a9ea0;
+            --border-dark:   rgba(238,238,237,0.08);
+            --border-teal:   rgba(43,117,116,0.22);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--graphite);
+            color: var(--air);
+            overflow-x: hidden;
+        }
+
+        .label { font-family: 'Sora', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+        .teal-rule { width: 36px; height: 2px; background: var(--teal-bright); border-radius: 1px; margin-bottom: 16px; }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(14,41,49,0.92);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border-teal);
+        }
+
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            padding: 0 20px; height: 56px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+
+        .nav-logo-mark {
+            width: 28px; height: 28px; background: var(--teal-deep);
+            border: 1px solid var(--border-teal); border-radius: 6px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+
+        .nav-product { display: flex; flex-direction: column; line-height: 1; }
+        .nav-parent { font-family: 'Sora', sans-serif; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 1px; }
+        .nav-name { font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--air); }
+
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a { font-size: 0.8rem; color: rgba(238,238,237,0.5); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--air); }
+
+        .nav-actions { display: flex; gap: 8px; align-items: center; }
+
+        .btn-sm {
+            font-family: 'Sora', sans-serif; font-size: 0.74rem; font-weight: 600;
+            padding: 7px 14px; border-radius: 6px; text-decoration: none;
+            border: none; cursor: pointer; transition: all 0.2s;
+        }
+
+        .btn-ghost-nav { background: transparent; color: rgba(238,238,237,0.5); border: 1px solid var(--border-teal); }
+        .btn-ghost-nav:hover { color: var(--air); border-color: var(--teal-bright); }
+        .btn-teal { background: var(--teal-bright); color: white; }
+        .btn-teal:hover { background: var(--teal-mid); }
+
+        @media (max-width: 767px) {
+            .nav-links { display: none; }
+            .btn-ghost-nav { display: none; }
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--teal-deep);
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; padding-top: 56px;
+            position: relative; overflow: hidden;
+        }
+
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(43,117,116,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(43,117,116,0.06) 1px, transparent 1px);
+            background-size: 60px 60px; pointer-events: none;
+        }
+
+        .hero-glow { position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(ellipse, rgba(43,117,116,0.2) 0%, transparent 65%); pointer-events: none; }
+        .hero-glow-bottom { position: absolute; bottom: -80px; left: -80px; width: 360px; height: 360px; background: radial-gradient(ellipse, rgba(201,146,42,0.06) 0%, transparent 65%); pointer-events: none; }
+
+        .hero-inner {
+            max-width: 1200px; margin: 0 auto;
+            padding: 60px 20px 40px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center;
+            position: relative; z-index: 2;
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: 1fr; gap: 44px; padding: 48px 20px 36px; }
+        }
+
+        .hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+        .eyebrow-line { width: 22px; height: 1px; background: var(--teal-bright); }
+
+        .hero-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.2rem, 8vw, 5.8rem);
+            font-weight: 500; letter-spacing: -0.02em; line-height: 1.0; color: var(--air);
+        }
+        .hero-headline .gold { color: var(--gold); }
+        .hero-headline .dim { color: rgba(238,238,237,0.2); font-style: italic; font-weight: 400; }
+
+        .hero-sub { font-size: 0.95rem; font-weight: 300; line-height: 1.75; color: rgba(238,238,237,0.5); margin-top: 18px; margin-bottom: 30px; }
+
+        .dl-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+
+        .btn-dl {
+            display: inline-flex; align-items: center; gap: 11px;
+            padding: 10px 18px; border-radius: 10px;
+            text-decoration: none; transition: all 0.22s; border: 1px solid;
+        }
+        .btn-dl.light { background: var(--air); color: var(--teal-deep); border-color: var(--air); }
+        .btn-dl.light:hover { background: white; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .btn-dl.outline { background: transparent; color: var(--air); border-color: var(--border-teal); }
+        .btn-dl.outline:hover { border-color: var(--teal-bright); background: var(--teal-glow); }
+
+        .btn-dl-texts { display: flex; flex-direction: column; }
+        .btn-dl-sub { font-size: 0.57rem; opacity: 0.6; letter-spacing: 0.04em; line-height: 1; }
+        .btn-dl-label { font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 600; line-height: 1.3; }
+
+        .web-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(238,238,237,0.3); text-decoration: none; transition: color 0.2s; }
+        .web-cta:hover { color: rgba(238,238,237,0.6); }
+        .web-cta span { border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+
+        .cap-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-teal); }
+        .cap-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(43,117,116,0.1); border: 1px solid var(--border-teal); border-radius: 4px; padding: 5px 10px; font-size: 0.7rem; color: rgba(238,238,237,0.6); }
+        .cap-pill .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-bright); flex-shrink: 0; }
+
+        /* ── PHONE ── */
+        .phone-scene { display: flex; justify-content: center; align-items: center; position: relative; }
+        .phone-scene::before { content: ''; position: absolute; width: 260px; height: 460px; background: radial-gradient(ellipse, rgba(43,117,116,0.25) 0%, transparent 70%); filter: blur(28px); pointer-events: none; }
+
+        .phone-frame {
+            width: 238px; background: #0d0d0d;
+            border-radius: 42px; border: 1.5px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.5), 0 40px 100px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
+            overflow: hidden; position: relative; z-index: 2;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+        @media (max-width: 900px) {
+            .phone-frame { width: 210px; }
+            .phone-scene::before { display: none; }
+        }
+
+        .phone-notch { width: 88px; height: 26px; background: #0a0a0a; border-radius: 0 0 20px 20px; margin: 0 auto; }
+        .phone-screen { padding: 14px 13px 22px; background: #0f1a1b; min-height: 440px; }
+        .ps-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .ps-logo-text { font-family: 'Sora', sans-serif; font-size: 0.57rem; font-weight: 600; color: rgba(238,238,237,0.7); letter-spacing: 0.06em; }
+        .ps-live { display: flex; align-items: center; gap: 4px; background: rgba(43,117,116,0.15); border: 1px solid rgba(43,117,116,0.3); border-radius: 20px; padding: 2px 7px; }
+        .ps-live-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--teal-bright); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        .ps-live-text { font-size: 0.4rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-bright); }
+        .ps-profit-label { font-size: 0.37rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(201,146,42,0.7); margin-bottom: 3px; }
+        .ps-profit-value { font-family: 'DM Mono', monospace; font-size: 1.55rem; font-weight: 500; color: var(--gold); line-height: 1; margin-bottom: 12px; }
+        .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 7px; }
+        .ps-card { background: rgba(43,117,116,0.08); border: 1px solid rgba(43,117,116,0.15); border-radius: 8px; padding: 8px 9px; }
+        .ps-card-label { font-size: 0.37rem; color: rgba(238,238,237,0.3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+        .ps-card-value { font-family: 'DM Mono', monospace; font-size: 0.76rem; font-weight: 500; color: var(--air); }
+        .ps-card-value.teal { color: var(--teal-bright); }
+        .ps-card-value.amber { color: #d4a843; }
+        .ps-sec-label { font-size: 0.36rem; color: rgba(238,238,237,0.2); text-transform: uppercase; letter-spacing: 0.12em; margin: 9px 0 4px; }
+        .ps-bars { display: flex; align-items: flex-end; gap: 3px; height: 34px; margin-bottom: 9px; }
+        .ps-bar { flex: 1; background: rgba(43,117,116,0.12); border-radius: 2px 2px 0 0; position: relative; overflow: hidden; }
+        .ps-bar::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; background: var(--teal-bright); border-radius: 2px 2px 0 0; animation: barUp 1.2s ease both; }
+        .ps-bar.gold::after { background: var(--gold); }
+        @keyframes barUp { from { height: 0; } }
+        .pb1::after{height:40%;animation-delay:.1s} .pb2::after{height:58%;animation-delay:.15s} .pb3::after{height:35%;animation-delay:.2s} .pb4::after{height:72%;animation-delay:.25s} .pb5::after{height:50%;animation-delay:.3s} .pb6::after{height:65%;animation-delay:.35s} .pb7::after{height:88%;animation-delay:.4s}
+        .ps-sale { display: flex; align-items: center; gap: 6px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .ps-sale:last-child { border-bottom: none; }
+        .ps-sale-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-bright); flex-shrink: 0; }
+        .ps-sale-name { font-size: 0.43rem; color: rgba(238,238,237,0.5); flex: 1; }
+        .ps-sale-amount { font-family: 'DM Mono', monospace; font-size: 0.45rem; font-weight: 500; color: var(--gold); }
+        .ps-new-sale { margin-top: 10px; background: var(--teal-bright); border-radius: 6px; padding: 7px; text-align: center; font-family: 'Sora', sans-serif; font-size: 0.48rem; font-weight: 600; color: white; letter-spacing: 0.05em; }
+
+        /* ── LIGHT SECTIONS ── */
+        .light-section { background: var(--bg); color: var(--text-primary); }
+        .white-section { background: var(--surface); color: var(--text-primary); }
+
+        /* ── STATEMENT ── */
+        .statement-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+
+        .statement-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            font-weight: 400; line-height: 1.45; letter-spacing: -0.01em;
+            color: var(--text-primary);
+            border-left: 3px solid var(--teal-bright);
+            padding-left: 24px;
+        }
+        .statement-text em { font-style: italic; color: var(--teal-bright); }
+
+        /* ── FEATURES ── */
+        .features-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+
+        .sec-header { margin-bottom: 40px; }
+        .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 500; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.1; }
+        .sec-sub { font-size: 0.88rem; color: var(--text-muted); font-weight: 300; margin-top: 8px; }
+
+        .features-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: var(--border-light);
+            border: 1px solid var(--border-light);
+            border-radius: 14px; overflow: hidden;
+        }
+
+        @media (max-width: 900px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 540px) { .features-grid { grid-template-columns: 1fr; } }
+
+        .feat-cell { background: var(--surface); padding: 28px 24px; transition: background 0.2s; position: relative; }
+        .feat-cell:hover { background: #fafafa; }
+        .feat-cell::after { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 2px; background: var(--teal-bright); transition: width 0.3s ease; }
+        .feat-cell:hover::after { width: 100%; }
+        .feat-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--text-muted); margin-bottom: 16px; }
+        .feat-title { font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.3; }
+        .feat-body { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+
+        /* ── TRUST SCORE ── */
+        .trust-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+
+        .trust-layout {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 56px; align-items: start; margin-top: 44px;
+        }
+
+        @media (max-width: 900px) {
+            .trust-layout { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .trust-copy h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 500; letter-spacing: -0.01em; color: var(--text-primary); line-height: 1.2; margin-bottom: 14px; }
+        .trust-copy p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; margin-bottom: 16px; }
+
+        .trust-points { display: flex; flex-direction: column; gap: 11px; margin-top: 20px; }
+        .trust-point { display: flex; align-items: flex-start; gap: 11px; }
+        .trust-point-icon { width: 20px; height: 20px; border-radius: 4px; background: var(--teal-glow); border: 1px solid rgba(43,117,116,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+        .trust-point-text { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+
+        .trust-card { background: var(--surface); border: 1px solid var(--border-light); border-radius: 18px; overflow: hidden; box-shadow: 0 8px 40px rgba(14,41,49,0.07); }
+        .trust-card-header { background: var(--teal-deep); padding: 22px 24px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+        .trust-card-label { font-family: 'Sora', sans-serif; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 4px; }
+        .trust-card-name { font-size: 0.95rem; font-weight: 500; color: var(--air); }
+        .trust-card-sub { font-size: 0.68rem; color: rgba(238,238,237,0.3); margin-top: 2px; }
+        .trust-score-display { text-align: right; flex-shrink: 0; }
+        .trust-score-num { font-family: 'DM Mono', monospace; font-size: 2.4rem; font-weight: 500; color: var(--gold); line-height: 1; }
+        .trust-score-denom { font-family: 'DM Mono', monospace; font-size: 0.95rem; color: rgba(238,238,237,0.2); }
+        .trust-score-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #5fbe8a; margin-top: 3px; }
+
+        .trust-card-body { padding: 22px 24px; }
+        .trust-vital-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+        .vital-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border-light); }
+        .vital-row:last-child { border-bottom: none; }
+        .vital-key { font-size: 0.78rem; color: var(--text-secondary); }
+        .vital-val { font-family: 'DM Mono', monospace; font-size: 0.8rem; font-weight: 500; color: var(--text-primary); }
+        .vital-val.good { color: #2d9e6b; }
+
+        .trust-bars { background: var(--bg); border-radius: 10px; padding: 14px; margin-top: 14px; }
+        .trust-bar-row { margin-bottom: 11px; }
+        .trust-bar-row:last-child { margin-bottom: 0; }
+        .trust-bar-top { display: flex; justify-content: space-between; font-size: 0.7rem; margin-bottom: 5px; }
+        .trust-bar-key { color: var(--text-secondary); }
+        .trust-bar-val { color: var(--text-primary); font-weight: 600; }
+        .trust-bar-track { height: 4px; background: var(--border-light); border-radius: 2px; overflow: hidden; }
+        .trust-bar-fill { height: 100%; border-radius: 2px; background: var(--teal-bright); animation: fillBar 1.4s ease both; }
+        @keyframes fillBar { from { width: 0 !important; } }
+        .trust-footnote { font-size: 0.66rem; color: var(--text-muted); font-style: italic; line-height: 1.5; margin-top: 12px; }
+
+        /* ── MODES ── */
+        .modes-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+
+        .modes-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 2px; margin-top: 44px;
+            background: var(--border-light);
+            border-radius: 14px; overflow: hidden;
+            border: 1px solid var(--border-light);
+        }
+
+        @media (max-width: 700px) { .modes-grid { grid-template-columns: 1fr; } }
+
+        .mode-card { background: var(--surface); padding: 40px 32px; position: relative; transition: background 0.2s; }
+        .mode-card:hover { background: #fafafa; }
+        .mode-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--teal-bright); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+        .mode-card:hover::before { transform: scaleX(1); }
+
+        @media (max-width: 480px) { .mode-card { padding: 28px 22px; } }
+
+        .mode-eyebrow { font-family: 'Sora', sans-serif; font-size: 0.58rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 12px; }
+        .mode-title { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 500; color: var(--text-primary); line-height: 1.15; margin-bottom: 12px; }
+        .mode-body { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; margin-bottom: 20px; }
+        .mode-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+        .mode-tag { font-size: 0.7rem; color: var(--text-secondary); background: var(--bg); border: 1px solid var(--border-light); padding: 4px 10px; border-radius: 4px; }
+
+        /* ── COMPLIANCE ── */
+        .compliance-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+
+        .compliance-layout {
+            display: grid; grid-template-columns: 1fr 1.2fr;
+            gap: 56px; align-items: center; margin-top: 44px;
+        }
+
+        @media (max-width: 900px) {
+            .compliance-layout { grid-template-columns: 1fr; gap: 36px; }
+        }
+
+        .compliance-copy h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 500; letter-spacing: -0.01em; color: var(--text-primary); line-height: 1.2; margin-bottom: 12px; }
+        .compliance-copy p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
+
+        .tax-cards { display: flex; flex-direction: column; gap: 9px; }
+        .tax-card { background: var(--surface); border: 1px solid var(--border-light); border-radius: 10px; padding: 16px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; transition: border-color 0.2s; }
+        .tax-card:hover { border-color: var(--border-mid); }
+        .tax-card-left { display: flex; align-items: center; gap: 12px; min-width: 0; }
+        .tax-icon { width: 34px; height: 34px; border-radius: 7px; background: var(--teal-glow); border: 1px solid rgba(43,117,116,0.2); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 500; color: var(--teal-bright); flex-shrink: 0; }
+        .tax-name { font-size: 0.85rem; font-weight: 500; color: var(--text-primary); }
+        .tax-desc { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; font-weight: 300; }
+        .tax-status { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+        .tax-status.native { background: rgba(45,158,107,0.1); color: #2d9e6b; border: 1px solid rgba(45,158,107,0.2); }
+
+        /* ── PLATFORM ── */
+        .platform-dark { background: var(--teal-deep); border-top: 1px solid var(--border-teal); border-bottom: 1px solid var(--border-teal); }
+        .platform-wrap { max-width: 1200px; margin: 0 auto; padding: 72px 20px; }
+
+        .platform-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; margin-top: 44px;
+            background: rgba(43,117,116,0.12);
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border-teal);
+        }
+
+        @media (max-width: 700px) { .platform-grid { grid-template-columns: 1fr; } }
+
+        .platform-cell { background: var(--teal-deep); padding: 32px 24px; transition: background 0.2s; }
+        .platform-cell:hover { background: var(--teal-mid); }
+        .platform-icon { width: 40px; height: 40px; background: rgba(43,117,116,0.15); border: 1px solid var(--border-teal); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+        .platform-title { font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--air); margin-bottom: 8px; }
+        .platform-body { font-size: 0.82rem; color: rgba(238,238,237,0.4); line-height: 1.7; font-weight: 300; }
+
+        /* ── FINAL CTA ── */
+        .final-cta { max-width: 1200px; margin: 0 auto; padding: 100px 20px; text-align: center; position: relative; }
+        .final-cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 500px; height: 260px; background: radial-gradient(ellipse, rgba(14,41,49,0.06) 0%, transparent 70%); pointer-events: none; }
+        .final-cta-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 500; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.05; margin-bottom: 16px; position: relative; z-index: 1; }
+        .final-cta-headline em { font-style: italic; color: var(--teal-bright); }
+        .final-cta-sub { font-size: 0.95rem; color: var(--text-muted); font-weight: 300; margin-bottom: 36px; position: relative; z-index: 1; }
+        .final-cta-btns { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; z-index: 1; }
+
+        .btn-dl-light { display: inline-flex; align-items: center; gap: 11px; padding: 11px 20px; border-radius: 10px; text-decoration: none; transition: all 0.22s; border: 1px solid; }
+        .btn-dl-light.filled { background: var(--teal-deep); color: var(--air); border-color: var(--teal-deep); }
+        .btn-dl-light.filled:hover { background: var(--teal-mid); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(14,41,49,0.2); }
+        .btn-dl-light.stroked { background: transparent; color: var(--text-primary); border-color: var(--border-mid); }
+        .btn-dl-light.stroked:hover { border-color: var(--teal-bright); }
+
+        /* ── FOOTER ── */
+        footer { background: var(--teal-deep); border-top: 1px solid var(--border-teal); padding: 44px 20px 28px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 24px; border-bottom: 1px solid var(--border-teal); margin-bottom: 20px; flex-wrap: wrap; gap: 16px; }
+        .footer-back { font-size: 0.8rem; color: rgba(238,238,237,0.3); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+        .footer-back:hover { color: var(--air); }
+        .footer-links-row { display: flex; gap: 20px; flex-wrap: wrap; }
+        .footer-links-row a { font-size: 0.78rem; color: rgba(238,238,237,0.28); text-decoration: none; transition: color 0.2s; }
+        .footer-links-row a:hover { color: var(--air); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .footer-copy { font-size: 0.7rem; color: rgba(238,238,237,0.18); }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">
+            <div class="nav-logo-mark">
+<img src="images/logo white.png" 
+     alt="Logo" 
+     style="height: 1.5rem; width: auto; vertical-align: middle;">
+            </div>
+            <div class="nav-product">
+                <span class="nav-parent">Toledah</span>
+                <span class="nav-name">Zaena</span>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#trust">Trust Score</a>
+            <a href="#compliance">Compliance</a>
+            <a href="#platform">Platforms</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="#" class="btn-sm btn-ghost-nav">Web App</a>
+            <a href="#download" class="btn-sm btn-teal">Download</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-bottom"></div>
+    <div class="hero-inner">
+
+        <div>
+            <div class="hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <span class="label" style="color:var(--teal-bright);">Zaena Business OS · Now Available</span>
+            </div>
+
+            <h1 class="hero-headline">
+                Your entire<br>
+                business<span class="gold">.</span><br>
+                <span class="dim">Always in sync.</span>
+            </h1>
+
+            <p class="hero-sub">A business operating system built for independent operators and growing companies. Sales, inventory, staff, compliance, and profit — from your phone or the web.</p>
+
+            <div class="dl-group" id="download">
+                <a href="#" class="btn-dl light">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <div class="btn-dl-texts"><span class="btn-dl-sub">Download on the</span><span class="btn-dl-label">App Store</span></div>
+                </a>
+                <a href="#" class="btn-dl outline">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.96.07l.06-.04 11.35-6.55-2.46-2.46-9.91 8.98zm15.49-9.27L16.2 13l-2.47 2.47 2.5 2.5 2.44-1.41c.69-.4.69-1.47 0-1.87zM2.01 1.2C1.7 1.53 1.5 2.02 1.5 2.66v18.69c0 .64.2 1.13.52 1.46l.08.07 10.47-10.48v-.24L2.01 1.2zm13.8 8.57l-2.53-2.53L10.75 9.8l2.46 2.46 2.6-2.49z"/></svg>
+                    <div class="btn-dl-texts"><span class="btn-dl-sub">Get it on</span><span class="btn-dl-label">Google Play</span></div>
+                </a>
+            </div>
+
+            <a href="#" class="web-cta">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/></svg>
+                <span>Or open the web dashboard</span>
+            </a>
+
+            <div class="cap-pills">
+                <span class="cap-pill"><span class="dot"></span>iOS & Android</span>
+                <span class="cap-pill"><span class="dot"></span>Full Web Dashboard</span>
+                <span class="cap-pill"><span class="dot"></span>Offline-First</span>
+                <span class="cap-pill"><span class="dot"></span>PIT · CIT · VAT</span>
+                <span class="cap-pill"><span class="dot"></span>Sole Proprietor & Company</span>
+            </div>
+        </div>
+
+        <div class="phone-scene">
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <div class="ps-top">
+                        <span class="ps-logo-text">Zaena · Dashboard</span>
+                        <div class="ps-live"><div class="ps-live-dot"></div><span class="ps-live-text">Live</span></div>
+                    </div>
+                    <div class="ps-profit-label">Today's Net Profit</div>
+                    <div class="ps-profit-value">₦31,200</div>
+                    <div class="ps-grid">
+                        <div class="ps-card"><div class="ps-card-label">Sales</div><div class="ps-card-value teal">₦84,500</div></div>
+                        <div class="ps-card"><div class="ps-card-label">Items Sold</div><div class="ps-card-value">142</div></div>
+                    </div>
+                    <div class="ps-grid">
+                        <div class="ps-card"><div class="ps-card-label">Personal Pay</div><div class="ps-card-value teal">₦14,832</div></div>
+                        <div class="ps-card"><div class="ps-card-label">Low Stock</div><div class="ps-card-value amber">3 items</div></div>
+                    </div>
+                    <div class="ps-sec-label">Weekly Revenue</div>
+                    <div class="ps-bars">
+                        <div class="ps-bar pb1"></div><div class="ps-bar pb2"></div><div class="ps-bar pb3"></div>
+                        <div class="ps-bar pb4"></div><div class="ps-bar pb5"></div><div class="ps-bar pb6"></div>
+                        <div class="ps-bar pb7 gold"></div>
+                    </div>
+                    <div class="ps-sec-label">Recent Sales</div>
+                    <div class="ps-sale"><div class="ps-sale-dot"></div><span class="ps-sale-name">Engine Oil 5L × 4</span><span class="ps-sale-amount">+₦12,000</span></div>
+                    <div class="ps-sale"><div class="ps-sale-dot"></div><span class="ps-sale-name">Brake Pads × 2</span><span class="ps-sale-amount">+₦8,400</span></div>
+                    <div class="ps-sale"><div class="ps-sale-dot"></div><span class="ps-sale-name">Filter Kit × 1</span><span class="ps-sale-amount">+₦3,200</span></div>
+                    <div class="ps-new-sale">+ New Sale</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STATEMENT -->
+<div class="light-section">
+    <div class="statement-wrap reveal">
+        <p class="statement-text">Whether you run a sole proprietorship from your phone, or manage a registered company across multiple locations — <em>Zaena gives you the same financial clarity</em> that used to require an accountant, a laptop, and three different software subscriptions.</p>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="features-wrap" id="features">
+        <div class="sec-header reveal">
+            <div class="teal-rule"></div>
+            <h2 class="sec-title">Full Power. Zero Laptop.</h2>
+            <p class="sec-sub">Built for the market, the depot, and the workshop floor.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feat-cell reveal"><div class="feat-num">01</div><div class="feat-title">Tap. Tap. Done.</div><div class="feat-body">Complete a sale in seconds. No dropdowns, no multi-step wizards. The fastest POS you've used on a phone.</div></div>
+            <div class="feat-cell reveal" style="transition-delay:.07s"><div class="feat-num">02</div><div class="feat-title">Separate your money.</div><div class="feat-body">The profit allocation engine separates business revenue from personal take-home. Know exactly what is yours to spend.</div></div>
+            <div class="feat-cell reveal" style="transition-delay:.14s"><div class="feat-num">03</div><div class="feat-title">Monitor staff from anywhere.</div><div class="feat-body">Role-based access gives each staff member exactly the permissions they need — cashier, manager, director — and nothing more.</div></div>
+            <div class="feat-cell reveal"><div class="feat-num">04</div><div class="feat-title">Receipts to WhatsApp.</div><div class="feat-body">Every sale generates a professional receipt sent directly to your customer's WhatsApp. One tap from the sales screen.</div></div>
+            <div class="feat-cell reveal" style="transition-delay:.07s"><div class="feat-num">05</div><div class="feat-title">Works when MTN doesn't.</div><div class="feat-body">Offline-first architecture keeps Zaena running during network failures. Data syncs silently when you're back online.</div></div>
+            <div class="feat-cell reveal" style="transition-delay:.14s"><div class="feat-num">06</div><div class="feat-title">Inventory that thinks ahead.</div><div class="feat-body">Track stock levels across products. Get low-stock alerts before you run out. Every sale automatically updates inventory.</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- TRUST SCORE -->
+<div class="white-section" id="trust">
+    <div class="trust-wrap">
+        <div class="reveal">
+            <div class="teal-rule"></div>
+            <span class="label" style="color:var(--teal-bright);">Audit Trail & Trust Score</span>
+        </div>
+        <div class="trust-layout">
+            <div class="trust-copy reveal">
+                <h3>Stop being invisible<br>to capital.</h3>
+                <p>Every transaction in Zaena is recorded in real time and sealed in a non-editable audit trail. Over time, this builds a verified financial reputation — a Trust Score — that banks, wholesalers, and institutional partners can read.</p>
+                <p>You don't need a formal credit history. You need a consistent record. Zaena builds it for you automatically, as a byproduct of running your business.</p>
+                <div class="trust-points">
+                    <div class="trust-point"><div class="trust-point-icon"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="var(--teal-bright)" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg></div><span class="trust-point-text">Real-time, tamper-proof transaction recording via WhatsApp audit trail</span></div>
+                    <div class="trust-point"><div class="trust-point-icon"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="var(--teal-bright)" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg></div><span class="trust-point-text">Score built from turnover, profit margin stability, and recording consistency</span></div>
+                    <div class="trust-point"><div class="trust-point-icon"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="var(--teal-bright)" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg></div><span class="trust-point-text">Shareable Verified Merchant Report for loan applications and supplier negotiations</span></div>
+                    <div class="trust-point"><div class="trust-point-icon"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="var(--teal-bright)" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg></div><span class="trust-point-text">Live feature — not coming soon</span></div>
+                </div>
+            </div>
+
+            <div class="trust-card reveal" style="transition-delay:.1s">
+                <div class="trust-card-header">
+                    <div>
+                        <div class="trust-card-label">Verified Merchant Report</div>
+                        <div class="trust-card-name">Oluaka Spare Parts & Co.</div>
+                        <div class="trust-card-sub">Zaena ID: ZA-9928-LA · Ikeja, Lagos</div>
+                    </div>
+                    <div class="trust-score-display">
+                        <div class="trust-score-num">842<span class="trust-score-denom">/1000</span></div>
+                        <div class="trust-score-label">Elite Merchant</div>
+                    </div>
+                </div>
+                <div class="trust-card-body">
+                    <div class="trust-vital-label">Financial Vital Signs · 90 Days</div>
+                    <div class="vital-row"><span class="vital-key">Verified Turnover</span><span class="vital-val">₦4,250,000</span></div>
+                    <div class="vital-row"><span class="vital-key">Profit Margin Stability</span><span class="vital-val">18.5%</span></div>
+                    <div class="vital-row"><span class="vital-key">Debt Recovery Index</span><span class="vital-val good">88%</span></div>
+                    <div class="trust-bars">
+                        <div class="trust-bar-row"><div class="trust-bar-top"><span class="trust-bar-key">Live Recording Rate</span><span class="trust-bar-val">92%</span></div><div class="trust-bar-track"><div class="trust-bar-fill" style="width:92%"></div></div></div>
+                        <div class="trust-bar-row"><div class="trust-bar-top"><span class="trust-bar-key">Inventory Accuracy</span><span class="trust-bar-val">96%</span></div><div class="trust-bar-track"><div class="trust-bar-fill" style="width:96%"></div></div></div>
+                        <div class="trust-bar-row"><div class="trust-bar-top"><span class="trust-bar-key">Compliance Consistency</span><span class="trust-bar-val">89%</span></div><div class="trust-bar-track"><div class="trust-bar-fill" style="width:89%"></div></div></div>
+                    </div>
+                    <p class="trust-footnote">Generated from real-time, non-editable transaction data. Verified via WhatsApp digital audit trail.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODES -->
+<div class="light-section">
+    <div class="modes-wrap">
+        <div class="reveal">
+            <div class="teal-rule"></div>
+            <h2 class="sec-title">One system.<br>Every stage.</h2>
+        </div>
+        <div class="modes-grid">
+            <div class="mode-card reveal">
+                <div class="mode-eyebrow">Sole Proprietor Mode</div>
+                <div class="mode-title">Start where<br>you are.</div>
+                <div class="mode-body">You run a shop, a depot, a trade. No CAC number, no accountant, no problem. Zaena gives you the financial clarity and speed of a system built for serious business — from your phone.</div>
+                <div class="mode-tags">
+                    <span class="mode-tag">Fast POS</span><span class="mode-tag">Personal vs business money</span>
+                    <span class="mode-tag">WhatsApp receipts</span><span class="mode-tag">Offline mode</span>
+                    <span class="mode-tag">PIT & VAT</span><span class="mode-tag">Trust Score</span>
+                </div>
+            </div>
+            <div class="mode-card reveal" style="transition-delay:.1s">
+                <div class="mode-eyebrow">Company Mode</div>
+                <div class="mode-title">Scale with<br>structure.</div>
+                <div class="mode-body">You have a CAC registration, directors, and a team. Zaena's company mode handles CIT, director-level access, multi-user permissions, and full audit trails — from phone or full web dashboard.</div>
+                <div class="mode-tags">
+                    <span class="mode-tag">Company registration</span><span class="mode-tag">CIT · PIT · VAT</span>
+                    <span class="mode-tag">Director roles</span><span class="mode-tag">Multi-user access</span>
+                    <span class="mode-tag">Web dashboard</span><span class="mode-tag">Audit trail</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPLIANCE -->
+    <div class="compliance-wrap" id="compliance">
+        <div class="compliance-layout">
+            <div class="compliance-copy reveal">
+                <div class="teal-rule"></div>
+                <h3>Tax-man proof<br>your business.</h3>
+                <p>PIT, CIT, and VAT are calculated natively on every transaction. You don't set anything up. You don't learn tax law. You just record sales, and Zaena keeps you audit-ready as a byproduct.</p>
+                <p style="margin-top:10px;">One-click reports for FIRS filings. Always up to date. Never a surprise.</p>
+            </div>
+            <div class="tax-cards reveal" style="transition-delay:.1s">
+                <div class="tax-card">
+                    <div class="tax-card-left"><div class="tax-icon">PIT</div><div><div class="tax-name">Personal Income Tax</div><div class="tax-desc">Calculated on sole proprietor withdrawals</div></div></div>
+                    <span class="tax-status native">Native</span>
+                </div>
+                <div class="tax-card">
+                    <div class="tax-card-left"><div class="tax-icon">CIT</div><div><div class="tax-name">Company Income Tax</div><div class="tax-desc">Applied automatically in company mode</div></div></div>
+                    <span class="tax-status native">Native</span>
+                </div>
+                <div class="tax-card">
+                    <div class="tax-card-left"><div class="tax-icon">VAT</div><div><div class="tax-name">Value Added Tax</div><div class="tax-desc">7.5% calculated on every eligible transaction</div></div></div>
+                    <span class="tax-status native">Native</span>
+                </div>
+                <div class="tax-card" style="border-color:rgba(43,117,116,0.2);background:rgba(14,41,49,0.03);">
+                    <div class="tax-card-left"><div class="tax-icon" style="background:var(--gold-soft);border-color:var(--gold-border);color:var(--gold);">RPT</div><div><div class="tax-name">One-Click Filing Reports</div><div class="tax-desc">FIRS-ready exports from your transaction history</div></div></div>
+                    <span class="tax-status native">Included</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PLATFORM -->
+<div class="platform-dark" id="platform">
+    <div class="platform-wrap">
+        <div class="reveal">
+            <div class="teal-rule"></div>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:500;letter-spacing:-0.02em;color:var(--air);line-height:1.1;">Wherever you work.</h2>
+            <p style="font-size:0.88rem;color:rgba(238,238,237,0.35);font-weight:300;margin-top:8px;">One account. Every device. Always in sync.</p>
+        </div>
+        <div class="platform-grid">
+            <div class="platform-cell reveal">
+                <div class="platform-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+                <div class="platform-title">Mobile App</div>
+                <div class="platform-body">iOS and Android. Built mobile-first — every feature works from your phone. The full system, not a stripped-down companion app.</div>
+            </div>
+            <div class="platform-cell reveal" style="transition-delay:.07s">
+                <div class="platform-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.5"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/></svg></div>
+                <div class="platform-title">Web Dashboard</div>
+                <div class="platform-body">Full-featured browser dashboard for when you're at a desk. Same data, deeper views. Manage everything from a larger screen.</div>
+            </div>
+            <div class="platform-cell reveal" style="transition-delay:.14s">
+                <div class="platform-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.5"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg></div>
+                <div class="platform-title">Offline First</div>
+                <div class="platform-body">Zaena runs without internet. Sales and records are captured locally during outages. Everything syncs silently when connectivity returns.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="light-section">
+    <div class="final-cta reveal">
+        <h2 class="final-cta-headline">Your business.<br><em>Fully equipped.</em></h2>
+        <p class="final-cta-sub">Download Zaena and run your entire operation from day one. No setup fee. No learning curve.</p>
+        <div class="final-cta-btns">
+            <a href="#" class="btn-dl-light filled">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                <div class="btn-dl-texts" style="color:var(--air);"><span class="btn-dl-sub">Download on the</span><span class="btn-dl-label">App Store</span></div>
+            </a>
+            <a href="#" class="btn-dl-light stroked">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color:var(--teal-deep)"><path d="M3.18 23.76c.3.17.65.19.96.07l.06-.04 11.35-6.55-2.46-2.46-9.91 8.98zm15.49-9.27L16.2 13l-2.47 2.47 2.5 2.5 2.44-1.41c.69-.4.69-1.47 0-1.87zM2.01 1.2C1.7 1.53 1.5 2.02 1.5 2.66v18.69c0 .64.2 1.13.52 1.46l.08.07 10.47-10.48v-.24L2.01 1.2zm13.8 8.57l-2.53-2.53L10.75 9.8l2.46 2.46 2.6-2.49z"/></svg>
+                <div class="btn-dl-texts" style="color:var(--text-primary);"><span class="btn-dl-sub">Get it on</span><span class="btn-dl-label">Google Play</span></div>
+            </a>
+            <a href="#" class="btn-dl-light stroked">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/></svg>
+                <div class="btn-dl-texts" style="color:var(--text-primary);"><span class="btn-dl-sub">Access via browser</span><span class="btn-dl-label">Web App</span></div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <a href="/" class="footer-back">
+                <img src="images/logo white.png" 
+     alt="Logo" 
+     style="height: 1.5rem; width: auto; vertical-align: middle;">
+                Back to Toledah
+            </a>
+            <div class="footer-links-row">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Support</a>
+                <a href="#">Global Compliance</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2026 Toledah Technologies Inc. Zaena Business OS.</p>
+            <p class="footer-copy">The Infrastructure of Growth.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
