@@ -1,1 +1,3 @@
+/admin/auth    https://toledah-cms-oauth.evansjohn152-1ea.workers.dev/auth    302
+/admin/callback    https://toledah-cms-oauth.evansjohn152-1ea.workers.dev/callback    302
 /verified/*    /verified/index.html    200
