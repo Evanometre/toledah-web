@@ -399,6 +399,48 @@
         .footer-links-row a:hover { color: var(--air); }
         .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
         .footer-copy { font-size: 0.7rem; color: rgba(238,238,237,0.18); }
+        /* ── WAITLIST ── */
+        .waitlist-form-wrap { margin-top: 4px; }
+        .waitlist-label { font-size: 0.78rem; color: rgba(238,238,237,0.35); margin-bottom: 12px; font-weight: 300; }
+        .waitlist-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .waitlist-input {
+            flex: 1; min-width: 200px;
+            background: rgba(43,117,116,0.12); border: 1px solid var(--border-teal);
+            border-radius: 8px; padding: 11px 16px;
+            font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+            color: var(--air); outline: none; transition: border-color 0.2s, background 0.2s;
+        }
+        .waitlist-input::placeholder { color: rgba(238,238,237,0.22); }
+        .waitlist-input:focus { border-color: var(--teal-bright); background: rgba(43,117,116,0.18); }
+        .waitlist-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--teal-bright); color: white;
+            border: none; border-radius: 8px; padding: 11px 20px;
+            font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 600;
+            cursor: pointer; transition: background 0.2s, transform 0.15s; white-space: nowrap;
+        }
+        .waitlist-btn:hover { background: var(--teal-mid); transform: translateY(-1px); }
+        .waitlist-btn:active { transform: translateY(0); }
+        .waitlist-success {
+            display: none; align-items: center; gap: 10px;
+            background: rgba(43,117,116,0.12); border: 1px solid var(--border-teal);
+            border-radius: 8px; padding: 12px 16px;
+            font-size: 0.84rem; color: rgba(238,238,237,0.7);
+        }
+        .waitlist-success.show { display: flex; }
+
+        /* light-section variants */
+        .waitlist-light { margin-top: 0; }
+        .waitlist-input-light {
+            background: white; border-color: var(--border-mid); color: var(--text-primary);
+        }
+        .waitlist-input-light::placeholder { color: var(--text-muted); }
+        .waitlist-input-light:focus { border-color: var(--teal-bright); background: #fafafa; }
+        .waitlist-btn-dark { background: var(--teal-deep); }
+        .waitlist-btn-dark:hover { background: var(--teal-mid); }
+        .waitlist-success-light {
+            background: rgba(43,117,116,0.07); border-color: rgba(43,117,116,0.2); color: var(--text-secondary);
+        }
     </style>
 </head>
 <body>
@@ -426,8 +468,7 @@
         </div>
 
         <div class="nav-actions">
-            <a href="#" class="btn-sm btn-ghost-nav">Web App</a>
-            <a href="#download" class="btn-sm btn-teal">Download</a>
+            <a href="#waitlist" class="btn-sm btn-teal">Join the Waitlist</a>
         </div>
     </div>
 </nav>
@@ -441,7 +482,7 @@
         <div>
             <div class="hero-eyebrow">
                 <div class="eyebrow-line"></div>
-                <span class="label" style="color:var(--teal-bright);">Zaena Business OS · Now Available</span>
+                <span class="label" style="color:var(--teal-bright);">Zaena Business OS · Coming Soon</span>
             </div>
 
             <h1 class="hero-headline">
@@ -452,21 +493,20 @@
 
             <p class="hero-sub">A business operating system built for independent operators and growing companies. Sales, inventory, staff, compliance, and profit — from your phone or the web.</p>
 
-            <div class="dl-group" id="download">
-                <a href="#" class="btn-dl light">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                    <div class="btn-dl-texts"><span class="btn-dl-sub">Download on the</span><span class="btn-dl-label">App Store</span></div>
-                </a>
-                <a href="#" class="btn-dl outline">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.96.07l.06-.04 11.35-6.55-2.46-2.46-9.91 8.98zm15.49-9.27L16.2 13l-2.47 2.47 2.5 2.5 2.44-1.41c.69-.4.69-1.47 0-1.87zM2.01 1.2C1.7 1.53 1.5 2.02 1.5 2.66v18.69c0 .64.2 1.13.52 1.46l.08.07 10.47-10.48v-.24L2.01 1.2zm13.8 8.57l-2.53-2.53L10.75 9.8l2.46 2.46 2.6-2.49z"/></svg>
-                    <div class="btn-dl-texts"><span class="btn-dl-sub">Get it on</span><span class="btn-dl-label">Google Play</span></div>
-                </a>
+            <div class="waitlist-form-wrap" id="waitlist">
+                <p class="waitlist-label">Be first when we launch. No spam, just the launch notice.</p>
+                <div class="waitlist-row" id="hero-wl-row">
+                    <input type="email" class="waitlist-input" placeholder="your@email.com" id="hero-wl-input" autocomplete="email">
+                    <button class="waitlist-btn" onclick="submitWaitlist('hero-wl-row','hero-wl-input')">
+                        <span>Get Early Access</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+                <div class="waitlist-success" id="hero-wl-success">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                    <span>You're on the list. We'll reach out when Zaena launches.</span>
+                </div>
             </div>
-
-            <a href="#" class="web-cta">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/></svg>
-                <span>Or open the web dashboard</span>
-            </a>
 
             <div class="cap-pills">
                 <span class="cap-pill"><span class="dot"></span>iOS & Android</span>
@@ -678,21 +718,22 @@
 <!-- FINAL CTA -->
 <div class="light-section">
     <div class="final-cta reveal">
-        <h2 class="final-cta-headline">Your business.<br><em>Fully equipped.</em></h2>
-        <p class="final-cta-sub">Download Zaena and run your entire operation from day one. No setup fee. No learning curve.</p>
+        <h2 class="final-cta-headline">Be first<br><em>in line.</em></h2>
+        <p class="final-cta-sub">Zaena is launching soon. Join the waitlist and we'll reach out the moment it's ready — no spam, just the launch notice.</p>
         <div class="final-cta-btns">
-            <a href="#" class="btn-dl-light filled">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                <div class="btn-dl-texts" style="color:var(--air);"><span class="btn-dl-sub">Download on the</span><span class="btn-dl-label">App Store</span></div>
-            </a>
-            <a href="#" class="btn-dl-light stroked">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color:var(--teal-deep)"><path d="M3.18 23.76c.3.17.65.19.96.07l.06-.04 11.35-6.55-2.46-2.46-9.91 8.98zm15.49-9.27L16.2 13l-2.47 2.47 2.5 2.5 2.44-1.41c.69-.4.69-1.47 0-1.87zM2.01 1.2C1.7 1.53 1.5 2.02 1.5 2.66v18.69c0 .64.2 1.13.52 1.46l.08.07 10.47-10.48v-.24L2.01 1.2zm13.8 8.57l-2.53-2.53L10.75 9.8l2.46 2.46 2.6-2.49z"/></svg>
-                <div class="btn-dl-texts" style="color:var(--text-primary);"><span class="btn-dl-sub">Get it on</span><span class="btn-dl-label">Google Play</span></div>
-            </a>
-            <a href="#" class="btn-dl-light stroked">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-primary)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20"/></svg>
-                <div class="btn-dl-texts" style="color:var(--text-primary);"><span class="btn-dl-sub">Access via browser</span><span class="btn-dl-label">Web App</span></div>
-            </a>
+            <div class="waitlist-form-wrap waitlist-light" id="footer-waitlist">
+                <div class="waitlist-row" id="footer-wl-row">
+                    <input type="email" class="waitlist-input waitlist-input-light" placeholder="your@email.com" id="footer-wl-input" autocomplete="email">
+                    <button class="waitlist-btn waitlist-btn-dark" onclick="submitWaitlist('footer-wl-row','footer-wl-input')">
+                        <span>Get Early Access</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+                <div class="waitlist-success waitlist-success-light" id="footer-wl-success">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                    <span>You're on the list. We'll reach out when Zaena launches.</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -722,7 +763,21 @@
 </footer>
 
 <script>
-    const reveals = document.querySelectorAll('.reveal');
+    function submitWaitlist(rowId, inputId) {
+        const input = document.getElementById(inputId);
+        const row = document.getElementById(rowId);
+        const successId = rowId.replace('-row', '-success');
+        const success = document.getElementById(successId);
+        if (!input.value || !input.value.includes('@')) {
+            input.style.borderColor = '#e06060';
+            input.focus();
+            setTimeout(() => input.style.borderColor = '', 1200);
+            return;
+        }
+        row.style.display = 'none';
+        success.classList.add('show');
+    }
+
     const io = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.08 });
