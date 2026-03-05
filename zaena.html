@@ -279,6 +279,22 @@
         }
         .wl-success-b.show { display: flex; }
 
+        /* MOBILE FIXES */
+        @media (max-width: 520px) {
+            nav { padding: 0 16px; }
+            .nav-badge { font-size: 0.52rem; padding: 3px 8px; letter-spacing: 0.1em; }
+
+            .wl-row { flex-direction: column; gap: 6px; border-radius: 12px; padding: 8px; }
+            .wl-input { padding: 10px 10px; font-size: 0.85rem; }
+            .wl-btn { width: 100%; justify-content: center; padding: 12px; font-size: 0.82rem; border-radius: 8px; }
+
+            .wl-row-b { flex-direction: column; gap: 6px; border-radius: 12px; padding: 8px; }
+            .wl-input-b { padding: 10px; font-size: 0.85rem; }
+            .wl-btn-b { width: 100%; justify-content: center; padding: 12px; font-size: 0.82rem; border-radius: 8px; }
+
+            .count-strip { gap: 14px; }
+        }
+
         /* FOOTER */
         footer {
             position: relative; z-index: 1;
@@ -313,7 +329,7 @@
 <nav>
     <a href="#" class="nav-logo">
         <div class="nav-mark">
-            <img src="images/android-icon-foreground.png" alt="Zaena">
+            <img src="images/logo white.png" alt="Zaena">
         </div>
         <div class="nav-wordmark">
             <span class="nav-parent">Toledah</span>
