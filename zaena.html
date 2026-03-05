@@ -23,13 +23,16 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
 
         body {
             font-family: 'Sora', sans-serif;
             background: var(--graphite);
             color: var(--air);
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+            position: relative;
         }
 
         body::before {
@@ -43,8 +46,8 @@
 
         /* NAV */
         nav {
-            position: fixed; top: 0; width: 100%; z-index: 100;
-            padding: 0 32px; height: 58px;
+            position: fixed; top: 0; left: 0; width: 100vw; z-index: 100;
+            padding: 0 20px; height: 58px;
             display: flex; align-items: center; justify-content: space-between;
             background: rgba(11,11,11,0.85);
             backdrop-filter: blur(20px);
@@ -78,6 +81,7 @@
             padding: 80px 24px 60px;
             position: relative; z-index: 1;
             text-align: center;
+            overflow: hidden;
         }
 
         .hero::after {
