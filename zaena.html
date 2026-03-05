@@ -439,11 +439,15 @@
 </footer>
 
 <script>
-    function submitWL(rowId, inputId, sucId, noteId) {
+    const SUPABASE_URL  = 'https://xgjeyphgmekakpvttjhr.supabase.co';
+    const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnamV5cGhnbWVrYWtwdnR0amhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4MTU2MjgsImV4cCI6MjA4MTM5MTYyOH0.45mb9tVTAhI7r2SFLYZcg8QvZWqLWecbDxshVFOO8rw';
+
+    async function submitWL(rowId, inputId, sucId, noteId) {
         const input = document.getElementById(inputId);
         const row   = document.getElementById(rowId);
         const suc   = document.getElementById(sucId);
         const note  = noteId ? document.getElementById(noteId) : null;
+        const btn   = row.querySelector('button');
         const val   = input.value.trim();
 
         if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
@@ -452,9 +456,39 @@
             row.addEventListener('animationend', () => row.classList.remove('shake'), { once: true });
             return;
         }
-        row.style.display = 'none';
-        if (note) note.style.visibility = 'hidden';
-        suc.classList.add('show');
+
+        // disable button while submitting
+        btn.disabled = true;
+        btn.style.opacity = '0.6';
+        btn.innerHTML = 'Saving...';
+
+        try {
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({ email: val })
+            });
+
+            if (res.ok || res.status === 409) {
+                // 409 = duplicate email, still show success (no need to tell them)
+                row.style.display = 'none';
+                if (note) note.style.visibility = 'hidden';
+                suc.classList.add('show');
+            } else {
+                throw new Error('Server error');
+            }
+        } catch (err) {
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.innerHTML = 'Try again';
+            input.style.borderColor = '#e06060';
+            setTimeout(() => input.style.borderColor = '', 2000);
+        }
     }
 
     const io = new IntersectionObserver(entries => {
