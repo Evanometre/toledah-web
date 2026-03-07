@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zaena Business OS | Built for the Nigerian Market</title>
+    <title>Zaena — The Business OS for  Growing Businesses</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -21,62 +21,64 @@
             --air:          #EEEEED;
             --border-teal:  rgba(43,117,116,0.22);
             --border-dim:   rgba(238,238,237,0.07);
+            --danger:       #e05c5c;
         }
-
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
-
         body {
             font-family: 'Sora', sans-serif;
             background: var(--graphite);
             color: var(--air);
             overflow-x: hidden;
             width: 100%;
-            max-width: 100%;
         }
-
         body::before {
             content: '';
             position: fixed; inset: 0; pointer-events: none; z-index: 0;
             background-image:
-                linear-gradient(rgba(43,117,116,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(43,117,116,0.03) 1px, transparent 1px);
+                linear-gradient(rgba(43,117,116,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(43,117,116,0.025) 1px, transparent 1px);
             background-size: 72px 72px;
         }
 
-        /* NAV */
+        /* ── NAV ── */
         nav {
             position: fixed; top: 0; left: 0; width: 100vw; z-index: 100;
-            padding: 0 20px; height: 58px;
+            padding: 0 24px; height: 60px;
             display: flex; align-items: center; justify-content: space-between;
-            background: rgba(11,11,11,0.88);
+            background: rgba(11,11,11,0.92);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-dim);
         }
         .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
         .nav-mark {
-            width: 30px; height: 30px;
+            width: 32px; height: 32px;
             background: var(--teal-deep);
             border: 1px solid var(--border-teal);
-            border-radius: 7px;
+            border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
         }
-        .nav-mark img { height: 1.1rem; width: auto; }
+        .nav-mark img { height: 18px; width: 18px; object-fit: contain; display: block; }
         .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
         .nav-parent { font-size: 0.5rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 2px; }
         .nav-name   { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--air); }
-        .nav-badge {
-            font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-            color: var(--gold); background: var(--gold-soft);
-            border: 1px solid rgba(201,146,42,0.22);
-            padding: 4px 10px; border-radius: 20px;
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+        .nav-cta {
+            background: var(--teal-bright); color: white;
+            border: none; border-radius: 8px; padding: 9px 18px;
+            font-family: 'Sora', sans-serif; font-size: 0.75rem; font-weight: 600;
+            cursor: pointer; text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+            display: flex; align-items: center; gap: 7px;
         }
+        .nav-cta:hover { background: var(--teal-mid); transform: scale(1.02); }
+        .nav-badge { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: var(--gold-soft); border: 1px solid rgba(201,146,42,0.22); padding: 4px 10px; border-radius: 20px; }
 
         /* ── HERO ── */
         .hero {
             min-height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 100px 24px 70px;
+            padding: 120px 24px 80px;
             position: relative; z-index: 1;
             text-align: center; overflow: hidden;
         }
@@ -84,139 +86,250 @@
             content: '';
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -58%);
-            width: 800px; height: 600px;
-            background: radial-gradient(ellipse, rgba(43,117,116,0.16) 0%, transparent 65%);
+            width: 900px; height: 700px;
+            background: radial-gradient(ellipse, rgba(43,117,116,0.14) 0%, transparent 65%);
             pointer-events: none; z-index: -1;
         }
 
-        .hero-eyebrow {
+        /* PRODUCT CLARITY BADGE — new */
+        .product-clarity {
             display: inline-flex; align-items: center; gap: 10px;
-            margin-bottom: 32px;
-            opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards;
+            background: rgba(43,117,116,0.1);
+            border: 1px solid var(--border-teal);
+            border-radius: 40px; padding: 8px 18px;
+            margin-bottom: 28px;
+            opacity: 0; animation: fadeUp 0.6s 0.05s ease forwards;
         }
-        .eyebrow-dash { width: 20px; height: 1px; background: var(--teal-bright); }
-        .eyebrow-text { font-size: 0.63rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal-bright); }
+        .pc-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-bright); flex-shrink: 0; }
+        .pc-text { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(238,238,237,0.72); }
+        .pc-text strong { color: var(--teal-bright); font-weight: 600; }
 
         .hero-headline {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3.2rem, 8.5vw, 6.4rem);
+            font-size: clamp(3rem, 8vw, 6.2rem);
             font-weight: 500; line-height: 1.02; letter-spacing: -0.02em;
-            color: var(--air);
-            max-width: 880px;
-            opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards;
+            color: var(--air); max-width: 900px;
+            opacity: 0; animation: fadeUp 0.8s 0.15s ease forwards;
         }
         .hero-headline .gold { color: var(--gold); }
-        .hero-headline em { font-style: italic; color: rgba(238,238,237,0.42); font-weight: 400; }
+        .hero-headline em { font-style: italic; color: rgba(238,238,237,0.4); font-weight: 400; }
 
         .hero-sub {
-            font-size: 1rem; font-weight: 300; line-height: 1.85;
-            color: rgba(238,238,237,0.68);
-            max-width: 540px; margin: 26px auto 44px;
-            opacity: 0; animation: fadeUp 0.8s 0.35s ease forwards;
+            font-size: 1.05rem; font-weight: 300; line-height: 1.85;
+            color: rgba(238,238,237,0.72);
+            max-width: 560px; margin: 24px auto 0;
+            opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards;
         }
-        .hero-sub strong { color: rgba(238,238,237,0.72); font-weight: 500; }
+        .hero-sub strong { color: rgba(238,238,237,0.88); font-weight: 600; }
 
-        /* WAITLIST */
-        .wl-wrap {
-            width: 100%; max-width: 480px; margin: 0 auto;
-            opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards;
+        /* HERO CTA BLOCK */
+        .hero-cta-block {
+            width: 100%; max-width: 540px; margin: 48px auto 0;
+            opacity: 0; animation: fadeUp 0.8s 0.45s ease forwards;
         }
-        .wl-row {
-            display: flex; gap: 8px;
-            background: rgba(43,117,116,0.08);
-            border: 1px solid var(--border-teal);
-            border-radius: 12px; padding: 6px;
+        .hero-cta-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 500; letter-spacing: -0.01em;
+            color: var(--air); margin-bottom: 20px; line-height: 1.2;
         }
-        .wl-input {
-            flex: 1; background: transparent; border: none; outline: none;
-            font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 300;
-            color: var(--air); padding: 9px 12px;
+        .hero-input-row {
+            display: flex; flex-direction: column; gap: 10px;
         }
-        .wl-input::placeholder { color: rgba(238,238,237,0.42); }
-        .wl-btn {
+        .hero-email-wrap {
+            position: relative;
+        }
+        .hero-email-icon {
+            position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+            color: rgba(43,117,116,0.7); pointer-events: none;
+            display: flex; align-items: center;
+        }
+        .hero-input {
+            width: 100%; background: rgba(255,255,255,0.05);
+            border: 1.5px solid rgba(43,117,116,0.45);
+            border-radius: 12px; outline: none;
+            font-family: 'Sora', sans-serif; font-size: 0.92rem; font-weight: 300;
+            color: var(--air); padding: 15px 16px 15px 44px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .hero-input:focus {
+            border-color: var(--teal-bright);
+            box-shadow: 0 0 0 3px rgba(43,117,116,0.15);
+        }
+        .hero-input::placeholder { color: rgba(238,238,237,0.32); }
+        .hero-submit {
+            width: 100%;
             background: var(--teal-bright); color: white;
-            border: none; border-radius: 8px; padding: 10px 20px;
-            font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 600;
-            cursor: pointer; white-space: nowrap;
-            transition: background 0.2s, transform 0.15s;
-            display: flex; align-items: center; gap: 8px;
+            border: none; border-radius: 12px; padding: 17px 24px;
+            font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700;
+            cursor: pointer; letter-spacing: 0.01em;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 6px 28px rgba(43,117,116,0.45), 0 0 0 1px rgba(43,117,116,0.3);
+            animation: ctaPulse 2.8s ease-in-out 1.8s infinite;
         }
-        .wl-btn:hover { background: var(--teal-mid); transform: scale(1.02); }
-        .wl-btn:active { transform: scale(0.99); }
-        .wl-success {
-            display: none; align-items: center; justify-content: center; gap: 10px;
-            padding: 16px 20px; border-radius: 12px;
-            background: rgba(43,117,116,0.1); border: 1px solid var(--border-teal);
-            font-size: 0.84rem; font-weight: 400; color: rgba(238,238,237,0.65);
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 6px 28px rgba(43,117,116,0.45), 0 0 0 1px rgba(43,117,116,0.3); }
+            50%       { box-shadow: 0 8px 40px rgba(43,117,116,0.65), 0 0 0 4px rgba(43,117,116,0.15); }
         }
-        .wl-success.show { display: flex; }
-        .wl-note { font-size: 0.67rem; color: rgba(238,238,237,0.42); margin-top: 12px; letter-spacing: 0.03em; }
+        .hero-submit:hover { background: #2e8180; transform: translateY(-2px); box-shadow: 0 10px 40px rgba(43,117,116,0.6); animation: none; }
+        .hero-submit:active { transform: translateY(0); }
 
-        .count-strip {
-            margin-top: 48px;
-            display: flex; align-items: center; justify-content: center; gap: 28px;
-            flex-wrap: wrap;
-            opacity: 0; animation: fadeUp 0.8s 0.7s ease forwards;
+        .hero-success {
+            display: none; align-items: center; justify-content: center; gap: 10px;
+            padding: 18px 24px; border-radius: 14px;
+            background: rgba(43,117,116,0.1); border: 1px solid var(--border-teal);
+            font-size: 0.86rem; color: rgba(238,238,237,0.7);
         }
-        .count-item { display: flex; align-items: center; gap: 8px; }
-        .count-dot  { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-bright); flex-shrink: 0; }
-        .count-text { font-size: 0.7rem; font-weight: 300; color: rgba(238,238,237,0.52); letter-spacing: 0.03em; }
+        .hero-success.show { display: flex; }
+
+        .hero-or { display: flex; align-items: center; gap: 14px; margin: 16px 0; }
+        .hero-or-line { flex: 1; height: 1px; background: var(--border-dim); }
+        .hero-or-text { font-size: 0.62rem; font-weight: 400; color: rgba(238,238,237,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+
+        .wa-btn {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 14px 20px;
+            background: rgba(37,211,102,0.07);
+            border: 1.5px solid rgba(37,211,102,0.25);
+            border-radius: 12px;
+            text-decoration: none; color: var(--air);
+            font-size: 0.85rem; font-weight: 600;
+            transition: background 0.2s, border-color 0.2s, transform 0.15s;
+        }
+        .wa-btn:hover { background: rgba(37,211,102,0.13); border-color: rgba(37,211,102,0.4); transform: translateY(-1px); }
+        .wa-btn span.sub { font-size: 0.7rem; font-weight: 300; color: rgba(238,238,237,0.52); margin-left: 4px; }
+
+        .hero-note { font-size: 0.65rem; color: rgba(238,238,237,0.38); margin-top: 14px; letter-spacing: 0.02em; }
+
+        /* PROOF STRIP */
+        .proof-strip {
+            margin-top: 52px;
+            display: flex; align-items: center; justify-content: center; gap: 0;
+            flex-wrap: wrap;
+            opacity: 0; animation: fadeUp 0.8s 0.62s ease forwards;
+        }
+        .proof-item {
+            display: flex; align-items: center; gap: 8px;
+            padding: 0 20px;
+            border-right: 1px solid var(--border-dim);
+        }
+        .proof-item:last-child { border-right: none; }
+        .proof-icon { display: flex; align-items: center; color: var(--teal-bright); flex-shrink: 0; }
+        .proof-text { font-size: 0.68rem; font-weight: 400; color: rgba(238,238,237,0.5); }
+
+        /* ── APP CLARITY BAR — NEW ── */
+        .app-bar {
+            position: relative; z-index: 1;
+            background: var(--teal-deep);
+            border-top: 1px solid rgba(43,117,116,0.35);
+            border-bottom: 1px solid rgba(43,117,116,0.35);
+            padding: 20px 24px;
+        }
+        .app-bar-inner {
+            max-width: 1000px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 20px;
+        }
+        .app-bar-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal-bright); }
+        .app-bar-points {
+            display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+        }
+        .app-point {
+            display: flex; align-items: center; gap: 9px;
+            font-size: 0.78rem; font-weight: 400; color: rgba(238,238,237,0.72);
+        }
+        .app-point-icon { display: flex; align-items: center; flex-shrink: 0; color: var(--teal-bright); }
 
         /* ── DIVIDER ── */
         .divider { position: relative; z-index: 1; border-top: 1px solid var(--border-dim); }
 
-        /* ── PAIN SECTION ── */
-        .pain {
+        /* ── PAIN SECTION — overhauled ── */
+        .pain-section {
             position: relative; z-index: 1;
-            max-width: 900px; margin: 0 auto;
-            padding: 90px 24px;
+            max-width: 1000px; margin: 0 auto;
+            padding: 100px 24px 80px;
         }
-        .pain-header { margin-bottom: 56px; }
+        .pain-intro {
+            text-align: center; max-width: 580px; margin: 0 auto 64px;
+        }
         .section-eyebrow { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 16px; }
         .section-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(2rem, 4.5vw, 3.2rem);
             font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; color: var(--air);
         }
-        .section-title em { font-style: italic; color: rgba(238,238,237,0.45); }
+        .section-title em { font-style: italic; color: rgba(238,238,237,0.4); }
+        .section-body { font-size: 0.88rem; font-weight: 300; line-height: 1.85; color: rgba(238,238,237,0.65); margin-top: 16px; }
 
-        .pain-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-        @media (max-width: 700px) { .pain-grid { grid-template-columns: 1fr; } }
-
-        .pain-card {
+        /* Pain scenario cards */
+        .pain-scenarios { display: flex; flex-direction: column; gap: 2px; }
+        .scenario {
             background: var(--g800);
             border: 1px solid var(--border-dim);
-            border-radius: 14px; padding: 28px 24px;
-            position: relative; overflow: hidden;
+            border-radius: 14px; overflow: hidden;
+            display: grid; grid-template-columns: 3fr 2fr;
         }
-        .pain-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 2px; background: rgba(201,146,42,0.5);
+        @media (max-width: 680px) { .scenario { grid-template-columns: 1fr; } }
+        .scenario-left { padding: 36px 32px; }
+        .scenario-right {
+            padding: 36px 28px;
+            background: rgba(14,41,49,0.4);
+            border-left: 1px solid var(--border-dim);
+            display: flex; flex-direction: column; justify-content: center;
         }
-        .pain-icon { font-size: 1.5rem; margin-bottom: 14px; display: block; }
-        .pain-title { font-size: 0.88rem; font-weight: 600; color: var(--air); margin-bottom: 10px; }
-        .pain-body { font-size: 0.8rem; font-weight: 300; color: rgba(238,238,237,0.62); line-height: 1.8; }
-        .pain-quote {
-            margin-top: 12px; padding-top: 12px;
-            border-top: 1px solid var(--border-dim);
+        @media (max-width: 680px) { .scenario-right { border-left: none; border-top: 1px solid var(--border-dim); } }
+
+        .scenario-num { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: rgba(43,117,116,0.45); letter-spacing: 0.1em; margin-bottom: 14px; }
+        .scenario-pain {
+            font-size: 1.1rem; font-weight: 600; color: var(--air); line-height: 1.4; margin-bottom: 14px;
+        }
+        .scenario-pain .highlight { color: var(--danger); }
+        .scenario-story {
+            font-size: 0.82rem; font-weight: 300; line-height: 1.85;
+            color: rgba(238,238,237,0.62);
+        }
+        .scenario-quote {
+            margin-top: 16px; padding: 14px 16px;
+            background: rgba(201,146,42,0.06); border: 1px solid rgba(201,146,42,0.15);
+            border-radius: 8px; border-left: 3px solid var(--gold);
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem; font-style: italic;
-            color: rgba(238,238,237,0.68); line-height: 1.6;
+            font-size: 1rem; font-style: italic; color: rgba(238,238,237,0.72);
         }
+        .fix-label { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 12px; }
+        .fix-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+        .fix-check {
+            width: 18px; height: 18px; flex-shrink: 0;
+            border-radius: 50%; background: rgba(43,117,116,0.15);
+            border: 1px solid var(--teal-bright);
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 1px;
+        }
+        .fix-check svg { display: block; }
+        .fix-text { font-size: 0.78rem; font-weight: 300; color: rgba(238,238,237,0.7); line-height: 1.6; }
+        .fix-text strong { color: rgba(238,238,237,0.72); font-weight: 500; display: block; font-size: 0.82rem; }
 
-        /* ── FEATURES ── */
-        .features {
+        /* ── WHAT IS ZAENA — new explicit section ── */
+        .what-section {
             position: relative; z-index: 1;
-            max-width: 1100px; margin: 0 auto;
-            padding: 0 24px 90px;
+            background: linear-gradient(180deg, #080e0f 0%, var(--graphite) 100%);
+            border-top: 1px solid var(--border-dim);
+            padding: 100px 24px;
         }
-        .feat-header { margin-bottom: 52px; }
+        .what-inner { max-width: 1060px; margin: 0 auto; }
+        .what-header { text-align: center; margin-bottom: 60px; }
+        .what-definition {
+            max-width: 700px; margin: 0 auto;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+            font-style: italic; font-weight: 400;
+            color: rgba(238,238,237,0.72); line-height: 1.6;
+            margin-bottom: 56px;
+        }
+        .what-definition strong { font-style: normal; color: var(--air); font-weight: 500; }
 
-        .feat-grid {
+        .what-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1px;
@@ -224,287 +337,160 @@
             border: 1px solid var(--border-dim);
             border-radius: 16px; overflow: hidden;
         }
-        @media (max-width: 860px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 520px)  { .feat-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 860px) { .what-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 520px)  { .what-grid { grid-template-columns: 1fr; } }
 
-        .feat-cell {
-            background: var(--g800); padding: 32px 28px;
+        .what-cell {
+            background: var(--g800); padding: 30px 26px;
             position: relative; overflow: hidden; transition: background 0.25s;
         }
-        .feat-cell::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 2px; background: var(--teal-bright);
-            transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
-        }
-        .feat-cell:hover { background: #181f20; }
-        .feat-cell:hover::before { transform: scaleX(1); }
-        .feat-num  { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: rgba(43,117,116,0.5); letter-spacing: 0.1em; margin-bottom: 20px; }
-        .feat-name { font-size: 0.94rem; font-weight: 600; color: var(--air); margin-bottom: 10px; line-height: 1.35; }
-        .feat-body { font-size: 0.82rem; font-weight: 300; color: rgba(238,238,237,0.62); line-height: 1.75; }
-        .feat-tag  {
-            display: inline-block; margin-top: 14px;
-            font-size: 0.58rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+        .what-cell:hover { background: #181f20; }
+        .what-cell-icon { margin-bottom: 16px; display: block; line-height: 0; }
+        .what-cell-num { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: rgba(43,117,116,0.4); letter-spacing: 0.1em; margin-bottom: 10px; }
+        .what-cell-name { font-size: 0.9rem; font-weight: 600; color: var(--air); margin-bottom: 8px; line-height: 1.3; }
+        .what-cell-body { font-size: 0.78rem; font-weight: 300; color: rgba(238,238,237,0.6); line-height: 1.75; }
+        .what-cell-tag {
+            display: inline-block; margin-top: 12px;
+            font-size: 0.57rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
             color: var(--gold); background: var(--gold-soft);
-            border: 1px solid rgba(201,146,42,0.18);
-            padding: 3px 8px; border-radius: 20px;
+            border: 1px solid rgba(201,146,42,0.18); padding: 3px 8px; border-radius: 20px;
         }
 
-        /* ── TRUST REPORT SECTION ── */
+        /* ── TRUST SECTION ── */
         .trust-section {
             position: relative; z-index: 1;
-            background: linear-gradient(180deg, var(--graphite) 0%, #080e0f 50%, var(--graphite) 100%);
             border-top: 1px solid var(--border-dim);
             border-bottom: 1px solid var(--border-dim);
-            padding: 90px 24px;
+            padding: 100px 24px;
             overflow: hidden;
         }
         .trust-section::before {
             content: '';
-            position: absolute; top: -100px; right: -100px;
+            position: absolute; top: -80px; right: -80px;
             width: 600px; height: 600px;
-            background: radial-gradient(ellipse, rgba(43,117,116,0.1) 0%, transparent 65%);
+            background: radial-gradient(ellipse, rgba(43,117,116,0.09) 0%, transparent 65%);
             pointer-events: none;
         }
         .trust-inner {
-            max-width: 1100px; margin: 0 auto;
+            max-width: 1060px; margin: 0 auto;
             display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
         }
         @media (max-width: 800px) { .trust-inner { grid-template-columns: 1fr; gap: 48px; } }
 
-        .trust-copy .section-title { margin-bottom: 20px; }
-        .trust-copy p {
-            font-size: 0.9rem; font-weight: 300; line-height: 1.85;
-            color: rgba(238,238,237,0.68); margin-bottom: 16px;
-        }
+        .trust-copy p { font-size: 0.88rem; font-weight: 300; line-height: 1.85; color: rgba(238,238,237,0.68); margin-bottom: 16px; }
         .trust-copy p strong { color: rgba(238,238,237,0.72); font-weight: 500; }
-        .trust-copy .trust-point {
-            display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px;
-        }
-        .trust-point-icon {
-            width: 28px; height: 28px; flex-shrink: 0;
-            border-radius: 7px; background: rgba(43,117,116,0.12);
-            border: 1px solid var(--border-teal);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.75rem; margin-top: 1px;
-        }
+        .trust-point { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+        .trust-point-icon { width: 28px; height: 28px; flex-shrink: 0; border-radius: 7px; background: rgba(43,117,116,0.12); border: 1px solid var(--border-teal); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; margin-top: 1px; }
         .trust-point-text { font-size: 0.82rem; font-weight: 300; color: rgba(238,238,237,0.68); line-height: 1.7; }
-        .trust-point-text strong { color: rgba(238,238,237,0.68); font-weight: 500; }
+        .trust-point-text strong { color: rgba(238,238,237,0.72); font-weight: 500; display: block; font-size: 0.86rem; }
 
         /* HEALTH REPORT CARD */
         .report-card {
-            background: #0c1a1e;
-            border: 1px solid rgba(43,117,116,0.3);
+            background: #0c1a1e; border: 1px solid rgba(43,117,116,0.3);
             border-radius: 18px; overflow: hidden;
-            box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(43,117,116,0.1);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(43,117,116,0.08);
             position: relative;
         }
-        .report-card::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(90deg, var(--teal-bright), var(--gold));
-        }
-        .report-header {
-            padding: 20px 24px 16px;
-            border-bottom: 1px solid rgba(43,117,116,0.15);
-            display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
-        }
+        .report-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--teal-bright), var(--gold)); }
+        .report-header { padding: 20px 24px 16px; border-bottom: 1px solid rgba(43,117,116,0.15); display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
         .report-merchant { font-size: 0.72rem; font-weight: 600; color: var(--air); letter-spacing: 0.05em; }
-        .report-id { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--teal-bright); margin-top: 3px; letter-spacing: 0.05em; }
-        .report-score-badge {
-            text-align: right; flex-shrink: 0;
-        }
-        .report-score-num {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem; font-weight: 600; color: var(--gold); line-height: 1;
-        }
+        .report-id { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--teal-bright); margin-top: 3px; }
+        .report-score-badge { text-align: right; flex-shrink: 0; }
+        .report-score-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--gold); line-height: 1; }
         .report-score-label { font-size: 0.52rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201,146,42,0.6); margin-top: 2px; }
-        .report-score-tier  { font-size: 0.58rem; font-weight: 600; color: var(--gold); background: var(--gold-soft); border: 1px solid rgba(201,146,42,0.2); padding: 2px 7px; border-radius: 10px; display: inline-block; margin-top: 4px; }
-
+        .report-score-tier { font-size: 0.58rem; font-weight: 600; color: var(--gold); background: var(--gold-soft); border: 1px solid rgba(201,146,42,0.2); padding: 2px 7px; border-radius: 10px; display: inline-block; margin-top: 4px; }
         .report-body { padding: 18px 24px; }
-        .report-section-title {
-            font-size: 0.55rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-            color: var(--teal-bright); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
-        }
+        .report-section-title { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
         .report-section-title::after { content: ''; flex: 1; height: 1px; background: rgba(43,117,116,0.2); }
-
         .report-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-        .report-metric {
-            background: rgba(14,41,49,0.5);
-            border: 1px solid rgba(43,117,116,0.12);
-            border-radius: 8px; padding: 10px 12px;
-        }
-        .metric-label { font-size: 0.57rem; font-weight: 400; color: rgba(238,238,237,0.52); margin-bottom: 4px; line-height: 1.3; }
-        .metric-value { font-family: 'DM Mono', monospace; font-size: 0.78rem; font-weight: 500; color: var(--air); }
+        .report-metric { background: rgba(14,41,49,0.5); border: 1px solid rgba(43,117,116,0.12); border-radius: 8px; padding: 10px 12px; }
+        .metric-label { font-size: 0.57rem; color: rgba(238,238,237,0.52); margin-bottom: 4px; line-height: 1.3; }
+        .metric-value { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--air); }
         .metric-value.green { color: #4caf82; }
         .metric-value.gold  { color: var(--gold); }
-
         .trust-bars { margin-bottom: 16px; }
         .trust-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
         .trust-bar-label { font-size: 0.6rem; font-weight: 300; color: rgba(238,238,237,0.62); width: 120px; flex-shrink: 0; }
         .trust-bar-track { flex: 1; height: 4px; background: rgba(43,117,116,0.12); border-radius: 2px; }
-        .trust-bar-fill  { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--teal-bright), var(--gold)); transition: width 1.2s ease; }
+        .trust-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--teal-bright), var(--gold)); transition: width 1.2s ease; }
         .trust-bar-val { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: rgba(238,238,237,0.4); width: 32px; text-align: right; flex-shrink: 0; }
-
-        .report-loan {
-            background: linear-gradient(135deg, rgba(43,117,116,0.1), rgba(201,146,42,0.06));
-            border: 1px solid rgba(201,146,42,0.2); border-radius: 10px;
-            padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
-        }
-        .loan-label { font-size: 0.62rem; font-weight: 400; color: rgba(238,238,237,0.62); line-height: 1.4; }
+        .report-loan { background: linear-gradient(135deg, rgba(43,117,116,0.1), rgba(201,146,42,0.06)); border: 1px solid rgba(201,146,42,0.2); border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .loan-label { font-size: 0.62rem; color: rgba(238,238,237,0.62); line-height: 1.4; }
         .loan-label strong { display: block; color: rgba(238,238,237,0.65); font-weight: 500; font-size: 0.68rem; }
         .loan-amount { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--gold); white-space: nowrap; }
+        .report-footer { padding: 10px 24px 16px; border-top: 1px solid rgba(43,117,116,0.1); font-size: 0.55rem; font-weight: 300; color: rgba(238,238,237,0.38); line-height: 1.5; text-align: center; }
 
-        .report-footer {
-            padding: 10px 24px 16px;
-            border-top: 1px solid rgba(43,117,116,0.1);
-            font-size: 0.55rem; font-weight: 300; color: rgba(238,238,237,0.42); line-height: 1.5; text-align: center;
-        }
-
-        /* ── MOBILE PROOF SECTION ── */
-        .mobile-section {
-            position: relative; z-index: 1;
-            max-width: 1000px; margin: 0 auto;
-            padding: 90px 24px;
-        }
-        .mobile-inner {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
-        }
-        @media (max-width: 740px) { .mobile-inner { grid-template-columns: 1fr; } }
-
-        .mobile-copy p {
-            font-size: 0.88rem; font-weight: 300; line-height: 1.85;
-            color: rgba(238,238,237,0.68); margin-bottom: 16px;
-        }
-        .mobile-copy p strong { color: rgba(238,238,237,0.7); font-weight: 500; }
-        .mobile-specs {
-            display: flex; flex-direction: column; gap: 10px; margin-top: 28px;
-        }
-        .mobile-spec {
-            display: flex; align-items: center; gap: 14px;
-            padding: 12px 16px;
-            background: rgba(14,41,49,0.3);
-            border: 1px solid var(--border-teal);
-            border-radius: 10px;
-        }
-        .ms-icon { font-size: 1rem; flex-shrink: 0; }
-        .ms-text { font-size: 0.78rem; font-weight: 300; color: rgba(238,238,237,0.68); line-height: 1.5; }
-        .ms-text strong { color: rgba(238,238,237,0.72); font-weight: 500; display: block; font-size: 0.82rem; }
-
-        /* Phone mockup */
-        .phone-mockup {
-            display: flex; justify-content: center; align-items: center;
-        }
-        .phone-frame {
-            width: 220px; position: relative;
-            background: #0c1a1e;
-            border: 2px solid rgba(43,117,116,0.4);
-            border-radius: 32px; overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(43,117,116,0.1), inset 0 0 0 1px rgba(255,255,255,0.04);
-        }
-        .phone-notch {
-            width: 80px; height: 10px; background: #0c1a1e;
-            border: 2px solid rgba(43,117,116,0.25);
-            border-radius: 0 0 12px 12px;
-            margin: 0 auto 0; position: relative; z-index: 2;
-        }
-        .phone-screen { padding: 8px 12px 20px; }
-        .ps-header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 8px 0 10px;
-            border-bottom: 1px solid rgba(43,117,116,0.15);
-            margin-bottom: 12px;
-        }
-        .ps-title { font-size: 0.65rem; font-weight: 600; color: var(--air); }
-        .ps-badge { font-family: 'DM Mono', monospace; font-size: 0.52rem; color: var(--teal-bright); }
-
-        .ps-metric-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
-        .ps-metric {
-            background: rgba(43,117,116,0.08); border: 1px solid rgba(43,117,116,0.15);
-            border-radius: 6px; padding: 8px;
-        }
-        .ps-metric-label { font-size: 0.48rem; color: rgba(238,238,237,0.52); margin-bottom: 3px; }
-        .ps-metric-val { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--air); font-weight: 500; }
-        .ps-metric-val.gold { color: var(--gold); }
-
-        .ps-chart { height: 40px; display: flex; align-items: flex-end; gap: 4px; margin-bottom: 10px; }
-        .ps-bar { flex: 1; border-radius: 2px 2px 0 0; background: var(--teal-bright); opacity: 0.6; }
-        .ps-bar.active { opacity: 1; background: var(--gold); }
-
-        .ps-sale-row {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 6px 0; border-bottom: 1px solid rgba(43,117,116,0.08);
-        }
-        .ps-sale-name { font-size: 0.52rem; color: rgba(238,238,237,0.68); }
-        .ps-sale-amt  { font-family: 'DM Mono', monospace; font-size: 0.55rem; color: var(--air); }
-
-        .ps-cta-btn {
-            width: 100%; margin-top: 14px; padding: 8px;
-            background: var(--teal-bright); border-radius: 8px;
-            text-align: center; font-size: 0.62rem; font-weight: 600; color: white;
-        }
-
-        /* ── BOTTOM CTA ── */
+        /* ── BOTTOM CTA — completely rebuilt ── */
         .bottom-cta {
             position: relative; z-index: 1;
             background: var(--teal-deep);
-            border-top: 1px solid var(--border-teal);
-            padding: 90px 24px; text-align: center; overflow: hidden;
+            border-top: 1px solid rgba(43,117,116,0.4);
+            padding: 100px 24px; overflow: hidden;
         }
         .bottom-cta::before {
             content: ''; position: absolute; top: -80px; right: -80px;
-            width: 440px; height: 440px;
-            background: radial-gradient(ellipse, rgba(43,117,116,0.3) 0%, transparent 65%);
+            width: 500px; height: 500px;
+            background: radial-gradient(ellipse, rgba(43,117,116,0.28) 0%, transparent 65%);
             pointer-events: none;
         }
-        .bottom-cta::after {
-            content: ''; position: absolute; bottom: -60px; left: -60px;
-            width: 320px; height: 320px;
-            background: radial-gradient(ellipse, rgba(201,146,42,0.07) 0%, transparent 65%);
-            pointer-events: none;
+        .cta-inner {
+            position: relative; z-index: 1;
+            max-width: 680px; margin: 0 auto; text-align: center;
         }
-        .cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
-        .cta-rule  { width: 36px; height: 2px; background: var(--teal-bright); border-radius: 1px; margin: 0 auto 20px; }
+        .cta-eyebrow { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 18px; }
         .cta-headline {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
-            font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;
-            color: var(--air); margin-bottom: 16px;
+            font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+            font-weight: 500; letter-spacing: -0.02em; line-height: 1.08;
+            color: var(--air); margin-bottom: 18px;
         }
-        .cta-headline em { font-style: italic; color: rgba(238,238,237,0.52); }
-        .cta-sub {
-            font-size: 0.9rem; font-weight: 300;
-            color: rgba(238,238,237,0.68); line-height: 1.8; margin-bottom: 38px;
+        .cta-headline em { font-style: italic; color: rgba(238,238,237,0.48); }
+        .cta-sub { font-size: 0.92rem; font-weight: 300; color: rgba(238,238,237,0.7); line-height: 1.85; margin-bottom: 44px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        /* Big input CTA */
+        .cta-form-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(238,238,237,0.5); margin-bottom: 10px; }
+        .cta-input-row {
+            display: flex; gap: 10px;
+            background: rgba(14,41,49,0.7);
+            border: 1.5px solid rgba(43,117,116,0.5);
+            border-radius: 14px; padding: 7px;
+            box-shadow: 0 0 0 4px rgba(43,117,116,0.1), 0 20px 60px rgba(0,0,0,0.4);
+            margin-bottom: 14px;
         }
-        .wl-wrap-b { max-width: 560px; margin: 0 auto; }
-        .wl-row-b {
-            display: flex; gap: 8px;
-            background: rgba(14,41,49,0.6);
-            border: 1px solid rgba(43,117,116,0.35);
-            border-radius: 12px; padding: 6px;
-        }
-        .wl-input-b {
+        .cta-input {
             flex: 1; background: transparent; border: none; outline: none;
-            font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 300;
-            color: var(--air); padding: 10px 14px;
+            font-family: 'Sora', sans-serif; font-size: 0.92rem; font-weight: 300;
+            color: var(--air); padding: 11px 14px;
         }
-        .wl-input-b::placeholder { color: rgba(238,238,237,0.42); }
-        .wl-btn-b {
+        .cta-input::placeholder { color: rgba(238,238,237,0.38); }
+        .cta-btn {
             background: var(--air); color: var(--teal-deep);
-            border: none; border-radius: 8px; padding: 10px 22px;
-            font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 700;
-            cursor: pointer; white-space: nowrap;
-            transition: background 0.2s, transform 0.15s;
+            border: none; border-radius: 10px; padding: 13px 26px;
+            font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700;
+            cursor: pointer; white-space: nowrap; letter-spacing: 0.01em;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
             display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.3);
         }
-        .wl-btn-b:hover { background: #fff; transform: scale(1.02); }
-        .wl-success-b {
-            display: none; align-items: center; justify-content: center; gap: 10px;
-            padding: 16px 20px; border-radius: 12px;
-            background: rgba(14,41,49,0.5); border: 1px solid rgba(43,117,116,0.3);
-            font-size: 0.84rem; font-weight: 400; color: rgba(238,238,237,0.72);
+        .cta-btn:hover { background: #ffffff; transform: scale(1.03); box-shadow: 0 8px 28px rgba(0,0,0,0.4); }
+        .cta-success { display: none; align-items: center; justify-content: center; gap: 10px; padding: 18px; border-radius: 14px; background: rgba(14,41,49,0.6); border: 1px solid rgba(43,117,116,0.35); font-size: 0.86rem; color: rgba(238,238,237,0.75); }
+        .cta-success.show { display: flex; }
+
+        .cta-divider { display: flex; align-items: center; gap: 14px; margin: 20px 0; }
+        .cta-divider-line { flex: 1; height: 1px; background: rgba(43,117,116,0.2); }
+        .cta-divider-text { font-size: 0.62rem; font-weight: 400; color: rgba(238,238,237,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+
+        .cta-wa {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            width: 100%; padding: 16px 20px;
+            background: rgba(37,211,102,0.08); border: 1.5px solid rgba(37,211,102,0.25);
+            border-radius: 12px; text-decoration: none; color: var(--air);
+            font-size: 0.88rem; font-weight: 600;
+            transition: background 0.2s, border-color 0.2s, transform 0.15s;
         }
-        .wl-success-b.show { display: flex; }
-        .wl-note-b { font-size: 0.67rem; color: rgba(238,238,237,0.4); margin-top: 12px; }
+        .cta-wa:hover { background: rgba(37,211,102,0.14); border-color: rgba(37,211,102,0.45); transform: translateY(-1px); }
+        .cta-wa .sub { font-size: 0.7rem; font-weight: 300; color: rgba(238,238,237,0.52); }
+        .cta-note { font-size: 0.65rem; color: rgba(238,238,237,0.35); margin-top: 18px; }
 
         /* FOOTER */
         footer {
@@ -514,85 +500,21 @@
             flex-wrap: wrap; gap: 12px;
             border-top: 1px solid var(--border-dim);
         }
-        .footer-copy { font-size: 0.68rem; color: rgba(238,238,237,0.38); letter-spacing: 0.03em; }
+        .footer-copy { font-size: 0.68rem; color: rgba(238,238,237,0.35); letter-spacing: 0.03em; }
 
-        /* ANIMATIONS */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
-        @keyframes shake {
-            0%,100% { transform: translateX(0); }
-            20%      { transform: translateX(-6px); }
-            40%      { transform: translateX(6px); }
-            60%      { transform: translateX(-4px); }
-            80%      { transform: translateX(4px); }
-        }
+        @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }
         .shake { animation: shake 0.4s ease; }
 
-        /* WHATSAPP CARD */
-        .wl-pair {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            width: 100%;
-        }
-        .wl-email-col { display: flex; flex-direction: column; }
-
-        .wa-card {
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 8px;
-            padding: 14px 18px;
-            background: rgba(37,211,102,0.07);
-            border: 1px solid rgba(37,211,102,0.18);
-            border-radius: 12px;
-            text-decoration: none;
-            transition: background 0.2s, border-color 0.2s, transform 0.15s;
-            text-align: center;
-        }
-        .wa-card:hover {
-            background: rgba(37,211,102,0.13);
-            border-color: rgba(37,211,102,0.36);
-            transform: translateY(-2px);
-        }
-        .wa-card:active { transform: translateY(0); }
-        .wa-top { display: flex; align-items: center; gap: 8px; }
-        .wa-label { font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--air); }
-        .wa-sub { font-size: 0.62rem; font-weight: 300; color: rgba(238,238,237,0.58); line-height: 1.4; }
-
-        /* WhatsApp in bottom CTA */
-        .wa-card-dark {
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 8px;
-            padding: 14px 18px;
-            background: rgba(37,211,102,0.06);
-            border: 1px solid rgba(37,211,102,0.2);
-            border-radius: 12px;
-            text-decoration: none;
-            transition: background 0.2s, border-color 0.2s, transform 0.15s;
-            text-align: center;
-        }
-        .wa-card-dark:hover {
-            background: rgba(37,211,102,0.12);
-            border-color: rgba(37,211,102,0.38);
-            transform: translateY(-2px);
-        }
-
-        /* MOBILE RESPONSIVE */
-        @media (max-width: 620px) {
-            .wl-pair { grid-template-columns: 1fr; }
-            .wa-card, .wa-card-dark { flex-direction: row; justify-content: center; gap: 12px; }
-            .wa-sub { display: none; }
-        }
+        /* ── RESPONSIVE ── */
         @media (max-width: 520px) {
             nav { padding: 0 16px; }
-            .nav-badge { font-size: 0.52rem; padding: 3px 8px; }
-            .wl-row, .wl-row-b { flex-direction: column; gap: 6px; padding: 8px; }
-            .wl-input, .wl-input-b { padding: 10px; font-size: 0.85rem; }
-            .wl-btn, .wl-btn-b { width: 100%; justify-content: center; padding: 12px; border-radius: 8px; }
-            .count-strip { gap: 14px; }
+            .hero-input-row { gap: 8px; }
+            .proof-strip { gap: 6px; }
+            .proof-item { border-right: none; padding: 4px 10px; }
         }
     </style>
 </head>
@@ -602,181 +524,205 @@
 <nav>
     <a href="https://toledah.com" class="nav-logo">
         <div class="nav-mark">
-            <img src="images/android-icon-foreground.png" alt="Zaena" style="width:18px;height:18px;object-fit:contain;display:block;">
+            <img src="images/android-icon-foreground.png" alt="Zaena">
         </div>
         <div class="nav-wordmark">
             <span class="nav-parent">Toledah</span>
             <span class="nav-name">Zaena</span>
         </div>
     </a>
-    <span class="nav-badge">Coming Soon</span>
+    <div class="nav-right">
+        <span class="nav-badge">Coming Soon</span>
+        <a href="#waitlist" class="nav-cta">
+            Get Early Access
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-    <div class="hero-eyebrow">
-        <span class="eyebrow-dash"></span>
-        <span class="eyebrow-text">Zaena Business OS &middot; Built for the Nigerian Market</span>
-        <span class="eyebrow-dash"></span>
+
+    <div class="product-clarity">
+        <span class="pc-dot"></span>
+        <span class="pc-text"><strong>Mobile app &amp; web dashboard</strong> — manage your entire business from your phone</span>
     </div>
 
     <h1 class="hero-headline">
-        The informal market<br>
-        runs <span class="gold">Nigeria.</span><br>
-        <em>Now it has a system.</em>
+        Stop running your business<br>
+        <em>on memory and</em> <span class="gold">guesswork.</span>
     </h1>
 
     <p class="hero-sub">
-        A mobile-first business operating system for market traders, depot owners, and workshop operators.
-        <strong>Run every part of your business from your phone</strong> — and build the financial record that proves you're worth trusting.
+        Zaena is a <strong>business operating system</strong> growing businesses — POS, inventory, staff control, tax compliance, and financial records. All in one app. <strong>Runs fully on your phone.</strong>
     </p>
 
-    <div class="wl-wrap">
-        <div class="wl-pair">
-            <div class="wl-email-col">
-                <div class="wl-row" id="hero-row">
-                    <input type="email" class="wl-input" placeholder="your@email.com" id="hero-input" autocomplete="email">
-                    <button class="wl-btn" onclick="submitWL('hero-row','hero-input','hero-suc','hero-note')">
-                        Get Early Access
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </button>
+    <div class="hero-cta-block" id="waitlist">
+        <p class="hero-cta-label">Get early access — it's free.</p>
+        <div id="hero-row">
+            <div class="hero-input-row">
+                <div class="hero-email-wrap">
+                    <span class="hero-email-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+                    </span>
+                    <input type="email" class="hero-input" placeholder="Enter your email address" id="hero-input" autocomplete="email">
                 </div>
-                <div class="wl-success" id="hero-suc">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-                    You're on the list. We'll reach out the moment doors open.
-                </div>
-                <p class="wl-note" id="hero-note">No spam. Just the launch notice.</p>
+                <button class="hero-submit" onclick="submitWL('hero-row','hero-input','hero-suc','hero-note')">
+                    Get Early Access — It's Free
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
             </div>
-            <a href="https://chat.whatsapp.com/LUqBmFgqQIL7sHntlU9CuB?mode=gi_t" target="_blank" rel="noopener" class="wa-card">
-                <div class="wa-top">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    <span class="wa-label">Join WhatsApp Group</span>
-                </div>
-                <span class="wa-sub">Early access community<br>for Nigerian business owners</span>
-            </a>
         </div>
+        <div class="hero-success" id="hero-suc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            You're on the list. We'll reach out the moment doors open.
+        </div>
+
+        <div class="hero-or">
+            <span class="hero-or-line"></span>
+            <span class="hero-or-text">or</span>
+            <span class="hero-or-line"></span>
+        </div>
+
+        <a href="https://chat.whatsapp.com/LUqBmFgqQIL7sHntlU9CuB?mode=gi_t" target="_blank" rel="noopener" class="wa-btn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#25D166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Join WhatsApp Community
+            <span class="sub">— Early access for business owners</span>
+        </a>
+
+        <p class="hero-note" id="hero-note">No spam. One email when Zaena launches. That's it.</p>
     </div>
 
-    <div class="count-strip">
-        <div class="count-item"><span class="count-dot"></span><span class="count-text">iOS &amp; Android</span></div>
-        <div class="count-item"><span class="count-dot"></span><span class="count-text">Full Web Dashboard</span></div>
-        <div class="count-item"><span class="count-dot"></span><span class="count-text">Offline-First</span></div>
-        <div class="count-item"><span class="count-dot"></span><span class="count-text">PIT &middot; CIT &middot; VAT Native</span></div>
-        <div class="count-item"><span class="count-dot"></span><span class="count-text">ZAENA Verified Trust Score</span></div>
+    <div class="proof-strip">
+        <div class="proof-item"><span class="proof-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg></span><span class="proof-text">iOS &amp; Android App</span></div>
+        <div class="proof-item"><span class="proof-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><span class="proof-text">Full Web Dashboard</span></div>
+        <div class="proof-item"><span class="proof-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 6l5 5 4-4 4 4 5-5"/><path d="M1 12l5 5 4-4 4 4 5-5"/></svg></span><span class="proof-text">Works Offline</span></div>
+        <div class="proof-item"><span class="proof-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></span><span class="proof-text">Tax Compliance Built-In</span></div>
+        <div class="proof-item"><span class="proof-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span><span class="proof-text">Staff Permissions &amp; Audit Trail</span></div>
     </div>
+
 </section>
+
+<!-- APP CLARITY BAR -->
+<div class="app-bar">
+    <div class="app-bar-inner">
+        <span class="app-bar-label">What Zaena replaces</span>
+        <div class="app-bar-points">
+            <div class="app-point"><span class="app-point-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span> Spreadsheets & notebooks</div>
+            <div class="app-point"><span class="app-point-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="8" cy="7" r="1" fill="currentColor"/><circle cx="8" cy="12" r="1" fill="currentColor"/><circle cx="8" cy="17" r="1" fill="currentColor"/></svg></span> Manual tax calculations</div>
+            <div class="app-point"><span class="app-point-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></span> Separate inventory systems</div>
+            <div class="app-point"><span class="app-point-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V2h12v7"/><rect x="6" y="17" width="12" height="5"/><path d="M6 14H4a2 2 0 01-2-2V9a2 2 0 012-2h16a2 2 0 012 2v3a2 2 0 01-2 2h-2"/></svg></span> Paper receipt books</div>
+            <div class="app-point"><span class="app-point-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span> Managing staff on guesswork</div>
+        </div>
+    </div>
+</div>
 
 <div class="divider"></div>
 
 <!-- PAIN SECTION -->
-<section class="pain">
-    <div class="pain-header reveal">
-        <p class="section-eyebrow">Why this exists</p>
-        <h2 class="section-title">Three things quietly<br><em>killing your business.</em></h2>
+<section class="pain-section">
+    <div class="pain-intro reveal">
+        <p class="section-eyebrow">Why small businesses fail silently</p>
+        <h2 class="section-title">You know the business.<br><em>But the system is failing you.</em></h2>
+        <p class="section-body">You're losing money every day without a proper system, and you're building no record of what you've actually done.</p>
     </div>
 
-    <div class="pain-grid">
-        <div class="pain-card reveal">
-            <span class="pain-icon">📋</span>
-            <div class="pain-title">The spreadsheet you built but stopped trusting</div>
-            <div class="pain-body">You organised the columns. You told yourself this was it. Then sales kept coming, and updating the spreadsheet started feeling like a second job. So one day, quietly, you stopped.</div>
-            <div class="pain-quote">"Excel is nice... until it becomes a second job."</div>
+    <div class="pain-scenarios">
+
+         <div class="scenario reveal" style="transition-delay:.16s">
+            <div class="scenario-left">
+                <div class="scenario-num">PAIN — 01</div>
+                <div class="scenario-pain">The supplier said "no".<span class="highlight"> The Bank said "no".</span> Because your business had no record.</div>
+                <div class="scenario-story">Three years in business. Real customers. Real turnover. Real reputation in your market. But when you approach a supplier for better terms, or a lender for working capital, the answer is still no — because nothing is written down in a way anyone outside your head can verify. Your track record is invisible to everyone who matters.</div>
+                <div class="scenario-quote">"I've been trading for years. I just can't prove it to anyone."</div>
+            </div>
+            <div class="scenario-right">
+                <div class="fix-label">How Zaena fixes this</div>
+                <div class="fix-item">
+                    <div class="fix-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <div class="fix-text"><strong>ZAENA Business Health Report</strong> A real-time financial profile auto-generated from your live transaction data. Verifiable. Non-editable. Shareable with suppliers and lenders.</div>
+                </div>
+                <div class="fix-item">
+                    <div class="fix-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <div class="fix-text"><strong>Trust Score</strong> Built from real transaction history — your loan ceiling, recovery rate, and inventory accuracy, calculated automatically and updated in real time.</div>
+                </div>
+            </div>
         </div>
-        <div class="pain-card reveal" style="transition-delay:.08s">
-            <span class="pain-icon">💻</span>
-            <div class="pain-title">The software that only worked on a laptop</div>
-            <div class="pain-body">You tried the big software. It was powerful — on a desktop, in an office, with reliable power. But you're in the market when a deal is happening. Your business doesn't wait for the generator to come on.</div>
-            <div class="pain-quote">"Your business shouldn't need a laptop to function."</div>
+
+        <div class="scenario reveal">
+            <div class="scenario-left">
+                <div class="scenario-num">PAIN — 02</div>
+                <div class="scenario-pain">You don't actually know <span class="highlight">how much you made</span> last month.</div>
+                <div class="scenario-story">Sales happened. Money came in. Some went out for stock, some for expenses, some you took out yourself. But right now, if someone asked "what was your profit last month?" — you'd be guessing. The notebook doesn't add up. The spreadsheet stopped getting updated two weeks ago. The number in your head doesn't account for stock shrinkage.</div>
+                <div class="scenario-quote">"I knew I was busy. I didn't know I was barely profitable."</div>
+            </div>
+            <div class="scenario-right">
+                <div class="fix-label">How Zaena fixes this</div>
+                <div class="fix-item">
+                    <div class="fix-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <div class="fix-text"><strong>Live profit dashboard</strong> Every sale recorded. Every expense tracked. Real profit, not guessed profit — on your phone screen, always.</div>
+                </div>
+                <div class="fix-item">
+                    <div class="fix-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <div class="fix-text"><strong>Profit allocation</strong> Automatically separates what's yours to take home from what belongs in the business. Stop guessing what you can spend.</div>
+                </div>
+            </div>
         </div>
-        <div class="pain-card reveal" style="transition-delay:.16s">
-            <span class="pain-icon">🤝</span>
-            <div class="pain-title">The supplier who said "no" because you had no proof</div>
-            <div class="pain-body">You wanted ₦500k of goods on credit. You've been trading for three years. But your records live in your head, your receipts are WhatsApp screenshots, and there's nothing to show. So the answer was no.</div>
-            <div class="pain-quote">"Your records are your most bankable asset."</div>
+
+        <div class="scenario reveal" style="transition-delay:.08s">
+            <div class="scenario-left">
+                <div class="scenario-num">PAIN — 03</div>
+                <div class="scenario-pain">Your staff <span class="highlight">know things</span> you don't — and that's a problem.</div>
+                <div class="scenario-story">You trust your team. But trust without visibility is just hope. When you're not at the shop, you have no way of knowing what's happening. Stock that "went missing." Discounts given that weren't authorised. A sale completed but the money didn't come in the right amount. You find out weeks later, when the numbers no longer match. By then, it's too late.</div>
+                <div class="scenario-quote">"I only found out something was wrong when the stock didn't match."</div>
+            </div>
+            <div class="scenario-right">
+                <div class="fix-label">How Zaena fixes this</div>
+                <div class="fix-item">
+                    <div class="fix-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <div class="fix-text"><strong>Role-based access control</strong> Cashiers see what cashiers need. Managers see more. Only you see everything. Set it once, monitor from anywhere.</div>
+                </div>
+                <div class="fix-item">
+                    <div class="fix-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    <div class="fix-text"><strong>Complete audit trail</strong> Every transaction, edit, and deletion — timestamped. Nothing disappears quietly. Review what happened while you were out.</div>
+                </div>
+            </div>
         </div>
+
+       
+
     </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- FEATURES -->
-<section class="features">
-    <div class="feat-header reveal">
-        <p class="section-eyebrow">Built for the market, the depot, and the workshop floor</p>
-        <h2 class="section-title">Full power.<br><em>From your phone.</em></h2>
-    </div>
-
-    <div class="feat-grid">
-        <div class="feat-cell reveal">
-            <div class="feat-num">01</div>
-            <div class="feat-name">Tap. Tap. Done.</div>
-            <div class="feat-body">Complete a sale in seconds. No dropdowns, no three-step wizards, no loading screens between screens. You should be able to sell and move on. This is the fastest POS you've used on a phone.</div>
-        </div>
-        <div class="feat-cell reveal" style="transition-delay:.07s">
-            <div class="feat-num">02</div>
-            <div class="feat-name">Separate your money.</div>
-            <div class="feat-body">Zaena's profit allocation engine separates business revenue from your personal take-home automatically. Know exactly what is the business's and what is yours to spend — every single day.</div>
-            <span class="feat-tag">For Sole Proprietors</span>
-        </div>
-        <div class="feat-cell reveal" style="transition-delay:.14s">
-            <div class="feat-num">03</div>
-            <div class="feat-name">Watch your staff from anywhere.</div>
-            <div class="feat-body">Role-based access gives every staff member exactly the permissions they need — cashier, manager, director — and nothing more. You can see what happened in your shop while you were at the bank.</div>
-            <span class="feat-tag">Peace of Mind</span>
-        </div>
-        <div class="feat-cell reveal" style="transition-delay:.07s">
-            <div class="feat-num">04</div>
-            <div class="feat-name">Receipts straight to WhatsApp.</div>
-            <div class="feat-body">Every sale generates a professional digital receipt sent directly to your customer's WhatsApp. One tap from the sales screen. No printer needed. No paper to lose. Your customer has proof, and so do you.</div>
-        </div>
-        <div class="feat-cell reveal" style="transition-delay:.14s">
-            <div class="feat-num">05</div>
-            <div class="feat-name">Works when MTN doesn't.</div>
-            <div class="feat-body">Offline-first architecture keeps Zaena running during network failures, NEPA outages, and generator switches. Your data syncs silently and automatically the moment you're back online.</div>
-            <span class="feat-tag">Offline-First</span>
-        </div>
-        <div class="feat-cell reveal" style="transition-delay:.21s">
-            <div class="feat-num">06</div>
-            <div class="feat-name">Tax-proof your business.</div>
-            <div class="feat-body">Nigerian VAT, PIT, and CIT compliance built natively — not bolted on. Your books stay ready. No spreadsheet gymnastics before the tax man comes. Zaena speaks FIRS.</div>
-            <span class="feat-tag">VAT · PIT · CIT</span>
-        </div>
-    </div>
-</section>
-
-<!-- TRUST REPORT SECTION -->
+    <!-- TRUST REPORT SECTION -->
 <section class="trust-section">
     <div class="trust-inner">
-
-        <!-- LEFT: COPY -->
         <div class="trust-copy reveal">
             <p class="section-eyebrow">The ZAENA Trust Score</p>
-            <h2 class="section-title" style="margin-bottom:20px">Your track record,<br><em>finally provable.</em></h2>
-
-            <p>Every sale you record in Zaena becomes part of something bigger than a receipt. It becomes <strong>evidence of a serious business.</strong></p>
-
-            <p>The Zaena Business Health Report is a real-time financial profile generated from your live transaction data — automatically, non-editable, and verifiable. When a supplier wants proof before granting credit, you send this. When a bank asks for your trading history, you send this.</p>
-
+            <h2 class="section-title" style="margin-bottom:20px">Your business record,<br><em>finally provable.</em></h2>
+            <p>Every sale you record in Zaena becomes evidence of a serious business. The <strong>Zaena Business Performance Report</strong> is generated automatically from your live transaction data — non-editable, verifiable, and ready to share.</p>
+            <p>When a supplier wants proof before granting credit, you send this. When a partner asks for your trading history, you send this.</p>
             <div class="trust-point">
-                <div class="trust-point-icon">🏦</div>
-                <div class="trust-point-text"><strong>Recommended loan ceiling.</strong> Calculated from your actual revenue, not guesswork — so when you walk into a negotiation, you walk in with a number.</div>
+                <div class="trust-point-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.8"><path d="M3 22h18M3 10v12M21 10v12M12 2l9 8H3l9-8z"/><rect x="9" y="14" width="6" height="8"/></svg></div>
+                <div class="trust-point-text"><strong>Recommended loan ceiling</strong> Calculated from your actual revenue — so you walk into a negotiation with a real number, not a guess.</div>
             </div>
             <div class="trust-point">
-                <div class="trust-point-icon">📦</div>
-                <div class="trust-point-text"><strong>Wholesaler-to-retailer trust.</strong> A supplier can see that you've moved ₦4M in the last 90 days. That's the only conversation you need to have about credit terms.</div>
+                <div class="trust-point-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.8"><path d="M12 2l10 6v8l-10 6L2 16V8l10-6z"/><path d="M2 8l10 6 10-6M12 14v8"/></svg></div>
+                <div class="trust-point-text"><strong>Supplier credit proof</strong> Show a potential supplier your verified turnover for the last 90 days. That's the only conversation you need to have about credit terms.</div>
             </div>
             <div class="trust-point">
-                <div class="trust-point-icon">🛡️</div>
-                <div class="trust-point-text"><strong>Live recording rate.</strong> Because records that are backdated after the fact carry lower weight. The system rewards honest, real-time behaviour — which is exactly what the market needs to trust.</div>
+                <div class="trust-point-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                <div class="trust-point-text"><strong>Live recording rate</strong> Records backdated after the fact carry lower weight. The score rewards real-time honest behaviour — the only kind worth trusting.</div>
             </div>
         </div>
 
-        <!-- RIGHT: HEALTH REPORT CARD -->
         <div class="reveal" style="transition-delay:.12s">
             <div class="report-card">
                 <div class="report-header">
                     <div>
-                        <div class="report-merchant">Oluaka Spare Parts &amp; Co.</div>
+                        <div class="report-merchant">Rex Co.</div>
                         <div class="report-id">ZAENA ID: NV-9928-LA</div>
                     </div>
                     <div class="report-score-badge">
@@ -785,232 +731,154 @@
                         <div class="report-score-tier">Elite Merchant</div>
                     </div>
                 </div>
-
                 <div class="report-body">
                     <div class="report-section-title">Financial Vital Signs</div>
                     <div class="report-metrics">
-                        <div class="report-metric">
-                            <div class="metric-label">Verified Turnover (90 Days)</div>
-                            <div class="metric-value gold">₦4,250,000</div>
-                        </div>
-                        <div class="report-metric">
-                            <div class="metric-label">Avg. Monthly Profit</div>
-                            <div class="metric-value green">₦820,000</div>
-                        </div>
-                        <div class="report-metric">
-                            <div class="metric-label">Profit Margin Stability</div>
-                            <div class="metric-value">18.5% Consistent</div>
-                        </div>
-                        <div class="report-metric">
-                            <div class="metric-label">Expense Tracking Ratio</div>
-                            <div class="metric-value green">94% High</div>
-                        </div>
+                        <div class="report-metric"><div class="metric-label">Verified Turnover (90 Days)</div><div class="metric-value gold">$28,400</div></div>
+                        <div class="report-metric"><div class="metric-label">Avg. Monthly Profit</div><div class="metric-value green">$5,460</div></div>
+                        <div class="report-metric"><div class="metric-label">Profit Margin Stability</div><div class="metric-value">18.5% Consistent</div></div>
+                        <div class="report-metric"><div class="metric-label">Expense Tracking Ratio</div><div class="metric-value green">94% High</div></div>
                     </div>
-
                     <div class="report-section-title">Trust Indicators</div>
-                    <div class="trust-bars" id="trust-bars">
-                        <div class="trust-bar-row">
-                            <span class="trust-bar-label">Live Recording Rate</span>
-                            <div class="trust-bar-track"><div class="trust-bar-fill" data-pct="92" style="width:0%"></div></div>
-                            <span class="trust-bar-val">92%</span>
-                        </div>
-                        <div class="trust-bar-row">
-                            <span class="trust-bar-label">Customer Retention</span>
-                            <div class="trust-bar-track"><div class="trust-bar-fill" data-pct="42" style="width:0%"></div></div>
-                            <span class="trust-bar-val">42%</span>
-                        </div>
-                        <div class="trust-bar-row">
-                            <span class="trust-bar-label">Debt Recovery Index</span>
-                            <div class="trust-bar-track"><div class="trust-bar-fill" data-pct="88" style="width:0%"></div></div>
-                            <span class="trust-bar-val">88%</span>
-                        </div>
-                        <div class="trust-bar-row">
-                            <span class="trust-bar-label">Inventory Accuracy</span>
-                            <div class="trust-bar-track"><div class="trust-bar-fill" data-pct="96" style="width:0%"></div></div>
-                            <span class="trust-bar-val">96%</span>
-                        </div>
+                    <div class="trust-bars">
+                        <div class="trust-bar-row"><span class="trust-bar-label">Live Recording Rate</span><div class="trust-bar-track"><div class="trust-bar-fill" data-pct="92" style="width:0%"></div></div><span class="trust-bar-val">92%</span></div>
+                        <div class="trust-bar-row"><span class="trust-bar-label">Customer Retention</span><div class="trust-bar-track"><div class="trust-bar-fill" data-pct="42" style="width:0%"></div></div><span class="trust-bar-val">42%</span></div>
+                        <div class="trust-bar-row"><span class="trust-bar-label">Debt Recovery Index</span><div class="trust-bar-track"><div class="trust-bar-fill" data-pct="88" style="width:0%"></div></div><span class="trust-bar-val">88%</span></div>
+                        <div class="trust-bar-row"><span class="trust-bar-label">Inventory Accuracy</span><div class="trust-bar-track"><div class="trust-bar-fill" data-pct="96" style="width:0%"></div></div><span class="trust-bar-val">96%</span></div>
                     </div>
-
                     <div class="report-loan">
-                        <div class="loan-label">
-                            <strong>Recommended Loan Ceiling</strong>
-                            Based on 3× verified monthly net profit
-                        </div>
-                        <div class="loan-amount">₦1.5M</div>
+                        <div class="loan-label"><strong>Recommended Loan Ceiling</strong>Based on 3× verified monthly net profit</div>
+                        <div class="loan-amount">$16,380</div>
                     </div>
                 </div>
-
-                <div class="report-footer">
-                    Generated from real-time, non-editable transaction data · Verified via WhatsApp digital audit trail
-                </div>
+                <div class="report-footer">Generated from real-time, non-editable transaction data · Verified via digital audit trail</div>
             </div>
         </div>
-
     </div>
 </section>
 
-<div class="divider"></div>
 
-<!-- MOBILE SECTION -->
-<section class="mobile-section">
-    <div class="mobile-inner">
-
-        <div class="mobile-copy reveal">
-            <p class="section-eyebrow">Full power. Zero laptop.</p>
-            <h2 class="section-title" style="margin-bottom:24px">Complex tasks.<br><em>6-inch screen.</em></h2>
-
-            <p>Other software made us watch a fifteen-minute demo just to complete one sale. We timed it. You shouldn't need a manual to run your own business.</p>
-
-            <p>Zaena was built mobile-first because that's where Nigerian business actually happens — in the market, at the depot gate, on the workshop floor. The web dashboard is just as capable. But you shouldn't need it to do your job.</p>
-
-            <div class="mobile-specs">
-                <div class="mobile-spec">
-                    <span class="ms-icon">⚡</span>
-                    <div class="ms-text">
-                        <strong>Profit allocation on a phone screen</strong>
-                        Separate personal from business income. Fully automated. No calculations.
-                    </div>
-                </div>
-                <div class="mobile-spec">
-                    <span class="ms-icon">👥</span>
-                    <div class="ms-text">
-                        <strong>RBAC from the palm of your hand</strong>
-                        Revoke staff access, change roles, and review permissions anywhere, anytime.
-                    </div>
-                </div>
-                <div class="mobile-spec">
-                    <span class="ms-icon">🏭</span>
-                    <div class="ms-text">
-                        <strong>Manufacturing & BOM support</strong>
-                        Bill of Materials, production orders, and raw material tracking — all on mobile.
-                    </div>
-                </div>
-                <div class="mobile-spec">
-                    <span class="ms-icon">🔍</span>
-                    <div class="ms-text">
-                        <strong>Complete audit trail</strong>
-                        Every transaction, edit, and deletion — timestamped and visible to authorised roles. Nothing disappears quietly.
-                    </div>
-                </div>
-            </div>
+<!-- WHAT IS ZAENA -->
+<section class="what-section">
+    <div class="what-inner">
+        <div class="what-header reveal">
+            <p class="section-eyebrow">Everything inside the app</p>
+            <h2 class="section-title">One app. <em>Runs your whole business.</em></h2>
         </div>
-
-        <!-- Phone Mockup -->
-        <div class="phone-mockup reveal" style="transition-delay:.1s">
-            <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                    <div class="ps-header">
-                        <span class="ps-title">Dashboard</span>
-                        <span class="ps-badge">● LIVE</span>
-                    </div>
-                    <div class="ps-metric-row">
-                        <div class="ps-metric">
-                            <div class="ps-metric-label">Today's Sales</div>
-                            <div class="ps-metric-val gold">₦84,500</div>
-                        </div>
-                        <div class="ps-metric">
-                            <div class="ps-metric-label">Net Profit</div>
-                            <div class="ps-metric-val">₦21,200</div>
-                        </div>
-                        <div class="ps-metric">
-                            <div class="ps-metric-label">In Stock</div>
-                            <div class="ps-metric-val">142 items</div>
-                        </div>
-                        <div class="ps-metric">
-                            <div class="ps-metric-label">VAT Due</div>
-                            <div class="ps-metric-val">₦4,225</div>
-                        </div>
-                    </div>
-                    <div class="ps-chart">
-                        <div class="ps-bar" style="height:55%"></div>
-                        <div class="ps-bar" style="height:72%"></div>
-                        <div class="ps-bar" style="height:48%"></div>
-                        <div class="ps-bar" style="height:88%"></div>
-                        <div class="ps-bar" style="height:65%"></div>
-                        <div class="ps-bar" style="height:91%"></div>
-                        <div class="ps-bar active" style="height:78%"></div>
-                    </div>
-                    <div class="ps-sale-row">
-                        <span class="ps-sale-name">Engine Oil 5W-30 (×4)</span>
-                        <span class="ps-sale-amt">₦18,000</span>
-                    </div>
-                    <div class="ps-sale-row">
-                        <span class="ps-sale-name">Air Filter — Toyota</span>
-                        <span class="ps-sale-amt">₦4,500</span>
-                    </div>
-                    <div class="ps-sale-row">
-                        <span class="ps-sale-name">Brake Pad Set (×2)</span>
-                        <span class="ps-sale-amt">₦12,000</span>
-                    </div>
-                    <div class="ps-cta-btn">+ New Sale</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- BOTTOM CTA -->
-<div class="bottom-cta">
-    <div class="cta-inner reveal">
-        <div class="cta-rule"></div>
-        <h2 class="cta-headline">Be first.<br><em>Build your record early.</em></h2>
-        <p class="cta-sub">
-            Every day you run your business without Zaena is a day your transaction history isn't building. 
-            The merchants who join first will have the longest verified records when it matters most.
+        <p class="what-definition reveal" style="transition-delay:.08s">
+            Zaena is a <strong>mobile-first business management system</strong> — the kind of software that usually only works on expensive computers, now built to run fully and powerfully on a phone.
         </p>
 
-        <div class="wl-wrap-b">
-            <div class="wl-pair">
-                <div class="wl-email-col">
-                    <div class="wl-row-b" id="bot-row">
-                        <input type="email" class="wl-input-b" placeholder="your@email.com" id="bot-input" autocomplete="email">
-                        <button class="wl-btn-b" onclick="submitWL('bot-row','bot-input','bot-suc','bot-note')">
-                            Join the Waitlist
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </button>
-                    </div>
-                    <div class="wl-success-b" id="bot-suc">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-                        You're on the list. We'll reach out when Zaena launches.
-                    </div>
-                    <p class="wl-note-b" id="bot-note">No spam. Just the launch notice when it's ready.</p>
-                </div>
-                <a href="https://chat.whatsapp.com/LUqBmFgqQIL7sHntlU9CuB?mode=gi_t" target="_blank" rel="noopener" class="wa-card-dark">
-                    <div class="wa-top">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        <span class="wa-label">Join WhatsApp Group</span>
-                    </div>
-                    <span class="wa-sub">Early access community<br>for Nigerian business owners</span>
-                </a>
+        <div class="what-grid">
+            <div class="what-cell reveal">
+                <span class="what-cell-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+                <div class="what-cell-num">01</div>
+                <div class="what-cell-name">Point of Sale — Tap. Tap. Done.</div>
+                <div class="what-cell-body">Complete a sale in seconds. No multi-step wizards, no loading screens, no confusion. The fastest POS you've run on a phone. Built for a counter with ten customers waiting.</div>
+            </div>
+            <div class="what-cell reveal" style="transition-delay:.07s">
+                <span class="what-cell-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M9 9h4.5a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3H15"/></svg></span>
+                <div class="what-cell-num">02</div>
+                <div class="what-cell-name">Profit Allocation — Separate your money.</div>
+                <div class="what-cell-body">Automatically splits business revenue from your personal take-home. Know exactly what's yours to spend versus what the business needs to survive — every single day.</div>
+                <span class="what-cell-tag">Sole Proprietors</span>
+            </div>
+            <div class="what-cell reveal" style="transition-delay:.14s">
+                <span class="what-cell-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>
+                <div class="what-cell-num">03</div>
+                <div class="what-cell-name">Staff Control — Watch from anywhere.</div>
+                <div class="what-cell-body">Role-based access for every team member. Cashier, manager, director — each sees only what they need. You see everything. Revoke access from your phone in seconds.</div>
+                <span class="what-cell-tag">Peace of Mind</span>
+            </div>
+            <div class="what-cell reveal" style="transition-delay:.07s">
+                <span class="what-cell-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.6"><path d="M12 2l10 6v8l-10 6L2 16V8l10-6z"/><path d="M2 8l10 6 10-6M12 14v8"/></svg></span>
+                <div class="what-cell-num">04</div>
+                <div class="what-cell-name">Inventory — Know exactly what you have.</div>
+                <div class="what-cell-body">Real-time stock levels, low-stock alerts, bulk pricing tiers, and manufacturing BOM support. Your stock count is always accurate, not remembered.</div>
+            </div>
+            <div class="what-cell reveal" style="transition-delay:.14s">
+                <span class="what-cell-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.6"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></span>
+                <div class="what-cell-num">05</div>
+                <div class="what-cell-name">Tax Compliance — Tax-proof your books.</div>
+                <div class="what-cell-body">VAT, income tax, and corporate tax compliance built natively. Your books stay ready. No spreadsheet scramble before the tax man comes.</div>
+                <span class="what-cell-tag">VAT · PIT · CIT</span>
+            </div>
+            <div class="what-cell reveal" style="transition-delay:.21s">
+                <span class="what-cell-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.6"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 010 8.49M7.76 16.24a6 6 0 010-8.49M19.07 4.93a10 10 0 010 14.14M4.93 19.07a10 10 0 010-14.14"/></svg></span>
+                <div class="what-cell-num">06</div>
+                <div class="what-cell-name">Works Online. Works Offline. Works Always.</div>
+                <div class="what-cell-body">Power cuts. Weak signal. Network downtime. Zaena keeps running and syncs silently when you're back online. Your business doesn't stop because the internet did.</div>
+                <span class="what-cell-tag">Always On</span>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+    <div class="cta-inner reveal">
+        <p class="cta-eyebrow">Early access · Free to join</p>
+        <h2 class="cta-headline">
+            Your business deserves<br>
+            <em>a real system.</em>
+        </h2>
+        <p class="cta-sub">
+            Join the waitlist and be first in line when Zaena launches. The merchants who start first will have the longest verified track record when it matters most.
+        </p>
+
+        <p class="cta-form-label">Enter your email to get early access</p>
+        <div id="bot-row">
+            <div class="cta-input-row">
+                <input type="email" class="cta-input" placeholder="your@email.com" id="bot-input" autocomplete="email">
+                <button class="cta-btn" onclick="submitWL('bot-row','bot-input','bot-suc','bot-note')">
+                    Join the Waitlist
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="cta-success" id="bot-suc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            You're on the list. We'll reach out when Zaena launches.
+        </div>
+
+        <div class="cta-divider"><span class="cta-divider-line"></span><span class="cta-divider-text">or join the community</span><span class="cta-divider-line"></span></div>
+
+        <a href="https://chat.whatsapp.com/LUqBmFgqQIL7sHntlU9CuB?mode=gi_t" target="_blank" rel="noopener" class="cta-wa">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Join WhatsApp Community
+            <span class="sub">· Early access for business owners</span>
+        </a>
+
+        <p class="cta-note" id="bot-note">No spam. One email when Zaena launches. That's it.</p>
+    </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
-    <span class="footer-copy">© 2026 Toledah Technologies Limited. Zaena Business OS.</span>
+    <span class="footer-copy">© 2026 Toledah Technologies Limited · Zaena Business OS</span>
     <span class="footer-copy">The Infrastructure of Growth.</span>
 </footer>
 
 <script>
-    const SUPABASE_URL  = 'https://xgjeyphgmekakpvttjhr.supabase.co';
-    const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnamV5cGhnbWVrYWtwdnR0amhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4MTU2MjgsImV4cCI6MjA4MTM5MTYyOH0.45mb9tVTAhI7r2SFLYZcg8QvZWqLWecbDxshVFOO8rw';
+    const SUPABASE_URL = 'https://xgjeyphgmekakpvttjhr.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnamV5cGhnbWVrYWtwdnR0amhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4MTU2MjgsImV4cCI6MjA4MTM5MTYyOH0.45mb9tVTAhI7r2SFLYZcg8QvZWqLWecbDxshVFOO8rw';
 
     async function submitWL(rowId, inputId, sucId, noteId) {
         const input = document.getElementById(inputId);
         const row   = document.getElementById(rowId);
         const suc   = document.getElementById(sucId);
         const note  = noteId ? document.getElementById(noteId) : null;
+        const inputRow = row.querySelector('.hero-input-row, .cta-input-row');
         const btn   = row.querySelector('button');
         const val   = input.value.trim();
 
         if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-            row.classList.add('shake');
+            if (inputRow) {
+                inputRow.classList.add('shake');
+                inputRow.addEventListener('animationend', () => inputRow.classList.remove('shake'), { once: true });
+            }
             input.focus();
-            row.addEventListener('animationend', () => row.classList.remove('shake'), { once: true });
             return;
         }
 
@@ -1031,7 +899,7 @@
             });
 
             if (res.ok || res.status === 409) {
-                row.style.display = 'none';
+                if (inputRow) inputRow.style.display = 'none';
                 if (note) note.style.visibility = 'hidden';
                 suc.classList.add('show');
             } else {
@@ -1041,7 +909,7 @@
             btn.disabled = false;
             btn.style.opacity = '1';
             btn.innerHTML = 'Try again';
-            setTimeout(() => { btn.innerHTML = 'Get Early Access'; }, 3000);
+            setTimeout(() => { btn.innerHTML = rowId === 'hero-row' ? 'Get Early Access' : 'Join the Waitlist'; }, 3000);
         }
     }
 
@@ -1050,10 +918,6 @@
         entries.forEach(e => {
             if (e.isIntersecting) {
                 e.target.classList.add('visible');
-                // Animate trust bars when the report card becomes visible
-                if (e.target.querySelector && e.target.querySelector('[data-pct]')) {
-                    animateBars();
-                }
             }
         });
     }, { threshold: 0.08 });
@@ -1066,14 +930,9 @@
             setTimeout(() => { bar.style.width = pct + '%'; }, 200);
         });
     }
-
-    // Also trigger if trust section is already visible on load
     const trustSection = document.querySelector('.trust-section');
     const trustObserver = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-            animateBars();
-            trustObserver.disconnect();
-        }
+        if (entries[0].isIntersecting) { animateBars(); trustObserver.disconnect(); }
     }, { threshold: 0.1 });
     if (trustSection) trustObserver.observe(trustSection);
 </script>
