@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — Zaena Business OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Paystack SDK -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <!-- Monnify SDK -->
+    <script src="https://sdk.monnify.com/plugin/monnify.js"></script>
+
+    <style>
+        :root {
+            --teal-deep:    #0E2931;
+            --teal-mid:     #12484C;
+            --teal-bright:  #2B7574;
+            --teal-glow:    rgba(43,117,116,0.15);
+            --gold:         #C9922A;
+            --gold-soft:    rgba(201,146,42,0.10);
+            --graphite:     #0b0b0b;
+            --g800:         #141414;
+            --air:          #EEEEED;
+            --light-bg:     #F4F2EE;
+            --light-surface:#FFFFFF;
+            --light-text:   #1a1a1a;
+            --light-muted:  #5a5a5a;
+            --light-border: rgba(14,41,49,0.12);
+            --border-teal:  rgba(43,117,116,0.22);
+            --border-dim:   rgba(238,238,237,0.07);
+            --danger:       #d94f4f;
+            --success:      #2e9e6e;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--light-bg);
+            color: var(--light-text);
+            min-height: 100vh;
+        }
+
+        /* ── MINIMAL NAV ── */
+        .checkout-nav {
+            height: 56px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 32px;
+            background: var(--graphite);
+            border-bottom: 1px solid var(--border-dim);
+            position: sticky; top: 0; z-index: 50;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .nav-mark {
+            width: 28px; height: 28px;
+            background: var(--teal-deep); border: 1px solid var(--border-teal);
+            border-radius: 7px; display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant Garamond', serif; font-size: 0.9rem;
+            font-weight: 600; color: var(--gold);
+        }
+        .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
+        .nav-parent { font-size: 0.45rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 1px; }
+        .nav-name   { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--air); }
+        .nav-secure {
+            display: flex; align-items: center; gap: 7px;
+            font-size: 0.65rem; font-weight: 400; color: rgba(238,238,237,0.45);
+        }
+        .nav-back {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 0.72rem; font-weight: 400; color: rgba(238,238,237,0.45);
+            text-decoration: none; transition: color 0.2s;
+        }
+        .nav-back:hover { color: rgba(238,238,237,0.75); }
+
+        /* ── INTL BANNER ── */
+        .intl-banner {
+            display: none;
+            background: rgba(201,146,42,0.08);
+            border-bottom: 1px solid rgba(201,146,42,0.18);
+            padding: 10px 32px;
+            font-size: 0.68rem; color: var(--light-muted); text-align: center;
+        }
+        .intl-banner strong { color: var(--light-text); }
+
+        /* ── LAYOUT ── */
+        .checkout-layout {
+            max-width: 1020px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 420px;
+            gap: 0; min-height: calc(100vh - 56px);
+        }
+        @media (max-width: 820px) {
+            .checkout-layout { grid-template-columns: 1fr; }
+        }
+
+        /* ── LEFT — PAYMENT FORM ── */
+        .checkout-left {
+            padding: 40px 48px 60px 40px;
+            border-right: 1px solid var(--light-border);
+            background: var(--light-surface);
+        }
+        @media (max-width: 820px) {
+            .checkout-left { padding: 32px 24px; border-right: none; border-bottom: 1px solid var(--light-border); }
+        }
+
+        .checkout-step-label {
+            font-size: 0.58rem; font-weight: 600; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--teal-bright); margin-bottom: 6px;
+        }
+        .checkout-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem; font-weight: 500; letter-spacing: -0.02em;
+            color: var(--light-text); line-height: 1.1; margin-bottom: 32px;
+        }
+
+        /* ── BILLING CYCLE TOGGLE ── */
+        .billing-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 16px; border-radius: 10px;
+            background: var(--light-bg); border: 1px solid var(--light-border);
+            margin-bottom: 28px;
+        }
+        .billing-row-label { font-size: 0.75rem; font-weight: 500; color: var(--light-text); }
+        .billing-row-label span { font-size: 0.68rem; font-weight: 300; color: var(--light-muted); display: block; margin-top: 2px; }
+        .billing-toggle-mini {
+            display: flex; align-items: center;
+            background: var(--light-surface);
+            border: 1px solid var(--light-border);
+            border-radius: 30px; padding: 3px; gap: 2px;
+        }
+        .btm-btn {
+            padding: 6px 16px; border-radius: 24px; border: none;
+            font-family: 'Sora', sans-serif; font-size: 0.7rem; font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
+            background: transparent; color: var(--light-muted);
+        }
+        .btm-btn.active {
+            background: var(--teal-deep); color: white;
+            box-shadow: 0 2px 8px rgba(14,41,49,0.2);
+        }
+        .annual-save-tag {
+            font-size: 0.6rem; font-weight: 600; color: var(--gold);
+            background: var(--gold-soft); border: 1px solid rgba(201,146,42,0.2);
+            padding: 2px 8px; border-radius: 10px; margin-left: 6px;
+        }
+
+        /* ── FORM FIELDS ── */
+        .form-section-title {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--teal-bright);
+            margin-bottom: 14px; margin-top: 28px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .form-section-title::after { content: ''; flex: 1; height: 1px; background: var(--light-border); }
+
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+        .field-row.single { grid-template-columns: 1fr; }
+        .field { display: flex; flex-direction: column; gap: 6px; }
+        .field label {
+            font-size: 0.68rem; font-weight: 500; color: var(--light-muted);
+            letter-spacing: 0.02em;
+        }
+        .field input, .field select {
+            width: 100%; padding: 12px 14px;
+            background: var(--light-bg);
+            border: 1.5px solid var(--light-border);
+            border-radius: 9px; outline: none;
+            font-family: 'Sora', sans-serif; font-size: 0.85rem;
+            font-weight: 300; color: var(--light-text);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: none;
+        }
+        .field input:focus, .field select:focus {
+            border-color: var(--teal-bright);
+            box-shadow: 0 0 0 3px rgba(43,117,116,0.1);
+            background: var(--light-surface);
+        }
+        .field input.error { border-color: var(--danger); }
+        .field-error {
+            font-size: 0.62rem; color: var(--danger); font-weight: 400;
+            display: none; margin-top: -2px;
+        }
+        .field-error.show { display: block; }
+        .field input::placeholder { color: rgba(90,90,90,0.45); }
+
+        /* ── PAYMENT METHOD SELECTOR ── */
+        .payment-methods { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+        .pm-option {
+            border: 1.5px solid var(--light-border);
+            border-radius: 11px; overflow: hidden;
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+        .pm-option.selected { border-color: var(--teal-bright); }
+        .pm-option.selected .pm-header { background: rgba(43,117,116,0.04); }
+
+        .pm-header {
+            display: flex; align-items: center; gap: 14px;
+            padding: 14px 16px;
+            transition: background 0.2s;
+        }
+        .pm-header:hover { background: var(--light-bg); }
+        .pm-radio {
+            width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+            border: 2px solid var(--light-border);
+            display: flex; align-items: center; justify-content: center;
+            transition: border-color 0.2s;
+        }
+        .pm-option.selected .pm-radio { border-color: var(--teal-bright); }
+        .pm-radio-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--teal-bright); opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            transform: scale(0.5);
+        }
+        .pm-option.selected .pm-radio-dot { opacity: 1; transform: scale(1); }
+
+        .pm-icon {
+            width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.65rem; font-weight: 700; letter-spacing: 0.04em;
+        }
+        .pm-icon.paystack { background: #00c3f7; color: white; }
+        .pm-icon.monnify  { background: #1a1a2e; color: #e8c060; }
+
+        .pm-info { flex: 1; }
+        .pm-name { font-size: 0.82rem; font-weight: 600; color: var(--light-text); margin-bottom: 2px; }
+        .pm-desc { font-size: 0.68rem; font-weight: 300; color: var(--light-muted); line-height: 1.4; }
+        .pm-badge {
+            font-size: 0.55rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; padding: 3px 8px; border-radius: 20px;
+            white-space: nowrap; flex-shrink: 0;
+        }
+        .badge-rec { color: var(--teal-bright); background: rgba(43,117,116,0.08); border: 1px solid rgba(43,117,116,0.18); }
+        .badge-pop { color: var(--gold); background: var(--gold-soft); border: 1px solid rgba(201,146,42,0.2); }
+
+        /* Payment method detail panels */
+        .pm-detail {
+            display: none;
+            padding: 0 16px 16px;
+            border-top: 1px solid var(--light-border);
+            background: rgba(43,117,116,0.02);
+        }
+        .pm-option.selected .pm-detail { display: block; }
+        .pm-detail-note {
+            font-size: 0.72rem; font-weight: 300; color: var(--light-muted);
+            line-height: 1.65; padding-top: 14px;
+        }
+        .pm-detail-note strong { color: var(--light-text); font-weight: 500; }
+        .pm-detail-note a { color: var(--teal-bright); text-decoration: none; }
+
+        /* ── SUBMIT BUTTON ── */
+        .submit-wrap { margin-top: 28px; }
+        .submit-btn {
+            width: 100%; padding: 17px 24px;
+            background: var(--teal-bright); color: white; border: none;
+            border-radius: 11px; cursor: pointer;
+            font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 700;
+            letter-spacing: 0.01em;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 6px 24px rgba(43,117,116,0.35);
+            animation: ctaPulse 3s ease-in-out 1s infinite;
+        }
+        @keyframes ctaPulse {
+            0%,100% { box-shadow: 0 6px 24px rgba(43,117,116,0.35); }
+            50%      { box-shadow: 0 8px 36px rgba(43,117,116,0.55); }
+        }
+        .submit-btn:hover { background: #2e8180; transform: translateY(-2px); animation: none; box-shadow: 0 10px 36px rgba(43,117,116,0.5); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; animation: none; }
+        .submit-btn .spinner {
+            width: 16px; height: 16px; border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            animation: spin 0.7s linear infinite;
+            display: none;
+        }
+        .submit-btn.loading .spinner { display: block; }
+        .submit-btn.loading .btn-text { opacity: 0.7; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .submit-note {
+            text-align: center; margin-top: 12px;
+            font-size: 0.62rem; color: var(--light-muted); line-height: 1.6;
+        }
+        .security-badges {
+            display: flex; align-items: center; justify-content: center; gap: 16px;
+            margin-top: 16px; flex-wrap: wrap;
+        }
+        .sec-badge {
+            display: flex; align-items: center; gap: 5px;
+            font-size: 0.6rem; font-weight: 400; color: rgba(90,90,90,0.6);
+        }
+
+        /* ── RIGHT — ORDER SUMMARY ── */
+        .checkout-right {
+            background: var(--teal-deep);
+            padding: 40px 32px 60px;
+            position: relative; overflow: hidden;
+        }
+        .checkout-right::before {
+            content: '';
+            position: absolute; top: -60px; right: -60px;
+            width: 300px; height: 300px;
+            background: radial-gradient(ellipse, rgba(43,117,116,0.3) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        @media (max-width: 820px) {
+            .checkout-right { order: -1; padding: 28px 24px 32px; }
+        }
+
+        .summary-label {
+            font-size: 0.58rem; font-weight: 600; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--teal-bright); margin-bottom: 20px;
+        }
+
+        /* Plan summary card */
+        .plan-summary {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(43,117,116,0.25);
+            border-radius: 14px; overflow: hidden;
+            margin-bottom: 24px; position: relative; z-index: 1;
+        }
+        .plan-summary::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--teal-bright), var(--gold));
+        }
+        .plan-summary-top {
+            padding: 18px 20px 14px;
+            border-bottom: 1px solid rgba(43,117,116,0.15);
+        }
+        .plan-summary-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem; font-weight: 500; color: var(--air); margin-bottom: 2px;
+        }
+        .plan-summary-tier {
+            font-size: 0.62rem; font-weight: 400; color: rgba(238,238,237,0.5);
+        }
+        .plan-summary-body { padding: 14px 20px; }
+        .summary-feat {
+            display: flex; align-items: center; gap: 9px;
+            font-size: 0.72rem; font-weight: 300; color: rgba(238,238,237,0.68);
+            margin-bottom: 7px; line-height: 1.4;
+        }
+        .summary-feat-check {
+            width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0;
+            background: rgba(43,117,116,0.15); border: 1px solid rgba(43,117,116,0.3);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Price breakdown */
+        .price-breakdown {
+            position: relative; z-index: 1;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(43,117,116,0.2);
+            border-radius: 12px; padding: 18px 20px;
+            margin-bottom: 20px;
+        }
+        .price-line {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .price-line:last-child { margin-bottom: 0; }
+        .price-line-label { font-size: 0.72rem; font-weight: 300; color: rgba(238,238,237,0.6); }
+        .price-line-val {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.78rem; color: rgba(238,238,237,0.8);
+        }
+        .price-line.total {
+            border-top: 1px solid rgba(43,117,116,0.2);
+            padding-top: 12px; margin-top: 4px;
+        }
+        .price-line.total .price-line-label { font-size: 0.78rem; font-weight: 500; color: var(--air); }
+        .price-line.total .price-line-val {
+            font-size: 1.1rem; font-weight: 500; color: var(--gold);
+        }
+        .price-line.discount .price-line-val { color: #4caf82; }
+
+        /* Founding member banner */
+        .founding-banner {
+            position: relative; z-index: 1;
+            background: linear-gradient(135deg, rgba(201,146,42,0.1), rgba(43,117,116,0.1));
+            border: 1px solid rgba(201,146,42,0.25);
+            border-radius: 10px; padding: 14px 16px;
+            margin-bottom: 20px;
+            display: flex; align-items: flex-start; gap: 10px;
+        }
+        .founding-banner-icon { flex-shrink: 0; margin-top: 1px; }
+        .founding-banner-text { font-size: 0.72rem; font-weight: 300; color: rgba(238,238,237,0.72); line-height: 1.55; }
+        .founding-banner-text strong { color: var(--gold); font-weight: 600; display: block; margin-bottom: 2px; font-size: 0.76rem; }
+
+        /* Change plan link */
+        .change-plan {
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            position: relative; z-index: 1;
+            font-size: 0.65rem; color: rgba(238,238,237,0.4);
+            text-decoration: none; transition: color 0.2s;
+        }
+        .change-plan:hover { color: rgba(238,238,237,0.7); }
+
+        /* ── SUCCESS STATE ── */
+        .success-overlay {
+            display: none;
+            position: fixed; inset: 0; z-index: 200;
+            background: rgba(11,11,11,0.92);
+            backdrop-filter: blur(12px);
+            align-items: center; justify-content: center;
+        }
+        .success-overlay.show { display: flex; }
+        .success-card {
+            background: var(--teal-deep);
+            border: 1px solid rgba(43,117,116,0.4);
+            border-radius: 20px; padding: 52px 44px;
+            text-align: center; max-width: 460px; width: 90%;
+            position: relative; overflow: hidden;
+            animation: scaleIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+        }
+        @keyframes scaleIn { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
+        .success-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--teal-bright), var(--gold));
+        }
+        .success-icon {
+            width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 24px;
+            background: rgba(43,117,116,0.15); border: 2px solid var(--teal-bright);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .success-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem; font-weight: 500; color: var(--air); margin-bottom: 12px;
+        }
+        .success-sub { font-size: 0.82rem; font-weight: 300; color: rgba(238,238,237,0.65); line-height: 1.75; margin-bottom: 28px; }
+        .success-ref {
+            font-family: 'DM Mono', monospace; font-size: 0.65rem;
+            color: var(--teal-bright); background: rgba(43,117,116,0.1);
+            border: 1px solid rgba(43,117,116,0.2);
+            padding: 8px 14px; border-radius: 6px; display: inline-block;
+            margin-bottom: 28px; letter-spacing: 0.08em;
+        }
+        .success-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 13px 28px; border-radius: 10px;
+            background: var(--teal-bright); color: white; border: none;
+            font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600;
+            cursor: pointer; text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .success-btn:hover { background: #2e8180; transform: translateY(-1px); }
+
+        /* ── PLAN SELECTOR (if no URL param) ── */
+        .plan-picker {
+            display: none;
+            flex-direction: column; gap: 8px;
+            margin-bottom: 24px;
+        }
+        .plan-picker.show { display: flex; }
+        .plan-pick-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px; border-radius: 9px; cursor: pointer;
+            border: 1.5px solid var(--light-border);
+            background: var(--light-bg);
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .plan-pick-item:hover { border-color: var(--teal-bright); background: rgba(43,117,116,0.03); }
+        .plan-pick-item.active { border-color: var(--teal-bright); background: rgba(43,117,116,0.05); }
+        .ppi-name { font-size: 0.82rem; font-weight: 600; color: var(--light-text); }
+        .ppi-price { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--teal-bright); }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+
+        @media (max-width: 520px) {
+            .checkout-nav { padding: 0 16px; }
+            .field-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="checkout-nav">
+    <a href="index.html" class="nav-logo">
+        <div class="nav-mark">Z</div>
+        <div class="nav-wordmark">
+            <span class="nav-parent">Toledah</span>
+            <span class="nav-name">Zaena</span>
+        </div>
+    </a>
+    <div class="nav-secure">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Secure Checkout
+    </div>
+    <a href="zaena-pricing.html" class="nav-back">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to Pricing
+    </a>
+</nav>
+
+<!-- INTL BANNER -->
+<div class="intl-banner" id="intl-banner">
+    <strong>International payment note:</strong> All payments are processed in Nigerian Naira (NGN). Your card provider will apply the conversion at their current rate. Additional conversion fees may apply.
+</div>
+
+<!-- LAYOUT -->
+<div class="checkout-layout">
+
+    <!-- LEFT — FORM -->
+    <div class="checkout-left fade-in">
+
+        <div class="checkout-step-label">Complete your subscription</div>
+        <h1 class="checkout-title">You're one step away.</h1>
+
+        <!-- Plan picker (shown if no URL param) -->
+        <div id="plan-picker-wrap">
+            <div class="form-section-title">Choose your plan</div>
+            <div class="plan-picker show" id="plan-picker">
+                <div class="plan-pick-item active" onclick="selectPlan('trader')" data-plan="trader">
+                    <span class="ppi-name">The Trader</span>
+                    <span class="ppi-price" id="pick-trader">₦4,500/mo</span>
+                </div>
+                <div class="plan-pick-item" onclick="selectPlan('operator')" data-plan="operator">
+                    <span class="ppi-name">The Operator</span>
+                    <span class="ppi-price" id="pick-operator">₦9,500/mo</span>
+                </div>
+                <div class="plan-pick-item" onclick="selectPlan('maker')" data-plan="maker">
+                    <span class="ppi-name">The Maker</span>
+                    <span class="ppi-price" id="pick-maker">₦13,500/mo</span>
+                </div>
+                <div class="plan-pick-item" onclick="selectPlan('enterprise')" data-plan="enterprise">
+                    <span class="ppi-name">The Enterprise</span>
+                    <span class="ppi-price" id="pick-enterprise">₦55,000/mo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Billing cycle -->
+        <div class="billing-row">
+            <div class="billing-row-label">
+                Billing cycle
+                <span>Annual saves you 2 months</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+                <span class="annual-save-tag" id="save-tag" style="display:none">Save 17%</span>
+                <div class="billing-toggle-mini">
+                    <button class="btm-btn active" id="co-monthly" onclick="setCheckoutBilling('monthly')">Monthly</button>
+                    <button class="btm-btn" id="co-annual" onclick="setCheckoutBilling('annual')">Annual</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account details -->
+        <div class="form-section-title">Your account details</div>
+        <div class="field-row">
+            <div class="field">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" placeholder="Emeka" autocomplete="given-name">
+                <span class="field-error" id="err-first">Required</span>
+            </div>
+            <div class="field">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" placeholder="Okafor" autocomplete="family-name">
+                <span class="field-error" id="err-last">Required</span>
+            </div>
+        </div>
+        <div class="field-row single">
+            <div class="field">
+                <label for="email">Email address</label>
+                <input type="email" id="email" placeholder="emeka@yourbusiness.com" autocomplete="email">
+                <span class="field-error" id="err-email">Enter a valid email address</span>
+            </div>
+        </div>
+        <div class="field-row single">
+            <div class="field">
+                <label for="business-name">Business name</label>
+                <input type="text" id="business-name" placeholder="Okafor Enterprises" autocomplete="organization">
+                <span class="field-error" id="err-biz">Required</span>
+            </div>
+        </div>
+        <div class="field-row">
+            <div class="field">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" placeholder="080XXXXXXXX" autocomplete="tel">
+                <span class="field-error" id="err-phone">Enter a valid phone number</span>
+            </div>
+            <div class="field">
+                <label for="business-type">Business type</label>
+                <select id="business-type">
+                    <option value="">Select one…</option>
+                    <option value="sole_trader">Sole Trader</option>
+                    <option value="partnership">Partnership</option>
+                    <option value="limited">Limited Company</option>
+                    <option value="manufacturer">Manufacturer</option>
+                    <option value="retailer">Retailer / Shop</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Payment method -->
+        <div class="form-section-title">Payment method</div>
+        <div class="payment-methods" id="payment-methods">
+
+            <!-- Paystack Card -->
+            <div class="pm-option selected" data-method="paystack-card" onclick="selectMethod(this)">
+                <div class="pm-header">
+                    <div class="pm-radio"><div class="pm-radio-dot"></div></div>
+                    <div class="pm-icon paystack">PS</div>
+                    <div class="pm-info">
+                        <div class="pm-name">Card Payment</div>
+                        <div class="pm-desc">Visa, Mastercard, Verve — charged instantly via Paystack</div>
+                    </div>
+                    <span class="pm-badge badge-rec">Instant</span>
+                </div>
+                <div class="pm-detail">
+                    <div class="pm-detail-note">
+                        A Paystack checkout will open. Your card is charged immediately and your subscription activates at once. <strong>Powered by Paystack</strong> — PCI-DSS compliant, 256-bit SSL encryption. Your card details are never stored on Zaena's servers.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paystack Bank Transfer -->
+            <div class="pm-option" data-method="paystack-transfer" onclick="selectMethod(this)">
+                <div class="pm-header">
+                    <div class="pm-radio"><div class="pm-radio-dot"></div></div>
+                    <div class="pm-icon paystack">PS</div>
+                    <div class="pm-info">
+                        <div class="pm-name">Bank Transfer</div>
+                        <div class="pm-desc">Pay via instant bank transfer — a dedicated account number is generated for you</div>
+                    </div>
+                    <span class="pm-badge badge-pop">Popular</span>
+                </div>
+                <div class="pm-detail">
+                    <div class="pm-detail-note">
+                        Paystack generates a <strong>dedicated virtual account number</strong> for your payment. Transfer the exact amount from any Nigerian bank app. Your subscription activates automatically once the transfer is confirmed — usually within seconds. For recurring billing, you will receive a new account number each cycle.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monnify Card Tokenization -->
+            <div class="pm-option" data-method="monnify-card" onclick="selectMethod(this)">
+                <div class="pm-header">
+                    <div class="pm-radio"><div class="pm-radio-dot"></div></div>
+                    <div class="pm-icon monnify">MN</div>
+                    <div class="pm-info">
+                        <div class="pm-name">Card — Auto-Renew</div>
+                        <div class="pm-desc">Pay by card once. Future renewals charge automatically — no action needed</div>
+                    </div>
+                    <span class="pm-badge badge-rec">Seamless</span>
+                </div>
+                <div class="pm-detail">
+                    <div class="pm-detail-note">
+                        Your card is securely tokenised via <strong>Monnify</strong> on the first payment. Every subsequent renewal is charged automatically — no re-entering details, no interrupted access. You'll receive an email before each renewal. Cancel any time from your account settings.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monnify Direct Debit -->
+            <div class="pm-option" data-method="monnify-debit" onclick="selectMethod(this)">
+                <div class="pm-header">
+                    <div class="pm-radio"><div class="pm-radio-dot"></div></div>
+                    <div class="pm-icon monnify">MN</div>
+                    <div class="pm-info">
+                        <div class="pm-name">Direct Debit Mandate</div>
+                        <div class="pm-desc">Authorize once from your bank account — renewals debit automatically, no card needed</div>
+                    </div>
+                    <span class="pm-badge badge-rec">Most Reliable</span>
+                </div>
+                <div class="pm-detail">
+                    <div class="pm-detail-note">
+                        Set up a <strong>direct debit mandate</strong> from any Nigerian bank account via Monnify. You authorize it once — renewals are debited automatically on your billing date. No card expiry problems. No failed payments from card limits. Works across all major Nigerian banks. You can cancel the mandate at any time from your bank app or Zaena account settings.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Submit -->
+        <div class="submit-wrap">
+            <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">
+                <div class="spinner"></div>
+                <span class="btn-text" id="submit-label">Subscribe Now</span>
+                <svg id="submit-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <div class="submit-note">
+                By subscribing you agree to Zaena's Terms of Service and Privacy Policy.
+                You can cancel your subscription at any time from your account settings.
+            </div>
+            <div class="security-badges">
+                <span class="sec-badge">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    256-bit SSL
+                </span>
+                <span class="sec-badge">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    PCI-DSS Compliant
+                </span>
+                <span class="sec-badge">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                    Cancel Anytime
+                </span>
+                <span class="sec-badge">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+                    CAC Registered
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RIGHT — ORDER SUMMARY -->
+    <div class="checkout-right fade-in" style="animation-delay:.1s">
+
+        <div class="summary-label">Order Summary</div>
+
+        <!-- Plan card -->
+        <div class="plan-summary" id="summary-card">
+            <div class="plan-summary-top">
+                <div class="plan-summary-name" id="summary-plan-name">The Operator</div>
+                <div class="plan-summary-tier" id="summary-plan-tier">Most Popular · 3 users included</div>
+            </div>
+            <div class="plan-summary-body" id="summary-features">
+                <!-- populated by JS -->
+            </div>
+        </div>
+
+        <!-- Price breakdown -->
+        <div class="price-breakdown">
+            <div class="price-line">
+                <span class="price-line-label" id="price-base-label">Monthly subscription</span>
+                <span class="price-line-val" id="price-base-val">₦9,500</span>
+            </div>
+            <div class="price-line discount" id="discount-line" style="display:none">
+                <span class="price-line-label">Annual discount (2 months free)</span>
+                <span class="price-line-val" id="price-discount-val">−₦19,000</span>
+            </div>
+            <div class="price-line">
+                <span class="price-line-label">VAT (0% — exempt)</span>
+                <span class="price-line-val">₦0</span>
+            </div>
+            <div class="price-line total">
+                <span class="price-line-label" id="total-label">Total today</span>
+                <span class="price-line-val" id="total-val">₦9,500</span>
+            </div>
+        </div>
+
+        <!-- Founding member banner -->
+        <div class="founding-banner">
+            <div class="founding-banner-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="founding-banner-text">
+                <strong>Founding Member Offer</strong>
+                As an early tester, your first 3 months of The Operator tier are completely free. You will not be charged until your trial period ends. Cancel before then with no obligation.
+            </div>
+        </div>
+
+        <a href="zaena-pricing.html" class="change-plan">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Change plan
+        </a>
+
+    </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="success-overlay">
+    <div class="success-card">
+        <div class="success-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <div class="success-title">You're in.</div>
+        <div class="success-sub" id="success-msg">
+            Your Zaena subscription is active. Check your email for your login details and onboarding guide.
+        </div>
+        <div class="success-ref" id="success-ref">REF: ZNA-000000</div>
+        <a href="#" class="success-btn">
+            Open Zaena Dashboard
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  CONFIGURATION
+//  Replace these with your actual keys
+// ─────────────────────────────────────────────
+const CONFIG = {
+    paystack: {
+        publicKey: 'pk_live_XXXXXXXXXXXXXXXXXXXXXXXXXXXX', // TODO: replace with live key
+    },
+    monnify: {
+        apiKey:      'MK_PROD_XXXXXXXXXXXXXXXXXX',         // TODO: replace
+        contractCode:'XXXXXXXXXX',                         // TODO: replace
+    }
+};
+
+// ─────────────────────────────────────────────
+//  PLAN DATA
+// ─────────────────────────────────────────────
+const PLANS = {
+    trader: {
+        name: 'The Trader',
+        tier: 'Shop Owner · Single user',
+        monthly: 4500,
+        features: [
+            'Unlimited transactions & products',
+            'Expenses & owner\'s withdrawals',
+            'Profit allocation',
+            'Sale orders & cash book',
+            'Export data',
+        ]
+    },
+    operator: {
+        name: 'The Operator',
+        tier: 'Most Popular · 3 users included',
+        monthly: 9500,
+        features: [
+            'Everything in Trader',
+            'RBAC — role-based staff access',
+            'Trust Score report',
+            'Nigerian tax calculator (VAT, PIT, CIT)',
+            'Payroll & multi-location',
+            'Zaena Hub access',
+        ]
+    },
+    maker: {
+        name: 'The Maker',
+        tier: 'Sole Proprietor Manufacturer · Single user',
+        monthly: 13500,
+        features: [
+            'BOM & production orders',
+            'Wastage tracking',
+            'Raw material costing',
+            'POS, inventory, expenses',
+            'Profit allocation & sale orders',
+        ]
+    },
+    enterprise: {
+        name: 'The Enterprise',
+        tier: 'Manufacturer · 10 users included',
+        monthly: 55000,
+        features: [
+            'Everything in Operator',
+            'BOM & production orders',
+            'Dedicated accounting module',
+            'Full audit trail & compliance',
+            'Priority onboarding support',
+        ]
+    }
+};
+
+// ─────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────
+let currentPlan    = 'operator';
+let currentBilling = 'monthly';
+let currentMethod  = 'paystack-card';
+
+// ─────────────────────────────────────────────
+//  INIT — read URL params
+// ─────────────────────────────────────────────
+function init() {
+    const params = new URLSearchParams(window.location.search);
+    const planParam = params.get('plan');
+    const billingParam = params.get('billing');
+
+    if (planParam && PLANS[planParam]) {
+        currentPlan = planParam;
+        // Hide plan picker since plan is pre-selected
+        document.getElementById('plan-picker-wrap').style.display = 'none';
+    }
+
+    if (billingParam === 'annual') {
+        setCheckoutBilling('annual');
+    }
+
+    selectPlan(currentPlan);
+    detectCurrency();
+    updateSubmitLabel();
+}
+
+// ─────────────────────────────────────────────
+//  CURRENCY DETECTION
+// ─────────────────────────────────────────────
+function detectCurrency() {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const isNigeria = tz && tz.toLowerCase().includes('lagos');
+    if (!isNigeria) {
+        document.getElementById('intl-banner').style.display = 'block';
+    }
+}
+
+// ─────────────────────────────────────────────
+//  PLAN SELECTION
+// ─────────────────────────────────────────────
+function selectPlan(planKey) {
+    currentPlan = planKey;
+    const plan  = PLANS[planKey];
+
+    // Update picker active state
+    document.querySelectorAll('.plan-pick-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.plan === planKey);
+    });
+
+    // Update summary
+    document.getElementById('summary-plan-name').textContent = plan.name;
+    document.getElementById('summary-plan-tier').textContent = plan.tier;
+
+    // Render features
+    const container = document.getElementById('summary-features');
+    container.innerHTML = plan.features.map(f => `
+        <div class="summary-feat">
+            <div class="summary-feat-check">
+                <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            ${f}
+        </div>
+    `).join('');
+
+    updatePriceBreakdown();
+    updateSubmitLabel();
+}
+
+// ─────────────────────────────────────────────
+//  BILLING TOGGLE
+// ─────────────────────────────────────────────
+function setCheckoutBilling(mode) {
+    currentBilling = mode;
+    document.getElementById('co-monthly').classList.toggle('active', mode === 'monthly');
+    document.getElementById('co-annual').classList.toggle('active', mode === 'annual');
+    document.getElementById('save-tag').style.display = mode === 'annual' ? 'inline-block' : 'none';
+    updatePriceBreakdown();
+    updateSubmitLabel();
+}
+
+// ─────────────────────────────────────────────
+//  PRICE BREAKDOWN
+// ─────────────────────────────────────────────
+function updatePriceBreakdown() {
+    const plan     = PLANS[currentPlan];
+    const monthly  = plan.monthly;
+    const isAnnual = currentBilling === 'annual';
+
+    const annualTotal   = monthly * 10; // pay 10, get 12
+    const discount      = monthly * 2;
+    const chargedNow    = isAnnual ? annualTotal : monthly;
+
+    const fmt = n => '₦' + n.toLocaleString('en-NG');
+
+    document.getElementById('price-base-label').textContent = isAnnual ? 'Annual subscription (10 months)' : 'Monthly subscription';
+    document.getElementById('price-base-val').textContent   = isAnnual ? fmt(monthly * 12) : fmt(monthly);
+
+    const discountLine = document.getElementById('discount-line');
+    if (isAnnual) {
+        discountLine.style.display = 'flex';
+        document.getElementById('price-discount-val').textContent = '−' + fmt(discount);
+    } else {
+        discountLine.style.display = 'none';
+    }
+
+    document.getElementById('total-label').textContent = isAnnual ? 'Total today (annual)' : 'Total today';
+    document.getElementById('total-val').textContent   = fmt(chargedNow);
+}
+
+// ─────────────────────────────────────────────
+//  PAYMENT METHOD
+// ─────────────────────────────────────────────
+function selectMethod(el) {
+    document.querySelectorAll('.pm-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    currentMethod = el.dataset.method;
+    updateSubmitLabel();
+}
+
+function updateSubmitLabel() {
+    const labels = {
+        'paystack-card':     'Pay with Card via Paystack',
+        'paystack-transfer': 'Pay via Bank Transfer',
+        'monnify-card':      'Pay with Card via Monnify',
+        'monnify-debit':     'Set Up Direct Debit via Monnify',
+    };
+    document.getElementById('submit-label').textContent = labels[currentMethod] || 'Subscribe Now';
+}
+
+// ─────────────────────────────────────────────
+//  FORM VALIDATION
+// ─────────────────────────────────────────────
+function validateForm() {
+    let valid = true;
+
+    const checks = [
+        { id: 'first-name', errId: 'err-first',  test: v => v.trim().length > 0 },
+        { id: 'last-name',  errId: 'err-last',   test: v => v.trim().length > 0 },
+        { id: 'email',      errId: 'err-email',  test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+        { id: 'business-name', errId: 'err-biz', test: v => v.trim().length > 0 },
+        { id: 'phone',      errId: 'err-phone',  test: v => /^(\+?234|0)[789]\d{9}$/.test(v.replace(/\s/g,'')) },
+    ];
+
+    checks.forEach(({ id, errId, test }) => {
+        const input = document.getElementById(id);
+        const err   = document.getElementById(errId);
+        const ok    = test(input.value);
+        input.classList.toggle('error', !ok);
+        err.classList.toggle('show', !ok);
+        if (!ok) valid = false;
+    });
+
+    return valid;
+}
+
+// ─────────────────────────────────────────────
+//  SUBMIT — ROUTE TO CORRECT PROCESSOR
+// ─────────────────────────────────────────────
+function handleSubmit() {
+    if (!validateForm()) return;
+
+    const btn  = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.classList.add('loading');
+    btn.querySelector('#submit-arrow').style.display = 'none';
+
+    // Short delay to show loading state, then open payment modal
+    setTimeout(() => {
+        btn.disabled = false;
+        btn.classList.remove('loading');
+        btn.querySelector('#submit-arrow').style.display = 'block';
+
+        switch (currentMethod) {
+            case 'paystack-card':     initPaystackCard();     break;
+            case 'paystack-transfer': initPaystackTransfer(); break;
+            case 'monnify-card':      initMonnifyCard();      break;
+            case 'monnify-debit':     initMonnifyDebit();     break;
+        }
+    }, 600);
+}
+
+// ─────────────────────────────────────────────
+//  HELPERS
+// ─────────────────────────────────────────────
+function getEmail()    { return document.getElementById('email').value.trim(); }
+function getFullName() { return `${document.getElementById('first-name').value.trim()} ${document.getElementById('last-name').value.trim()}`; }
+function getPhone()    { return document.getElementById('phone').value.trim(); }
+function getBizName()  { return document.getElementById('business-name').value.trim(); }
+
+function getAmountKobo() {
+    const plan = PLANS[currentPlan];
+    return currentBilling === 'annual' ? plan.monthly * 10 * 100 : plan.monthly * 100;
+}
+function getAmountNaira() { return getAmountKobo() / 100; }
+
+function generateRef() {
+    return 'ZNA-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2,5).toUpperCase();
+}
+
+function showSuccess(ref, method) {
+    const methodMessages = {
+        'paystack-card':     'Your card has been charged and your subscription is now active.',
+        'paystack-transfer': 'Your transfer has been received. Your subscription will activate within seconds.',
+        'monnify-card':      'Your card is tokenised. Future renewals will charge automatically — no action needed.',
+        'monnify-debit':     'Your direct debit mandate is set up. Renewals will debit automatically on your billing date.',
+    };
+    document.getElementById('success-msg').textContent  = methodMessages[method] || 'Your subscription is now active.';
+    document.getElementById('success-ref').textContent  = 'REF: ' + ref;
+    document.getElementById('success-overlay').classList.add('show');
+}
+
+// ─────────────────────────────────────────────
+//  PAYSTACK — CARD
+// ─────────────────────────────────────────────
+function initPaystackCard() {
+    const ref = generateRef();
+
+    const handler = PaystackPop.setup({
+        key:       CONFIG.paystack.publicKey,
+        email:     getEmail(),
+        amount:    getAmountKobo(),
+        currency:  'NGN',
+        ref:       ref,
+        firstname: document.getElementById('first-name').value.trim(),
+        lastname:  document.getElementById('last-name').value.trim(),
+        phone:     getPhone(),
+        metadata: {
+            custom_fields: [
+                { display_name: 'Business Name', variable_name: 'business_name', value: getBizName() },
+                { display_name: 'Plan',          variable_name: 'plan',          value: currentPlan },
+                { display_name: 'Billing',       variable_name: 'billing',       value: currentBilling },
+            ]
+        },
+        // For recurring subscriptions, use Paystack's plan feature
+        // plan: 'PLN_XXXXX', // TODO: replace with your Paystack plan code
+        callback: function(response) {
+            // TODO: verify transaction on your backend before activating subscription
+            // POST /api/verify-payment { reference: response.reference }
+            showSuccess(response.reference, 'paystack-card');
+        },
+        onClose: function() {
+            // User closed the modal — no action needed
+        }
+    });
+
+    handler.openIframe();
+}
+
+// ─────────────────────────────────────────────
+//  PAYSTACK — BANK TRANSFER (Pay with Transfer)
+// ─────────────────────────────────────────────
+function initPaystackTransfer() {
+    const ref = generateRef();
+
+    const handler = PaystackPop.setup({
+        key:      CONFIG.paystack.publicKey,
+        email:    getEmail(),
+        amount:   getAmountKobo(),
+        currency: 'NGN',
+        ref:      ref,
+        channels: ['bank_transfer'], // Force bank transfer channel
+        metadata: {
+            custom_fields: [
+                { display_name: 'Business Name', variable_name: 'business_name', value: getBizName() },
+                { display_name: 'Plan',          variable_name: 'plan',          value: currentPlan },
+                { display_name: 'Billing',       variable_name: 'billing',       value: currentBilling },
+            ]
+        },
+        callback: function(response) {
+            // TODO: verify on backend
+            showSuccess(response.reference, 'paystack-transfer');
+        },
+        onClose: function() {}
+    });
+
+    handler.openIframe();
+}
+
+// ─────────────────────────────────────────────
+//  MONNIFY — CARD TOKENIZATION
+// ─────────────────────────────────────────────
+function initMonnifyCard() {
+    const ref = generateRef();
+
+    MonnifySDK.initialize({
+        amount:           getAmountNaira(),
+        currency:         'NGN',
+        reference:        ref,
+        customerFullName: getFullName(),
+        customerEmail:    getEmail(),
+        customerMobileNumber: getPhone(),
+        apiKey:           CONFIG.monnify.apiKey,
+        contractCode:     CONFIG.monnify.contractCode,
+        paymentDescription: `Zaena ${PLANS[currentPlan].name} — ${currentBilling}`,
+        isTestMode:       false, // TODO: set true for testing
+        paymentMethods:   ['CARD'], // Card only for tokenization flow
+
+        onLoadStart: () => {},
+        onLoadComplete: () => {},
+
+        onComplete: function(response) {
+            if (response.status === 'SUCCESS' || response.status === 'PAID') {
+                // TODO: verify on backend, then save card token for recurring charges
+                // POST /api/monnify/verify { transactionReference: response.transactionReference }
+                showSuccess(response.transactionReference || ref, 'monnify-card');
+            }
+        },
+        onClose: function(data) {}
+    });
+}
+
+// ─────────────────────────────────────────────
+//  MONNIFY — DIRECT DEBIT MANDATE
+// ─────────────────────────────────────────────
+function initMonnifyDebit() {
+    const ref = generateRef();
+
+    MonnifySDK.initialize({
+        amount:           getAmountNaira(),
+        currency:         'NGN',
+        reference:        ref,
+        customerFullName: getFullName(),
+        customerEmail:    getEmail(),
+        customerMobileNumber: getPhone(),
+        apiKey:           CONFIG.monnify.apiKey,
+        contractCode:     CONFIG.monnify.contractCode,
+        paymentDescription: `Zaena ${PLANS[currentPlan].name} — ${currentBilling} (Direct Debit)`,
+        isTestMode:       false, // TODO: set true for testing
+        paymentMethods:   ['DIRECT_DEBIT'], // Direct debit mandate only
+
+        // Mandate config — Open Fixed: fixed amount, no end date, perfect for subscriptions
+        // TODO: Confirm mandate type with Monnify integration team (developers@monnify.com)
+        // mandateType: 'OPEN_FIXED',
+
+        onLoadStart: () => {},
+        onLoadComplete: () => {},
+
+        onComplete: function(response) {
+            if (response.status === 'SUCCESS' || response.status === 'PAID') {
+                // TODO: store mandate reference for future debit calls
+                // POST /api/monnify/verify { transactionReference: response.transactionReference }
+                showSuccess(response.transactionReference || ref, 'monnify-debit');
+            }
+        },
+        onClose: function(data) {}
+    });
+}
+
+// ─────────────────────────────────────────────
+//  KEYBOARD — close success on Escape
+// ─────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('success-overlay').classList.remove('show');
+});
+
+// ─────────────────────────────────────────────
+//  BOOT
+// ─────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
