@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing — Zaena Business OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal-deep:    #0E2931;
+            --teal-mid:     #12484C;
+            --teal-bright:  #2B7574;
+            --teal-glow:    rgba(43,117,116,0.15);
+            --gold:         #C9922A;
+            --gold-soft:    rgba(201,146,42,0.1);
+            --graphite:     #0b0b0b;
+            --g800:         #141414;
+            --g900:         #0f0f0f;
+            --air:          #EEEEED;
+            --light-bg:     #F4F2EE;
+            --light-surface:#FFFFFF;
+            --light-text:   #1a1a1a;
+            --light-muted:  #5a5a5a;
+            --light-border: rgba(14,41,49,0.12);
+            --border-teal:  rgba(43,117,116,0.22);
+            --border-dim:   rgba(238,238,237,0.07);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--graphite);
+            color: var(--air);
+            overflow-x: hidden;
+            width: 100%;
+        }
+        body::before {
+            content: '';
+            position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background-image:
+                linear-gradient(rgba(43,117,116,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(43,117,116,0.025) 1px, transparent 1px);
+            background-size: 72px 72px;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100vw; z-index: 100;
+            padding: 0 24px; height: 60px;
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(11,11,11,0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-dim);
+        }
+        .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+        .nav-mark {
+            width: 32px; height: 32px;
+            background: var(--teal-deep);
+            border: 1px solid var(--border-teal);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem; font-weight: 600; color: var(--gold);
+        }
+        .nav-wordmark { display: flex; flex-direction: column; line-height: 1; }
+        .nav-parent { font-size: 0.5rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 2px; }
+        .nav-name   { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--air); }
+        .nav-right { display: flex; align-items: center; gap: 12px; }
+        .nav-link { font-size: 0.75rem; font-weight: 400; color: rgba(238,238,237,0.55); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+        .nav-link:hover { color: var(--air); }
+        .nav-cta {
+            background: var(--teal-bright); color: white;
+            border: none; border-radius: 8px; padding: 9px 18px;
+            font-family: 'Sora', sans-serif; font-size: 0.75rem; font-weight: 600;
+            cursor: pointer; text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+            display: flex; align-items: center; gap: 7px;
+        }
+        .nav-cta:hover { background: var(--teal-mid); transform: scale(1.02); }
+
+        /* ── HERO — DARK ── */
+        .pricing-hero {
+            background: var(--graphite);
+            min-height: 54vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 130px 24px 80px;
+            position: relative; z-index: 1;
+            text-align: center; overflow: hidden;
+        }
+        .pricing-hero::after {
+            content: '';
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -60%);
+            width: 800px; height: 600px;
+            background: radial-gradient(ellipse, rgba(43,117,116,0.12) 0%, transparent 65%);
+            pointer-events: none; z-index: -1;
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: rgba(43,117,116,0.1);
+            border: 1px solid var(--border-teal);
+            border-radius: 40px; padding: 8px 18px;
+            margin-bottom: 28px;
+            opacity: 0; animation: fadeUp 0.6s 0.05s ease forwards;
+        }
+        .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-bright); }
+        .eyebrow-text { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(238,238,237,0.72); }
+        .pricing-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 500; line-height: 1.04; letter-spacing: -0.02em;
+            color: var(--air); max-width: 780px;
+            opacity: 0; animation: fadeUp 0.8s 0.15s ease forwards;
+        }
+        .pricing-headline .gold { color: var(--gold); }
+        .pricing-headline em { font-style: italic; color: rgba(238,238,237,0.38); font-weight: 400; }
+        .pricing-sub {
+            font-size: 0.95rem; font-weight: 300; line-height: 1.85;
+            color: rgba(238,238,237,0.62); max-width: 500px;
+            margin: 20px auto 0;
+            opacity: 0; animation: fadeUp 0.8s 0.28s ease forwards;
+        }
+
+        /* ── BILLING TOGGLE ── */
+        .billing-toggle-wrap {
+            margin-top: 44px;
+            opacity: 0; animation: fadeUp 0.8s 0.4s ease forwards;
+            display: flex; flex-direction: column; align-items: center; gap: 12px;
+        }
+        .billing-toggle {
+            display: inline-flex; align-items: center;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-teal);
+            border-radius: 50px; padding: 5px;
+            gap: 4px;
+        }
+        .toggle-btn {
+            padding: 9px 22px; border-radius: 40px; border: none;
+            font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 600;
+            cursor: pointer; letter-spacing: 0.02em;
+            transition: background 0.25s, color 0.25s;
+            background: transparent; color: rgba(238,238,237,0.5);
+        }
+        .toggle-btn.active {
+            background: var(--teal-bright); color: white;
+            box-shadow: 0 4px 14px rgba(43,117,116,0.4);
+        }
+        .annual-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--gold);
+            background: var(--gold-soft); border: 1px solid rgba(201,146,42,0.22);
+            padding: 4px 12px; border-radius: 20px;
+        }
+
+        /* ── PLANS SECTION — LIGHT ── */
+        .plans-section {
+            background: var(--light-bg);
+            position: relative; z-index: 1;
+            padding: 80px 24px 100px;
+            border-top: 1px solid rgba(14,41,49,0.08);
+        }
+        .plans-section::before {
+            content: '';
+            position: absolute; inset: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(14,41,49,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14,41,49,0.025) 1px, transparent 1px);
+            background-size: 72px 72px;
+        }
+        .plans-inner {
+            position: relative; z-index: 1;
+            max-width: 1120px; margin: 0 auto;
+        }
+        .currency-note {
+            text-align: center; margin-bottom: 48px;
+        }
+        .currency-note p {
+            font-size: 0.72rem; font-weight: 400; color: var(--light-muted);
+            letter-spacing: 0.02em;
+        }
+        .currency-note strong { color: var(--light-text); }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0;
+            border: 1px solid var(--light-border);
+            border-radius: 20px; overflow: hidden;
+            box-shadow: 0 20px 80px rgba(14,41,49,0.1), 0 4px 20px rgba(14,41,49,0.06);
+        }
+        @media (max-width: 1200px) { .plans-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 780px)  { .plans-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px)  { .plans-grid { grid-template-columns: 1fr; } }
+
+        .plan-card {
+            background: var(--light-surface);
+            border-right: 1px solid var(--light-border);
+            display: flex; flex-direction: column;
+            position: relative; transition: transform 0.2s;
+        }
+        .plan-card:last-child { border-right: none; }
+        @media (max-width: 1200px) {
+            .plan-card:nth-child(3) { border-right: none; }
+            .plan-card:nth-child(1),
+            .plan-card:nth-child(2),
+            .plan-card:nth-child(3) { border-bottom: 1px solid var(--light-border); }
+        }
+        @media (max-width: 780px) {
+            .plan-card:nth-child(2) { border-right: none; }
+            .plan-card:nth-child(4) { border-right: none; }
+            .plan-card:nth-child(1),
+            .plan-card:nth-child(2),
+            .plan-card:nth-child(3),
+            .plan-card:nth-child(4) { border-bottom: 1px solid var(--light-border); }
+        }
+        @media (max-width: 480px) {
+            .plan-card { border-right: none; border-bottom: 1px solid var(--light-border); }
+            .plan-card:last-child { border-bottom: none; }
+        }
+
+        .plan-card.featured {
+            background: var(--teal-deep);
+            border-right: 1px solid rgba(43,117,116,0.3);
+            position: relative;
+        }
+        .plan-card.featured::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--teal-bright), var(--gold));
+        }
+
+        .plan-top {
+            padding: 32px 28px 24px;
+            border-bottom: 1px solid var(--light-border);
+        }
+        .plan-card.featured .plan-top {
+            border-bottom: 1px solid rgba(43,117,116,0.2);
+        }
+
+        .plan-badge {
+            display: inline-block;
+            font-size: 0.57rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+            padding: 4px 10px; border-radius: 20px; margin-bottom: 16px;
+        }
+        .badge-free    { color: var(--teal-bright); background: rgba(43,117,116,0.1); border: 1px solid rgba(43,117,116,0.2); }
+        .badge-shop    { color: var(--light-muted); background: rgba(90,90,90,0.07); border: 1px solid rgba(90,90,90,0.15); }
+        .badge-popular { color: var(--gold); background: var(--gold-soft); border: 1px solid rgba(201,146,42,0.25); }
+        .badge-maker  { color: #7c5c2e; background: rgba(201,146,42,0.08); border: 1px solid rgba(201,146,42,0.2); }
+        .badge-enterprise { color: #fff; background: rgba(43,117,116,0.3); border: 1px solid rgba(43,117,116,0.4); }
+
+        .plan-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.55rem; font-weight: 500; letter-spacing: -0.01em;
+            color: var(--light-text); line-height: 1.1; margin-bottom: 6px;
+        }
+        .plan-card.featured .plan-name { color: var(--air); }
+        .plan-tagline {
+            font-size: 0.75rem; font-weight: 300; color: var(--light-muted); line-height: 1.5;
+        }
+        .plan-card.featured .plan-tagline { color: rgba(238,238,237,0.6); }
+
+        .plan-price-block { margin-top: 22px; }
+        .plan-price {
+            display: flex; align-items: flex-end; gap: 4px; line-height: 1;
+        }
+        .price-currency {
+            font-family: 'DM Mono', monospace;
+            font-size: 1rem; font-weight: 500; color: var(--light-muted);
+            margin-bottom: 6px;
+        }
+        .plan-card.featured .price-currency { color: rgba(238,238,237,0.6); }
+        .price-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem; font-weight: 600; letter-spacing: -0.03em;
+            color: var(--light-text); line-height: 1;
+        }
+        .plan-card.featured .price-amount { color: var(--air); }
+        .price-free {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem; font-weight: 500; color: var(--teal-bright);
+        }
+        .price-period {
+            font-size: 0.72rem; font-weight: 300; color: var(--light-muted);
+            margin-bottom: 8px; margin-left: 2px;
+        }
+        .plan-card.featured .price-period { color: rgba(238,238,237,0.5); }
+        .price-annual-note {
+            font-size: 0.65rem; color: var(--teal-bright); font-weight: 400;
+            margin-top: 6px; display: none;
+        }
+        .price-annual-note.show { display: block; }
+        .plan-card.featured .price-annual-note { color: var(--gold); }
+        .price-was {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem; color: var(--light-muted);
+            text-decoration: line-through; margin-top: 4px;
+            display: none;
+        }
+        .price-was.show { display: block; }
+
+        .plan-cta-wrap { padding: 20px 28px; }
+        .plan-cta {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; padding: 13px 20px; border-radius: 10px;
+            font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 600;
+            text-decoration: none; cursor: pointer; border: none;
+            transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+            letter-spacing: 0.01em;
+        }
+        .cta-outline {
+            background: transparent; color: var(--teal-bright);
+            border: 1.5px solid var(--teal-bright);
+        }
+        .cta-outline:hover { background: rgba(43,117,116,0.07); transform: translateY(-1px); }
+        .cta-solid {
+            background: var(--teal-bright); color: white;
+            box-shadow: 0 6px 24px rgba(43,117,116,0.35);
+        }
+        .cta-solid:hover { background: #2e8180; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(43,117,116,0.5); }
+        .cta-dark {
+            background: var(--light-text); color: white;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+        }
+        .cta-dark:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(0,0,0,0.25); }
+        .cta-gold {
+            background: var(--gold); color: white;
+            box-shadow: 0 6px 24px rgba(201,146,42,0.35);
+        }
+        .cta-gold:hover { background: #b8831f; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(201,146,42,0.5); }
+
+        .plan-body { padding: 0 28px 32px; flex: 1; display: flex; flex-direction: column; }
+        .plan-section-label {
+            font-size: 0.55rem; font-weight: 600; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--teal-bright);
+            margin-bottom: 12px; margin-top: 20px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .plan-section-label::after {
+            content: ''; flex: 1; height: 1px;
+            background: var(--light-border);
+        }
+        .plan-card.featured .plan-section-label {
+            color: rgba(43,117,116,0.8);
+        }
+        .plan-card.featured .plan-section-label::after {
+            background: rgba(43,117,116,0.2);
+        }
+        .plan-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .feat {
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.78rem; font-weight: 300; color: var(--light-muted); line-height: 1.55;
+        }
+        .plan-card.featured .feat { color: rgba(238,238,237,0.68); }
+        .feat strong { font-weight: 500; color: var(--light-text); display: inline; }
+        .plan-card.featured .feat strong { color: rgba(238,238,237,0.9); }
+        .feat-check {
+            width: 16px; height: 16px; flex-shrink: 0;
+            border-radius: 50%; margin-top: 1px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .check-teal { background: rgba(43,117,116,0.1); border: 1px solid rgba(43,117,116,0.3); }
+        .check-gold { background: var(--gold-soft); border: 1px solid rgba(201,146,42,0.25); }
+        .feat-x {
+            width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(90,90,90,0.35); font-size: 0.65rem;
+        }
+        .feat.locked { opacity: 0.45; }
+
+        .plan-limit-tag {
+            display: inline-flex; align-items: center; gap: 5px;
+            margin-top: 16px; padding: 6px 12px; border-radius: 6px;
+            font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.04em;
+            color: var(--teal-bright); background: rgba(43,117,116,0.07);
+            border: 1px solid rgba(43,117,116,0.15);
+            align-self: flex-start;
+        }
+        .plan-card.featured .plan-limit-tag {
+            color: var(--gold); background: var(--gold-soft);
+            border-color: rgba(201,146,42,0.2);
+        }
+
+        /* ── REFERRAL MECHANIC — DARK ── */
+        .referral-section {
+            background: var(--graphite);
+            position: relative; z-index: 1;
+            padding: 80px 24px;
+            border-top: 1px solid var(--border-dim);
+            border-bottom: 1px solid var(--border-dim);
+            overflow: hidden;
+        }
+        .referral-section::before {
+            content: '';
+            position: absolute; bottom: -80px; left: -80px;
+            width: 500px; height: 500px;
+            background: radial-gradient(ellipse, rgba(201,146,42,0.07) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .referral-inner {
+            position: relative; z-index: 1;
+            max-width: 960px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+        }
+        @media (max-width: 760px) { .referral-inner { grid-template-columns: 1fr; gap: 48px; } }
+        .referral-copy .section-eyebrow { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+        .referral-copy h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;
+            color: var(--air); margin-bottom: 16px;
+        }
+        .referral-copy h2 em { font-style: italic; color: rgba(238,238,237,0.38); }
+        .referral-copy p {
+            font-size: 0.85rem; font-weight: 300; line-height: 1.85;
+            color: rgba(238,238,237,0.62); margin-bottom: 0;
+        }
+        .referral-steps { display: flex; flex-direction: column; gap: 12px; }
+        .ref-step {
+            display: flex; align-items: center; gap: 16px;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px; position: relative;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .ref-step:hover { border-color: rgba(201,146,42,0.2); background: rgba(201,146,42,0.03); }
+        .ref-step-num {
+            font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 500;
+            color: var(--gold); width: 24px; flex-shrink: 0; letter-spacing: 0.05em;
+        }
+        .ref-step-arrow {
+            font-size: 0.75rem; color: var(--teal-bright); flex-shrink: 0;
+        }
+        .ref-step-text { flex: 1; }
+        .ref-step-text strong {
+            display: block; font-size: 0.82rem; font-weight: 600;
+            color: var(--air); margin-bottom: 2px;
+        }
+        .ref-step-text span {
+            font-size: 0.72rem; font-weight: 300;
+            color: rgba(238,238,237,0.52);
+        }
+        .ref-step-badge {
+            font-family: 'DM Mono', monospace; font-size: 0.6rem;
+            color: var(--teal-bright); background: rgba(43,117,116,0.1);
+            border: 1px solid rgba(43,117,116,0.2);
+            padding: 3px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+        }
+        .ref-step-badge.gold-badge {
+            color: var(--gold); background: var(--gold-soft);
+            border-color: rgba(201,146,42,0.2);
+        }
+
+        /* ── ANOVA ADDON — LIGHT ── */
+        .anova-section {
+            background: var(--light-bg);
+            position: relative; z-index: 1;
+            padding: 80px 24px;
+            border-top: 1px solid rgba(14,41,49,0.08);
+        }
+        .anova-inner {
+            max-width: 960px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+        }
+        @media (max-width: 760px) { .anova-inner { grid-template-columns: 1fr; gap: 48px; } }
+        .anova-copy .section-eyebrow-light {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em;
+            text-transform: uppercase; color: var(--teal-bright); margin-bottom: 16px;
+        }
+        .anova-copy h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 500; letter-spacing: -0.02em; line-height: 1.12;
+            color: var(--light-text); margin-bottom: 16px;
+        }
+        .anova-copy h2 em { font-style: italic; color: var(--light-muted); }
+        .anova-copy p {
+            font-size: 0.85rem; font-weight: 300; line-height: 1.85;
+            color: var(--light-muted); margin-bottom: 12px;
+        }
+        .anova-copy p strong { color: var(--light-text); font-weight: 500; }
+        .anova-card {
+            background: var(--light-surface);
+            border: 1px solid var(--light-border);
+            border-radius: 18px; overflow: hidden;
+            box-shadow: 0 12px 48px rgba(14,41,49,0.09);
+        }
+        .anova-card-top {
+            padding: 28px 28px 20px;
+            border-bottom: 1px solid var(--light-border);
+            background: var(--teal-deep);
+            position: relative; overflow: hidden;
+        }
+        .anova-card-top::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--teal-bright), var(--gold));
+        }
+        .anova-card-top::after {
+            content: '';
+            position: absolute; top: -40px; right: -40px;
+            width: 200px; height: 200px;
+            background: radial-gradient(ellipse, rgba(43,117,116,0.2) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .anova-logo-row {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+        }
+        .anova-mark {
+            font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 500;
+            color: var(--gold); letter-spacing: 0.1em;
+            background: var(--gold-soft); border: 1px solid rgba(201,146,42,0.25);
+            padding: 4px 10px; border-radius: 4px;
+        }
+        .anova-by { font-size: 0.6rem; color: rgba(238,238,237,0.4); }
+        .anova-card-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem; font-weight: 500; color: var(--air); margin-bottom: 6px;
+        }
+        .anova-card-desc { font-size: 0.75rem; font-weight: 300; color: rgba(238,238,237,0.6); line-height: 1.6; }
+        .anova-card-body { padding: 24px 28px; }
+        .anova-feat { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+        .anova-feat-icon {
+            width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+            background: rgba(43,117,116,0.08); border: 1px solid var(--light-border);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .anova-feat-text { font-size: 0.78rem; font-weight: 300; color: var(--light-muted); line-height: 1.6; }
+        .anova-feat-text strong { display: block; font-weight: 500; color: var(--light-text); font-size: 0.82rem; }
+        .anova-price-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 18px 20px;
+            background: var(--light-bg);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .anova-price-label { font-size: 0.7rem; color: var(--light-muted); }
+        .anova-price-label strong { display: block; font-size: 0.78rem; color: var(--light-text); font-weight: 600; }
+        .anova-price-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem; font-weight: 600; color: var(--teal-deep); line-height: 1;
+        }
+        .anova-price-amount span { font-size: 0.75rem; font-weight: 300; color: var(--light-muted); }
+        .anova-avail {
+            font-size: 0.65rem; font-weight: 400; color: var(--light-muted);
+            margin-top: 12px; text-align: center;
+        }
+        .anova-avail strong { color: var(--teal-bright); }
+
+        /* ── TRUST SCORE — DARK ── */
+        .trust-score-section {
+            background: var(--teal-deep);
+            position: relative; z-index: 1;
+            padding: 80px 24px;
+            border-top: 1px solid rgba(43,117,116,0.3);
+            overflow: hidden;
+        }
+        .trust-score-section::before {
+            content: '';
+            position: absolute; top: -60px; right: -60px;
+            width: 400px; height: 400px;
+            background: radial-gradient(ellipse, rgba(43,117,116,0.25) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .ts-inner {
+            position: relative; z-index: 1;
+            max-width: 860px; margin: 0 auto; text-align: center;
+        }
+        .ts-inner .section-eyebrow { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 18px; }
+        .ts-inner h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4.5vw, 3.4rem);
+            font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;
+            color: var(--air); margin-bottom: 16px;
+        }
+        .ts-inner h2 em { font-style: italic; color: rgba(238,238,237,0.4); }
+        .ts-inner p {
+            font-size: 0.88rem; font-weight: 300; line-height: 1.85;
+            color: rgba(238,238,237,0.65); max-width: 560px; margin: 0 auto 40px;
+        }
+        .ts-free-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 14px 28px; border-radius: 50px;
+            background: rgba(43,117,116,0.15);
+            border: 1px solid rgba(43,117,116,0.35);
+            margin-bottom: 40px;
+        }
+        .ts-free-badge span { font-size: 0.72rem; font-weight: 400; color: rgba(238,238,237,0.72); }
+        .ts-free-badge strong { color: var(--air); font-weight: 600; }
+        .ts-future {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+            max-width: 740px; margin: 0 auto;
+        }
+        @media (max-width: 600px) { .ts-future { grid-template-columns: 1fr; } }
+        .ts-future-item {
+            padding: 20px 18px; border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(43,117,116,0.18);
+            text-align: left;
+        }
+        .ts-future-label {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--teal-bright); margin-bottom: 8px;
+        }
+        .ts-future-text {
+            font-size: 0.78rem; font-weight: 300; line-height: 1.6;
+            color: rgba(238,238,237,0.6);
+        }
+        .ts-future-text strong { color: rgba(238,238,237,0.85); font-weight: 500; }
+
+        /* ── FAQ — LIGHT ── */
+        .faq-section {
+            background: var(--light-bg);
+            position: relative; z-index: 1;
+            padding: 80px 24px 100px;
+            border-top: 1px solid rgba(14,41,49,0.08);
+        }
+        .faq-inner { max-width: 720px; margin: 0 auto; }
+        .faq-header { text-align: center; margin-bottom: 52px; }
+        .faq-header .section-eyebrow-light {
+            font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em;
+            text-transform: uppercase; color: var(--teal-bright); margin-bottom: 14px;
+        }
+        .faq-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 500; letter-spacing: -0.02em; color: var(--light-text);
+        }
+        .faq-list { display: flex; flex-direction: column; gap: 2px; }
+        .faq-item {
+            border: 1px solid var(--light-border); border-radius: 12px;
+            overflow: hidden; background: var(--light-surface);
+        }
+        .faq-q {
+            width: 100%; display: flex; align-items: center; justify-content: space-between;
+            gap: 16px; padding: 20px 24px;
+            background: none; border: none; cursor: pointer;
+            font-family: 'Sora', sans-serif; font-size: 0.86rem; font-weight: 500;
+            color: var(--light-text); text-align: left;
+            transition: background 0.2s;
+        }
+        .faq-q:hover { background: rgba(14,41,49,0.03); }
+        .faq-q-icon {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: rgba(43,117,116,0.08); border: 1px solid var(--light-border);
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+            transition: transform 0.25s, background 0.2s;
+        }
+        .faq-item.open .faq-q-icon { transform: rotate(45deg); background: var(--teal-bright); border-color: var(--teal-bright); }
+        .faq-item.open .faq-q-icon svg { stroke: white; }
+        .faq-a {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.25s ease;
+            padding: 0 24px;
+            font-size: 0.82rem; font-weight: 300; line-height: 1.85;
+            color: var(--light-muted);
+        }
+        .faq-item.open .faq-a { max-height: 300px; padding: 0 24px 20px; }
+
+        /* ── BOTTOM CTA — DARK ── */
+        .bottom-cta {
+            background: var(--graphite);
+            position: relative; z-index: 1;
+            border-top: 1px solid var(--border-dim);
+            padding: 100px 24px; overflow: hidden;
+        }
+        .bottom-cta::before {
+            content: ''; position: absolute; top: -80px; right: -80px;
+            width: 500px; height: 500px;
+            background: radial-gradient(ellipse, rgba(43,117,116,0.1) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .cta-inner {
+            position: relative; z-index: 1;
+            max-width: 600px; margin: 0 auto; text-align: center;
+        }
+        .cta-eyebrow { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal-bright); margin-bottom: 18px; }
+        .cta-headline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 500; letter-spacing: -0.02em; line-height: 1.08;
+            color: var(--air); margin-bottom: 16px;
+        }
+        .cta-headline em { font-style: italic; color: rgba(238,238,237,0.4); }
+        .cta-sub {
+            font-size: 0.88rem; font-weight: 300; color: rgba(238,238,237,0.6);
+            line-height: 1.85; margin-bottom: 44px;
+        }
+        .cta-btn-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 15px 28px; border-radius: 10px;
+            background: var(--teal-bright); color: white; border: none;
+            font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600;
+            cursor: pointer; text-decoration: none; letter-spacing: 0.01em;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 6px 24px rgba(43,117,116,0.4);
+        }
+        .btn-primary:hover { background: #2e8180; transform: translateY(-2px); box-shadow: 0 10px 36px rgba(43,117,116,0.55); }
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 15px 28px; border-radius: 10px;
+            background: transparent; color: rgba(238,238,237,0.65);
+            border: 1px solid var(--border-teal);
+            font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 400;
+            cursor: pointer; text-decoration: none; letter-spacing: 0.01em;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+        }
+        .btn-ghost:hover { background: rgba(43,117,116,0.07); color: var(--air); transform: translateY(-1px); }
+        .cta-note { font-size: 0.65rem; color: rgba(238,238,237,0.35); margin-top: 20px; }
+
+        /* ── FOOTER ── */
+        footer {
+            position: relative; z-index: 1;
+            padding: 28px 32px;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 12px;
+            border-top: 1px solid var(--border-dim);
+            background: var(--graphite);
+        }
+        .footer-copy { font-size: 0.68rem; color: rgba(238,238,237,0.35); letter-spacing: 0.03em; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-link { font-size: 0.68rem; color: rgba(238,238,237,0.35); text-decoration: none; transition: color 0.2s; }
+        .footer-link:hover { color: rgba(238,238,237,0.6); }
+
+        /* ── INTL NOTE ── */
+        .intl-note {
+            text-align: center; padding: 14px 24px;
+            background: rgba(43,117,116,0.06);
+            border-bottom: 1px solid rgba(43,117,116,0.15);
+            font-size: 0.68rem; font-weight: 300;
+            color: rgba(238,238,237,0.5);
+            position: relative; z-index: 2;
+        }
+        .intl-note strong { color: rgba(238,238,237,0.7); font-weight: 500; }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 520px) {
+            nav { padding: 0 16px; }
+            .nav-link { display: none; }
+            .plans-inner { padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="nav-logo">
+        <div class="nav-mark">Z</div>
+        <div class="nav-wordmark">
+            <span class="nav-parent">Toledah</span>
+            <span class="nav-name">Zaena</span>
+        </div>
+    </a>
+    <div class="nav-right">
+        <a href="index.html" class="nav-link">Product</a>
+        <a href="#" class="nav-link" style="color:var(--air)">Pricing</a>
+        <a href="index.html#waitlist" class="nav-cta">
+            Get Early Access
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+</nav>
+
+<!-- INTL NOTE -->
+<div class="intl-note" id="intl-note" style="display:none">
+    <strong>International visitors:</strong> Prices shown in USD. Payments are processed in Nigerian Naira (NGN). Your card provider will apply the conversion at their current rate. Additional conversion fees may apply.
+</div>
+
+<!-- HERO -->
+<section class="pricing-hero">
+    <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        <span class="eyebrow-text">Simple, transparent pricing — in naira</span>
+    </div>
+    <h1 class="pricing-headline">
+        Pay for what your<br>
+        business <span class="gold">actually needs.</span>
+    </h1>
+    <p class="pricing-sub">
+        Start free. Grow when you're ready. No hidden fees, no dollar exposure, no spreadsheet to justify it.
+    </p>
+
+    <div class="billing-toggle-wrap">
+        <div class="billing-toggle">
+            <button class="toggle-btn active" id="btn-monthly" onclick="setBilling('monthly')">Monthly</button>
+            <button class="toggle-btn" id="btn-annual" onclick="setBilling('annual')">Annual</button>
+        </div>
+        <div class="annual-badge" id="annual-badge" style="opacity:0.4">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            Save 2 months — pay for 10, get 12
+        </div>
+    </div>
+</section>
+
+<!-- PLANS -->
+<section class="plans-section">
+    <div class="plans-inner">
+        <div class="currency-note reveal">
+            <p id="currency-label"><strong>Prices in Nigerian Naira (₦)</strong> · Billed in NGN via Paystack</p>
+        </div>
+
+        <div class="plans-grid reveal" style="transition-delay:.08s">
+
+            <!-- FREE -->
+            <div class="plan-card">
+                <div class="plan-top">
+                    <span class="plan-badge badge-free">Free Forever</span>
+                    <div class="plan-name">The Hustler</div>
+                    <div class="plan-tagline">For traders and side businesses getting started with real records.</div>
+                    <div class="plan-price-block">
+                        <div class="plan-price">
+                            <span class="price-free">Free</span>
+                        </div>
+                        <div class="price-period">no card required</div>
+                    </div>
+                </div>
+                <div class="plan-cta-wrap">
+                    <a href="index.html#waitlist" class="plan-cta cta-outline">
+                        Start Free
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="plan-body">
+                    <div class="plan-section-label">Core</div>
+                    <ul class="plan-features">
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>POS</strong> — fast, offline-capable</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Inventory tracking</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Digital receipts</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Import data</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Works fully offline</span>
+                        </li>
+                    </ul>
+                    <div class="plan-section-label">Limits</div>
+                    <ul class="plan-features">
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>75 transactions/month</strong></span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Up to 50 products</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Single user</span>
+                        </li>
+                    </ul>
+                    <div class="plan-limit-tag">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>
+                        Refer 3 → unlock 225 txn/mo
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHOP OWNER -->
+            <div class="plan-card">
+                <div class="plan-top">
+                    <span class="plan-badge badge-shop">Shop Owner</span>
+                    <div class="plan-name">The Trader</div>
+                    <div class="plan-tagline">For growing shops that need real profit visibility and financial control.</div>
+                    <div class="plan-price-block">
+                        <div class="plan-price">
+                            <span class="price-currency" id="t2-sym">₦</span>
+                            <span class="price-amount" id="t2-price">4,500</span>
+                            <span class="price-period">/mo</span>
+                        </div>
+                        <div class="price-was" id="t2-was"></div>
+                        <div class="price-annual-note" id="t2-note"></div>
+                    </div>
+                </div>
+                <div class="plan-cta-wrap">
+                    <a href="index.html#waitlist" class="plan-cta cta-dark">
+                        Get Early Access
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="plan-body">
+                    <div class="plan-section-label">Everything in Free, plus</div>
+                    <ul class="plan-features">
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>Unlimited</strong> transactions</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>Unlimited</strong> products</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Expenses tracking</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Owner's withdrawals</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>Profit allocation</strong> — know what's yours</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Sales orders</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Cash book balance</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Export data</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Customers &amp; suppliers</span>
+                        </li>
+                    </ul>
+                    <div class="plan-limit-tag">Single user</div>
+                </div>
+            </div>
+
+            <!-- OPERATOR — FEATURED -->
+            <div class="plan-card featured">
+                <div class="plan-top">
+                    <span class="plan-badge badge-popular">Most Popular</span>
+                    <div class="plan-name">The Operator</div>
+                    <div class="plan-tagline">For serious businesses that need control, compliance, and staff oversight.</div>
+                    <div class="plan-price-block">
+                        <div class="plan-price">
+                            <span class="price-currency" id="t3-sym">₦</span>
+                            <span class="price-amount" id="t3-price">9,500</span>
+                            <span class="price-period">/mo</span>
+                        </div>
+                        <div class="price-was" id="t3-was"></div>
+                        <div class="price-annual-note" id="t3-note"></div>
+                    </div>
+                </div>
+                <div class="plan-cta-wrap">
+                    <a href="index.html#waitlist" class="plan-cta cta-solid">
+                        Get Early Access
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="plan-body">
+                    <div class="plan-section-label">Everything in Trader, plus</div>
+                    <ul class="plan-features">
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>3 users</strong> included</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>RBAC</strong> — role-based staff access</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>Trust Score</strong> — business credibility report</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>Nigerian tax calculator</strong> — VAT, PIT, CIT</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Payroll</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Multi-location support</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Zaena Hub access</span>
+                        </li>
+                    </ul>
+                    <div class="plan-limit-tag">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>
+                        Extra seats at ₦2,000/user/mo
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAKER -->
+            <div class="plan-card">
+                <div class="plan-top">
+                    <span class="plan-badge badge-maker">Sole Proprietor</span>
+                    <div class="plan-name">The Maker</div>
+                    <div class="plan-tagline">For solo manufacturers who need BOM, production orders, and wastage tracking.</div>
+                    <div class="plan-price-block">
+                        <div class="plan-price">
+                            <span class="price-currency" id="t-maker-sym">₦</span>
+                            <span class="price-amount" id="t-maker-price">13,500</span>
+                            <span class="price-period">/mo</span>
+                        </div>
+                        <div class="price-was" id="t-maker-was"></div>
+                        <div class="price-annual-note" id="t-maker-note"></div>
+                    </div>
+                </div>
+                <div class="plan-cta-wrap">
+                    <a href="index.html#waitlist" class="plan-cta cta-outline" style="border-color:var(--gold);color:var(--gold);">
+                        Get Early Access
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="plan-body">
+                    <div class="plan-section-label">Manufacturing Core</div>
+                    <ul class="plan-features">
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>BOM</strong> — bills of materials</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>Production orders</strong></span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>Wastage tracking</strong></span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-gold"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Raw material costing</span>
+                        </li>
+                    </ul>
+                    <div class="plan-section-label">Business Essentials</div>
+                    <ul class="plan-features">
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>POS, inventory, receipts</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Expenses &amp; cash book</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Profit allocation</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Sale orders</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Customers &amp; suppliers</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Export data</span>
+                        </li>
+                    </ul>
+                    <div class="plan-section-label" style="margin-top:16px">Not included</div>
+                    <ul class="plan-features">
+                        <li class="feat locked">
+                            <span class="feat-x">✕</span>
+                            <span>Multi-user / RBAC</span>
+                        </li>
+                        <li class="feat locked">
+                            <span class="feat-x">✕</span>
+                            <span>Payroll &amp; tax calculator</span>
+                        </li>
+                        <li class="feat locked">
+                            <span class="feat-x">✕</span>
+                            <span>Multi-location</span>
+                        </li>
+                    </ul>
+                    <div class="plan-limit-tag" style="color:var(--gold);background:var(--gold-soft);border-color:rgba(201,146,42,0.2)">
+                        Single user · Upgrade to Enterprise when you grow
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENTERPRISE -->
+            <div class="plan-card">
+                <div class="plan-top">
+                    <span class="plan-badge badge-enterprise">Manufacturer</span>
+                    <div class="plan-name">The Enterprise</div>
+                    <div class="plan-tagline">For manufacturers and multi-location businesses that need a complete operating system.</div>
+                    <div class="plan-price-block">
+                        <div class="plan-price">
+                            <span class="price-currency" id="t4-sym">₦</span>
+                            <span class="price-amount" id="t4-price">55,000</span>
+                            <span class="price-period">/mo</span>
+                        </div>
+                        <div class="price-was" id="t4-was"></div>
+                        <div class="price-annual-note" id="t4-note"></div>
+                    </div>
+                </div>
+                <div class="plan-cta-wrap">
+                    <a href="index.html#waitlist" class="plan-cta cta-gold">
+                        Contact Us
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="plan-body">
+                    <div class="plan-section-label">Everything in Operator, plus</div>
+                    <ul class="plan-features">
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>10 users</strong> included</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span><strong>BOM &amp; production orders</strong></span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Dedicated accounting module</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Full audit trail &amp; compliance</span>
+                        </li>
+                        <li class="feat">
+                            <span class="feat-check check-teal"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+                            <span>Priority onboarding support</span>
+                        </li>
+                    </ul>
+                    <div class="plan-limit-tag">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>
+                        Extra seats at ₦1,500/user/mo
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- REFERRAL MECHANIC -->
+<section class="referral-section">
+    <div class="referral-inner">
+        <div class="referral-copy reveal">
+            <p class="section-eyebrow">Free tier unlock</p>
+            <h2>Refer friends.<br><em>Unlock more.</em></h2>
+            <p>On the free plan, every verified referral expands your transaction limit automatically. No payments, no upgrades — just share Zaena with other business owners and grow together.</p>
+        </div>
+        <div class="referral-steps reveal" style="transition-delay:.1s">
+            <div class="ref-step">
+                <span class="ref-step-num">00</span>
+                <span class="ref-step-arrow">→</span>
+                <div class="ref-step-text">
+                    <strong>Start free</strong>
+                    <span>75 transactions per month</span>
+                </div>
+                <span class="ref-step-badge">Default</span>
+            </div>
+            <div class="ref-step">
+                <span class="ref-step-num">01</span>
+                <span class="ref-step-arrow">→</span>
+                <div class="ref-step-text">
+                    <strong>First referral signs up</strong>
+                    <span>Your limit increases automatically</span>
+                </div>
+                <span class="ref-step-badge">125 txn/mo</span>
+            </div>
+            <div class="ref-step">
+                <span class="ref-step-num">02</span>
+                <span class="ref-step-arrow">→</span>
+                <div class="ref-step-text">
+                    <strong>Second referral</strong>
+                    <span>Growing your network</span>
+                </div>
+                <span class="ref-step-badge">175 txn/mo</span>
+            </div>
+            <div class="ref-step">
+                <span class="ref-step-num">03</span>
+                <span class="ref-step-arrow">→</span>
+                <div class="ref-step-text">
+                    <strong>Third referral</strong>
+                    <span>Maximum free tier unlocked</span>
+                </div>
+                <span class="ref-step-badge gold-badge">225 txn/mo</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ANOVA ADD-ON — commented out until built
+<section class="anova-section">
+    <div class="anova-inner">
+        <div class="anova-copy reveal">
+            <p class="section-eyebrow-light">Intelligence add-on</p>
+            <h2>Institutional-grade forecasting. <em>On your phone.</em></h2>
+            <p>ANOVA is Zaena's analytics engine — a separate add-on available to any paid plan. It brings AI-powered demand forecasting, inventory optimisation, and cash flow prediction to Nigerian SMEs for the first time.</p>
+            <p><strong>Powered by Nixtla's TimeGPT and advanced operations research models</strong>, ANOVA gives your business the kind of intelligence that was previously only available to enterprise companies with data teams.</p>
+            <p>This is not dashboards. This is <strong>answers</strong> — "you will likely run out of stock in 9 days," "your slowest moving product is costing you ₦42,000/month in dead capital."</p>
+        </div>
+        <div class="reveal" style="transition-delay:.1s">
+            <div class="anova-card">
+                <div class="anova-card-top">
+                    <div class="anova-logo-row">
+                        <span class="anova-mark">ANOVA</span>
+                        <span class="anova-by">by Toledah · Analytics Engine</span>
+                    </div>
+                    <div class="anova-card-name">Predictive Intelligence</div>
+                    <div class="anova-card-desc">AI forecasting and optimisation for growing Nigerian businesses. Available as a monthly add-on to any paid Zaena plan.</div>
+                </div>
+                <div class="anova-card-body">
+                    <div class="anova-feat">
+                        <div class="anova-feat-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
+                        <div class="anova-feat-text">
+                            <strong>Demand Forecasting</strong>
+                            Predict stock requirements before you run out. Based on your actual sales patterns.
+                        </div>
+                    </div>
+                    <div class="anova-feat">
+                        <div class="anova-feat-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.8"><path d="M12 2l10 6v8l-10 6L2 16V8l10-6z"/></svg>
+                        </div>
+                        <div class="anova-feat-text">
+                            <strong>Inventory Optimisation</strong>
+                            Identify dead stock, optimal reorder points, and capital locked in slow-moving products.
+                        </div>
+                    </div>
+                    <div class="anova-feat">
+                        <div class="anova-feat-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M9 9h4.5a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3H15"/></svg>
+                        </div>
+                        <div class="anova-feat-text">
+                            <strong>Cash Flow Intelligence</strong>
+                            30-day cash flow projections based on your revenue, expense, and seasonal patterns.
+                        </div>
+                    </div>
+                    <div class="anova-price-row">
+                        <div class="anova-price-label">
+                            <strong>Monthly add-on</strong>
+                            Available on any paid plan
+                        </div>
+                        <div>
+                            <div class="anova-price-amount" id="anova-price">₦30,000 <span>/mo</span></div>
+                        </div>
+                    </div>
+                    <div class="anova-avail">Available from <strong>The Operator</strong> tier upward</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END ANOVA COMMENT OUT -->
+
+<!-- TRUST SCORE --> -->
+<section class="trust-score-section">
+    <div class="ts-inner reveal">
+        <p class="section-eyebrow">Business credibility · Free for now</p>
+        <h2>The Zaena Trust Score —<br><em>free while we build the signal.</em></h2>
+        <p>Every paid plan includes unlimited Trust Score report generation, free, during our launch period. We're building the reputation of the seal first — so that when a supplier in Lagos asks for it, they already know what it means.</p>
+
+        <div class="ts-free-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span>Trust Score reports are <strong>free on all paid plans</strong> during the launch period</span>
+        </div>
+
+        <div class="ts-future">
+            <div class="ts-future-item">
+                <div class="ts-future-label">Coming Later</div>
+                <div class="ts-future-text"><strong>Per-generation fee</strong> — each certified report will carry a small fee once the seal has market weight.</div>
+            </div>
+            <div class="ts-future-item">
+                <div class="ts-future-label">Coming Later</div>
+                <div class="ts-future-text"><strong>Verified badge</strong> — a Toledah-signed certificate with QR verification for counterparties to confirm authenticity.</div>
+            </div>
+            <div class="ts-future-item">
+                <div class="ts-future-label">The Long Game</div>
+                <div class="ts-future-text"><strong>Counterparty lookup</strong> — suppliers and lenders query your score directly. A business credit bureau, built from real data.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+    <div class="faq-inner">
+        <div class="faq-header reveal">
+            <p class="section-eyebrow-light">Common questions</p>
+            <h2>Everything you need to know.</h2>
+        </div>
+        <div class="faq-list reveal" style="transition-delay:.08s">
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Is the free plan really free forever?
+                    <span class="faq-q-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+                </button>
+                <div class="faq-a">Yes. No credit card required, no trial period, no surprise charges. The free plan has transaction and product limits, but those limits are yours to use indefinitely. Upgrade only when your business grows to need more.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    How does annual billing work?
+                    <span class="faq-q-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+                </button>
+                <div class="faq-a">Annual billing charges you for 10 months upfront and gives you 12 months of access — effectively two months free. It's a single annual payment, billed in naira via Paystack. You can switch between monthly and annual at any renewal date.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    How are international payments handled?
+                    <span class="faq-q-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+                </button>
+                <div class="faq-a">All payments are processed in Nigerian Naira (NGN) via Paystack. If you're paying with a foreign-issued card, your card provider will apply the conversion at their current rate. Additional conversion fees from your bank may apply. We display USD equivalent prices for international visitors, but the actual charge is always in naira.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Can I add more users beyond the plan limit?
+                    <span class="faq-q-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+                </button>
+                <div class="faq-a">Yes. The Operator plan includes 3 users and allows additional seats at ₦2,000/user/month. The Enterprise plan includes 10 users with additional seats at ₦1,500/user/month. There's no hard cap on total users.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    What happens to my data if I downgrade?
+                    <span class="faq-q-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+                </button>
+                <div class="faq-a">Your data is always yours. If you downgrade to a lower plan, your existing records remain intact and accessible. Features not available on your new plan will be locked, but nothing is deleted. You can export your data at any time from any paid plan.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Is ANOVA included in any plan?
+                    <span class="faq-q-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+                </button>
+                <div class="faq-a">ANOVA is a separate add-on, not included in any base plan. It will be available to subscribers on The Operator plan and above when it launches. It will cover AI-powered forecasting, inventory optimisation, and cash flow intelligence. Pricing will be announced closer to launch.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    What is the Founding Member offer?
+                    <span class="faq-q-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--teal-bright)" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+                </button>
+                <div class="faq-a">The first batch of business owners who join the waitlist and become early testers receive 3 months of The Operator tier completely free. This is our way of saying thank you for trusting a product before it's perfect — and for helping us make it better.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+    <div class="cta-inner reveal">
+        <p class="cta-eyebrow">Founding Member · 3 months free</p>
+        <h2 class="cta-headline">
+            Your business deserves<br>
+            <em>a real system.</em>
+        </h2>
+        <p class="cta-sub">
+            Join the waitlist now. The first merchants in get three months of The Operator tier, free — no card required, no conditions.
+        </p>
+        <div class="cta-btn-row">
+            <a href="index.html#waitlist" class="btn-primary">
+                Get Early Access — Free
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="https://chat.whatsapp.com/LUqBmFgqQIL7sHntlU9CuB?mode=gi_t" target="_blank" rel="noopener" class="btn-ghost">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="#25D166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Join WhatsApp Community
+            </a>
+        </div>
+        <p class="cta-note">No spam. One email when Zaena launches. That's it.</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <span class="footer-copy">© 2026 Toledah Technologies Limited · Zaena Business OS</span>
+    <div class="footer-links">
+        <a href="index.html" class="footer-link">Product</a>
+        <a href="#" class="footer-link">Pricing</a>
+        <a href="mailto:hello@toledah.com" class="footer-link">Contact</a>
+    </div>
+</footer>
+
+<script>
+    // ── BILLING TOGGLE ──
+    const PRICES = {
+        naira: {
+            t2:    { monthly: 4500,  annual: 3750,  sym: '₦' },
+            t3:    { monthly: 9500,  annual: 7917,  sym: '₦' },
+            maker: { monthly: 13500, annual: 11250, sym: '₦' },
+            t4:    { monthly: 55000, annual: 45833, sym: '₦' },
+            // anova: { monthly: 30000, sym: '₦' }  // ANOVA not yet built
+        },
+        usd: {
+            t2:    { monthly: 8,  annual: 6.67, sym: '$' },
+            t3:    { monthly: 15, annual: 12.5, sym: '$' },
+            maker: { monthly: 20, annual: 16.67, sym: '$' },
+            t4:    { monthly: 65, annual: 54.17, sym: '$' },
+            // anova: { monthly: 25, sym: '$' }  // ANOVA not yet built
+        }
+    };
+
+    let billing = 'monthly';
+    let currency = 'naira';
+
+    function fmt(n, sym) {
+        if (sym === '₦') return sym + n.toLocaleString('en-NG');
+        return sym + n.toLocaleString('en-US');
+    }
+
+    function renderPrices() {
+        const p = PRICES[currency];
+        const isAnnual = billing === 'annual';
+
+        const tiers = [
+            { id: 't2',    data: p.t2 },
+            { id: 't3',    data: p.t3 },
+            { id: 't-maker', data: p.maker },
+            { id: 't4',    data: p.t4 }
+        ];
+
+        tiers.forEach(({ id, data }) => {
+            const price = isAnnual ? data.annual : data.monthly;
+            const was   = data.monthly;
+
+            document.getElementById(`${id}-sym`).textContent   = data.sym;
+            document.getElementById(`${id}-price`).textContent = price.toLocaleString(currency === 'naira' ? 'en-NG' : 'en-US');
+
+            const wasEl  = document.getElementById(`${id}-was`);
+            const noteEl = document.getElementById(`${id}-note`);
+
+            if (isAnnual) {
+                wasEl.textContent  = data.sym + was.toLocaleString() + '/mo (monthly rate)';
+                wasEl.classList.add('show');
+                noteEl.textContent = 'Billed annually — save 2 months';
+                noteEl.classList.add('show');
+            } else {
+                wasEl.classList.remove('show');
+                noteEl.classList.remove('show');
+            }
+        });
+
+        // ANOVA price — commented out until built
+        // document.getElementById('anova-price').innerHTML =
+        //     fmt(p.anova.monthly, p.anova.sym) + ' <span>/mo</span>';
+
+        // Currency label
+        document.getElementById('currency-label').innerHTML = currency === 'naira'
+            ? '<strong>Prices in Nigerian Naira (₦)</strong> · Billed in NGN via Paystack'
+            : '<strong>Prices shown in USD</strong> · Charged in NGN at checkout · Conversion fees may apply';
+    }
+
+    function setBilling(mode) {
+        billing = mode;
+        document.getElementById('btn-monthly').classList.toggle('active', mode === 'monthly');
+        document.getElementById('btn-annual').classList.toggle('active', mode === 'annual');
+        document.getElementById('annual-badge').style.opacity = mode === 'annual' ? '1' : '0.4';
+        renderPrices();
+    }
+
+    // ── CURRENCY DETECTION (IP-based simulation) ──
+    // In production, check IP geolocation. Here we show USD for non-NG browsers.
+    function detectCurrency() {
+        // Try timezone as a proxy for Nigeria
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const isNigeria = tz && tz.toLowerCase().includes('lagos');
+        if (!isNigeria) {
+            currency = 'usd';
+            document.getElementById('intl-note').style.display = 'block';
+        }
+        renderPrices();
+    }
+
+    // ── FAQ ──
+    function toggleFaq(btn) {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+    }
+
+    // ── SCROLL REVEAL ──
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ── INIT ──
+    detectCurrency();
+</script>
+</body>
+</html>
