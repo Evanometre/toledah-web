@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Zaena — The Business OS for Growing Businesses</title>
 
-    <title>Zaena — The Infrastructure for Growing Businesses</title>
-    <meta name="description" content="Zaena is a mobile-first business operating system — POS, inventory, staff control, tax compliance, and financial records in one app. Built for SMEs everywhere.">
+    < <meta name="description" content="Zaena is a mobile-first business operating system — POS, inventory, staff control, tax compliance, and financial records in one app. Built for SMEs everywhere.">
     <meta name="author" content="Toledah Technologies Limited">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://zaena.app/">
@@ -334,60 +335,139 @@
         }
         .pain-intro { text-align: center; max-width: 580px; margin: 0 auto 64px; }
 
-        .pain-list { display: flex; flex-direction: column; gap: 2px; }
+        .pain-list { display: flex; flex-direction: column; gap: 3px; }
 
         .pain-card {
-            display: grid; grid-template-columns: 3fr 2fr;
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
             background: var(--white);
             border: 1px solid rgba(14,26,28,0.07);
             border-radius: 14px; overflow: hidden;
         }
-        @media (max-width: 680px) { .pain-card { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .pain-card { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .pain-card { grid-template-columns: 1fr; } }
 
-        .pain-left { padding: 40px 36px; }
-        .pain-right {
-            padding: 40px 32px;
+        /* Column 1: number + headline + one-liner */
+        .pain-left {
+            padding: 36px 32px;
+            display: flex; flex-direction: column; justify-content: center;
+            border-right: 1px solid rgba(14,26,28,0.07);
+        }
+        /* Column 2: graphic — the broken state */
+        .pain-graphic {
+            padding: 28px 24px;
             background: var(--chalk);
-            border-left: 1px solid rgba(14,26,28,0.07);
+            border-right: 1px solid rgba(14,26,28,0.07);
+            display: flex; flex-direction: column; justify-content: center;
+            gap: 0;
+        }
+        @media (max-width: 900px) {
+            .pain-graphic { display: none; }
+        }
+        /* Column 3: the fix */
+        .pain-right {
+            padding: 36px 32px;
+            background: var(--chalk);
             display: flex; flex-direction: column; justify-content: center;
         }
-        @media (max-width: 680px) { .pain-right { border-left: none; border-top: 1px solid rgba(14,26,28,0.07); } }
+        @media (max-width: 600px) {
+            .pain-left { border-right: none; border-bottom: 1px solid rgba(14,26,28,0.07); }
+            .pain-right { border-top: 1px solid rgba(14,26,28,0.07); }
+        }
 
         .pain-num {
-            font-family: 'DM Mono', monospace; font-size: 0.54rem;
-            color: var(--teal); letter-spacing: 0.12em;
-            margin-bottom: 16px;
+            font-family: 'DM Mono', monospace; font-size: 0.52rem;
+            color: var(--teal); letter-spacing: 0.14em;
+            margin-bottom: 14px;
         }
         .pain-headline {
-            font-size: 1.08rem; font-weight: 600; line-height: 1.45;
-            color: var(--on-light-1); margin-bottom: 16px;
-        }
-        .pain-headline .red { color: var(--danger); }
-        .pain-story {
-            font-size: 0.82rem; font-weight: 300; line-height: 1.9;
-            color: var(--on-light-2);
-        }
-        .pain-quote {
-            margin-top: 20px; padding: 14px 18px;
-            border-left: 3px solid var(--teal);
-            background: rgba(43,117,116,0.04);
-            border-radius: 0 8px 8px 0;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.02rem; font-style: italic;
+            font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+            font-weight: 600; line-height: 1.25;
+            color: var(--on-light-1); margin-bottom: 14px;
+        }
+        .pain-one-line {
+            font-size: 0.8rem; font-weight: 300; line-height: 1.85;
             color: var(--on-light-2);
         }
         .fix-label {
-            font-size: 0.56rem; font-weight: 600; letter-spacing: 0.18em;
-            text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
+            font-size: 0.54rem; font-weight: 600; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
         }
-        .fix-item { display: flex; align-items: flex-start; gap: 11px; margin-bottom: 14px; }
+        .fix-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
         .fix-check {
-            width: 19px; height: 19px; flex-shrink: 0; margin-top: 1px;
+            width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
             border-radius: 50%; background: var(--teal);
             display: flex; align-items: center; justify-content: center;
         }
-        .fix-text { font-size: 0.79rem; font-weight: 300; line-height: 1.7; color: var(--on-light-2); }
-        .fix-text strong { color: var(--on-light-1); font-weight: 600; display: block; font-size: 0.83rem; margin-bottom: 2px; }
+        .fix-text { font-size: 0.78rem; font-weight: 300; line-height: 1.7; color: var(--on-light-2); }
+        .fix-text strong { color: var(--on-light-1); font-weight: 600; display: block; font-size: 0.81rem; margin-bottom: 2px; }
+
+        /* ── PAIN GRAPHICS — broken-state UI ── */
+
+        /* Shared graphic primitives */
+        .pg-card {
+            background: var(--white);
+            border: 1px solid rgba(14,26,28,0.09);
+            border-radius: 10px; overflow: hidden;
+            font-size: 0;
+        }
+        .pg-card-head {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(14,26,28,0.06);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .pg-card-title {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.52rem; color: var(--on-light-3); letter-spacing: 0.08em;
+        }
+        .pg-status-none {
+            font-size: 0.5rem; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--danger);
+            background: rgba(192,57,43,0.07); border: 1px solid rgba(192,57,43,0.18);
+            padding: 2px 7px; border-radius: 10px;
+        }
+        .pg-status-unknown {
+            font-size: 0.5rem; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--on-light-3);
+            background: rgba(14,26,28,0.05); border: 1px solid rgba(14,26,28,0.1);
+            padding: 2px 7px; border-radius: 10px;
+        }
+        .pg-card-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+        .pg-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .pg-row-label { font-size: 0.56rem; color: var(--on-light-3); font-family: 'DM Mono', monospace; }
+        .pg-dash {
+            font-family: 'DM Mono', monospace; font-size: 0.72rem;
+            color: rgba(14,26,28,0.2); letter-spacing: 0.1em;
+        }
+        .pg-est {
+            font-family: 'DM Mono', monospace; font-size: 0.65rem;
+            color: rgba(192,57,43,0.45); font-style: italic;
+        }
+        .pg-bar-wrap { display: flex; flex-direction: column; gap: 6px; padding: 2px 0; }
+        .pg-bar-row { display: flex; align-items: center; gap: 8px; }
+        .pg-bar-label { font-size: 0.54rem; color: var(--on-light-3); width: 90px; flex-shrink: 0; font-family: 'DM Mono', monospace; }
+        .pg-bar-track { flex: 1; height: 3px; background: rgba(14,26,28,0.08); border-radius: 2px; }
+        .pg-bar-fill-empty { height: 100%; width: 0%; border-radius: 2px; background: rgba(14,26,28,0.12); }
+        .pg-bar-val { font-family: 'DM Mono', monospace; font-size: 0.52rem; color: rgba(14,26,28,0.2); width: 24px; text-align: right; }
+        .pg-log-row {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(14,26,28,0.05);
+        }
+        .pg-log-row:last-child { border-bottom: none; }
+        .pg-log-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(14,26,28,0.12); flex-shrink: 0; }
+        .pg-log-text { font-size: 0.54rem; color: rgba(14,26,28,0.2); font-family: 'DM Mono', monospace; }
+        .pg-empty-state {
+            padding: 20px 14px;
+            text-align: center;
+        }
+        .pg-empty-icon { color: rgba(14,26,28,0.15); margin-bottom: 8px; display: flex; justify-content: center; }
+        .pg-empty-text { font-size: 0.58rem; color: rgba(14,26,28,0.25); font-family: 'DM Mono', monospace; letter-spacing: 0.06em; }
+        .pg-caption {
+            margin-top: 10px; text-align: center;
+            font-size: 0.55rem; color: var(--on-light-3);
+            font-style: italic; letter-spacing: 0.04em;
+        }
 
         /* ════════════ 3. TRUST — DARK ════════════ */
         .trust-section {
@@ -776,7 +856,6 @@
             aria-label="Join the Zaena WhatsApp community — for West Africa and Nigeria (opens in new tab)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D166" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             WhatsApp Community
-            <span class="sub">— Nigeria &amp; West Africa</span>
         </a>
 
         <a href="https://t.me/zaenahq"
@@ -785,7 +864,6 @@
             aria-label="Join the Zaena Telegram channel — international community (opens in new tab)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="#26A9E0" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
             Telegram Channel
-            <span class="sub">— International community</span>
         </a>
 
     </div>
@@ -795,7 +873,7 @@
     <div class="proof-strip" role="list" aria-label="Key features">
         <div class="proof-item" role="listitem">
             <span class="proof-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="18" r="1" fill="currentColor"/></svg></span>
-            <span class="proof-text">iOS &amp; Android</span>
+            <span class="proof-text">Android App</span>
         </div>
         <div class="proof-item" role="listitem">
             <span class="proof-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
@@ -804,10 +882,6 @@
         <div class="proof-item" role="listitem">
             <span class="proof-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 6l5 5 4-4 4 4 5-5"/><path d="M1 12l5 5 4-4 4 4 5-5"/></svg></span>
             <span class="proof-text">Works Offline</span>
-        </div>
-        <div class="proof-item" role="listitem">
-            <span class="proof-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></span>
-            <span class="proof-text">Tax Compliance</span>
         </div>
         <div class="proof-item" role="listitem">
             <span class="proof-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>
@@ -822,29 +896,59 @@
     <div class="section-inner">
 
         <div class="pain-intro reveal">
-            <p class="eyebrow on-light">Why small businesses fail silently</p>
-            <h2 class="section-h2 on-light" id="pain-heading">You know the business.<br><em>But the system is failing you.</em></h2>
-            <p class="section-body on-light">400 million SMEs worldwide run on memory, notebooks, and guesswork. The problem isn't effort — it's the absence of a system built for how they actually work.</p>
+            <p class="eyebrow on-light">The infrastructure gap</p>
+            <h2 class="section-h2 on-light" id="pain-heading">Most growing businesses are built<br><em>on foundations that don't scale.</em></h2>
+            <p class="section-body on-light">Without financial and operational infrastructure, every decision is a guess — and every missed record is a gap in your business history that cannot be recovered.</p>
         </div>
 
         <div class="pain-list">
 
+            <!-- PAIN 01 -->
             <article class="pain-card reveal" style="transition-delay:.1s" aria-labelledby="pain-01">
                 <div class="pain-left">
-                    <div class="pain-num" aria-hidden="true">PAIN — 01</div>
-                    <h3 class="pain-headline" id="pain-01">
-                        The supplier said "no."<br>
-                        <span class="red">The bank said "no."</span><br>
-                        <span style="color:var(--on-light-3);font-weight:400">Because your business had no record.</span>
-                    </h3>
-                    <p class="pain-story">Three years in business. Real customers. Real turnover. Real reputation in your market. But when you approach a supplier for better terms, or a lender for working capital, the answer is still no — because nothing is written down in a way anyone outside your head can verify. Your track record is invisible to everyone who matters.</p>
-                    <blockquote class="pain-quote">"I've been trading for years. I just can't prove it to anyone."</blockquote>
+                    <div class="pain-num" aria-hidden="true">01</div>
+                    <h3 class="pain-headline" id="pain-01">Years of trading.<br>Nothing to show a lender.</h3>
+                    <p class="pain-one-line">Your supplier wants proof. Your lender wants history. Without verifiable financial records, years of real trading count for nothing outside your own head.</p>
                 </div>
+
+                <!-- Graphic: incomplete business profile -->
+                <div class="pain-graphic" aria-hidden="true">
+                    <div class="pg-card">
+                        <div class="pg-card-head">
+                            <span class="pg-card-title">BUSINESS PROFILE</span>
+                            <span class="pg-status-none">Unverified</span>
+                        </div>
+                        <div class="pg-card-body">
+                            <div class="pg-row">
+                                <span class="pg-row-label">Trading history</span>
+                                <span class="pg-dash">— — —</span>
+                            </div>
+                            <div class="pg-row">
+                                <span class="pg-row-label">Verified turnover</span>
+                                <span class="pg-dash">— — —</span>
+                            </div>
+                            <div class="pg-row">
+                                <span class="pg-row-label">Avg. monthly profit</span>
+                                <span class="pg-dash">— — —</span>
+                            </div>
+                            <div class="pg-row">
+                                <span class="pg-row-label">Debt recovery</span>
+                                <span class="pg-dash">— — —</span>
+                            </div>
+                            <div class="pg-row">
+                                <span class="pg-row-label">Trust Score</span>
+                                <span class="pg-dash">— — —</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="pg-caption">Your track record — invisible to everyone who matters.</p>
+                </div>
+
                 <div class="pain-right">
                     <div class="fix-label">How Zaena fixes this</div>
                     <div class="fix-item">
                         <div class="fix-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
-                        <div class="fix-text"><strong>Zaena Business Performance Report</strong>A real-time financial profile auto-generated from your live transaction data. Verifiable. Non-editable. Ready to share with any supplier or lender.</div>
+                        <div class="fix-text"><strong>Business Performance Report</strong>A verifiable financial profile auto-generated from your live transaction data. Non-editable. Ready to share with any supplier or lender.</div>
                     </div>
                     <div class="fix-item">
                         <div class="fix-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
@@ -853,33 +957,87 @@
                 </div>
             </article>
 
+            <!-- PAIN 02 -->
             <article class="pain-card reveal" aria-labelledby="pain-02">
                 <div class="pain-left">
-                    <div class="pain-num" aria-hidden="true">PAIN — 02</div>
-                    <h3 class="pain-headline" id="pain-02">You don't actually know <span class="red">how much you made</span> last month.</h3>
-                    <p class="pain-story">Sales happened. Money came in. Some went out for stock, some for expenses, some you took out yourself. But if someone asked "what was your profit last month?" — you'd be guessing. The notebook doesn't add up. The spreadsheet stopped getting updated two weeks ago. The number in your head doesn't account for stock shrinkage.</p>
-                    <blockquote class="pain-quote">"I knew I was busy. I didn't know I was barely profitable."</blockquote>
+                    <div class="pain-num" aria-hidden="true">02</div>
+                    <h3 class="pain-headline" id="pain-02">Revenue is not profit.</h3>
+                    <p class="pain-one-line">Turnover tells you what came in. Without a live financial picture — sales, expenses, cost of goods, commitments — you never know what's actually left.</p>
                 </div>
+
+                <!-- Graphic: financial summary with unknowns -->
+                <div class="pain-graphic" aria-hidden="true">
+                    <div class="pg-card">
+                        <div class="pg-card-head">
+                            <span class="pg-card-title">FINANCIAL SUMMARY</span>
+                            <span class="pg-status-unknown">Incomplete</span>
+                        </div>
+                        <div class="pg-card-body">
+                            <div class="pg-row">
+                                <span class="pg-row-label">Revenue</span>
+                                <span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--on-light-2);">$12,400</span>
+                            </div>
+                            <div class="pg-row">
+                                <span class="pg-row-label">Cost of goods</span>
+                                <span class="pg-est">est.</span>
+                            </div>
+                            <div class="pg-row">
+                                <span class="pg-row-label">Expenses</span>
+                                <span class="pg-est">est.</span>
+                            </div>
+                            <div class="pg-row">
+                                <span class="pg-row-label">Commitments</span>
+                                <span class="pg-dash">—</span>
+                            </div>
+                            <div class="pg-row" style="border-top:1px solid rgba(14,26,28,0.07);padding-top:8px;margin-top:2px;">
+                                <span class="pg-row-label" style="font-weight:600;color:var(--on-light-2);">Net profit</span>
+                                <span class="pg-dash">? ? ?</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="pg-caption">One real number. Everything else — a guess.</p>
+                </div>
+
                 <div class="pain-right">
                     <div class="fix-label">How Zaena fixes this</div>
                     <div class="fix-item">
                         <div class="fix-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
-                        <div class="fix-text"><strong>Live profit dashboard</strong>Every sale recorded. Every expense tracked. Real profit, not guessed profit — on your phone screen, always.</div>
+                        <div class="fix-text"><strong>Live financial picture</strong>Zaena builds your financial position in real time, from every transaction, so your profit figure is always accurate — not estimated at the end of the month when it's too late to act.</div>
                     </div>
                     <div class="fix-item">
                         <div class="fix-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
-                        <div class="fix-text"><strong>Profit allocation</strong>Automatically separates what's yours to take home from what belongs in the business. Stop guessing what you can spend.</div>
+                        <div class="fix-text"><strong>Profit allocation</strong>Automatically separates distributable profit from working capital — so every stakeholder knows exactly where they stand.</div>
                     </div>
                 </div>
             </article>
 
+            <!-- PAIN 03 -->
             <article class="pain-card reveal" style="transition-delay:.08s" aria-labelledby="pain-03">
                 <div class="pain-left">
-                    <div class="pain-num" aria-hidden="true">PAIN — 03</div>
-                    <h3 class="pain-headline" id="pain-03">Your staff <span class="red">know things</span> you don't — and that's a problem.</h3>
-                    <p class="pain-story">You trust your team. But trust without visibility is just hope. When you're not at the shop, you have no way of knowing what's happening. Stock that "went missing." Discounts given without authorisation. A sale completed but the money didn't come in the right amount. You find out weeks later, when the numbers no longer match.</p>
-                    <blockquote class="pain-quote">"I only found out something was wrong when the stock didn't match."</blockquote>
+                    <div class="pain-num" aria-hidden="true">03</div>
+                    <h3 class="pain-headline" id="pain-03">Visibility is not optional.</h3>
+                    <p class="pain-one-line">A business you can't see from wherever you are is a business that runs on trust alone. Trust without a record is just hope.</p>
                 </div>
+
+                <!-- Graphic: empty audit log -->
+                <div class="pain-graphic" aria-hidden="true">
+                    <div class="pg-card">
+                        <div class="pg-card-head">
+                            <span class="pg-card-title">ACTIVITY LOG</span>
+                            <span class="pg-status-none">No records</span>
+                        </div>
+                        <div class="pg-empty-state">
+                            <div class="pg-empty-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h4"/></svg>
+                            </div>
+                            <div class="pg-empty-text">No transactions recorded</div>
+                            <div class="pg-empty-text" style="margin-top:4px;font-size:0.5rem;">Staff activity untracked</div>
+                            <div class="pg-empty-text" style="margin-top:4px;font-size:0.5rem;">Access: Unrestricted</div>
+                        </div>
+                    </div>
+                    <p class="pg-caption">Nothing happened. Or everything did. You don't know.</p>
+                </div>
+
                 <div class="pain-right">
                     <div class="fix-label">How Zaena fixes this</div>
                     <div class="fix-item">
@@ -888,7 +1046,7 @@
                     </div>
                     <div class="fix-item">
                         <div class="fix-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>
-                        <div class="fix-text"><strong>Complete audit trail</strong>Every transaction, edit, and deletion — timestamped. Nothing disappears quietly. Review what happened while you were out.</div>
+                        <div class="fix-text"><strong>Complete audit trail</strong>Every transaction, edit, and deletion — timestamped. Nothing disappears quietly. Review what happened while you were away.</div>
                     </div>
                 </div>
             </article>
