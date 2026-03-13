@@ -3,151 +3,131 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Dispatch — What Is Net Profit | Toledah Technologies</title>
+  <title>The Dispatch — Understanding Net Profit</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Sora:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --foundation:  #0E2931;
-      --air:         #E2E2E0;
-      --teal:        #2B7574;
-      --signal:      #C9922A;
-      --mid:         #12484C;
-      --t-border:    rgba(43,117,116,0.18);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Sora', sans-serif;
-      background: var(--foundation);
-      color: var(--air);
+      background: #0E2931;
+      color: #E2E2E0;
       line-height: 1.65;
-      overflow-x: hidden;
-      padding-bottom: 120px;
+      padding: 48px;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    a { color: var(--teal); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    nav {
-      position: fixed; top: 0; width: 100%; height: 58px;
-      display: flex; align-items: center; padding: 0 48px;
-      background: rgba(14,41,49,0.85); backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(43,117,116,0.1); z-index: 100;
-    }
-    .nav-logo { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.85rem; color: var(--air); }
-    
-    .dispatch-container {
-      max-width: 860px;
-      margin: 100px auto 0;
-      padding: 0 24px;
-    }
-    .dispatch-title {
+    h1, h2, h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 6vw, 4rem);
-      font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 12px;
-      color: var(--air);
+      color: #2B7574;
+      margin-top: 1.5em;
+      margin-bottom: 0.6em;
     }
-    .dispatch-date {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: rgba(226,226,224,0.35);
-      margin-bottom: 32px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-    .dispatch-content p {
-      margin-bottom: 1.45em;
-      font-size: 1rem;
-    }
-    .dispatch-content h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.45rem;
-      color: var(--teal);
-      margin: 1.6em 0 0.6em;
-    }
-    .dispatch-content pre {
-      background: rgba(43,117,116,0.08);
-      border-left: 3px solid var(--teal);
-      padding: 12px 16px;
-      overflow-x: auto;
-      border-radius: 6px;
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.4rem; color: #C9922A; }
+    p { margin-bottom: 1.2em; }
+    strong { color: #FFFFFF; }
+    em { font-style: italic; color: #C9922A; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
       margin: 1.5em 0;
-      font-family: 'DM Mono', monospace;
       font-size: 0.95rem;
     }
-    .dispatch-content code { font-family: 'DM Mono', monospace; background: rgba(43,117,116,0.08); padding: 2px 4px; border-radius: 3px; }
-    .bottom-strip {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      height: 44px; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; background: rgba(8,12,13,0.75);
-      border-top: 1px solid rgba(43,117,116,0.07);
-      font-family: 'DM Mono', monospace; font-size: 0.52rem;
-      color: rgba(226,226,224,0.14);
+    table, th, td {
+      border: 1px solid rgba(226,226,224,0.2);
     }
-    .bottom-strip a { color: rgba(226,226,224,0.16); margin-left: 22px; font-family: 'Sora', sans-serif; font-size: 0.6rem; }
-    .bottom-strip a:hover { color: rgba(226,226,224,0.45); }
-
-    @media (max-width:768px) {
-      nav { padding: 0 20px; }
-      .dispatch-container { padding: 0 16px; }
-      .bottom-strip { padding: 0 20px; flex-direction: column; gap: 4px; height: auto; }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+    }
+    th { background: rgba(43,117,116,0.2); }
+    .tip {
+      background: rgba(43,117,116,0.12);
+      border-left: 4px solid #2B7574;
+      padding: 12px 16px;
+      margin: 1.5em 0;
+      font-size: 0.95rem;
+    }
+    code {
+      background: rgba(226,226,224,0.1);
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: 'DM Mono', monospace;
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <span class="nav-logo"><a href="/">Toledah</a></span>
-</nav>
+<article>
+  <h1>Understanding Net Profit: How to Calculate Your Business Net Profit Margin, and what a healthy net profit margin is.</h1>
 
-<div class="dispatch-container">
-  <h1 class="dispatch-title">What Is Net Profit — And How Not To Calculate Your Business Net Profit Margins</h1>
-  <div class="dispatch-date">March 13, 2026 · The Dispatch</div>
+  <h2>What is Net Profit?</h2>
 
-  <div class="dispatch-content">
-    <p>Net profit is the amount of money a business keeps after all expenses have been deducted from revenue. It’s a fundamental metric to understand whether your business is actually making money, not just generating sales.</p>
+  <p>Three terms that always show up in the business world are <strong>Revenue</strong>, <strong>Gross Profit</strong>, and <strong>Net Profit</strong>.</p>
 
-    <h2>The Basics</h2>
-    <p><strong>Revenue:</strong> Total money your business brings in from sales or services.<br/>
-       <strong>Expenses:</strong> All costs incurred to run the business — including salaries, rent, utilities, raw materials, marketing, and taxes.<br/>
-       <strong>Net Profit:</strong> Revenue minus Expenses.</p>
+  <p><strong>Revenue</strong> is simply the sum of all sales made by a business.</p>
 
-    <pre><code>Example:
-Revenue: ₦1,000,000
-Expenses: ₦700,000
-Net Profit: ₦300,000
-</code></pre>
+  <p><strong>Gross Profit</strong> is the revenue less the cost of goods sold.</p>
 
-    <h2>How NOT To Calculate Net Profit Margins</h2>
-    <p>Common mistakes founders make:</p>
-    <ul>
-      <li>Ignoring hidden costs like utilities, subscriptions, or software amortization.</li>
-      <li>Using revenue only, instead of subtracting all operating expenses.</li>
-      <li>Mixing personal and business expenses.</li>
-    </ul>
+  <p>For example, if a business made a total of €5,400 in a week, and the total cost of products sold during that period was €4,800, the gross profit is:</p>
+  <p><code>€5,400 - €4,800 = €600</code></p>
 
-    <p>Correct approach:</p>
-    <pre><code>Net Profit Margin (%) = (Net Profit / Total Revenue) × 100
-Example: (300,000 / 1,000,000) × 100 = 30%
-</code></pre>
+  <p>The <strong>Net Profit</strong> is the gross profit minus all expenses incurred to make those sales. Continuing with the example, if the business spent €100 on labour, €55 on energy, and €45 on servers, the net profit is:</p>
+  <p><code>€600 - (€100 + €55 + €45) = €400</code></p>
 
-    <p>This means for every ₦1 your business earns, ₦0.30 is actual profit after expenses.</p>
+  <p>The <strong>Net Profit Margin</strong> is calculated as:</p>
+  <p><code>Net Profit / Revenue × 100</code></p>
+  <p>Using our example: <code>(€400 / €5,400) × 100 ≈ 7.41%</code> approximately.</p>
 
-    <h2>Bottom Line</h2>
-    <p>Net profit shows the real health of your business. Always subtract <em>all expenses</em> before calculating margins — skipping this step is one of the fastest ways to misjudge your company’s performance.</p>
+  <p>There are several tools that help business owners calculate this. Popular offline tools include <em>Excel</em>, and many online calculators exist. A more automatic method is using a <strong>POS system</strong>, which records sales and calculates net profit automatically. For instance, the <a href="/zaena" target="_blank" rel="noopener"><strong>Zaena Business Manager</strong></a>, which automates this process, reducing human error and saving hours of manual entry.</p>
+
+  <h2>What is a Healthy Net Profit Margin?</h2>
+
+  <p>The definition of a healthy net profit margin depends heavily on <strong>industry</strong>, <strong>business model</strong>, and <strong>location</strong>. A businessman comparing their pharmacy to a SaaS company would yield misleading results.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Industry / Business Type</th>
+        <th>Typical Net Profit Margin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Large e-retail chains (Amazon, Walmart)</td>
+        <td>2–6%</td>
+      </tr>
+      <tr>
+        <td>Commodity distribution businesses</td>
+        <td>1–3%</td>
+      </tr>
+      <tr>
+        <td>Software / SaaS businesses</td>
+        <td>20–40%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    💡 <strong>Tip:</strong> Track your net profit margin monthly. Watching trends over time is more valuable than one-off calculations.
   </div>
-</div>
 
-<div class="bottom-strip">
-  <span>© 2026 Toledah Technologies</span>
-  <div>
-    <a href="/legal/terms">Terms</a>
-    <a href="/legal/aup">Acceptable Use</a>
-    <a href="/legal/privacy">Privacy</a>
-  </div>
-</div>
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li><strong>Revenue</strong> – total sales.</li>
+    <li><strong>Gross Profit</strong> – revenue minus cost of goods sold.</li>
+    <li><strong>Net Profit</strong> – gross profit minus all operating expenses.</li>
+    <li><strong>Net Profit Margin</strong> – net profit as a percentage of revenue.</li>
+    <li>Healthy margins vary by industry; low-margin operations are not necessarily failing.</li>
+  </ul>
+
+  <p>Modern business managers and POS systems like <a href="/zaena" target="_blank" rel="noopener">
+  <strong>Zaena</strong>
+  </a> simplify the calculation and reporting process, making net profit visibility effortless for small and large businesses alike.</p>
+
+</article>
 
 </body>
-</html>
+</html>    
