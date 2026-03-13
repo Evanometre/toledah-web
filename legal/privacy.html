@@ -1,1 +1,94 @@
-H
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy — Toledah Technologies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Sora:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --background: #FFFFFF;
+      --text: #1B1B1B;
+      --accent: #2B7574;
+      --heading: #12484C;
+      --border: #E0E0E0;
+      --link: #2B7574;
+      --link-hover: #12484C;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Sora', sans-serif; background: var(--background); color: var(--text); line-height: 1.6; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+
+    header, footer { width: 100%; padding: 20px 40px; border-bottom: 1px solid var(--border); }
+    header h1 { font-family: 'DM Mono', monospace; font-size: 1.2rem; color: var(--heading); }
+    nav { margin-top: 10px; }
+    nav a { margin-right: 20px; font-weight: 500; font-size: 0.95rem; }
+
+    main { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    h2 { font-family: 'DM Mono', monospace; font-size: 1.5rem; color: var(--heading); margin-top: 2em; margin-bottom: 0.5em; }
+    h3 { font-family: 'DM Mono', monospace; font-size: 1.2rem; color: var(--heading); margin-top: 1.5em; margin-bottom: 0.3em; }
+    p, li { font-size: 1rem; color: var(--text); margin-bottom: 1em; }
+    ul { padding-left: 1.4em; margin-bottom: 1em; }
+    li { margin-bottom: 0.5em; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+    footer { border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 0.85rem; color: #777777; }
+    footer a { color: var(--link); font-weight: 500; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Toledah Technologies Ltd</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/legal/privacy">Privacy</a>
+    <a href="/legal/security">Security</a>
+    <a href="/legal/terms">Terms of Sale</a>
+    <a href="/legal/aup">Acceptable Use</a>
+    <a href="/contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Privacy</h2>
+  
+  <p>{{INTRO_TEXT}}</p>
+
+  <!-- Example Sections -->
+  <h3>1. Scope</h3>
+  <p>{{SECTION_1_CONTENT}}</p>
+
+  <h3>2. Your Responsibilities</h3>
+  <p>{{SECTION_2_CONTENT}}</p>
+
+  <h3>3. Our Responsibilities</h3>
+  <p>{{SECTION_3_CONTENT}}</p>
+
+  <h3>4. Data Handling</h3>
+  <p>{{SECTION_4_CONTENT}}</p>
+
+  <h3>5. Liability</h3>
+  <p>{{SECTION_5_CONTENT}}</p>
+
+  <hr>
+
+  <p>Last Updated: {{LAST_UPDATED_DATE}}</p>
+</main>
+
+<footer>
+  <span>© 2026 Toledah Technologies Ltd</span>
+  <span>
+    <a href="/legal/privacy">Privacy</a> |
+    <a href="/legal/security">Security</a> |
+    <a href="/legal/terms">Terms</a> |
+    <a href="/legal/aup">AUP</a>
+  </span>
+</footer>
+
+</body>
+</html> 
