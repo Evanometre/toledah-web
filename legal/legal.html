@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Legal — Toledah Technologies</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Sora:wght@300;400;600&display=swap" rel="stylesheet"/>
+
+<style>
+
+:root{
+--background:#ffffff;
+--text:#1b1b1b;
+--heading:#12484c;
+--accent:#2b7574;
+--border:#e0e0e0;
+--card:#f8f9f9;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+font-family:'Sora',sans-serif;
+background:var(--background);
+color:var(--text);
+line-height:1.6;
+}
+
+a{
+text-decoration:none;
+color:var(--accent);
+}
+
+header,footer{
+width:100%;
+padding:20px 40px;
+border-bottom:1px solid var(--border);
+}
+
+header h1{
+font-family:'DM Mono',monospace;
+font-size:1.2rem;
+color:var(--heading);
+}
+
+nav{
+margin-top:10px;
+}
+
+nav a{
+margin-right:20px;
+font-size:0.95rem;
+font-weight:500;
+}
+
+main{
+max-width:900px;
+margin:60px auto;
+padding:0 20px;
+}
+
+.hero{
+margin-bottom:40px;
+}
+
+.hero h2{
+font-family:'DM Mono',monospace;
+font-size:1.8rem;
+color:var(--heading);
+margin-bottom:10px;
+}
+
+.hero p{
+color:#555;
+max-width:600px;
+}
+
+.legal-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:10px;
+padding:24px;
+transition:all .2s ease;
+}
+
+.card:hover{
+border-color:var(--accent);
+transform:translateY(-2px);
+}
+
+.card h3{
+font-family:'DM Mono',monospace;
+color:var(--heading);
+margin-bottom:8px;
+}
+
+.card p{
+font-size:.95rem;
+color:#555;
+margin-bottom:10px;
+}
+
+.card a{
+font-weight:600;
+}
+
+footer{
+border-top:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+font-size:.85rem;
+color:#777;
+margin-top:60px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>Toledah Technologies Ltd</h1>
+
+<nav>
+<a href="/">Home</a>
+<a href="/legal/privacy">Privacy</a>
+<a href="/legal/security">Security</a>
+<a href="/legal">Legal</a>
+<a href="/contact">Contact</a>
+</nav>
+
+</header>
+
+<main>
+
+<div class="hero">
+
+<h2>Legal Information</h2>
+
+<p>
+This page contains the legal policies governing the use of Toledah Technologies services, including Zaena ERP and related software platforms.
+</p>
+
+</div>
+
+<div class="legal-grid">
+
+<div class="card">
+
+<h3>Terms of Service</h3>
+
+<p>
+The agreement governing subscriptions, licensing, and use of Toledah software services.
+</p>
+
+<a href="/legal/terms">Read Terms →</a>
+
+</div>
+
+<div class="card">
+
+<h3>Acceptable Use Policy</h3>
+
+<p>
+Rules describing permitted and prohibited uses of the Toledah platform.
+</p>
+
+<a href="/legal/aup">Read Acceptable Use Policy →</a>
+
+</div>
+
+</div>
+
+</main>
+
+<footer>
+
+<span>© 2026 Toledah Technologies Ltd</span>
+
+<span>
+<a href="/legal/privacy">Privacy</a> |
+<a href="/legal/security">Security</a> |
+<a href="/legal/terms">Terms</a> |
+<a href="/legal/aup">AUP</a>
+</span>
+
+</footer>
+
+</body>
+</html> 
