@@ -63,34 +63,98 @@ This policy explains what information is collected, why it is collected, and how
 
   <!-- Example Sections -->
   <h3>1. Information We Collect</h3>
-  <p>Most of the personal data we collect is directly provided by our users when they register and use the Toledah ERP or Analytics platform.
+  <p>Most of the personal data we collect is directly provided by our users when they register and use the Toledah ERP or Analytics platform:</p>
 
-    Account & Contact Data: When you register for Toledah ERP, start a free trial, or request a demo, you provide us with information such as your name, company name, email address, phone number, and business sector. We never store credit card information; we use PCI-DSS-compliant third-party processors.
+<ul>
+  <li><strong>Account & Contact Data:</strong> When you register for Toledah ERP, start a free trial, or request a demo, you provide us with information such as your name, company name, email address, phone number, and business sector. We never store credit card information; we use PCI-DSS-compliant third-party processors.</li>
 
-    Customer Databases (ERP Data): When you use the Toledah ERP, any information you upload (employee lists, inventory, financial records, customer contacts) is your own. You retain full ownership and control. We only process this data on your behalf.
+  <li><strong>Customer Databases (ERP Data):</strong> When you use the Toledah ERP, any information you upload (employee lists, inventory, financial records, customer contacts) is your own. You retain full ownership and control. We only process this data on your behalf.</li>
 
-    Analytics Data: For our Analytics product, we collect and process data derived from your ERP usage or external data sources you connect. This includes transaction volumes, performance metrics, and user interaction patterns.
+  <li><strong>Analytics Data:</strong> For our Analytics product, we collect and process data derived from your ERP usage or external data sources you connect. This includes transaction volumes, performance metrics, and user interaction patterns.</li>
 
-    Browser & Geolocation Data: We record your IP address, browser type, and geolocation to customize your experience and for security purposes.
+  <li><strong>Browser & Geolocation Data:</strong> We record your IP address, browser type, and geolocation to customize your experience and for security purposes.</li>
 
-    Interaction Recording: We may record session interactions (clicks, navigation) during trial periods to improve our User Interface (UI), provided you have opted in.
+  <li><strong>Interaction Recording:</strong> We may record session interactions (clicks, navigation) during trial periods to improve our User Interface (UI), provided you have opted in.</li>
+</ul>
+
+  <h3>2. How We Use This Information
+</h3>
+<ul>
+  <li><strong>Service Provision:</strong> We use contact data to manage your account, handle billing, and provide technical support.</li>
+
+  <li><strong>Business Analytics:</strong> Our Analytics product processes your business data to generate reports, forecasts, and performance insights. This analysis is performed strictly to provide you with the service you subscribed to.</li>
+
+  <li><strong>Marketing:</strong> We may use your contact info to send updates about Toledah. You may opt out at any time.</li>
+
+  <li><strong>Security & Legal:</strong> We analyze server logs to prevent fraud, unauthorized access, and to comply with legal obligations.</li>
+</ul>
+
+  <h3>3. Accessing, Updating, or Deleting Your Data
+</h3>
+  <ul>
+  <li><strong>ERP & Analytics Data:</strong> You can modify or delete your data directly through the Toledah control panel. You can export a full backup of your database at any time.</li>
+
+  <li><strong>Account Deletion:</strong> You may request the permanent deletion of your account by contacting our Helpdesk. We will delete all data except what we are legally required to keep (e.g., invoices for tax purposes).</li>
+
+  <li><strong>Analytics Opt-out:</strong> You can manage which data sources are connected to the Toledah Analytics engine through your settings.</li>
+  </ul>
+
+  <h3>4. Data Retention
+</h3>
+  <ul>
+  <li><strong>Account Data:</strong> Retained as long as your account is active or for the duration of legal retention periods.</li>
+  <li><strong>ERP / Analytics Databases:</strong> If you cancel your subscription, data is kept in a deactivated state for a <strong>3-week grace period</strong> before being permanently destroyed.</li>
+  <li><strong>Backups:</strong> For safety, data may persist in our <strong>encrypted, inalterable backups</strong> for up to <strong>12 months</strong> after deletion from live systems.</li>
+  </ul>
+
+  <h3>5. Third-Party Service Providers</h3>
+  <p>Toledah relies on trusted partners to provide our infrastructure and services. We ensure these providers comply with data protection legislation.
+</p>
+  <table style="width:100%; border-collapse: collapse; font-family: 'Sora', sans-serif;">
+  <thead>
+    <tr style="background-color: #E2E2E0; color: #0E2931; text-align: left;">
+      <th style="padding: 10px; border: 1px solid #ccc;">Service Provider</th>
+      <th style="padding: 10px; border: 1px solid #ccc;">Purpose</th>
+      <th style="padding: 10px; border: 1px solid #ccc;">Data Shared</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color: #ffffff;">
+      <td style="padding: 10px; border: 1px solid #ccc;">Supabase</td>
+      <td style="padding: 10px; border: 1px solid #ccc;">Database & Backend Hosting</td>
+      <td style="padding: 10px; border: 1px solid #ccc;">Encrypted ERP databases, Analytics data, user accounts</td>
+    </tr>
+    <tr style="background-color: #f9f9f9;">
+      <td style="padding: 10px; border: 1px solid #ccc;">Cloud Hosting (e.g., AWS/Google)</td>
+      <td style="padding: 10px; border: 1px solid #ccc;">Infrastructure & Hosting</td>
+      <td style="padding: 10px; border: 1px solid #ccc;">Encrypted ERP databases and Analytics data</td>
+    </tr>
+    <tr style="background-color: #ffffff;">
+      <td style="padding: 10px; border: 1px solid #ccc;">Stripe / PayPal</td>
+      <td style="padding: 10px; border: 1px solid #ccc;">Payment Processing</td>
+      <td style="padding: 10px; border: 1px solid #ccc;">Contact info and order totals (No credit card info)</td>
+    </tr>
+    <tr style="background-color: #f9f9f9;">
+      <td style="padding: 10px; border: 1px solid #ccc;">Google Analytics</td>
+      <td style="padding: 10px; border: 1px solid #ccc;">Web Audience Analysis</td>
+      <td style="padding: 10px; border: 1px solid #ccc;">Anonymous browser data and visited pages</td>
+    </tr>
+  </tbody>
+  </table>
+
+    <h3>6. Security
+</h3>
+  <p>We implement rigorous technical and organizational measures to protect your data, including encryption at rest and in transit, multi-factor authentication, and regular security audits.
 </p>
 
-  <h3>2. Your Responsibilities</h3>
-  <p>{{SECTION_2_CONTENT}}</p>
-
-  <h3>3. Our Responsibilities</h3>
-  <p>{{SECTION_3_CONTENT}}</p>
-
-  <h3>4. Data Handling</h3>
-  <p>{{SECTION_4_CONTENT}}</p>
-
-  <h3>5. Liability</h3>
-  <p>{{SECTION_5_CONTENT}}</p>
+      <h3>7. Contact Us
+</h3>
+  <p>If you have questions regarding this Privacy Policy or your personal data, please reach out to us:
+Toledah Data Protection Office Email: support@toledah.com Address: 2 Irowa street, Benin City.</p>
 
   <hr>
 
-  <p>Last Updated: {{LAST_UPDATED_DATE}}</p>
+  <p>Last Updated: 13th of March, 2026.</p>
 </main>
 
 <footer>
