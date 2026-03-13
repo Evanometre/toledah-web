@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Contact — Toledah Technologies</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Sora:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+
+<style>
+
+:root{
+--foundation:#0E2931;
+--mid:#12484C;
+--teal:#2B7574;
+--signal:#C9922A;
+--air:#E2E2E0;
+--t-border:rgba(43,117,116,0.18);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:'Sora',sans-serif;
+background:var(--foundation);
+color:var(--air);
+overflow-x:hidden;
+}
+
+body::after{
+content:'';
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:9000;
+opacity:.022;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:128px;
+}
+
+/* NAV */
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:58px;
+display:flex;
+align-items:center;
+padding:0 48px;
+background:rgba(14,41,49,0.75);
+backdrop-filter:blur(24px);
+border-bottom:1px solid rgba(43,117,116,0.1);
+z-index:200;
+}
+
+.nav-logo{
+display:flex;
+align-items:center;
+gap:11px;
+text-decoration:none;
+}
+
+.nav-mark{
+width:30px;
+height:30px;
+background:rgba(43,117,116,0.15);
+border:1px solid var(--t-border);
+border-radius:8px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.nav-name{
+font-size:.85rem;
+font-weight:600;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--air);
+}
+
+/* PAGE */
+
+.page{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:120px 20px 100px;
+}
+
+.contact-container{
+max-width:640px;
+width:100%;
+text-align:center;
+}
+
+.contact-eyebrow{
+font-family:'DM Mono',monospace;
+font-size:.55rem;
+letter-spacing:.22em;
+text-transform:uppercase;
+color:rgba(43,117,116,.6);
+margin-bottom:18px;
+}
+
+.contact-title{
+font-family:'Cormorant Garamond',serif;
+font-size:clamp(3rem,7vw,5rem);
+font-weight:300;
+letter-spacing:-.03em;
+margin-bottom:18px;
+}
+
+.contact-sub{
+font-family:'Cormorant Garamond',serif;
+font-style:italic;
+font-size:1.2rem;
+color:rgba(226,226,224,.6);
+max-width:420px;
+margin:auto;
+margin-bottom:42px;
+}
+
+/* CONTACT BOX */
+
+.contact-box{
+border:1px solid var(--t-border);
+background:rgba(43,117,116,.06);
+border-radius:14px;
+padding:34px;
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.contact-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid rgba(43,117,116,.12);
+padding-bottom:14px;
+}
+
+.contact-item:last-child{
+border-bottom:none;
+padding-bottom:0;
+}
+
+.contact-label{
+font-size:.65rem;
+letter-spacing:.18em;
+text-transform:uppercase;
+color:rgba(226,226,224,.4);
+}
+
+.contact-value{
+font-size:.85rem;
+font-weight:500;
+color:var(--air);
+}
+
+.contact-value a{
+color:var(--teal);
+text-decoration:none;
+}
+
+.contact-value a:hover{
+text-decoration:underline;
+}
+
+/* BOTTOM STRIP */
+
+.bottom-strip{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:44px;
+display:flex;
+align-items:center;
+padding:0 48px;
+background:rgba(8,12,13,.72);
+backdrop-filter:blur(16px);
+border-top:1px solid rgba(43,117,116,.07);
+}
+
+.strip-left{
+font-family:'DM Mono',monospace;
+font-size:.52rem;
+letter-spacing:.16em;
+text-transform:uppercase;
+color:rgba(226,226,224,.13);
+}
+
+.strip-right{
+margin-left:auto;
+display:flex;
+gap:22px;
+}
+
+.strip-link{
+font-size:.6rem;
+color:rgba(226,226,224,.16);
+text-decoration:none;
+}
+
+.strip-link:hover{
+color:rgba(226,226,224,.45);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+nav{padding:0 20px}
+
+.bottom-strip{padding:0 20px}
+
+.contact-box{padding:26px}
+
+.contact-item{
+flex-direction:column;
+align-items:flex-start;
+gap:4px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<a href="/" class="nav-logo">
+<div class="nav-mark">
+<img src="images/logo white.png" style="width:18px;height:18px;object-fit:contain;">
+</div>
+<span class="nav-name">Toledah</span>
+</a>
+
+</nav>
+
+
+<section class="page">
+
+<div class="contact-container">
+
+<div class="contact-eyebrow">Communication</div>
+
+<h1 class="contact-title">
+Contact
+</h1>
+
+<p class="contact-sub">
+If you need assistance, have a partnership inquiry, or want to discuss infrastructure for your business, we’re here to help.
+</p>
+
+
+<div class="contact-box">
+
+<div class="contact-item">
+<div class="contact-label">Support</div>
+<div class="contact-value">
+<a href="mailto:support@toledah.com">support@toledah.com</a>
+</div>
+</div>
+
+<div class="contact-item">
+<div class="contact-label">Security Reports</div>
+<div class="contact-value">
+<a href="mailto:security@toledah.com">security@toledah.com</a>
+</div>
+</div>
+
+<div class="contact-item">
+<div class="contact-label">Business</div>
+<div class="contact-value">
+<a href="mailto:hello@toledah.com">hello@toledah.com</a>
+</div>
+</div>
+
+<div class="contact-item">
+<div class="contact-label">Location</div>
+<div class="contact-value">
+Nigeria
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="bottom-strip">
+
+<span class="strip-left">© 2026 Toledah Technologies</span>
+
+<div class="strip-right">
+<a href="/legal/privacy" class="strip-link">Privacy</a>
+<a href="/legal/security" class="strip-link">Security</a>
+<a href="/contact" class="strip-link">Contact</a>
+</div>
+
+</div>
+
+</body>
+  </html> 
