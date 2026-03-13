@@ -523,39 +523,6 @@
   </div>
 </section>
 
-  <section class="homepage-dispatch">
-  <h2>Latest Dispatch</h2>
-  <div id="latest-dispatch-posts" class="dispatch-list"></div>
-</section>
-
-<script>
-async function loadLatestDispatch() {
-  try {
-    const res = await fetch('/dispatch/index.json');
-    const posts = await res.json();
-
-    const container = document.getElementById('latest-dispatch-posts');
-    container.innerHTML = '';
-
-    // Get the first 3 posts
-    posts.slice(0, 3).forEach(post => {
-      const postEl = document.createElement('div');
-      postEl.className = 'dispatch-item';
-      postEl.innerHTML = `
-        <a href="${post.url}" class="dispatch-link">
-          <h3>${post.title}</h3>
-          <p class="dispatch-date">${post.date}</p>
-        </a>
-      `;
-      container.appendChild(postEl);
-    });
-  } catch(err) {
-    console.error('Error loading dispatch posts', err);
-  }
-}
-
-loadLatestDispatch();
-</script>
 
 <!-- BOTTOM STRIP -->
 <div class="bottom-strip">
