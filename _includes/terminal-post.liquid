@@ -244,6 +244,25 @@
             max-width: 1440px;
             margin: 0 auto;
         }
+.live-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #e74c3c; /* Red for 'The Wire' */
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.active-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #2ecc71; /* Green for 'System Status' */
+    border-radius: 50%;
+    margin-right: 5px;
+    box-shadow: 0 0 8px #2ecc71;
+}
+
         .footer-logo { font-family: var(--font-serif); font-size: 24px; color: var(--air); text-decoration: none; }
         .footer-nav a { color: var(--graphite-400); text-decoration: none; margin-left: 20px; font-family: var(--font-mono); font-size: 12px; }
         .footer-nav a:hover { color: var(--teal-bright); }
