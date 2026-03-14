@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const postsDir = path.join(__dirname, 'terminal');
-const outputFile = path.join(__dirname, 'posts.json');
+// This tells the script to save inside the folder Eleventy builds
+const outputFile = path.join(__dirname, '_site', 'posts.json');
 
 const files = fs.readdirSync(postsDir).filter(file => file.endsWith('.html'));
 
