@@ -98,6 +98,20 @@
             background: radial-gradient(circle at 50% 50%, var(--teal-glow) 0%, transparent 70%);
         }
 
+        .hero-header {
+            margin-bottom: 1rem;
+        }
+
+        .tagline {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--teal-bright);
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
         .hero h1 {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(3rem, 8vw, 6rem);
@@ -105,6 +119,23 @@
             line-height: 1.1;
             margin-bottom: 1.5rem;
             color: var(--teal-deep);
+        }
+
+        .hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--graphite-400);
+            max-width: 600px; 
+            margin: 1.5rem auto 3rem;
+            padding: 0 20px;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-sub span {
+            color: var(--teal-mid); 
+            font-style: italic;
         }
 
         .hero p {
@@ -116,234 +147,304 @@
             margin-bottom: 2rem;
         }
 
-        /* Remove the old hero-image class and add this */
-.lottie-wrapper {
-    width: 90%;
-    max-width: 900px;
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Subtle glow that matches your brand-DNA */
-    filter: drop-shadow(0 0 40px var(--teal-glow));
-    opacity: 0.95;
-    filter: hue-rotate(-40deg) saturate(0.8) brightness(1.1) drop-shadow(0 0 40px var(--teal-glow));
-}
-
-
-
+        .lottie-wrapper {
+            width: 90%;
+            max-width: 900px;
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.95;
+            filter: hue-rotate(-40deg) saturate(0.8) brightness(1.1) drop-shadow(0 0 40px var(--teal-glow));
+        }
 
         /* Ecosystem Grid */
         .grid-section {
-            padding: 100px 5%;
+            padding: 100px 5% 40px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
-.card {
-    max-width: 350px;
-    background: #ffffff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    transition: transform 0.3s ease;
-}
+        .card {
+            max-width: 350px;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            transition: transform 0.3s ease;
+            opacity: 0; /* Changed for scroll reveal */
+            transform: translateY(20px); /* Changed for scroll reveal */
+        }
 
-.card:hover {
-    transform: translateY(-4px);
-}
+        .card:hover {
+            transform: translateY(-4px);
+        }
 
-.card-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    background: #f8f9fa; /* Light neutral placeholder */
-}
+        .card-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #f8f9fa; 
+        }
 
-.card-content {
-    padding: 24px;
-}
+        .card-content {
+            padding: 24px;
+        }
 
-.card-content h3 {
-    margin: 0 0 8px 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1a1a1a;
-}
+        .card-content h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
 
-.card-content p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #666;
-    margin-bottom: 24px;
-}
+        .card-content p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 24px;
+        }
 
-.card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
+        .cta-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #000; 
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
 
-.cta-button {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #000; /* Minimalist black */
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: opacity 0.2s ease;
-}
+        .cta-button:hover {
+            opacity: 0.8;
+        }
 
-.cta-button:hover {
-    opacity: 0.8;
-}
+        /* Terminal Section (Moved out of mobile query) */
+        #terminal {
+            padding: 60px 5% 100px;
+        }
 
+        #terminal h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: var(--teal-deep);
+            margin-bottom: 10px;
+        }
+
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .post-card {
+            background: transparent; 
+            border-radius: 8px;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .post-card:hover {
+            opacity: 0.9;
+        }
+
+        .post-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 2.35 / 1; 
+            overflow: hidden;
+            background: #1a1a1a; 
+            border-radius: 4px; 
+        }
+
+        .post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            display: block;
+            filter: grayscale(20%); 
+            transition: transform 0.5s ease;
+        }
+
+        .post-card:hover .post-thumb img {
+            transform: scale(1.03); 
+        }
+
+        .post-thumb::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0.04; 
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .post-date {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #999;
+            margin-top: 16px;
+            margin-bottom: 4px;
+        }
+
+        .post-content h4 {
+            margin: 0 0 8px 0;
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #1a1a1a;
+        }
+
+        .post-content p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .read-more {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+        }
 
         /* Footer */
         footer {
-    background: var(--graphite-900); /* Deep charcoal */
-    padding: 100px 5% 40px;
-    color: var(--air);
-    border-top: 1px solid var(--graphite-800);
-}
-
-
-        .footer h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.4rem;
-    font-weight: 300; /* Lightened for elegance */
-    margin-bottom: 24px;
-    color: var(--air);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
-footer p {
-    color: var(--graphite-400);
-}
-
-.footer-links a {
-    color: var(--graphite-200);
-    font-weight: 300;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--teal-bright);
-}
-
-.copyright {
-    border-top: 1px solid var(--graphite-800);
-    color: var(--graphite-400);
-}
-
-/* Scroll Reveal Initial State */
-
-
-
-        /* Mobile */
-           @media (max-width: 768px) {
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--air);
-            gap: 2.5rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 999;
+            background: var(--graphite-900); 
+            padding: 100px 5% 40px;
+            color: var(--air);
+            border-top: 1px solid var(--graphite-800);
         }
 
-        .nav-links.active {
-            opacity: 1;
-            visibility: visible;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
         }
 
-        .nav-links a {
-            font-size: 1.5rem;
+        footer h2 {
             font-family: 'Cormorant Garamond', serif;
-            color: var(--teal-deep);
+            font-size: 2.4rem;
+            font-weight: 300; 
+            margin-bottom: 24px;
+            color: var(--air);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            z-index: 1001;
-            padding: 10px;
+        footer p {
+            color: var(--graphite-400);
         }
 
-        .hamburger span {
-            display: block;
-            width: 24px;
-            height: 1.5px;
-            background: var(--graphite-900);
-            transition: 0.3s ease;
+        .footer-links {
+            list-style: none;
         }
 
-        /* X Animation */
-        .hamburger.active span:nth-child(1) {
-            transform: translateY(4px) rotate(45deg);
+        .footer-links li {
+            margin-bottom: 12px;
         }
-        .hamburger.active span:nth-child(2) {
-            transform: translateY(-4px) rotate(-45deg);
+
+        .footer-links a {
+            color: var(--graphite-200);
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.3s ease;
         }
-        .hero-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.6;
-    color: var(--graphite-400);
-    max-width: 600px; /* Essential for "Apple-style" text blocks */
-    margin: 1.5rem auto 3rem;
-    padding: 0 20px;
-    letter-spacing: 0.01em;
-}
 
-.hero-sub span {
-    color: var(--teal-mid); /* Subtle emphasis on the core philosophy */
-    font-style: italic;
-}
-
-.tagline {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--teal-bright);
-    margin-bottom: 1rem;
-    opacity: 0.8;
-}
-
-/* Ensure the layout stacks beautifully */
-.hero-header {
-    margin-bottom: 1rem;
-}
-
-        
-        /* Stop scrolling when menu is open */
-        body.menu-open {
-            overflow: hidden;
+        .footer-links a:hover {
+            color: var(--teal-bright);
         }
-    }
+
+        .copyright {
+            border-top: 1px solid var(--graphite-800);
+            color: var(--graphite-400);
+            padding-top: 24px;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--air);
+                gap: 2.5rem;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links a {
+                font-size: 1.5rem;
+                font-family: 'Cormorant Garamond', serif;
+                color: var(--teal-deep);
+            }
+
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                z-index: 1001;
+                padding: 10px;
+            }
+
+            .hamburger span {
+                display: block;
+                width: 24px;
+                height: 1.5px;
+                background: var(--graphite-900);
+                transition: 0.3s ease;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(4px) rotate(45deg);
+            }
+            .hamburger.active span:nth-child(2) {
+                transform: translateY(-4px) rotate(-45deg);
+            }
+            
+            body.menu-open {
+                overflow: hidden;
+            }
+        }
     </style>
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
-
 </head>
 <body>
 
-    <nav>
+<nav>
     <a href="#" class="logo">TOLEDAH</a>
     <div class="nav-links" id="navLinks">
         <a href="#">Zaena</a>
@@ -383,26 +484,26 @@ footer p {
     </div>
 </section>
 
-
-
-    <section class="grid-section">
-<div class="card">
-    <div class="card-image">
-        <img src="/images/phone mockup.png" alt="Zaena Interface Mockup">
+<section class="grid-section">
+    <div class="card">
+        <div class="card-image">
+            <img src="/images/phone mockup.png" alt="Zaena Interface Mockup">
+        </div>
+        <div class="card-content">
+            <h3>Zaena</h3>
+            <p>The financial and operational infrastructure for growing businesses to manage staff, stock, and trade history.</p>
+            <a href="#" class="cta-button">Discover Zaena</a>
+        </div>
     </div>
-    <div class="card-content">
-        <h3>Zaena</h3>
-        <p>The financial and operational infrastructure for growing businesses to manage staff, stock, and trade history.</p>
-        <a href="#" class="cta-button">Discover Zaena</a>
-    </div>
-</div>
-    </section>
+</section>
+
+<h2>Great</h2>
     
-            <section id="terminal">
-        <h2>At the Terminal</h2>
-        <div id="terminal-posts-container" class="post-grid">
-            </div>
-    </section>
+<section id="terminal">
+    <h2>At the Terminal</h2>
+    <div id="terminal-posts-container" class="post-grid">
+        </div>
+</section>
 
 <footer>
     <div class="footer-grid">
@@ -429,25 +530,21 @@ footer p {
     </div>
     <div class="copyright">
         <span>© 2026 Toledah Technologies. All Rights Reserved.</span>
-        <span style="font-family: 'DM Mono';">00 // SECURE CONNECTION</span>
     </div>
 </footer>
 
-    
-    
 <script>
+    // --- Mobile Menu Logic ---
     const hamburger = document.getElementById('hamburgerMenu');
     const navLinks = document.getElementById('navLinks');
     const body = document.body;
 
     hamburger.addEventListener('click', () => {
-        // Toggle classes
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
         body.classList.toggle('menu-open');
     });
 
-    // Close menu when a link is clicked
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
@@ -456,61 +553,67 @@ footer p {
         });
     });
     
-    // Intersection Observer for Scroll Reveal
-const revealCallback = (entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            // Once visible, stop observing to save resources
-            observer.unobserve(entry.target);
-        }
+    // --- Scroll Reveal Logic ---
+    const revealCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    const revealObserver = new IntersectionObserver(revealCallback, {
+        root: null,
+        threshold: 0.1, 
+        rootMargin: '0px 0px -50px 0px' 
     });
-};
 
-const revealObserver = new IntersectionObserver(revealCallback, {
-    root: null,
-    threshold: 0.1, // Trigger when 10% of card is visible
-    rootMargin: '0px 0px -50px 0px' // Slight offset for better feel
-});
+    document.querySelectorAll('.card').forEach(card => {
+        revealObserver.observe(card);
+    });
 
-document.querySelectorAll('.card').forEach(card => {
-    revealObserver.observe(card);
-});
+    document.querySelectorAll('.card').forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.1}s`;
+    });
 
-// Staggered delay for cards that are in the same row
-document.querySelectorAll('.card').forEach((card, index) => {
-    card.style.transitionDelay = `${index * 0.1}s`;
-});
+    // --- Terminal Feed Logic ---
+    async function loadTerminalPosts() {
+        try {
+            const response = await fetch('/posts.json');
+            if (!response.ok) throw new Error('Manifest not found');
+            
+            const posts = await response.json();
+            const container = document.getElementById('terminal-posts-container');
 
-async function loadTerminalPosts() {
-            try {
-                const response = await fetch('/posts.json');
-                if (!response.ok) throw new Error('Manifest not found');
-                
-                const posts = await response.json();
-                const container = document.getElementById('terminal-posts-container');
+            // Map through the posts array and build HTML for each card
+            container.innerHTML = posts.map(post => {
+                const dateObj = new Date(post.date);
+                const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                    month: 'short', day: 'numeric', year: 'numeric' 
+                }).toUpperCase();
 
-                container.innerHTML = posts.map(post => `
+                return `
                     <div class="post-card">
                         <div class="post-thumb">
                             <img src="${post.image}" alt="${post.title}" loading="lazy">
                         </div>
                         <div class="post-content">
+                            <span class="post-date">${formattedDate}</span>
                             <h4>${post.title}</h4>
                             <p>${post.snippet}</p>
                             <a href="${post.url}" class="read-more">Read Entry →</a>
                         </div>
                     </div>
-                `).join('');
-            } catch (e) {
-                console.error("Terminal feed unavailable.", e);
-                // Optional: Hide the section if it fails to load
-                document.getElementById('terminal').style.display = 'none';
-            }
+                `;
+            }).join('');
+        } catch (e) {
+            console.error("Terminal feed unavailable.", e);
+            document.getElementById('terminal').style.display = 'none';
         }
+    }
 
-        document.addEventListener('DOMContentLoaded', loadTerminalPosts);
-
+    document.addEventListener('DOMContentLoaded', loadTerminalPosts);
 </script>
 
 </body>
