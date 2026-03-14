@@ -16,12 +16,14 @@ const posts = files.map(file => {
     const firstPara = content.match(/<p[^>]*>([\s\S]*?)<\/p>/)?.[1] || "";
 
     return {
-        title: title.trim(),
-        image,
-        snippet: firstPara.trim().substring(0, 160) + "...",
-        url: `/terminal/${file}`,
-        date: fs.statSync(path.join(postsDir, file)).mtime // Use file modification date
-    };
+    title: title.trim(),
+    image,
+    snippet: firstPara.trim().substring(0, 160) + "...",
+    // Change this to match Eleventy's pretty URL structure
+    url: `/terminal/${file.replace('.html', '/')}`, 
+    date: fs.statSync(path.join(postsDir, file)).mtime
+};
+
 });
 
 // Sort by newest and take the top 4
