@@ -531,7 +531,6 @@
         <span>© 2026 Toledah Technologies. All Rights Reserved.</span>
     </div>
 </footer>
-
 <script>
     // --- Mobile Menu Logic ---
     const hamburger = document.getElementById('hamburgerMenu');
@@ -544,14 +543,6 @@
         body.classList.toggle('menu-open');
     });
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            body.classList.remove('menu-open');
-        });
-    });
-    
     // --- Scroll Reveal Logic ---
     const revealCallback = (entries, observer) => {
         entries.forEach(entry => {
@@ -568,12 +559,9 @@
         rootMargin: '0px 0px -50px 0px' 
     });
 
+    // Initial observe for the Zaena card
     document.querySelectorAll('.card').forEach(card => {
         revealObserver.observe(card);
-    });
-
-    document.querySelectorAll('.card').forEach((card, index) => {
-        card.style.transitionDelay = `${index * 0.1}s`;
     });
 
     // --- Terminal Feed Logic ---
@@ -585,15 +573,15 @@
             const posts = await response.json();
             const container = document.getElementById('terminal-posts-container');
 
-            // Map through the posts array and build HTML for each card
             container.innerHTML = posts.map(post => {
                 const dateObj = new Date(post.date);
                 const formattedDate = dateObj.toLocaleDateString('en-US', { 
                     month: 'short', day: 'numeric', year: 'numeric' 
                 }).toUpperCase();
 
+                // FIX 1: Added "card" class here so CSS and Observer recognize it
                 return `
-                    <div class="post-card">
+                    <div class="post-card card"> 
                         <div class="post-thumb">
                             <img src="${post.image}" alt="${post.title}" loading="lazy">
                         </div>
@@ -606,20 +594,24 @@
                     </div>
                 `;
             }).join('');
-  // --- THE CRITICAL ADDITION ---
-        // Now that the posts exist in the DOM, tell the observer to watch them
-        document.querySelectorAll('#terminal .card').forEach(card => {
-            revealObserver.observe(card);
-        });
 
-    } catch (e) {
-        console.error("Terminal feed unavailable.", e);
-        document.getElementById('terminal').style.display = 'none';
+            // FIX 2: Re-run the observer for these newly created cards
+            document.querySelectorAll('#terminal .card').forEach(card => {
+                revealObserver.observe(card);
+            });
+
+        } catch (e) {
+            // FIX 3: Added console.error so you can debug the "Vanish"
+            console.error("Terminal Logic Error:", e);
+            // If this line runs, the section vanishes. 
+            // Check your browser console to see why!
+            document.getElementById('terminal').style.display = 'none';
+        }
     }
-}
 
     document.addEventListener('DOMContentLoaded', loadTerminalPosts);
 </script>
+
 
 </body>
 </html>
