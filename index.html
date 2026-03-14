@@ -1,599 +1,411 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Toledah — The Infrastructure of Growth</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Sora:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
-  <link rel="icon" type="image/png" href="/logo white.png">
-<link rel="apple-touch-icon" href="/logo white.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toledah | The Infrastructure of Growth</title>
+    
+    <meta property="og:title" content="Toledah — The Infrastructure of Growth">
+    <meta property="og:description" content="Precision ecosystem infrastructure for the next generation of global industry.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200&h=630">
+    <meta name="twitter:card" content="summary_large_image">
 
-  <style>
-    :root {
-      --foundation:  #0E2931;
-      --mid:         #12484C;
-      --teal:        #2B7574;
-      --signal:      #C9922A;
-      --air:         #E2E2E0;
-      --t-border:    rgba(43,117,116,0.18);
-      --t-glow:      rgba(43,117,116,0.10);
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Sora:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+    <link rel="icon" type="image/png" href="/logo-black.png">
+    <link rel="apple-touch-icon" href="/logo-black.png">
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    <style>
+        :root {
+            --graphite-900: #0f0f0f;
+            --graphite-800: #1a1a1a;
+            --graphite-400: #6b6b6b;
+            --graphite-200: #b8b8b8;
+            --graphite-100: #e8e8e6;
+            --teal-deep: #0E2931;
+            --teal-mid: #12484C;
+            --teal-bright: #2B7574;
+            --teal-glow: rgba(43,117,116,0.05);
+            --platinum: #C8C8C6;
+            --platinum-soft: #DDDDDB;
+            --platinum-ghost: rgba(200,200,198,0.1);
+            --air: #EEEEED;
+            --border-dark: rgba(15,15,15,0.06);
+        }
 
-    body {
-      font-family: 'Sora', sans-serif;
-      background: var(--foundation);
-      color: var(--air);
-      overflow-x: hidden;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* grain */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 9000;
-      opacity: 0.022;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 128px;
-    }
+        body {
+            background-color: var(--air);
+            color: var(--graphite-900);
+            font-family: 'Sora', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; width: 100%;
-      z-index: 200; height: 58px;
-      display: flex; align-items: center;
-      padding: 0 48px;
-      background: rgba(14,41,49,0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(43,117,116,0.1);
-    }
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            background: rgba(238, 238, 237, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-dark);
+        }
 
-    .nav-logo {
-      display: flex; align-items: center; gap: 11px;
-      text-decoration: none;
-    }
-    .nav-mark {
-      width: 30px; height: 30px;
-      background: rgba(43,117,116,0.15);
-      border: 1px solid var(--t-border);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .nav-name {
-      font-family: 'Sora', sans-serif;
-      font-size: 0.85rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--air);
-    }
+        .logo {
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            font-size: 1.2rem;
+            color: var(--teal-deep);
+            text-decoration: none;
+        }
 
-    .nav-live {
-      margin-left: auto;
-      display: flex; align-items: center; gap: 8px;
-      background: rgba(43,117,116,0.1);
-      border: 1px solid var(--t-border);
-      border-radius: 20px;
-      padding: 5px 12px;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .nav-live:hover {
-      background: rgba(43,117,116,0.18);
-      border-color: rgba(43,117,116,0.35);
-    }
-    .nav-live-dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--teal);
-      animation: blink 2.5s infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
-    .nav-live-label {
-      font-family: 'Sora', sans-serif;
-      font-size: 0.6rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--teal);
-    }
-    .nav-live-name {
-      font-family: 'Sora', sans-serif;
-      font-size: 0.6rem; font-weight: 400;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(226,226,224,0.4);
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
-      padding: 58px 48px 88px;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--graphite-400);
+            font-size: 0.85rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
 
-    .hero-atm {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(18,72,76,0.55) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,146,42,0.04) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 20% 20%, rgba(43,117,116,0.08) 0%, transparent 60%);
-      pointer-events: none;
-    }
+        .nav-links a:hover { color: var(--teal-bright); }
 
-    .hero-lines {
-      position: absolute; inset: 0;
-      background-image: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 79px,
-        rgba(43,117,116,0.04) 79px,
-        rgba(43,117,116,0.04) 80px
-      );
-      pointer-events: none;
-    }
+        .hamburger { display: none; cursor: pointer; }
 
-    .hero-vline {
-      position: absolute;
-      left: 48px; top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(to bottom,
-        transparent 0%,
-        rgba(43,117,116,0.18) 20%,
-        rgba(43,117,116,0.18) 80%,
-        transparent 100%
-      );
-    }
-    .hero-vline-r {
-      position: absolute;
-      right: 48px; top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(to bottom,
-        transparent 0%,
-        rgba(201,146,42,0.07) 30%,
-        rgba(201,146,42,0.07) 70%,
-        transparent 100%
-      );
-    }
+        /* Hero Section */
+        .hero {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 60px;
+            min-height: 100vh;
+            background: radial-gradient(circle at 50% 50%, var(--teal-glow) 0%, transparent 70%);
+        }
 
-    .hero-content {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column;
-      align-items: center; text-align: center;
-      max-width: 860px; width: 100%;
-    }
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--teal-deep);
+        }
 
-    .hero-coord {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.57rem; font-weight: 300;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(43,117,116,0.38);
-      margin-bottom: 48px;
-      opacity: 0;
-      animation: fadeIn 1s ease 0.3s forwards;
-    }
+        .hero p {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: var(--graphite-400);
+            margin-bottom: 2rem;
+        }
 
-    .hero-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(4rem, 10vw, 9rem);
-      line-height: 0.9;
-      letter-spacing: -0.04em;
-      color: var(--air);
-      opacity: 0;
-      animation: fadeIn 1.2s ease 0.5s forwards;
-    }
-    .hero-headline .teal   { color: var(--teal); }
-    .hero-headline .dim    { color: rgba(226,226,224,0.12); font-style: italic; font-weight: 300; }
-    .hero-headline .signal { color: var(--signal); }
-
-    .hero-rule {
-      width: 1px; height: 52px;
-      background: linear-gradient(to bottom, rgba(43,117,116,0.45), transparent);
-      margin: 38px auto;
-      opacity: 0;
-      animation: fadeIn 1s ease 0.9s forwards;
-    }
-
-    .hero-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.05rem, 2vw, 1.45rem);
-      font-weight: 300; font-style: italic;
-      line-height: 1.65; letter-spacing: 0.01em;
-      color: rgba(226,226,224,0.62);
-      max-width: 500px;
-      opacity: 0;
-      animation: fadeIn 1s ease 1.1s forwards;
-    }
-
-    .homepage-dispatch { max-width: 860px; margin: 60px auto; padding: 0 24px; }
-.homepage-dispatch h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--air); margin-bottom: 24px; }
-.dispatch-list { display: grid; gap: 18px; }
-.dispatch-item { background: rgba(43,117,116,0.06); padding: 18px; border-left: 3px solid var(--teal); border-radius: 8px; transition: transform 0.15s; }
-.dispatch-item:hover { transform: translateY(-2px); }
-.dispatch-link h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--air); margin-bottom: 6px; }
-.dispatch-link .dispatch-date { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: rgba(226,226,224,0.35); }
-
-    /* ── WAITLIST ── */
-    .wl-block {
-      margin-top: 50px;
-      width: 100%; max-width: 680px;
-      display: flex; flex-direction: column;
-      align-items: center;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 1.35s forwards;
-    }
-
-    .wl-eyebrow {
-      font-family: 'Sora', sans-serif;
-      font-size: 0.55rem; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(43,117,116,0.85);
-      margin-bottom: 14px;
-    }
+        /* Remove the old hero-image class and add this */
+.lottie-wrapper {
+    width: 90%;
+    max-width: 900px;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Subtle glow that matches your brand-DNA */
+    filter: drop-shadow(0 0 40px var(--teal-glow));
+    opacity: 0.95;
+}
 
 
-    /* side-by-side pair */
-    .wl-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      width: 100%;
-    }
 
-    .wl-email-col {
-      display: flex; flex-direction: column;
-    }
 
-    /* WhatsApp card */
-    .wa-card {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 8px;
-      padding: 14px 18px;
-      background: rgba(37,211,102,0.07);
-      border: 1px solid rgba(37,211,102,0.18);
-      border-radius: 12px;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s, transform 0.15s;
-      text-align: center;
-    }
-    .wa-card:hover {
-      background: rgba(37,211,102,0.13);
-      border-color: rgba(37,211,102,0.36);
-      transform: translateY(-2px);
-    }
-    .wa-card:active { transform: translateY(0); }
-    .wa-top { display: flex; align-items: center; gap: 8px; }
-    .wa-label {
-      font-family: 'Sora', sans-serif;
-      font-size: 0.8rem; font-weight: 600;
-      color: #e2e2e0;
-    }
-    .wa-sub {
-      font-size: 0.62rem; font-weight: 300;
-      color: rgba(226,226,224,0.35);
-      line-height: 1.4;
-    }
+        /* Ecosystem Grid */
+        .grid-section {
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
 
-    .wl-row {
-      display: flex; gap: 7px;
-      width: 100%;
-      background: rgba(43,117,116,0.08);
-      border: 1px solid var(--t-border);
-      border-radius: 12px; padding: 6px;
-      transition: border-color 0.25s;
-    }
-    .wl-row:focus-within { border-color: rgba(43,117,116,0.4); }
+        .card {
+            background: white;
+            padding: 40px;
+            border: 1px solid var(--border-dark);
+            transition: transform 0.4s ease;
+        }
 
-    .wl-input {
-      flex: 1; background: transparent;
-      border: none; outline: none;
-      font-family: 'Sora', sans-serif;
-      font-size: 0.86rem; font-weight: 300;
-      color: var(--air); padding: 9px 12px;
-    }
-    .wl-input::placeholder { color: rgba(226,226,224,0.38); }
+        .card:hover { transform: translateY(-5px); }
 
-    .wl-btn {
-      background: var(--teal); color: white;
-      border: none; border-radius: 8px;
-      padding: 10px 20px;
-      font-family: 'Sora', sans-serif;
-      font-size: 0.78rem; font-weight: 600;
-      cursor: pointer; white-space: nowrap;
-      display: flex; align-items: center; gap: 8px;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .wl-btn:hover:not(:disabled) { background: var(--mid); transform: scale(1.02); }
-    .wl-btn:active:not(:disabled) { transform: scale(0.98); }
-    .wl-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+        .card h3 { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 2.2rem; 
+    font-weight: 300; /* Lightened for elegance */
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+    color: var(--teal-deep);
+}
 
-    .wl-success {
-      display: none;
-      width: 100%;
-      align-items: center; justify-content: center; gap: 10px;
-      padding: 15px 20px; border-radius: 12px;
-      background: rgba(43,117,116,0.1);
-      border: 1px solid var(--t-border);
-      font-family: 'Sora', sans-serif;
-      font-size: 0.8rem; font-weight: 300;
-      color: rgba(226,226,224,0.55);
-      line-height: 1.55; text-align: center;
-    }
-    .wl-success.show { display: flex; }
+        /* Footer */
+        footer {
+    background: var(--graphite-900); /* Deep charcoal */
+    padding: 100px 5% 40px;
+    color: var(--air);
+    border-top: 1px solid var(--graphite-800);
+}
 
-    .wl-note {
-      font-size: 0.6rem;
-      color: rgba(226,226,224,0.3);
-      margin-top: 10px;
-      letter-spacing: 0.03em;
-    }
 
-    /* Zaena already live nudge */
-    .zaena-nudge {
-      margin-top: 24px;
-      display: flex; align-items: center; gap: 10px;
-      text-decoration: none;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.56rem; font-weight: 300;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(226,226,224,0.16);
-      transition: color 0.25s;
-    }
-    .zaena-nudge:hover { color: rgba(226,226,224,0.38); }
-    .zaena-nudge-rule { width: 26px; height: 1px; background: rgba(43,117,116,0.22); }
+        .footer h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300; /* Lightened for elegance */
+    margin-bottom: 24px;
+    color: var(--air);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
 
-    /* "More is being built" */
-    .coming-hint {
-      margin-top: 52px;
-      display: flex; align-items: center; gap: 12px;
-      opacity: 0;
-      animation: fadeIn 1s ease 2s forwards;
-    }
-    .coming-line { width: 40px; height: 1px; background: rgba(43,117,116,0.16); }
-    .coming-text {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.52rem; font-weight: 300;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(226,226,224,0.12);
-    }
+footer p {
+    color: var(--graphite-400);
+}
 
-    /* ── BOTTOM STRIP ── */
-    .bottom-strip {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      height: 44px; z-index: 100;
-      display: flex; align-items: center;
-      padding: 0 48px;
-      background: rgba(8,12,13,0.72);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid rgba(43,117,116,0.07);
-    }
-    .strip-left {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.52rem; font-weight: 300;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: rgba(226,226,224,0.13);
-    }
-    .strip-right {
-      margin-left: auto;
-      display: flex; align-items: center; gap: 22px;
-    }
-    .strip-link {
-      font-family: 'Sora', sans-serif;
-      font-size: 0.6rem;
-      color: rgba(226,226,224,0.16);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .strip-link:hover { color: rgba(226,226,224,0.45); }
+.footer-links a {
+    color: var(--graphite-200);
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes shake {
-      0%,100% { transform: translateX(0); }
-      20%     { transform: translateX(-6px); }
-      40%     { transform: translateX(6px); }
-      60%     { transform: translateX(-4px); }
-      80%     { transform: translateX(4px); }
-    }
-    .shake { animation: shake 0.4s ease; }
+.footer-links a:hover {
+    color: var(--teal-bright);
+}
 
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .nav-live-name { display: none; }
-      .hero { padding: 58px 20px 88px; }
-      .hero-vline  { left: 20px; }
-      .hero-vline-r { right: 20px; }
-      .hero-headline { font-size: clamp(3.4rem, 14vw, 5.5rem); }
-      .bottom-strip { padding: 0 20px; }
-      .strip-right { gap: 16px; }
-      .strip-link:last-child { display: none; }
-    }
+.copyright {
+    border-top: 1px solid var(--graphite-800);
+    color: var(--graphite-400);
+}
 
-    @media (max-width: 620px) {
-      .wl-block { max-width: 100%; }
-      .wl-pair { grid-template-columns: 1fr; }
-      .wa-card { flex-direction: row; justify-content: center; gap: 12px; }
-      .wa-sub { display: none; }
+/* Scroll Reveal Initial State */
+.card {
+    background: white;
+    padding: 60px 40px;
+    border: 1px solid var(--border-dark);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+        /* Mobile */
+           @media (max-width: 768px) {
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--air);
+            gap: 2.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+        }
+
+        .nav-links.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-links a {
+            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--teal-deep);
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1001;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--graphite-900);
+            transition: 0.3s ease;
+        }
+
+        /* X Animation */
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(4px) rotate(45deg);
+        }
+        .hamburger.active span:nth-child(2) {
+            transform: translateY(-4px) rotate(-45deg);
+        }
+        
+        /* Stop scrolling when menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
     }
-    @media (max-width: 420px) {
-      .wl-row { flex-direction: column; }
-      .wl-btn { justify-content: center; }
-    }
-  </style>
+    </style>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">
-    <div class="nav-mark">
-     <img src="images/logo white.png" alt="Toledah" style="width:18px; height:18px; object-fit:contain; display:block;">
+    <nav>
+    <a href="#" class="logo">TOLEDAH</a>
+    <div class="nav-links" id="navLinks">
+        <a href="#">Zaena</a>
+        <a href="#">Steward</a>
+        <a href="#">Witness</a>
+        <a href="#">Nuri</a>
+        <a href="#">Terminal</a>
+        <a href="#">Afia</a>
+        <a href="#">About</a>
     </div>
-    <span class="nav-name">Toledah</span>
-  </a>
-
-  <a href="zaena" class="nav-live">
-    <div class="nav-live-dot"></div>
-    <span class="nav-live-label">Coming Soon —&nbsp;</span>
-    <span class="nav-live-name">Zaena</span>
-  </a>
+    <div class="hamburger" id="hamburgerMenu">
+        <span></span>
+        <span></span>
+    </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-atm"></div>
-  <div class="hero-lines"></div>
-  <div class="hero-vline"></div>
-  <div class="hero-vline-r"></div>
-
-  <div class="hero-content">
-
-    <div class="hero-coord">Toledah Technologies · Est. 2025 · Nigeria</div>
-
-    <h1 class="hero-headline">
-      The Infra<span class="teal">-</span><br/>
-      <span class="dim">structure</span><br/>
-      of <span class="signal">Growth</span><span class="dim">.</span>
-    </h1>
-
-    <div class="hero-rule"></div>
-
-    <p class="hero-sub">
-      We build the systems that sit beneath commerce,
-      capital, and community — invisible when they work,
-      indispensable when they don't.
-    </p>
-
-    <!-- WAITLIST -->
-    <div class="wl-block">
-      <div class="wl-eyebrow">Early access — join the waitlist</div>
-
-      <div class="wl-pair">
-
-        <!-- Email col -->
-        <div class="wl-email-col">
-          <div class="wl-row" id="wl-row">
-            <input
-              type="email"
-              class="wl-input"
-              id="wl-input"
-              placeholder="your@email.com"
-              autocomplete="email"
-            />
-            <button class="wl-btn" id="wl-btn" onclick="submitWL()">
-              Join
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-          </div>
-          <div class="wl-success" id="wl-success">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2B7574" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
-            You're on the list. We'll reach out at launch.
-          </div>
-          <p class="wl-note" id="wl-note">No spam. Just the launch notice.</p>
-        </div>
-
-        <!-- WhatsApp col -->
-        <a href="https://chat.whatsapp.com/LUqBmFgqQIL7sHntlU9CuB?mode=gi_t" target="_blank" rel="noopener" class="wa-card">
-          <div class="wa-top">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D166"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span class="wa-label">Join WhatsApp Group</span>
-          </div>
-          <span class="wa-sub">Early access community<br/>for Nigerian business owners</span>
-        </a>
-
-      </div>
-
-      <a href="zaena" class="zaena-nudge">
-        <div class="zaena-nudge-rule"></div>
-        Zaena - Coming Soon
-        <div class="zaena-nudge-rule"></div>
-      </a>
+    <p> ▫️</p>
+    <p>Ecosystem v3.0</p>
+    <h1>The Infrastructure<br>of Growth.</h1>
+    
+    <div class="lottie-wrapper">
+        <dotlottie-player 
+            src="/images/hero-infrastructure.lottie" 
+            background="transparent" 
+            speed="0.8" 
+            style="width: 100%; height: auto;" 
+            loop 
+            autoplay>
+        </dotlottie-player>
     </div>
-
-    <div class="coming-hint">
-      <div class="coming-line"></div>
-      <span class="coming-text">More is being built</span>
-      <div class="coming-line"></div>
-    </div>
-
-  </div>
 </section>
 
 
-<!-- BOTTOM STRIP -->
-<div class="bottom-strip">
-  <span class="strip-left">© 2026 Toledah Technologies</span>
-  <div class="strip-right">
-    <a href="/legal/privacy" class="strip-link">Privacy</a>
-    <a href="/legal/security" class="strip-link">Security</a>
-    <a href="/contact" class="strip-link">Contact</a>
-  </div>
-</div>
+    <section class="grid-section">
+        <div class="card">
+            <h3>Zaena</h3>
+            <p>The core computational layer for decentralized resource allocation.</p>
+        </div>
+        <div class="card">
+            <h3>Terminal</h3>
+            <p>A unified interface for global operations and monitoring.</p>
+        </div>
+        <div class="card">
+            <h3>Steward</h3>
+            <p>Governance frameworks designed for autonomous scalability.</p>
+        </div>
+    </section>
 
+<footer>
+    <div class="footer-grid">
+        <div>
+            <h2>Toledah</h2>
+            <p>Architecting the foundational systems of the modern world.</p>
+        </div>
+        <ul class="footer-links">
+            <li><strong style="color: var(--teal-bright); font-size: 0.7rem; letter-spacing: 0.1rem; text-transform: uppercase;">Ecosystem</strong></li>
+            <li><a href="#">Zaena</a></li>
+            <li><a href="#">Steward</a></li>
+            <li><a href="#">Witness</a></li>
+            <li><a href="#">Nuri</a></li>
+            <li><a href="#">Terminal</a></li>
+            <li><a href="#">Afia</a></li>
+        </ul>
+        <ul class="footer-links">
+            <li><strong style="color: var(--teal-bright); font-size: 0.7rem; letter-spacing: 0.1rem; text-transform: uppercase;">Governance</strong></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Legal</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Security</a></li>
+        </ul>
+    </div>
+    <div class="copyright">
+        <span>© 2026 Toledah Technologies. All Rights Reserved.</span>
+        <span style="font-family: 'DM Mono';">00 // SECURE CONNECTION</span>
+    </div>
+</footer>
+
+    
+    
 <script>
-  const SUPABASE_URL = 'https://xgjeyphgmekakpvttjhr.supabase.co';
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhnamV5cGhnbWVrYWtwdnR0amhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU4MTU2MjgsImV4cCI6MjA4MTM5MTYyOH0.45mb9tVTAhI7r2SFLYZcg8QvZWqLWecbDxshVFOO8rw';
+    const hamburger = document.getElementById('hamburgerMenu');
+    const navLinks = document.getElementById('navLinks');
+    const body = document.body;
 
-  async function submitWL() {
-    const input   = document.getElementById('wl-input');
-    const row     = document.getElementById('wl-row');
-    const btn     = document.getElementById('wl-btn');
-    const success = document.getElementById('wl-success');
-    const note    = document.getElementById('wl-note');
-    const val     = input.value.trim();
+    hamburger.addEventListener('click', () => {
+        // Toggle classes
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('menu-open');
+    });
 
-    // validate email
-    if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-      row.classList.add('shake');
-      input.focus();
-      row.addEventListener('animationend', () => row.classList.remove('shake'), { once: true });
-      return;
-    }
+    // Close menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+        });
+    });
+    
+    // Intersection Observer for Scroll Reveal
+const revealCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Once visible, stop observing to save resources
+            observer.unobserve(entry.target);
+        }
+    });
+};
 
-    // loading
-    btn.disabled = true;
-    btn.innerHTML = 'Saving&hellip;';
+const revealObserver = new IntersectionObserver(revealCallback, {
+    root: null,
+    threshold: 0.1, // Trigger when 10% of card is visible
+    rootMargin: '0px 0px -50px 0px' // Slight offset for better feel
+});
 
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_KEY,
-          'Authorization': `Bearer ${SUPABASE_KEY}`,
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({ email: val })
-      });
+document.querySelectorAll('.card').forEach(card => {
+    revealObserver.observe(card);
+});
 
-      if (res.ok || res.status === 409) {
-        // 409 = duplicate email — show success anyway
-        row.style.display = 'none';
-        note.style.visibility = 'hidden';
-        success.classList.add('show');
-      } else {
-        throw new Error('Server error');
-      }
-    } catch (err) {
-      btn.disabled = false;
-      btn.innerHTML = 'Try again';
-      row.style.borderColor = 'rgba(200,80,80,0.4)';
-      setTimeout(() => row.style.borderColor = '', 2500);
-    }
-  }
+// Staggered delay for cards that are in the same row
+document.querySelectorAll('.card').forEach((card, index) => {
+    card.style.transitionDelay = `${index * 0.1}s`;
+});
 
-  // Enter key support
-  document.getElementById('wl-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') submitWL();
-  });
 </script>
+
 </body>
 </html>
-
