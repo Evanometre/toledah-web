@@ -225,6 +225,51 @@
             margin-right: 5px;
         }
 
+        footer {
+‎        background: var(--graphite-900);
+‎        color: var(--air);
+‎        padding: 80px 0 40px 0;
+‎        margin-top: 80px;
+‎        border-top: 1px solid var(--teal-bright);
+‎    }
+‎    .footer-grid {
+‎        display: grid;
+‎        grid-template-columns: 2fr 1fr 1fr 1fr;
+‎        gap: 40px;
+‎        margin-bottom: 60px;
+‎    }
+‎    .footer-brand .logo-f {
+‎        font-family: var(--font-serif);
+‎        font-size: 32px;
+‎        margin-bottom: 20px;
+‎        display: block;
+‎    }
+‎    .footer-col h4 {
+‎        font-family: var(--font-mono);
+‎        font-size: 12px;
+‎        text-transform: uppercase;
+‎        color: var(--teal-bright);
+‎        margin-bottom: 20px;
+‎    }
+‎    .footer-col ul { list-style: none; }
+‎    .footer-col ul li { margin-bottom: 12px; }
+‎    .footer-col a {
+‎        color: var(--graphite-200);
+‎        text-decoration: none;
+‎        font-size: 14px;
+‎        transition: color 0.3s;
+‎    }
+‎    .footer-col a:hover { color: var(--air); }
+‎    .footer-bottom {
+‎        border-top: 1px solid var(--graphite-700);
+‎        padding-top: 20px;
+‎        display: flex;
+‎        justify-content: space-between;
+‎        font-family: var(--font-mono);
+‎        font-size: 10px;
+‎        color: var(--graphite-400);
+‎    }
+
     </style>
 </head>
 <body>
@@ -294,6 +339,45 @@
             </aside>
         </main>
     </div>
+
+    ‎<footer>
+‎    <div class="container">
+‎        <div class="footer-grid">
+‎            <div class="footer-brand">
+‎                <span class="logo-f">toledah.</span>
+‎                <p style="color: var(--graphite-400); max-width: 300px;">Developing the digital bedrock for sovereign systems and verified intelligence.</p>
+‎            </div>
+‎            <div class="footer-col">
+‎                <h4>Products</h4>
+‎                <ul>
+‎                    <li><a href="/zaena">Zaena</a></li>
+‎                    <li><a href="/witness">Witness</a></li>
+‎                    <li><a href="/yoseph">Yoseph AI</a></li>
+‎                </ul>
+‎            </div>
+‎            <div class="footer-col">
+‎                <h4>Terminal</h4>
+‎                <ul>
+‎                    <li><a href="#">Geopolitics</a></li>
+‎                    <li><a href="#">Macro-Tech</a></li>
+‎                    <li><a href="#">Signals</a></li>
+‎                </ul>
+‎            </div>
+‎            <div class="footer-col">
+‎                <h4>Legal</h4>
+‎                <ul>
+‎                    <li><a href="/legal/terms">Terms</a></li>
+‎                    <li><a href="/legal/privacy">Privacy</a></li>
+‎                    <li><a href="/legal/security">Security</a></li>
+‎                </ul>
+‎            </div>
+‎        </div>
+‎        <div class="footer-bottom">
+‎            <div>© 2026 TOLEDAH TECHNOLOGIES LTD. ALL RIGHTS RESERVED.</div>
+‎        </div>
+‎    </div>
+‎</footer>
+    
 <script>fetch('/posts.json')
   .then(response => response.json())
   .then(allPosts => {
