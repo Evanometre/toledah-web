@@ -287,6 +287,39 @@
             </aside>
         </main>
     </div>
+<script>fetch('/posts.json')
+  .then(response => response.json())
+  .then(allPosts => {
+    // 1. Identify the Cover Story
+    // We look for any post where featured is true. 
+    // If none are found, we fallback to the latest post.
+    let cover = allPosts.find(post => post.featured === true);
+    if (!cover) cover = allPosts.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
 
+    // 2. Filter out the cover story from the rest of the list
+    const theWire = allPosts
+        .filter(post => post.url !== cover.url)
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // 3. Render Cover
+    document.querySelector('.lead-story').innerHTML = `
+        <span class="category-tag">${cover.category || 'Intelligence'}</span>
+        <h1 class="headline-lg"><a href="${cover.url}" style="text-decoration:none; color:inherit;">${cover.title}</a></h1>
+        <div class="featured-img" style="background-image: url('${cover.image}'); background-size: cover; background-position: center;"></div>
+        <p class="excerpt">${cover.snippet}</p>
+        <div class="meta-data">BY TOLEDAH DISPATCH // REFERENCE: ${cover.id || 'REF_001'}</div>
+    `;
+
+    // 4. Render The Wire
+    const wireContainer = document.querySelector('.sidebar .news-items-container'); 
+    wireContainer.innerHTML = theWire.slice(0, 5).map(post => `
+        <div class="news-item">
+            <span class="category-tag">${post.category || 'Signals'}</span>
+            <h3 class="headline-md"><a href="${post.url}" style="text-decoration:none; color:inherit;">${post.title}</a></h3>
+            <div class="meta-data">${new Date(post.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} // ${post.views || '1.2k'} Views</div>
+        </div>
+    `).join('');
+  });
+ </script>
 </body>
 </html>
