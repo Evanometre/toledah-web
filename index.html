@@ -426,71 +426,6 @@
       .wl-row { flex-direction: column; }
       .wl-btn { justify-content: center; }
     }
-    /* Hamburger button */
-.nav-hamburger {
-  display: none; /* hidden on desktop */
-  flex-direction: column;
-  justify-content: space-between;
-  width: 22px;
-  height: 18px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.nav-hamburger span {
-  display: block;
-  height: 2px;
-  width: 100%;
-  background: var(--air);
-  border-radius: 2px;
-}
-
-/* Mobile nav */
-@media (max-width: 768px) {
-  .nav-hamburger { display: flex; }
-
-  .nav-links {
-    position: absolute;
-    top: 58px; /* below navbar */
-    right: 0;
-    width: 100%;
-    max-height: 0;
-    overflow: hidden;
-    flex-direction: column;
-    background: rgba(14,41,49,0.95);
-    backdrop-filter: blur(12px);
-    transition: max-height 0.3s ease;
-  }
-
-  .nav-links.show {
-    max-height: 500px; /* large enough to show all links */
-  }
-
-  .nav-item {
-  display: flex;
-  align-items: center;
-  padding: 5px 14px;
-  border-radius: 20px;
-  background: rgba(43,117,116,0.1);
-  border: 1px solid var(--t-border);
-  font-family: 'Sora', sans-serif;
-  font-size: 0.65rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--air);
-  text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
-}
-
-.nav-item:hover {
-  background: rgba(43,117,116,0.18);
-  border-color: rgba(43,117,116,0.35);
-  color: var(--teal);
-}
-  }
   </style>
 </head>
 <body>
@@ -499,27 +434,16 @@
 <nav>
   <a href="/" class="nav-logo">
     <div class="nav-mark">
-      <img src="images/logo white.png" alt="Toledah" style="width:18px; height:18px; object-fit:contain; display:block;">
+     <img src="images/logo white.png" alt="Toledah" style="width:18px; height:18px; object-fit:contain; display:block;">
     </div>
     <span class="nav-name">Toledah</span>
   </a>
 
-  <!-- Hamburger button for mobile -->
-  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
-  <div class="nav-links" id="nav-links">
-    <a href="zaena" class="nav-item">Zaena</a>
-    <a href="steward" class="nav-item">Steward</a>
-    <a href="witness" class="nav-item">Witness</a>
-    <a href="nuri" class="nav-item">Nuri</a>
-    <a href="afia" class="nav-item">Afia</a>
-    <a href="terminal" class="nav-item">Terminal</a>
-    <a href="about" class="nav-item">About</a>
-  </div>
+  <a href="zaena" class="nav-live">
+    <div class="nav-live-dot"></div>
+    <span class="nav-live-label">Coming Soon —&nbsp;</span>
+    <span class="nav-live-name">Zaena</span>
+  </a>
 </nav>
 
 <!-- HERO -->
@@ -670,13 +594,6 @@
     if (e.key === 'Enter') submitWL();
   });
 </script>
-  <script>
-const hamburger = document.getElementById('nav-hamburger');
-const navLinks = document.getElementById('nav-links');
-
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('show');
-});
-  </script>
 </body>
 </html>
+
