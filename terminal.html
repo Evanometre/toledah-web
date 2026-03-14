@@ -225,11 +225,12 @@
             margin-right: 5px;
         }
 
-        footer {
+        
 ‎        footer {
+    backfooter {
     background: var(--graphite-900);
     color: var(--air);
-    padding: 80px 0 40px 0;
+    padding: 80px 0 40px;
     margin-top: 80px;
     border-top: 1px solid var(--teal-bright);
 }
@@ -253,11 +254,13 @@
     font-size: 12px;
     text-transform: uppercase;
     color: var(--teal-bright);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .footer-col ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-col ul li {
@@ -280,9 +283,66 @@
     padding-top: 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-family: var(--font-mono);
     font-size: 10px;
     color: var(--graphite-400);
+}
+
+/* Mobile footer fix */
+@media (max-width: 768px) {
+    footer {
+        padding: 48px 0 28px;
+        margin-top: 48px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 32px;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+    }
+
+    .footer-brand .logo-f {
+        font-size: 42px;
+        margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+        max-width: 260px !important;
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--graphite-200) !important;
+    }
+
+    .footer-col h4 {
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+
+    .footer-col ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer-col a {
+        font-size: 15px;
+        color: var(--platinum);
+    }
+
+    .footer-bottom {
+        display: block;
+        text-align: left;
+        font-size: 9px;
+        line-height: 1.8;
+        padding-top: 16px;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
 }
 
     </style>
@@ -330,43 +390,47 @@
         </main>
     </div>
 
-    ‎<footer>
-‎    <div class="container">
-‎        <div class="footer-grid">
-‎            <div class="footer-brand">
-‎                <span class="logo-f">toledah.</span>
-‎                <p style="color: var(--graphite-400); max-width: 300px;">Developing the digital bedrock for sovereign systems and verified intelligence.</p>
-‎            </div>
-‎            <div class="footer-col">
-‎                <h4>Products</h4>
-‎                <ul>
-‎                    <li><a href="/zaena">Zaena</a></li>
-‎                    <li><a href="/witness">Witness</a></li>
-‎                    <li><a href="/yoseph">Yoseph AI</a></li>
-‎                </ul>
-‎            </div>
-‎            <div class="footer-col">
-‎                <h4>Terminal</h4>
-‎                <ul>
-‎                    <li><a href="#">Geopolitics</a></li>
-‎                    <li><a href="#">Macro-Tech</a></li>
-‎                    <li><a href="#">Signals</a></li>
-‎                </ul>
-‎            </div>
-‎            <div class="footer-col">
-‎                <h4>Legal</h4>
-‎                <ul>
-‎                    <li><a href="/legal/terms">Terms</a></li>
-‎                    <li><a href="/legal/privacy">Privacy</a></li>
-‎                    <li><a href="/legal/security">Security</a></li>
-‎                </ul>
-‎            </div>
-‎        </div>
-‎        <div class="footer-bottom">
-‎            <div>© 2026 TOLEDAH TECHNOLOGIES LTD. ALL RIGHTS RESERVED.</div>
-‎        </div>
-‎    </div>
-‎</footer>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-f">toledah.</span>
+        <p>Developing the digital bedrock for sovereign systems and verified intelligence.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="/zaena">Zaena</a></li>
+          <li><a href="/witness">Witness</a></li>
+          <li><a href="/yoseph">Yoseph AI</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Terminal</h4>
+        <ul>
+          <li><a href="#">Geopolitics</a></li>
+          <li><a href="#">Macro-Tech</a></li>
+          <li><a href="#">Signals</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/legal/terms">Terms</a></li>
+          <li><a href="/legal/privacy">Privacy</a></li>
+          <li><a href="/legal/security">Security</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 TOLEDAH TECHNOLOGIES LTD. ALL RIGHTS RESERVED.</div>
+    </div>
+  </div>
+</footer>
     
 <script>fetch('/posts.json')
   .then(response => response.json())
