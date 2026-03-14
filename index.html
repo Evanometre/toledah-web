@@ -127,6 +127,7 @@
     /* Subtle glow that matches your brand-DNA */
     filter: drop-shadow(0 0 40px var(--teal-glow));
     opacity: 0.95;
+    filter: hue-rotate(160deg) saturate(0.8) brightness(1.1) drop-shadow(0 0 40px var(--teal-glow));
 }
 
 
@@ -265,6 +266,38 @@ footer p {
         .hamburger.active span:nth-child(2) {
             transform: translateY(-4px) rotate(-45deg);
         }
+        .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--graphite-400);
+    max-width: 600px; /* Essential for "Apple-style" text blocks */
+    margin: 1.5rem auto 3rem;
+    padding: 0 20px;
+    letter-spacing: 0.01em;
+}
+
+.hero-sub span {
+    color: var(--teal-mid); /* Subtle emphasis on the core philosophy */
+    font-style: italic;
+}
+
+.tagline {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--teal-bright);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+/* Ensure the layout stacks beautifully */
+.hero-header {
+    margin-bottom: 1rem;
+}
+
         
         /* Stop scrolling when menu is open */
         body.menu-open {
@@ -295,21 +328,28 @@ footer p {
 </nav>
 
 <section class="hero">
-    <p> ▫️</p>
-    <p>Ecosystem v3.0</p>
-    <h1>The Infrastructure<br>of Growth.</h1>
-    
+    <div class="hero-header">
+        <p class="tagline">▪️</p>
+        <h1>The Infrastructure<br>of Growth.</h1>
+    </div>
+
+    <p class="hero-sub">
+        We build the systems that sit beneath commerce,
+        capital, and community — <span>invisible when they work,
+        indispensable when they don't.</span>
+    </p>
+
     <div class="lottie-wrapper">
         <dotlottie-player 
             src="/images/hero-infrastructure.lottie" 
             background="transparent" 
             speed="0.8" 
-            style="width: 100%; height: auto;" 
             loop 
             autoplay>
         </dotlottie-player>
     </div>
 </section>
+
 
 
     <section class="grid-section">
