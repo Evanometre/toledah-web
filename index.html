@@ -127,7 +127,7 @@
     /* Subtle glow that matches your brand-DNA */
     filter: drop-shadow(0 0 40px var(--teal-glow));
     opacity: 0.95;
-    filter: hue-rotate(160deg) saturate(0.8) brightness(1.1) drop-shadow(0 0 40px var(--teal-glow));
+    filter: hue-rotate(90deg) saturate(0.8) brightness(1.1) drop-shadow(0 0 40px var(--teal-glow));
 }
 
 
@@ -141,23 +141,67 @@
             gap: 20px;
         }
 
-        .card {
-            background: white;
-            padding: 40px;
-            border: 1px solid var(--border-dark);
-            transition: transform 0.4s ease;
-        }
-
-        .card:hover { transform: translateY(-5px); }
-
-        .card h3 { 
-    font-family: 'Cormorant Garamond', serif; 
-    font-size: 2.2rem; 
-    font-weight: 300; /* Lightened for elegance */
-    margin-bottom: 12px;
-    letter-spacing: -0.01em;
-    color: var(--teal-deep);
+.card {
+    max-width: 350px;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transition: transform 0.3s ease;
 }
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #f8f9fa; /* Light neutral placeholder */
+}
+
+.card-content {
+    padding: 24px;
+}
+
+.card-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #000; /* Minimalist black */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.cta-button:hover {
+    opacity: 0.8;
+}
+
 
         /* Footer */
         footer {
@@ -198,19 +242,8 @@ footer p {
 }
 
 /* Scroll Reveal Initial State */
-.card {
-    background: white;
-    padding: 60px 40px;
-    border: 1px solid var(--border-dark);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
 
-.card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+
 
         /* Mobile */
            @media (max-width: 768px) {
@@ -353,9 +386,17 @@ footer p {
 
 
     <section class="grid-section">
-        <div class="card">
-            <h3>Zaena</h3>
-            <p>The core computational layer for decentralized resource allocation.</p>
+<div class="card">
+    <div class="card-image">
+        <img src="/images/phone mockup.png" alt="Zaena Interface Mockup">
+    </div>
+    <div class="card-content">
+        <h3>Zaena</h3>
+        <p>The financial and operational infrastructure for growing businesses to manage staff, stock, and trade history.</p>
+        <a href="#" class="cta-button">Discover Zaena</a>
+    </div>
+</div>
+
         </div>
         <div class="card">
             <h3>Terminal</h3>
