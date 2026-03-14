@@ -9,29 +9,33 @@ const files = fs.readdirSync(postsDir).filter(file => file.endsWith('.html'));
 
 const posts = files.map(file => {
     const content = fs.readFileSync(path.join(postsDir, file), 'utf8');
+    
+    // 1. Logic for Featured & Category
     const isFeatured = content.includes('featured: true');
-    // Check for a category line like const categoryMatch = content.match(//);
-const category = categoryMatch ? categoryMatch[1] : 'Intelligence';
-    // Simple Regex to grab data - you can make these more robust
+    
+    // Fixed: Properly define categoryMatch before using it
+    const categoryMatch = content.match(//);
+    const category = categoryMatch ? categoryMatch[1] : 'Intelligence';
+
+    // 2. Content Extraction
     const title = content.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] || "Untitled Post";
     const image = content.match(/<img.*?src=["'](.*?)["']/)?.[1] || "default-thumbnail.jpg";
     const firstPara = content.match(/<p[^>]*>([\s\S]*?)<\/p>/)?.[1] || "";
 
     return {
-    title: title.trim(),
-    image,
-    snippet: firstPara.trim().substring(0, 160) + "...",
-    // Change this to match Eleventy's pretty URL structure
-    url: `/terminal/${file.replace('.html', '/')}`, 
-    date: fs.statSync(path.join(postsDir, file)).mtime
-        featured: isFeatured,
+        title: title.trim(),
+        image,
+        snippet: firstPara.trim().substring(0, 160) + "...",
+        url: `/terminal/${file.replace('.html', '/')}`, 
+        date: fs.statSync(path.join(postsDir, file)).mtime, // Added missing comma here
+        featured: isFeatured,                             // Added missing comma here
         category: category
-};
-
+    };
 });
 
-// Sort by newest and take the top 4
-const latestPosts = posts.sort((a, b) => b.date - a.date).slice(0, 4);
+// Sort all posts by date
+const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-fs.writeFileSync(outputFile, JSON.stringify(latestPosts, null, 2));
-console.log('Terminal manifest generated.');
+// Write the full list so the Terminal page can filter for Featured vs Wire
+fs.writeFileSync(outputFile, JSON.stringify(sortedPosts, null, 2));
+console.log('Terminal manifest generated with editorial flags.');
