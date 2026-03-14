@@ -9,7 +9,9 @@ const files = fs.readdirSync(postsDir).filter(file => file.endsWith('.html'));
 
 const posts = files.map(file => {
     const content = fs.readFileSync(path.join(postsDir, file), 'utf8');
-    
+    const isFeatured = content.includes('featured: true');
+    // Check for a category line like const categoryMatch = content.match(//);
+const category = categoryMatch ? categoryMatch[1] : 'Intelligence';
     // Simple Regex to grab data - you can make these more robust
     const title = content.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] || "Untitled Post";
     const image = content.match(/<img.*?src=["'](.*?)["']/)?.[1] || "default-thumbnail.jpg";
@@ -22,6 +24,8 @@ const posts = files.map(file => {
     // Change this to match Eleventy's pretty URL structure
     url: `/terminal/${file.replace('.html', '/')}`, 
     date: fs.statSync(path.join(postsDir, file)).mtime
+        featured: isFeatured,
+        category: category
 };
 
 });
