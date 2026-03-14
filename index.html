@@ -396,8 +396,12 @@ footer p {
         <a href="#" class="cta-button">Discover Zaena</a>
     </div>
 </div>
-
-
+    </section>
+    
+            <section id="terminal">
+        <h2>At the Terminal</h2>
+        <div id="terminal-posts-container" class="post-grid">
+            </div>
     </section>
 
 <footer>
@@ -477,6 +481,35 @@ document.querySelectorAll('.card').forEach(card => {
 document.querySelectorAll('.card').forEach((card, index) => {
     card.style.transitionDelay = `${index * 0.1}s`;
 });
+
+async function loadTerminalPosts() {
+            try {
+                const response = await fetch('/posts.json');
+                if (!response.ok) throw new Error('Manifest not found');
+                
+                const posts = await response.json();
+                const container = document.getElementById('terminal-posts-container');
+
+                container.innerHTML = posts.map(post => `
+                    <div class="post-card">
+                        <div class="post-thumb">
+                            <img src="${post.image}" alt="${post.title}" loading="lazy">
+                        </div>
+                        <div class="post-content">
+                            <h4>${post.title}</h4>
+                            <p>${post.snippet}</p>
+                            <a href="${post.url}" class="read-more">Read Entry →</a>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                console.error("Terminal feed unavailable.", e);
+                // Optional: Hide the section if it fails to load
+                document.getElementById('terminal').style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadTerminalPosts);
 
 </script>
 
