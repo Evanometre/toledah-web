@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | The Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Sora:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+    <style>
+            <style>
+        :root {
+            /* Brand DNA */
+            --graphite-900: #0f0f0f;
+            --graphite-800: #1a1a1a;
+            --graphite-700: #242424;
+            --graphite-600: #2e2e2e;
+            --graphite-400: #6b6b6b;
+            --graphite-200: #b8b8b8;
+            --graphite-100: #e8e8e6;
+
+            --teal-deep: #0E2931;
+            --teal-mid: #12484C;
+            --teal-bright: #2B7574;
+            --teal-glow: rgba(43,117,116,0.15);
+
+            --platinum: #C8C8C6;
+            --platinum-soft: #DDDDDB;
+            --platinum-dim: rgba(200,200,198,0.4);
+            --platinum-ghost: rgba(200,200,198,0.1);
+
+            --air: #EEEEED;
+
+            --border-dark: rgba(200,200,198,0.3);
+            --border-teal: rgba(43,117,116,0.2);
+
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Sora', sans-serif;
+            --font-mono: 'DM Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--air);
+            color: var(--graphite-900);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Utility: Grid & Layout */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+            border-left: 1px solid var(--border-dark);
+            border-right: 1px solid var(--border-dark);
+        }
+
+        /* Top Navigation / Terminal Status */
+        .status-bar {
+            background: var(--graphite-900);
+            color: var(--air);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 8px 40px;
+            display: flex;
+            justify-content: space-between;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-bar span { color: var(--teal-bright); }
+
+        header {
+            padding: 40px 0;
+            border-bottom: 1px solid var(--graphite-900);
+            text-align: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 64px;
+            font-weight: 500;
+            letter-spacing: -2px;
+            color: var(--graphite-900);
+            text-transform: lowercase;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            text-transform: uppercase;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--graphite-600);
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--teal-bright); }
+
+        /* Main Grid */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            padding: 40px 0;
+        }
+
+        /* Typography */
+        .category-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--teal-bright);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .headline-lg {
+            font-family: var(--font-serif);
+            font-size: 52px;
+            line-height: 1.1;
+            font-weight: 500;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .headline-lg:hover { color: var(--teal-mid); }
+
+        .headline-md {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .meta-data {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--graphite-400);
+            margin-top: 8px;
+        }
+
+        /* Components */
+        .featured-img {
+            width: 100%;
+            height: 500px;
+            background-color: var(--platinum-soft);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-dark);
+        }
+
+        .featured-img::after {
+            content: "IMG_REF_001";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--graphite-400);
+        }
+
+        .sidebar {
+            border-left: 1px solid var(--border-dark);
+            padding-left: 40px;
+        }
+
+        .sidebar-title {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--graphite-900);
+            margin-bottom: 20px;
+        }
+
+        .news-item {
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--platinum-dim);
+        }
+
+        .news-item:last-child { border: none; }
+
+        .excerpt {
+            color: var(--graphite-700);
+            font-size: 16px;
+            max-width: 600px;
+        }
+
+        /* The 'Terminal' Accent */
+        .cursor-blink {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: var(--teal-bright);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #e74c3c;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        /* Add these extra styles for the post layout */
+        .post-container { max-width: 800px; margin: 60px auto; padding-bottom: 100px; }
+        .post-content p { margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--graphite-800); }
+        .post-content img { width: 100%; border-radius: 2px; margin: 2rem 0; border: 1px solid var(--border-dark); }
+        
+        footer {
+            background: var(--graphite-900);
+            color: var(--air);
+            padding: 80px 40px;
+            margin-top: 100px;
+            border-top: 1px solid var(--teal-bright);
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        .footer-logo { font-family: var(--font-serif); font-size: 24px; color: var(--air); text-decoration: none; }
+        .footer-nav a { color: var(--graphite-400); text-decoration: none; margin-left: 20px; font-family: var(--font-mono); font-size: 12px; }
+        .footer-nav a:hover { color: var(--teal-bright); }
+    </style>
+</head>
+<body>
+
+    <div class="status-bar">
+        <div>SYS_LOCAL: {{ "now" | date: "%H:%M:%S" }} // <span>ACTIVE</span></div>
+        <div>MARKET_SENTIMENT: +0.24% // VOL: HIGH</div>
+        <div>TERMINAL_REF: {{ title | truncate: 8, "" | uppercase }}</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <a href="/terminal" class="logo" style="text-decoration: none; color: inherit;">the terminal<span class="cursor-blink"></span></a>
+            <nav>
+                <a href="/">Toledah Home</a>
+                <a href="/zaena">Zaena</a>
+                <a href="/terminal">Archive</a>
+                <a href="/contact">Signals</a>
+            </nav>
+        </header>
+
+        <main class="post-container">
+            <span class="category-tag">Intelligence // Dispatch</span>
+            <article class="post-content">
+                {{ content }}
+            </article>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <a href="/" class="footer-logo">toledah.</a>
+            <div class="footer-nav">
+                <a href="/legal">Legal</a>
+                <a href="/privacy">Privacy</a>
+                <a href="https://github.com/Evanometre">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
