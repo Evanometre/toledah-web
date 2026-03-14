@@ -497,7 +497,6 @@
     </div>
 </section>
 
-<h2>Great</h2>
     
 <section id="terminal">
     <h2>At the Terminal</h2>
@@ -607,11 +606,17 @@
                     </div>
                 `;
             }).join('');
-        } catch (e) {
-            console.error("Terminal feed unavailable.", e);
-            document.getElementById('terminal').style.display = 'none';
-        }
+  // --- THE CRITICAL ADDITION ---
+        // Now that the posts exist in the DOM, tell the observer to watch them
+        document.querySelectorAll('#terminal .card').forEach(card => {
+            revealObserver.observe(card);
+        });
+
+    } catch (e) {
+        console.error("Terminal feed unavailable.", e);
+        document.getElementById('terminal').style.display = 'none';
     }
+}
 
     document.addEventListener('DOMContentLoaded', loadTerminalPosts);
 </script>
